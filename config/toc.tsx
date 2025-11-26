@@ -447,16 +447,72 @@ export const TocData: TocData = {
       href: '/docs/sms/overview',
       pages: [
         {
-          title: 'Introduction',
-          href: '/docs/sms/overview#introduction',
+          title: 'Why Choose Sendexa SMS?',
+          href: '/docs/sms/overview#why-choose-sendexa-sms',
         },
         {
-          title: 'Features',
-          href: '/docs/sms/overview#features',
+          title: 'Key Features',
+          href: '/docs/sms/overview#key-features',
         },
         {
-          title: 'Use Cases',
-          href: '/docs/sms/overview#use-cases',
+          title: 'Getting Started',
+          href: '/docs/sms/overview#getting-started',
+        },
+        {
+          title: 'Base URL',
+          href: '/docs/sms/overview#base-url',
+        },
+        {
+          title: 'Authentication',
+          href: '/docs/sms/overview#authentication',
+        },
+        {
+          title: 'API Endpoints Summary',
+          href: '/docs/sms/overview#api-endpoints-summary',
+        },
+        {
+          title: 'Message Pricing',
+          href: '/docs/sms/overview#message-pricing',
+        },
+        {
+          title: 'Message Status Lifecycle',
+          href: '/docs/sms/overview#message-status-lifecycle',
+        },
+        {
+          title: 'Supported Countries',
+          href: '/docs/sms/overview#supported-countries',
+        },
+        {
+          title: 'Common Use Cases',
+          href: '/docs/sms/overview#common-use-cases',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/sms/overview#best-practices',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/sms/overview#testing',
+        },
+        {
+          title: 'Migration Guide',
+          href: '/docs/sms/overview#migration-guide',
+        },
+        {
+          title: 'SDKs & Libraries',
+          href: '/docs/sms/overview#sdks--libraries',
+        },
+        {
+          title: 'Rate Limits',
+          href: '/docs/sms/overview#rate-limits',
+        },
+        {
+          title: 'Support',
+          href: '/docs/sms/overview#support',
+        },
+        {
+          title: 'Next Steps',
+          href: '/docs/sms/overview#next-steps',
         },
       ],
     },
@@ -467,16 +523,256 @@ export const TocData: TocData = {
       href: '/docs/sms/send',
       pages: [
         {
-          title: 'Basic SMS',
-          href: '/docs/sms/send#basic-sms',
+          title: 'Quick Start',
+          href: '/docs/sms/send#quick-start',
         },
         {
-          title: 'Unicode SMS',
-          href: '/docs/sms/send#unicode-sms',
+          title: 'Endpoint',
+          href: '/docs/sms/send#endpoint',
         },
         {
-          title: 'SMS Parameters',
-          href: '/docs/sms/send#sms-parameters',
+          title: 'Request Parameters',
+          href: '/docs/sms/send#request-parameters',
+        },
+        {
+          title: 'Response Format',
+          href: '/docs/sms/send#response-format',
+        },
+        {
+          title: 'Code Examples',
+          href: '/docs/sms/send#code-examples',
+        },
+        {
+          title: 'Advanced Features',
+          href: '/docs/sms/send#advanced-features',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/sms/send#best-practices',
+        },
+        {
+          title: 'Common Errors',
+          href: '/docs/sms/send#common-errors',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/sms/send#testing',
+        },
+        {
+          title: 'Next Steps',
+          href: '/docs/sms/send#next-steps',
+        },
+      ],
+    },
+  ],
+  'sms/dlr': [
+    {
+      title: 'Delivery Reports',
+      href: '/docs/sms/dlr',
+      pages: [
+        {
+          title: 'Overview',
+          href: '/docs/sms/dlr#overview',
+        },
+        {
+          title: 'Message Lifecycle',
+          href: '/docs/sms/dlr#message-lifecycle',
+        },
+        {
+          title: 'Check Delivery Status',
+          href: '/docs/sms/dlr#check-delivery-status',
+        },
+        {
+          title: 'Request',
+          href: '/docs/sms/dlr#request',
+        },
+        {
+          title: 'Response',
+          href: '/docs/sms/dlr#response',
+        },
+        {
+          title: 'Code Examples',
+          href: '/docs/sms/dlr#code-examples',
+        },
+        {
+          title: 'Bulk Status Check',
+          href: '/docs/sms/dlr#bulk-status-check',
+        },
+        {
+          title: 'Polling Best Practices',
+          href: '/docs/sms/dlr#polling-best-practices',
+        },
+        {
+          title: 'Delivery Reports via Webhook',
+          href: '/docs/sms/dlr#delivery-reports-via-webhook',
+        },
+        {
+          title: 'Error Handling',
+          href: '/docs/sms/dlr#error-handling',
+        },
+        {
+          title: 'Message History',
+          href: '/docs/sms/dlr#message-history',
+        },
+        {
+          title: 'Analytics',
+          href: '/docs/sms/dlr#analytics',
+        },
+        {
+          title: 'Dashboard Reports',
+          href: '/docs/sms/dlr#dashboard-reports',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/sms/dlr#best-practices',
+        },
+        {
+          title: 'Troubleshooting',
+          href: '/docs/sms/dlr#troubleshooting',
+        },
+        {
+          title: 'Next Steps',
+          href: '/docs/sms/dlr#next-steps',
+        },
+      ],
+    },
+  ],
+  'sms/webhooks': [
+    {
+      title: 'SMS Webhooks',
+      href: '/docs/sms/webhooks',
+      pages: [
+        {
+          title: 'Overview',
+          href: '/docs/sms/webhooks#overview',
+        },
+        {
+          title: 'Webhook Events',
+          href: '/docs/sms/webhooks#webhook-events',
+        },
+        {
+          title: 'Configuration',
+          href: '/docs/sms/webhooks#configuration',
+        },
+        {
+          title: 'Implementing Webhook Handlers',
+          href: '/docs/sms/webhooks#implementing-webhook-handlers',
+        },
+        {
+          title: 'Security',
+          href: '/docs/sms/webhooks#security',
+        },
+        {
+          title: 'Retry Policy',
+          href: '/docs/sms/webhooks#retry-policy',
+        },
+        {
+          title: 'Testing Webhooks',
+          href: '/docs/sms/webhooks#testing-webhooks',
+        },
+        {
+          title: 'Monitoring & Debugging',
+          href: '/docs/sms/webhooks#monitoring--debugging',
+        },
+        {
+          title: 'Advanced Patterns',
+          href: '/docs/sms/webhooks#advanced-patterns',
+        },
+        {
+          title: 'Common Issues',
+          href: '/docs/sms/webhooks#common-issues',
+        },
+        {
+          title: 'Sendexa IP Addresses',
+          href: '/docs/sms/webhooks#sendexa-ip-addresses',
+        },
+        {
+          title: 'Best Practices Checklist',
+          href: '/docs/sms/webhooks#best-practices-checklist',
+        },
+        {
+          title: 'Need Help?',
+          href: '/docs/sms/webhooks#need-help',
+        },
+      ],
+    },
+  ],
+  'sms/v1': [
+    {
+      title: 'SMS API v1 Reference',
+      href: '/docs/sms/v1',
+      pages: [
+        {
+          title: 'Base URL',
+          href: '/docs/sms/v1#base-url',
+        },
+        {
+          title: 'Authentication',
+          href: '/docs/sms/v1#authentication',
+        },
+        {
+          title: 'Endpoints Overview',
+          href: '/docs/sms/v1#endpoints-overview',
+        },
+        {
+          title: 'Send SMS',
+          href: '/docs/sms/v1#send-sms',
+        },
+        {
+          title: 'Check Status',
+          href: '/docs/sms/v1#check-status',
+        },
+        {
+          title: 'Bulk Status Check',
+          href: '/docs/sms/v1#bulk-status-check',
+        },
+        {
+          title: 'Resend Message',
+          href: '/docs/sms/v1#resend-message',
+        },
+        {
+          title: 'Message History',
+          href: '/docs/sms/v1#message-history',
+        },
+        {
+          title: 'Cancel Scheduled Message',
+          href: '/docs/sms/v1#cancel-scheduled-message',
+        },
+        {
+          title: 'Error Codes',
+          href: '/docs/sms/v1#error-codes',
+        },
+        {
+          title: 'Rate Limits',
+          href: '/docs/sms/v1#rate-limits',
+        },
+        {
+          title: 'Message Status Values',
+          href: '/docs/sms/v1#message-status-values',
+        },
+        {
+          title: 'Webhooks',
+          href: '/docs/sms/v1#webhooks',
+        },
+        {
+          title: 'SDKs & Code Examples',
+          href: '/docs/sms/v1#sdks--code-examples',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/sms/v1#testing',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/sms/v1#best-practices',
+        },
+        {
+          title: 'Support',
+          href: '/docs/sms/v1#support',
+        },
+        {
+          title: 'Changelog',
+          href: '/docs/sms/v1#changelog',
         },
       ],
     },

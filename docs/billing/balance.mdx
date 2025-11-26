@@ -12,13 +12,13 @@ Monitor your Sendexa credit balance programmatically or through the dashboard.
 
 ## API Endpoint
 
-### GET /v2/billing/balance
+### GET /v1/billing/balance
 
 Retrieve your current credit balance and account information.
 
 **Base URL:**
 ```
-https://smsc.sendexa.co
+https://api.sendexa.co
 ```
 
 ---
@@ -32,7 +32,7 @@ import axios from 'axios';
 
 async function checkBalance() {
   const res = await axios.get(
-    'https://smsc.sendexa.co/v2/billing/balance',
+    'https://api.sendexa.co/v1/billing/balance',
     {
       headers: {
         Authorization: `Bearer YOUR_TOKEN_HERE`,
@@ -50,7 +50,7 @@ checkBalance();
 ### cURL
 
 ```bash
-curl -X GET https://smsc.sendexa.co/v2/billing/balance \
+curl -X GET https://api.sendexa.co/v1/billing/balance \
   -H "Authorization: Bearer YOUR_TOKEN_HERE" \
   -H "Content-Type: application/json"
 ```
@@ -60,7 +60,7 @@ curl -X GET https://smsc.sendexa.co/v2/billing/balance \
 ```python
 import requests
 
-url = "https://smsc.sendexa.co/v2/billing/balance"
+url = "https://api.sendexa.co/v1/billing/balance"
 headers = {
     "Authorization": "Bearer YOUR_TOKEN_HERE",
     "Content-Type": "application/json"

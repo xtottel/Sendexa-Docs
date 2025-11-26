@@ -1,7 +1,7 @@
-import { Rocket } from 'lucide-react';
 import { HugeiconsIcon } from '@hugeicons/react';
 import {
   CallRinging04Icon,
+  Certificate01Icon,
   ContactBookIcon,
   CpuChargeIcon,
   CreditCardIcon,
@@ -9,6 +9,7 @@ import {
   Mail01Icon,
   Message01Icon,
   NotificationSquareIcon,
+  StartUp02Icon,
   ToolsIcon,
   TransactionHistoryIcon,
   WhatsappBusinessIcon,
@@ -17,7 +18,7 @@ import {
 export const sidebarNav = [
   {
     title: 'Getting Started',
-    icon: <Rocket className="h-5 w-5" />,
+    icon: <HugeiconsIcon icon={StartUp02Icon} />,
     defaultOpen: true,
     pages: [
       { title: 'Overview', href: '/docs/getting-started/overview' },
@@ -71,7 +72,7 @@ export const sidebarNav = [
   },
 
   {
-    title: 'Phonebook API',
+    title: 'Phonebook',
     icon: <HugeiconsIcon icon={ContactBookIcon} />,
     defaultOpen: false,
     pages: [
@@ -79,9 +80,26 @@ export const sidebarNav = [
       { title: 'Contact', href: '/docs/phonebook/contact' },
       { title: 'Group', href: '/docs/phonebook/group' },
       { title: 'Webhooks', href: '/docs/phonebook/webhooks' },
-      { title: 'API Reference', href: '/api/phonebook/v1' },
+      { title: 'API Reference', href: '/docs/phonebook/v1' },
     ],
   },
+  // ------------------------------------------------------
+  // LOOKUP API
+  // ------------------------------------------------------
+  {
+    title: 'Lookup API',
+    icon: <HugeiconsIcon icon={Certificate01Icon} />,
+    defaultOpen: false,
+    pages: [
+      { title: 'Overview', href: '/docs/lookup/overview' },
+      { title: 'Carrier Lookup', href: '/docs/lookup/carrier' },
+      { title: 'Validate Number', href: '/docs/lookup/validate' },
+      { title: 'Email Verification', href: '/docs/lookup/email-verification' },
+      { title: 'Line Type Detection', href: '/docs/lookup/line-type' },
+      { title: 'API Reference', href: '/docs/lookup/v1' },
+    ],
+  },
+
   // ------------------------------------------------------
   // SMS API
   // ------------------------------------------------------

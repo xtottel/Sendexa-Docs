@@ -1,6 +1,6 @@
 ---
 title: Quickstart Guide
-description: Learn how to generate your API token and send your first SMS using the Sendexa v2 SMS API.
+description: Learn how to generate your API token and send your first SMS using the Sendexa v1 SMS API.
 date: 2025-03-12
 ---
 
@@ -10,13 +10,13 @@ Welcome to the **Sendexa Quickstart Guide**. This guide helps you make your firs
 
 By the end, you will:
 - Create an API Token
-- Send your first SMS using the **/v2/sms/send** endpoint
+- Send your first SMS using the **/v1/sms/send** endpoint
 - Understand basic request/response structures
 
 ---
 
 ## 1. Get Your API Token
-Sendexa v2 uses **Token-based Authorization** for improved security.
+Sendexa v1 uses **Token-based Authorization** for improved security.
 
 To generate a token:
 1. Log in to your dashboard.
@@ -34,7 +34,7 @@ Authorization: Bearer YOUR_TOKEN_HERE
 ## 2. Base URL
 All SMS requests use the base:
 ```
-https://smsc.sendexa.co
+https://api.sendexa.co
 ```
 
 ---
@@ -47,7 +47,7 @@ import axios from 'axios';
 
 async function sendSms() {
   const res = await axios.post(
-    'https://smsc.sendexa.co/v2/sms/send',
+    'https://api.sendexa.co/v1/sms/send',
     {
       to: '+233500000000',
       message: 'Hello from Sendexa!',
@@ -71,7 +71,7 @@ sendSms();
 
 ## 4. Example cURL Request
 ```bash
-curl -X POST https://smsc.sendexa.co/v2/sms/send \
+curl -X POST https://api.sendexa.co/v1/sms/send \
   -H "Authorization: Bearer YOUR_TOKEN_HERE" \
   -H "Content-Type: application/json" \
   -d '{

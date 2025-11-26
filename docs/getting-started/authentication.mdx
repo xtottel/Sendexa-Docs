@@ -1,12 +1,12 @@
 ---
 title: Authentication
-description: Learn how to authenticate securely with Sendexa v2 using Token-based Authorization.
+description: Learn how to authenticate securely with Sendexa v1 using Token-based Authorization.
 date: 2025-03-12
 ---
 
 # Authentication
 
-Sendexa v2 uses **Token-based Authorization** for all API requests. This ensures a more secure, modern, and scalable system compared to legacy API key methods.
+Sendexa v1 uses **Token-based Authorization** for all API requests. This ensures a more secure, modern, and scalable system compared to legacy API key methods.
 
 Every request you make must include a valid **Bearer Token**.
 
@@ -42,8 +42,8 @@ You can create multiple tokens for different environments:
 Here’s an example of adding your token in a standard request:
 
 ```http
-POST /v2/sms/send HTTP/1.1
-Host: smsc.sendexa.co
+POST /v1/sms/send HTTP/1.1
+Host: api.sendexa.co
 Authorization: Bearer YOUR_TOKEN_HERE
 Content-Type: application/json
 ```
@@ -84,10 +84,10 @@ If a token becomes compromised:
 ---
 
 ## Testing Authentication
-You can test token validity using `/v2/auth/check`:
+You can test token validity using `/v1/auth/check`:
 
 ```bash
-curl -X GET https://smsc.sendexa.co/v2/auth/check \
+curl -X GET https://api.sendexa.co/v1/auth/check \
   -H "Authorization: Bearer YOUR_TOKEN_HERE"
 ```
 

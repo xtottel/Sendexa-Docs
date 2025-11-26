@@ -1,6 +1,6 @@
-# Contributing to Pinexio Documentation Template
+# Contributing to Sendexa for Developers
 
-Thank you for considering contributing to **Pinexio Documentation Template**! 🚀 Your contributions help improve this project for everyone. Please follow these guidelines to ensure a smooth collaboration.
+Thank you for considering contributing to **Sendexa for Developers**! 🚀 Your contributions help improve this project for everyone. Please follow these guidelines to ensure a smooth collaboration.
 
 ## 📌 How to Contribute
 
@@ -28,7 +28,7 @@ To contribute code, follow these steps:
 1. **Fork** this repository.
 2. **Clone** your forked repo:
    ```sh
-   git clone https://github.com/sanjayc208/pinexio.git
+   git clone https://github.com/xtottel/Sendexa-Docs.git
    ```
 3. **Create a new branch** for your changes:
    ```sh

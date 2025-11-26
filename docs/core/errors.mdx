@@ -320,7 +320,7 @@ import axios from 'axios';
 async function sendSMS(to, message) {
   try {
     const response = await axios.post(
-      'https://smsc.sendexa.co/v2/sms/send',
+      'https://api.sendexa.co/v1/sms/send',
       { to, message, sender_id: 'Sendexa' },
       {
         headers: {
@@ -381,7 +381,7 @@ import requests
 import time
 
 def send_sms(to, message, max_retries=3):
-    url = "https://smsc.sendexa.co/v2/sms/send"
+    url = "https://api.sendexa.co/v1/sms/send"
     headers = {
         "Authorization": "Bearer YOUR_TOKEN_HERE",
         "Content-Type": "application/json"

@@ -47,26 +47,26 @@ Burst limits allow short spikes in traffic. For example, you can send 100 SMS re
 
 | Endpoint | Rate Limit | Notes |
 |----------|------------|-------|
-| `POST /v2/sms/send` | 60/min | Single message |
-| `POST /v2/sms/bulk` | 10/min | Bulk operations (up to 1000 recipients) |
-| `GET /v2/sms/status` | 100/min | Status checks |
-| `GET /v2/sms/history` | 30/min | Message history |
+| `POST /v1/sms/send` | 60/min | Single message |
+| `POST /v1/sms/bulk` | 10/min | Bulk operations (up to 1000 recipients) |
+| `GET /v1/sms/status` | 100/min | Status checks |
+| `GET /v1/sms/history` | 30/min | Message history |
 
 ### OTP Endpoints
 
 | Endpoint | Rate Limit | Notes |
 |----------|------------|-------|
-| `POST /v2/otp/send` | 30/min | OTP generation |
-| `POST /v2/otp/verify` | 100/min | OTP verification |
-| `POST /v2/otp/resend` | 10/min | OTP resend (per phone number) |
+| `POST /v1/otp/send` | 30/min | OTP generation |
+| `POST /v1/otp/verify` | 100/min | OTP verification |
+| `POST /v1/otp/resend` | 10/min | OTP resend (per phone number) |
 
 ### Billing Endpoints
 
 | Endpoint | Rate Limit | Notes |
 |----------|------------|-------|
-| `GET /v2/billing/balance` | 20/min | Balance checks |
-| `POST /v2/billing/topup` | 5/min | Top-up requests |
-| `GET /v2/billing/history` | 30/min | Transaction history |
+| `GET /v1/billing/balance` | 20/min | Balance checks |
+| `POST /v1/billing/topup` | 5/min | Top-up requests |
+| `GET /v1/billing/history` | 30/min | Transaction history |
 
 ---
 

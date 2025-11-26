@@ -1,57 +1,67 @@
 export const meta = {
-  metadataBase: new URL('https://pinexio.vercel.app'),
-   title: {
-    default: "Sendexa for Developers",
-    template: "%s | Sendexa Docs",
+  metadataBase: new URL('https://docs.sendexa.co'),
+  title: {
+    default: 'Sendexa for Developers',
+    template: '%s | Sendexa Docs',
   },
 
   description:
-    'Africas Leading Communication Platform. A customizable open-source documentation template built with Next.js.',
-  authors: [{ name: 'Collins Vidzro' }],
+    'Africa’s Leading Communication Platform — Build SMS, Email, Voice, WhatsApp, Push, and OTP experiences with simple, modern APIs.',
+
+  authors: [{ name: 'Sendexa' }],
   keywords: [
-    'Pinexio',
-    'documentation template',
-    'template',
-    'Next.js',
-    'React',
-    'JavaScript',
+    'Sendexa',
+    'SMS API',
+    'OTP API',
+    'Email API',
+    'Voice API',
+    'WhatsApp API',
+    'Push Notifications',
+    'Developer Documentation',
+    'Communication Platform',
+    'CPaaS',
+    'Africa',
+    'Ghana',
   ],
-  publisher: 'Collins Vidzro',
-  creator: 'Collins Vidzro',
+
+  publisher: 'Sendexa',
+  creator: 'Sendexa',
+
   openGraph: {
     type: 'website',
     title: 'Sendexa for Developers',
     description:
-      'A customizable open-source documentation template built with Next.js.',
+      'Africa’s Leading Communication Platform — Build reliable communication workflows with modern APIs.',
     images: [
       {
         url: '/og_image.png',
         width: 1200,
         height: 630,
-        alt: 'Pinexio Documentation Template',
+        alt: 'Sendexa Developer Documentation',
       },
     ],
   },
+
   twitter: {
-    card: 'summary_large_image', // Type of Twitter card
-    title: 'Sendexa for Developers', // Twitter card title
+    card: 'summary_large_image',
+    title: 'Sendexa for Developers',
     description:
-      'A customizable open-source documentation template built with Next.js.', // Twitter card description
-    images: ['/og_image.png'], // Image used in the Twitter card
-    creator: '@sanjayrajeev', // Twitter handle of the content creator (optional)
+      'Explore Sendexa’s powerful SMS, Email, Voice, WhatsApp, OTP, and Push APIs.',
+    images: ['/og_image.png'],
+    creator: '@sendexa', // update if you have an official handle
   },
+
   // SEO Enhancements
   alternates: {
-    canonical: 'https://pinexio.vercel.app', // Set the canonical URL
+    canonical: 'https://docs.sendexa.co',
   },
-  robots: 'index, follow', // Allows search engines to index and follow links
-  // Optional: Hreflang for multilingual content (if applicable)
+
+  robots: 'index, follow',
+
   hreflang: {
-    en: 'https://pinexio.vercel.app', // English version URL
-    // Add more hreflang if you have other languages (example: Spanish)
-    // "es": "https://pinexio.vercel.app/es",
+    en: 'https://docs.sendexa.co',
   },
-  //icon
+
   icons: {
     icon: '/favicon.png',
   },

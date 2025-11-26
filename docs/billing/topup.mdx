@@ -35,13 +35,13 @@ You can top up your account in two ways:
 
 ## API Top-Up
 
-### POST /v2/billing/topup
+### POST /v1/billing/topup
 
 Initiate a credit top-up programmatically.
 
 **Base URL:**
 ```
-https://smsc.sendexa.co
+https://api.sendexa.co
 ```
 
 ---
@@ -55,7 +55,7 @@ import axios from 'axios';
 
 async function topUpCredits() {
   const res = await axios.post(
-    'https://smsc.sendexa.co/v2/billing/topup',
+    'https://api.sendexa.co/v1/billing/topup',
     {
       amount: 100.00,
       currency: 'GHS',
@@ -80,7 +80,7 @@ topUpCredits();
 ### cURL
 
 ```bash
-curl -X POST https://smsc.sendexa.co/v2/billing/topup \
+curl -X POST https://api.sendexa.co/v1/billing/topup \
   -H "Authorization: Bearer YOUR_TOKEN_HERE" \
   -H "Content-Type: application/json" \
   -d '{
@@ -97,7 +97,7 @@ curl -X POST https://smsc.sendexa.co/v2/billing/topup \
 ```python
 import requests
 
-url = "https://smsc.sendexa.co/v2/billing/topup"
+url = "https://api.sendexa.co/v1/billing/topup"
 headers = {
     "Authorization": "Bearer YOUR_TOKEN_HERE",
     "Content-Type": "application/json"

@@ -1,0 +1,35 @@
+---
+title: Rate Limits
+description: Details the request limits for Sendexa API usage.
+date: 2025-03-12
+---
+
+# Rate Limits
+
+To ensure stability and fairness for all clients, Sendexa enforces rate limits across different API categories.
+
+## Global Limits
+| Endpoint Group | Limit |
+|----------------|--------|
+| SMS API | 60 requests / minute |
+| OTP API | 30 requests / minute |
+| Email API | 50 requests / minute |
+
+## When You Hit a Rate Limit
+If your application exceeds the allowed rate, the API will respond with:
+
+```json
+{
+  "status": "error",
+  "code": "RATE_LIMIT_EXCEEDED",
+  "message": "Too many requests. Try again later.",
+  "retry_after": 30
+}
+```
+
+## Avoiding Rate Limits
+- Queue requests during high traffic
+- Cache responses where possible
+- Use bulk endpoints for batch operations
+- Implement exponential backoff
+

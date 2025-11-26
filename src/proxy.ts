@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   console.log('req.nextUrl==>', req.nextUrl.pathname);
   // Check if the request path starts with `/documentation`
   if (req.nextUrl.pathname.startsWith('/docs')) {

@@ -1,0 +1,42 @@
+---
+title: Webhooks
+description: Configure callbacks to receive SMS and OTP status updates in real-time.
+date: 2025-03-12
+---
+
+# Webhooks
+
+Webhooks allow your system to receive real-time updates from Sendexa for events such as SMS delivery, OTP verification, and more.
+
+## How Webhooks Work
+1. You provide a callback URL.
+2. Sendexa sends a POST request whenever an event occurs.
+3. Your system acknowledges with a **200 OK** response.
+
+## Example Delivery Webhook Payload
+```json
+{
+  "event": "sms.delivery",
+  "message_id": "MSG-99332",
+  "status": "DELIVERED",
+  "recipient": "+233501234567",
+  "timestamp": "2025-03-12T12:45:30Z"
+}
+```
+
+## Expected Response
+Your webhook endpoint must return:
+```http
+200 OK
+```
+within **5 seconds**.
+
+## Security
+- Include signature validation (coming soon)
+- Use HTTPS always
+
+## Retry Policy
+If your system does not respond with 200 OK, Sendexa will retry:
+- 3 attempts
+- With exponential backoff
+

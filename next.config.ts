@@ -1,11 +1,15 @@
 // import createMDX from '@next/mdx';
 import { createContentlayerPlugin } from 'next-contentlayer2';
+import { webpack } from 'next/dist/compiled/webpack/webpack';
 
 const nextConfig = {
   // pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
-  webpack: (config: { cache: boolean }) => {
-    config.cache = false;
-    return config;
+  // webpack: (config: { cache: boolean }) => {
+  //   config.cache = false;
+  //   return config;
+  // },
+  turbopack: {
+    // root: path.join(__dirname, '..'),
   },
   images: {
     remotePatterns: [

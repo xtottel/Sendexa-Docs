@@ -1,154 +1,64 @@
 ---
-title: Installation
-description: A guide to install Pinexio locally to your system and get it running
+title: Overview
+description: Secure access to the Sendexa SMS API using Basic Authentication with your API credentials.
 date: 2025-03-12
 ---
+# Overview
 
-# Installation Guide
+Welcome to the official Sendexa Developer Documentation. This guide provides a complete overview of our communication platform, covering SMS, OTP, Email, Voice (future), and all tools designed to help businesses integrate Sendexa seamlessly into their workflows.
 
-Welcome to the installation guide for forking the application from GitHub and setting up your development environment!
+## What is Sendexa?
+Sendexa is a modern communication platform built for businesses in Ghana and across Africa. We provide reliable, fast, and scalable APIs for:
 
-<Steps>
-  <Step>
-    <StepTitle>Step 1: Fork the Repository</StepTitle>
-    <StepContent>
-    <div>
-      <div>
-        Visit our GitHub repository and click the "Fork" button to create your own copy.
-      </div>
-        <a
-          href="https://github.com/sanjayc208/pinexio"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Fork the Repository on GitHub
-        </a>
-      </div>
-    </StepContent>
-  </Step>
-  <Step>
-    <StepTitle>Step 2: Clone Your Fork</StepTitle>
-    <StepContent>
-    <div>
-      After forking, clone your repository to your local machine:
-  ```sh
-  git clone https://github.com/sanjayc208/pinexio.git
-  ```
-      </div>
-    </StepContent>
-  </Step>
-  <Step>
-    <StepTitle>Step 3: Install Dependencies</StepTitle>
-    <StepContent>
-    <div>
-      Install the project dependencies using your preferred package manager:
-       <CodeTabs tabs={{
-        'npm':{
-          syntax:'npm i'
-        },
-        'pnpm':{
-          syntax:'pnpm i'
-        },
-        'yarn':{
-          syntax:'yarn i'
-        },
-       }} />
-      </div>
-    </StepContent>
-  </Step>
-  <Step>
-    <StepTitle>Step 4: Run the Development Server</StepTitle>
-    <StepContent>
-    <div>
-      Start your development server with one of the following commands:
-      <CodeTabs tabs={{
-        'npm':{
-          syntax:'npm run dev'
-        },
-        'pnpm':{
-          syntax:'pnpm dev'
-        },
-        'yarn':{
-          syntax:'yarn run dev'
-        },
-       }} />
-      </div>
-    </StepContent>
-  </Step>
-  <Step>
-    <StepTitle>Step 5: Make Changes</StepTitle>
-    <StepContent>
-    <div>
-      <p>If you want to make changes:</p>
+- **SMS Messaging** (Transactional & Marketing)
+- **OTP & Verification** (SMS & Email OTP)
+- **Email Communication** (Transactional emails)
+- **Voice Services** (upcoming)
+- **Webhooks & Event-driven integrations**
 
-      1. Edit files in the root directory <code>/</code> for global configurations.
-      2. Update or create MDX files in the <code>docs</code> directory to modify or add documentation.
-      3. Update or create MDX files in the <code>docs</code> directory to modify or add documentation.
+Our goal is to empower developers with simple yet powerful APIs and dashboards that help businesses communicate at scale.
 
-          <FolderTree className="overflow-hidden p-2">
-            <Folder element="docs" defaultOpen={true}>
-              <File>
-                <p>page1.mdx</p>
-              </File>
-              <File>
-                <p>page2.mdx</p>
-              </File>
-            </Folder>
-          </FolderTree>
-      4. Refer to the existing documentation to see how things work.
-      </div>
-    </StepContent>
+## Why Sendexa?
+- **Built for Africa-first scalability**
+- **Multiple provider routing** (Kairos, Telecel, etc.)
+- **Simple authentication** with Token-based authorization
+- **Fast delivery & intelligent routing**
+- **Transparent pricing**
+- **Developer-friendly SDKs & examples**
+- **24/7 system monitoring & uptime guarantees** (post-launch)
 
-  </Step>
-</Steps>
+## Core API Categories
+- **SMS API** – Send single or bulk messages with advanced features
+- **OTP API** – Request, verify, and resend OTPs for any application
+- **Email API** – Send templated transactional emails
+- **Webhook API** – Subscribe to delivery reports and events
 
-## What is MDX?
+## Base URLs
+Different services run on dedicated subdomains for performance and scalability:
 
-MDX is an extension of Markdown that allows you to write JSX (React components) inside your Markdown files. This means you can mix content with interactive components seamlessly.
+- **SMS API** → `https://smsc.sendexa.co`
+- **OTP API** → `https://2fa.sendexa.co`
+- **Email API** → `https://email.sendexa.co` (coming soon)
 
-For example, in a normal Markdown file, you might write:
+## Authentication
+Sendexa v2 uses **Token-based Authorization** instead of legacy API keys.
 
-```md
-# Welcome to My Docs
-
-This is a simple Markdown page.
+Example:
+```http
+Authorization: Bearer YOUR_TOKEN_HERE
 ```
 
-But in MDX, you can add React components directly:
+## What You Can Do
+- Integrate SMS & OTP into websites, mobile apps, backend systems
+- Build login & verification flows
+- Automate notifications and alerts
+- Track message delivery in real time
+- Use the dashboard for reports, analytics, and management
 
-```ts
-import { Button } from '@/components/ui/button';
+## Next Steps
+- Read the **Quickstart Guide**
+- Explore the new **/v2/sms/send** API
+- Check OTP API Endpoints
+- Learn how to use Webhooks effectively
 
-# Welcome to My Docs
-
-This is a simple Markdown page with a button:
-
-<Button>Click Me</Button>
-```
-
-## Creating an MDX File
-
-To add a new documentation page, create a new `.mdx` file inside the `docs` directory:
-
-```sh
-echo "# My New Page" > docs/my-new-page.mdx
-```
-
-This file will automatically be picked up by the system and rendered as a new documentation page.
-
-Your folder structure should look like this:
-
-<FolderTree className="overflow-hidden p-2">
-  <Folder element="project-root" defaultOpen={true}>
-    <Folder element="docs" defaultOpen={true}>
-      <File>
-        <p>my-new-page.mdx</p>
-      </File>
-      <File>
-        <p>another-page.mdx</p>
-      </File>
-    </Folder>
-  </Folder>
-</FolderTree>
-
-🎉 That’s it! You now have a functional documentation site up and running with your first MDX page.
+---

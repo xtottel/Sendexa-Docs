@@ -1,0 +1,47 @@
+---
+title: Errors
+description: Error handling structure and standard responses for the Sendexa API.
+date: 2025-03-12
+---
+
+# Errors
+
+Sendexa APIs use a consistent error format to help developers understand exactly what went wrong in any request. All errors follow a predictable JSON structure with an HTTP status code.
+
+## Error Response Format
+```json
+{
+  "status": "error",
+  "code": "INVALID_PARAMETERS",
+  "message": "The phone number provided is invalid.",
+  "timestamp": "2025-03-12T14:55:21Z"
+}
+```
+
+## Common Error Codes
+| Code | Meaning |
+|------|---------|
+| `INVALID_TOKEN` | Token is missing, expired, or invalid |
+| `INVALID_PARAMETERS` | One or more required fields are missing or incorrect |
+| `INSUFFICIENT_BALANCE` | Not enough balance to complete SMS request |
+| `RATE_LIMIT_EXCEEDED` | Too many requests in a short time |
+| `SERVER_ERROR` | Unexpected error on Sendexa servers |
+
+## HTTP Status Codes
+- **400** – Bad Request
+- **401** – Unauthorized
+- **403** – Forbidden
+- **404** – Not Found
+- **429** – Too Many Requests
+- **500** – Internal Server Error
+
+## Example Error
+```json
+{
+  "status": "error",
+  "code": "INSUFFICIENT_BALANCE",
+  "message": "You do not have enough SMS credits.",
+  "timestamp": "2025-03-12T10:15:00Z"
+}
+```
+

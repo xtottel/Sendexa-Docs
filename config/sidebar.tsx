@@ -1,47 +1,3 @@
-// import {
-//   Rocket,
-//   ToolCase,
-//   MessageSquareText,
-//   Mail,
-//   Shield,
-//   CreditCard,
-//   Network,
-//   Bell,
-//   PhoneCall,
-// } from 'lucide-react';
-
-// import { FaWhatsapp } from 'react-icons/fa';
-
-// export const sidebarNav = [
-//   {
-//     title: 'Getting Started',
-//     icon: <Rocket className="h-5 w-5" />,
-//     defaultOpen: true,
-//     pages: [
-//       {
-//         title: 'Overview',
-//         href: '/docs/getting-started/overview',
-//       },
-//       {
-//         title: 'Installation',
-//         href: '/docs/getting-started/installation',
-//       },
-//       {
-//         title: 'Quick Start',
-//         href: '/docs/getting-started/quick-start',
-//       },
-      
-
-//       {
-//         title: 'Authentication',
-//         href: '/docs/getting-started/authentication',
-//       },
-//       {
-//         title: 'SDKs & Libraries',
-//         href: '/docs/getting-started/sdks',
-//       },
-//     ],
-//   },
 //   {
 //     title: 'Core Concepts',
 //     icon: <Network className="h-5 w-5" />,
@@ -297,7 +253,6 @@
 //   },
 // ];
 
-
 import {
   Rocket,
   ToolCase,
@@ -324,23 +279,11 @@ export const sidebarNav = [
       },
       {
         title: 'Quickstart',
-        href: '/docs/getting-started/quick-start',
+        href: '/docs/getting-started/quickstart',
       },
       {
         title: 'Authentication',
         href: '/docs/getting-started/authentication',
-      },
-      {
-        title: 'API Keys & Security',
-        href: '/docs/getting-started/api-keys',
-      },
-      {
-        title: 'SDKs & Libraries',
-        href: '/docs/getting-started/sdks',
-      },
-      {
-        title: 'Best Practices',
-        href: '/docs/getting-started/best-practices',
       },
     ],
   },
@@ -349,10 +292,6 @@ export const sidebarNav = [
     icon: <Cpu className="h-5 w-5" />,
     defaultOpen: false,
     pages: [
-      {
-        title: 'Overview',
-        href: '/docs/core/overview',
-      },
       {
         title: 'Rate Limits',
         href: '/docs/core/rate-limits',
@@ -365,14 +304,6 @@ export const sidebarNav = [
         title: 'Webhooks',
         href: '/docs/core/webhooks',
       },
-      {
-        title: 'Sandbox',
-        href: '/docs/core/environments',
-      },
-      {
-        title: 'Versioning',
-        href: '/docs/core/versioning',
-      },
     ],
   },
   {
@@ -380,10 +311,6 @@ export const sidebarNav = [
     icon: <ToolCase className="h-5 w-5" />,
     defaultOpen: false,
     pages: [
-      {
-        title: 'Overview',
-        href: '/docs/tools/overview',
-      },
       {
         title: 'Sendexa UIs',
         href: '/docs/tools/exa-ui',

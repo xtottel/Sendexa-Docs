@@ -1,4 +1,3 @@
-
 type TocPage = {
   title: string;
   href: string;
@@ -18,44 +17,68 @@ type TocData = {
 export const TocData: TocData = {
   'getting-started/overview': [
     {
-      title: 'Introduction',
-      href: '/docs/getting-started/overview#introduction',
+      title: 'Overview',
+      href: '/docs/getting-started/overview',
       pages: [
         {
           title: 'What is Sendexa',
           href: '/docs/getting-started/overview#what-is-sendexa',
         },
         {
-          title: 'Key Features',
-          href: '/docs/getting-started/overview#key-features',
+          title: 'Why Sendexa',
+          href: '/docs/getting-started/overview#why-sendexa',
         },
         {
-          title: 'Getting Help',
-          href: '/docs/getting-started/overview#getting-help',
+          title: 'Core API Categories',
+          href: '/docs/getting-started/overview#core-api-categories',
+        },
+        {
+          title: 'Base URLs',
+          href: '/docs/getting-started/overview#base-urls',
+        },
+        {
+          title: 'Authentication',
+          href: '/docs/getting-started/overview#authentication',
+        },
+        {
+          title: 'What You Can Do',
+          href: '/docs/getting-started/overview#what-you-can-do',
+        },
+        {
+          title: 'Next Steps',
+          href: '/docs/getting-started/overview#next-steps',
         },
       ],
     },
   ],
   'getting-started/quickstart': [
     {
-      title: 'Quick Start Guide',
+      title: 'Quickstart Guide',
       href: '/docs/getting-started/quickstart',
       pages: [
         {
-          title: 'Prerequisites',
-          href: '/docs/getting-started/quickstart#prerequisites',
+          title: 'Get Your API Token',
+          href: '/docs/getting-started/quickstart#1-get-your-api-token',
         },
         {
-          title: 'Step 1: Get API Keys',
-          href: '/docs/getting-started/quickstart#step-1-getting-api-keys',
+          title: 'Base URL',
+          href: '/docs/getting-started/quickstart#2-base-url',
         },
         {
-          title: 'Step 2: Send Your First Message',
-          href: '/docs/getting-started/quickstart#step-2-send-your-first-message',
+          title: 'Send Your First SMS',
+          href: '/docs/getting-started/quickstart#3-send-your-first-sms',
         },
         {
-          title: 'Next Steps',
-          href: '/docs/getting-started/quickstart#next-steps',
+          title: 'Example cURL Request',
+          href: '/docs/getting-started/quickstart#4-example-curl-request',
+        },
+        {
+          title: 'Response Structure',
+          href: '/docs/getting-started/quickstart#5-response-structure',
+        },
+        {
+          title: 'Troubleshooting',
+          href: '/docs/getting-started/quickstart#6-troubleshooting',
         },
       ],
     },
@@ -66,80 +89,37 @@ export const TocData: TocData = {
       href: '/docs/getting-started/authentication',
       pages: [
         {
-          title: 'API Keys',
-          href: '/docs/getting-started/authentication#api-keys',
+          title: 'How Authentication Works',
+          href: '/docs/getting-started/authentication#how-authentication-works',
         },
         {
-          title: 'Authentication Headers',
-          href: '/docs/getting-started/authentication#authentication-headers',
+          title: 'Creating an API Token',
+          href: '/docs/getting-started/authentication#creating-an-api-token',
         },
         {
-          title: 'Bearer Token',
-          href: '/docs/getting-started/authentication#bearer-token',
+          title: 'Using Tokens in API Requests',
+          href: '/docs/getting-started/authentication#using-tokens-in-api-requests',
+        },
+        {
+          title: 'Token Scopes (Coming Soon)',
+          href: '/docs/getting-started/authentication#token-scopes-coming-soon',
+        },
+        {
+          title: 'Securing Your Tokens',
+          href: '/docs/getting-started/authentication#securing-your-tokens',
+        },
+        {
+          title: 'Rotating or Revoking Tokens',
+          href: '/docs/getting-started/authentication#rotating-or-revoking-tokens',
+        },
+        {
+          title: 'Testing Authentication',
+          href: '/docs/getting-started/authentication#testing-authentication',
         },
       ],
     },
   ],
-  'getting-started/api-keys': [
-    {
-      title: 'API Keys & Security',
-      href: '/docs/getting-started/api-keys',
-      pages: [
-        {
-          title: 'Creating API Keys',
-          href: '/docs/getting-started/api-keys#creating-api-keys',
-        },
-        {
-          title: 'Managing API Keys',
-          href: '/docs/getting-started/api-keys#managing-api-keys',
-        },
-        {
-          title: 'Security Best Practices',
-          href: '/docs/getting-started/api-keys#security-best-practices',
-        },
-      ],
-    },
-  ],
-  'getting-started/sdks': [
-    {
-      title: 'SDKs & Libraries',
-      href: '/docs/getting-started/sdks',
-      pages: [
-        {
-          title: 'Available SDKs',
-          href: '/docs/getting-started/sdks#available-sdks',
-        },
-        {
-          title: 'Installation',
-          href: '/docs/getting-started/sdks#installation',
-        },
-        {
-          title: 'Usage Examples',
-          href: '/docs/getting-started/sdks#usage-examples',
-        },
-      ],
-    },
-  ],
-  'getting-started/best-practices': [
-    {
-      title: 'Best Practices',
-      href: '/docs/getting-started/best-practices',
-      pages: [
-        {
-          title: 'General Guidelines',
-          href: '/docs/getting-started/best-practices#general-guidelines',
-        },
-        {
-          title: 'Performance Tips',
-          href: '/docs/getting-started/best-practices#performance-tips',
-        },
-        {
-          title: 'Error Handling',
-          href: '/docs/getting-started/best-practices#error-handling',
-        },
-      ],
-    },
-  ],
+
   'core/overview': [
     {
       title: 'Core Concepts Overview',
@@ -156,22 +136,31 @@ export const TocData: TocData = {
       ],
     },
   ],
+
   'core/rate-limits': [
     {
       title: 'Rate Limits',
       href: '/docs/core/rate-limits',
       pages: [
         {
-          title: 'Understanding Rate Limits',
-          href: '/docs/core/rate-limits#understanding-rate-limits',
+          title: 'Global Limits',
+          href: '/docs/core/rate-limits#global-limits',
         },
         {
-          title: 'Default Limits',
-          href: '/docs/core/rate-limits#default-limits',
+          title: 'Per-Endpoint Limits',
+          href: '/docs/core/rate-limits#per-endpoint-limits',
         },
         {
-          title: 'Handling Rate Limits',
-          href: '/docs/core/rate-limits#handling-rate-limits',
+          title: 'Exceeding the Limit',
+          href: '/docs/core/rate-limits#exceeding-the-limit',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/core/rate-limits#best-practices',
+        },
+        {
+          title: 'Contact for Upgrades',
+          href: '/docs/core/rate-limits#contact-for-upgrades',
         },
       ],
     },
@@ -186,12 +175,20 @@ export const TocData: TocData = {
           href: '/docs/core/errors#common-error-codes',
         },
         {
-          title: 'Error Responses',
-          href: '/docs/core/errors#error-responses',
+          title: 'Validation Errors',
+          href: '/docs/core/errors#validation-errors',
         },
         {
-          title: 'Troubleshooting',
-          href: '/docs/core/errors#troubleshooting',
+          title: 'Provider Errors',
+          href: '/docs/core/errors#provider-errors',
+        },
+        {
+          title: 'Handling Errors Properly',
+          href: '/docs/core/errors#handling-errors-properly',
+        },
+        {
+          title: 'Dashboard Error Logs',
+          href: '/docs/core/errors#dashboard-error-logs',
         },
       ],
     },
@@ -202,20 +199,29 @@ export const TocData: TocData = {
       href: '/docs/core/webhooks',
       pages: [
         {
-          title: 'Setting Up Webhooks',
-          href: '/docs/core/webhooks#setting-up-webhooks',
+          title: 'Setting Up a Webhook',
+          href: '/docs/core/webhooks#setting-up-a-webhook',
         },
         {
-          title: 'Webhook Security',
-          href: '/docs/core/webhooks#webhook-security',
+          title: 'Delivery Report Payload',
+          href: '/docs/core/webhooks#delivery-report-payload',
         },
         {
-          title: 'Event Types',
-          href: '/docs/core/webhooks#event-types',
+          title: 'Security & Verification',
+          href: '/docs/core/webhooks#security-verification',
+        },
+        {
+          title: 'Responding to Webhooks',
+          href: '/docs/core/webhooks#responding-to-webhooks',
+        },
+        {
+          title: 'Retry Logic',
+          href: '/docs/core/webhooks#retry-logic',
         },
       ],
     },
   ],
+
   'sms/overview': [
     {
       title: 'SMS API Overview',
@@ -356,7 +362,7 @@ export const TocData: TocData = {
       ],
     },
   ],
-  'changelog': [
+  changelog: [
     {
       title: 'Changelog',
       href: '/docs/changelog',

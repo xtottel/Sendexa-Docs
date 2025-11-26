@@ -1,60 +1,102 @@
 ---
 title: Authentication
-description: A guide to install Pinexio locally to your system and get it running
+description: Learn how to authenticate securely with Sendexa v2 using Token-based Authorization.
 date: 2025-03-12
 ---
 
-# Authentication Guide
+# Authentication
 
-Welcome to the Authentication guide for forking the application from GitHub and setting up your development environment!
+Sendexa v2 uses **Token-based Authorization** for all API requests. This ensures a more secure, modern, and scalable system compared to legacy API key methods.
 
-## What is MDX?
+Every request you make must include a valid **Bearer Token**.
 
-MDX is an extension of Markdown that allows you to write JSX (React components) inside your Markdown files. This means you can mix content with interactive components seamlessly.
+---
 
-For example, in a normal Markdown file, you might write:
+## How Authentication Works
+Sendexa issues secure access tokens that uniquely identify your application. These tokens must be included in the `Authorization` header:
 
-```md
-# Welcome to My Docs
-
-This is a simple Markdown page.
+```http
+Authorization: Bearer YOUR_TOKEN_HERE
 ```
 
-But in MDX, you can add React components directly:
+Tokens allow you to authenticate without exposing your account credentials.
 
-```ts
-import { Button } from '@/components/ui/button';
+---
 
-# Welcome to My Docs
+## Creating an API Token
+To generate a new token:
 
-This is a simple Markdown page with a button:
+1. Log in to the **Sendexa Dashboard**.
+2. Go to **Settings → API Tokens**.
+3. Click **Create Token**.
+4. Copy and store the token securely.
 
-<Button>Click Me</Button>
+You can create multiple tokens for different environments:
+- **Production**
+- **Development**
+- **Staging**
+
+---
+
+## Using Tokens in API Requests
+Here’s an example of adding your token in a standard request:
+
+```http
+POST /v2/sms/send HTTP/1.1
+Host: smsc.sendexa.co
+Authorization: Bearer YOUR_TOKEN_HERE
+Content-Type: application/json
 ```
 
-## Creating an MDX File
+---
 
-To add a new documentation page, create a new `.mdx` file inside the `docs` directory:
+## Token Scopes (Coming Soon)
+Future versions of Sendexa will support scoped tokens such as:
+- **sms.send**
+- **otp.verify**
+- **email.send**
 
-```sh
-echo "# My New Page" > docs/my-new-page.mdx
+This gives you finer control over token permissions.
+
+---
+
+## Securing Your Tokens
+To keep your integration safe:
+- Never expose tokens in frontend code.
+- Regenerate a token immediately if exposed.
+- Do not share your token with anyone.
+- Use environment variables for storing tokens.
+
+Example `.env` usage:
+```
+SENDEXA_TOKEN=YOUR_TOKEN_HERE
 ```
 
-This file will automatically be picked up by the system and rendered as a new documentation page.
+---
 
-Your folder structure should look like this:
+## Rotating or Revoking Tokens
+If a token becomes compromised:
+1. Open **Settings → API Tokens**.
+2. Select the token.
+3. Click **Revoke**.
+4. Generate a new token and update your applications.
 
-<FolderTree className="overflow-hidden p-2">
-  <Folder element="project-root" defaultOpen={true}>
-    <Folder element="docs" defaultOpen={true}>
-      <File>
-        <p>my-new-page.mdx</p>
-      </File>
-      <File>
-        <p>another-page.mdx</p>
-      </File>
-    </Folder>
-  </Folder>
-</FolderTree>
+---
 
-🎉 That’s it! You now have a functional documentation site up and running with your first MDX page.
+## Testing Authentication
+You can test token validity using `/v2/auth/check`:
+
+```bash
+curl -X GET https://smsc.sendexa.co/v2/auth/check \
+  -H "Authorization: Bearer YOUR_TOKEN_HERE"
+```
+
+If successful, you’ll receive:
+```json
+{
+  "status": "valid",
+  "message": "Token is active."
+}
+```
+
+---

@@ -8,6 +8,9 @@ module.exports = {
   theme: {
     extend: {
       // Your theme extensions
+      fontFamily: {
+        sans: ['Outfit', 'sans-serif'],
+      },
     },
   },
   screens: {

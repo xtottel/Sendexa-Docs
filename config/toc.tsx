@@ -119,76 +119,251 @@ export const TocData: TocData = {
       ],
     },
   ],
-
-  'core/overview': [
+  'billing/overview': [
     {
-      title: 'Core Concepts Overview',
-      href: '/docs/core/overview',
+      title: 'Billing Overview',
+      href: '/docs/billing/overview',
       pages: [
         {
-          title: 'Understanding the Platform',
-          href: '/docs/core/overview#understanding-the-platform',
+          title: 'How Billing Works',
+          href: '/docs/billing/overview#how-billing-works',
         },
         {
-          title: 'Key Components',
-          href: '/docs/core/overview#key-components',
+          title: 'Credit System',
+          href: '/docs/billing/overview#credit-system',
+        },
+        {
+          title: 'Payment Methods',
+          href: '/docs/billing/overview#payment-methods',
+        },
+        {
+          title: 'Auto Top-Up',
+          href: '/docs/billing/overview#auto-top-up',
+        },
+        {
+          title: 'Billing Dashboard',
+          href: '/docs/billing/overview#billing-dashboard',
+        },
+        {
+          title: 'Invoice & Receipts',
+          href: '/docs/billing/overview#invoice--receipts',
+        },
+        {
+          title: 'Support',
+          href: '/docs/billing/overview#support',
         },
       ],
     },
   ],
-
-  'core/rate-limits': [
+  'billing/balance': [
     {
-      title: 'Rate Limits',
-      href: '/docs/core/rate-limits',
+      title: 'Check Balance',
+      href: '/docs/billing/balance',
       pages: [
         {
-          title: 'Global Limits',
-          href: '/docs/core/rate-limits#global-limits',
+          title: 'API Endpoint',
+          href: '/docs/billing/balance#api-endpoint',
         },
         {
-          title: 'Per-Endpoint Limits',
-          href: '/docs/core/rate-limits#per-endpoint-limits',
+          title: 'Request Example',
+          href: '/docs/billing/balance#request-example',
         },
         {
-          title: 'Exceeding the Limit',
-          href: '/docs/core/rate-limits#exceeding-the-limit',
+          title: 'Response Structure',
+          href: '/docs/billing/balance#response-structure',
+        },
+        {
+          title: 'Error Responses',
+          href: '/docs/billing/balance#error-responses',
+        },
+        {
+          title: 'Check Balance in Dashboard',
+          href: '/docs/billing/balance#check-balance-in-dashboard',
+        },
+        {
+          title: 'Low Balance Alerts',
+          href: '/docs/billing/balance#low-balance-alerts',
         },
         {
           title: 'Best Practices',
-          href: '/docs/core/rate-limits#best-practices',
+          href: '/docs/billing/balance#best-practices',
         },
         {
-          title: 'Contact for Upgrades',
-          href: '/docs/core/rate-limits#contact-for-upgrades',
+          title: 'Support',
+          href: '/docs/billing/balance#support',
         },
       ],
     },
   ],
+  'billing/topup': [
+    {
+      title: 'Top-Up Credits',
+      href: '/docs/billing/topup',
+      pages: [
+        {
+          title: 'Top-Up Methods',
+          href: '/docs/billing/topup#top-up-methods',
+        },
+        {
+          title: 'Dashboard Top-Up',
+          href: '/docs/billing/topup#dashboard-top-up',
+        },
+        {
+          title: 'API Top-Up',
+          href: '/docs/billing/topup#api-top-up',
+        },
+        {
+          title: 'Request Example',
+          href: '/docs/billing/topup#request-example',
+        },
+        {
+          title: 'Request Parameters',
+          href: '/docs/billing/topup#request-parameters',
+        },
+        {
+          title: 'Response Structure',
+          href: '/docs/billing/topup#response-structure',
+        },
+        {
+          title: 'Payment Flow',
+          href: '/docs/billing/topup#payment-flow',
+        },
+        {
+          title: 'Webhook Notification',
+          href: '/docs/billing/topup#webhook-notification',
+        },
+        {
+          title: 'Error Responses',
+          href: '/docs/billing/topup#error-responses',
+        },
+        {
+          title: 'Minimum Top-Up Amounts',
+          href: '/docs/billing/topup#minimum-top-up-amounts',
+        },
+        {
+          title: 'Auto Top-Up',
+          href: '/docs/billing/topup#auto-top-up',
+        },
+        {
+          title: 'Support',
+          href: '/docs/billing/topup#support',
+        },
+      ],
+    },
+  ],
+
   'core/errors': [
     {
       title: 'Error Handling',
       href: '/docs/core/errors',
       pages: [
         {
+          title: 'Error Response Format',
+          href: '/docs/core/errors#error-response-format',
+        },
+        {
+          title: 'HTTP Status Codes',
+          href: '/docs/core/errors#http-status-codes',
+        },
+        {
           title: 'Common Error Codes',
           href: '/docs/core/errors#common-error-codes',
+        },
+        {
+          title: 'Authentication Errors',
+          href: '/docs/core/errors#authentication-errors',
         },
         {
           title: 'Validation Errors',
           href: '/docs/core/errors#validation-errors',
         },
         {
-          title: 'Provider Errors',
-          href: '/docs/core/errors#provider-errors',
+          title: 'Business Logic Errors',
+          href: '/docs/core/errors#business-logic-errors',
         },
         {
-          title: 'Handling Errors Properly',
-          href: '/docs/core/errors#handling-errors-properly',
+          title: 'Rate Limiting Errors',
+          href: '/docs/core/errors#rate-limiting-errors',
         },
         {
-          title: 'Dashboard Error Logs',
-          href: '/docs/core/errors#dashboard-error-logs',
+          title: 'Server Errors',
+          href: '/docs/core/errors#server-errors',
+        },
+        {
+          title: 'Error Code Reference',
+          href: '/docs/core/errors#error-code-reference',
+        },
+        {
+          title: 'Handling Errors in Your Code',
+          href: '/docs/core/errors#handling-errors-in-your-code',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/core/errors#best-practices',
+        },
+        {
+          title: 'Testing Error Scenarios',
+          href: '/docs/core/errors#testing-error-scenarios',
+        },
+        {
+          title: 'Need Help?',
+          href: '/docs/core/errors#need-help',
+        },
+      ],
+    },
+  ],
+  'core/rate-limits': [
+    {
+      title: 'Rate Limits',
+      href: '/docs/core/rate-limits',
+      pages: [
+        {
+          title: 'Overview',
+          href: '/docs/core/rate-limits#overview',
+        },
+        {
+          title: 'Global Rate Limits',
+          href: '/docs/core/rate-limits#global-rate-limits',
+        },
+        {
+          title: 'Endpoint-Specific Limits',
+          href: '/docs/core/rate-limits#endpoint-specific-limits',
+        },
+        {
+          title: 'Rate Limit Headers',
+          href: '/docs/core/rate-limits#rate-limit-headers',
+        },
+        {
+          title: 'Rate Limit Exceeded Response',
+          href: '/docs/core/rate-limits#rate-limit-exceeded-response',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/core/rate-limits#best-practices',
+        },
+        {
+          title: 'Advanced Strategies',
+          href: '/docs/core/rate-limits#advanced-strategies',
+        },
+        {
+          title: 'Plan-Based Limits',
+          href: '/docs/core/rate-limits#plan-based-limits',
+        },
+        {
+          title: 'Monitoring & Alerts',
+          href: '/docs/core/rate-limits#monitoring--alerts',
+        },
+        {
+          title: 'Testing Rate Limits',
+          href: '/docs/core/rate-limits#testing-rate-limits',
+        },
+        {
+          title: 'Frequently Asked Questions',
+          href: '/docs/core/rate-limits#frequently-asked-questions',
+        },
+        {
+          title: 'Need Help?',
+          href: '/docs/core/rate-limits#need-help',
         },
       ],
     },
@@ -199,24 +374,68 @@ export const TocData: TocData = {
       href: '/docs/core/webhooks',
       pages: [
         {
-          title: 'Setting Up a Webhook',
-          href: '/docs/core/webhooks#setting-up-a-webhook',
+          title: 'Overview',
+          href: '/docs/core/webhooks#overview',
         },
         {
-          title: 'Delivery Report Payload',
-          href: '/docs/core/webhooks#delivery-report-payload',
+          title: 'How Webhooks Work',
+          href: '/docs/core/webhooks#how-webhooks-work',
         },
         {
-          title: 'Security & Verification',
-          href: '/docs/core/webhooks#security-verification',
+          title: 'Configuration',
+          href: '/docs/core/webhooks#configuration',
         },
         {
-          title: 'Responding to Webhooks',
-          href: '/docs/core/webhooks#responding-to-webhooks',
+          title: 'Event Types',
+          href: '/docs/core/webhooks#event-types',
         },
         {
-          title: 'Retry Logic',
-          href: '/docs/core/webhooks#retry-logic',
+          title: 'SMS Events',
+          href: '/docs/core/webhooks#sms-events',
+        },
+        {
+          title: 'OTP Events',
+          href: '/docs/core/webhooks#otp-events',
+        },
+        {
+          title: 'Billing Events',
+          href: '/docs/core/webhooks#billing-events',
+        },
+        {
+          title: 'Implementing Webhook Handlers',
+          href: '/docs/core/webhooks#implementing-webhook-handlers',
+        },
+        {
+          title: 'Security',
+          href: '/docs/core/webhooks#security',
+        },
+        {
+          title: 'Retry Policy',
+          href: '/docs/core/webhooks#retry-policy',
+        },
+        {
+          title: 'Testing Webhooks',
+          href: '/docs/core/webhooks#testing-webhooks',
+        },
+        {
+          title: 'Monitoring & Debugging',
+          href: '/docs/core/webhooks#monitoring--debugging',
+        },
+        {
+          title: 'Common Issues',
+          href: '/docs/core/webhooks#common-issues',
+        },
+        {
+          title: 'Sendexa IP Addresses',
+          href: '/docs/core/webhooks#sendexa-ip-addresses',
+        },
+        {
+          title: 'Best Practices Checklist',
+          href: '/docs/core/webhooks#best-practices-checklist',
+        },
+        {
+          title: 'Need Help?',
+          href: '/docs/core/webhooks#need-help',
         },
       ],
     },

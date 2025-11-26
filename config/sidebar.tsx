@@ -367,7 +367,7 @@ export const sidebarNav = [
       },
       {
         title: 'API Reference',
-        href: '/api/sms/v1',
+        href: '/docs/sms/v1',
       },
     ],
   },

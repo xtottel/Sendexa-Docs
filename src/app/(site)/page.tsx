@@ -1,12 +1,11 @@
-"use client";
+'use client';
 
-import Hero from "./core/Hero";
-import Stats from "./core/Stats";
-import ProductFeatures from "./core/ProductFeatures";
-import QuickStart from "./core/QuickStart";
-import SDKs from "./core/SDKs";
-import UseCases from "./core/UseCases";
-import CTASection from "./core/CTASection";
+import Hero from './core/Hero';
+import Stats from './core/Stats';
+import ProductFeatures from './core/ProductFeatures';
+import QuickStart from './core/QuickStart';
+import SDKs from './core/SDKs';
+import UseCases from './core/UseCases';
 
 export default function DocsLanding() {
   return (
@@ -22,9 +21,6 @@ export default function DocsLanding() {
 
       {/* Use Cases Section */}
       <UseCases />
-
-      {/* CTA Section */}
-      <CTASection />
     </div>
   );
 }

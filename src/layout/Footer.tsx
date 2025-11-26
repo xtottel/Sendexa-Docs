@@ -1,62 +1,52 @@
-"use client";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import {
-  FaTwitter,
-  FaLinkedin,
-  FaGithub,
-  FaFacebook,
-  FaYoutube,
-  FaInstagram,
-  FaBook,
-  FaCode,
-  FaQuestionCircle,
-} from "react-icons/fa";
-import { Heart, Terminal } from "lucide-react";
+'use client';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { FaTwitter, FaLinkedin, FaGithub, FaBook } from 'react-icons/fa';
+import { Heart, Terminal } from 'lucide-react';
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const docLinks = [
     {
-      title: "Documentation",
+      title: 'Documentation',
       items: [
-        { name: "Getting Started", href: "/docs/getting-started" },
-        { name: "API Reference", href: "/docs/api" },
-        { name: "SDKs & Libraries", href: "/docs/sdks" },
-        { name: "Authentication", href: "/docs/auth" },
-        { name: "Rate Limits", href: "/docs/rate-limits" },
+        { name: 'Getting Started', href: '/docs/getting-started' },
+        { name: 'API Reference', href: '/docs/api' },
+        { name: 'SDKs & Libraries', href: '/docs/sdks' },
+        { name: 'Authentication', href: '/docs/auth' },
+        { name: 'Rate Limits', href: '/docs/rate-limits' },
       ],
     },
     {
-      title: "Guides",
+      title: 'Guides',
       items: [
-        { name: "Quick Start", href: "/docs/quickstart" },
-        { name: "Best Practices", href: "/docs/best-practices" },
-        { name: "Webhooks Guide", href: "/docs/webhooks" },
-        { name: "Error Handling", href: "/docs/errors" },
-        { name: "Security", href: "/docs/security" },
+        { name: 'Quick Start', href: '/docs/quickstart' },
+        { name: 'Best Practices', href: '/docs/best-practices' },
+        { name: 'Webhooks Guide', href: '/docs/webhooks' },
+        { name: 'Error Handling', href: '/docs/errors' },
+        { name: 'Security', href: '/docs/security' },
       ],
     },
     {
-      title: "Resources",
+      title: 'Resources',
       items: [
-        { name: "API Status", href: "https://status.sendexa.co" },
-        { name: "Changelog", href: "/docs/changelog" },
-        { name: "Community", href: "/community" },
-        { name: "Support", href: "/support" },
-        { name: "Blog", href: "/blog" },
+        { name: 'API Status', href: 'https://status.sendexa.co' },
+        { name: 'Changelog', href: '/docs/changelog' },
+        { name: 'Community', href: '/community' },
+        { name: 'Support', href: '/support' },
+        { name: 'Blog', href: '/blog' },
       ],
     },
     {
-      title: "Tools",
+      title: 'Tools',
       items: [
-        { name: "API Playground", href: "/playground" },
-        { name: "Code Samples", href: "/docs/samples" },
-        { name: "CLI Tool", href: "/docs/cli" },
-        { name: "Postman Collection", href: "/docs/postman" },
-        { name: "Testing", href: "/docs/testing" },
+        { name: 'API Playground', href: '/playground' },
+        { name: 'Code Samples', href: '/docs/samples' },
+        { name: 'CLI Tool', href: '/docs/cli' },
+        { name: 'Postman Collection', href: '/docs/postman' },
+        { name: 'Testing', href: '/docs/testing' },
       ],
     },
   ];
@@ -64,27 +54,27 @@ export const Footer = () => {
   const socialIcons = [
     {
       icon: FaGithub,
-      href: "https://github.com/sendexa",
-      label: "GitHub",
-      className: "hover:text-gray-300",
+      href: 'https://github.com/sendexa',
+      label: 'GitHub',
+      className: 'hover:text-gray-300',
     },
     {
       icon: FaTwitter,
-      href: "https://twitter.com/sendexaHQ",
-      label: "Twitter/X",
-      className: "hover:text-blue-400",
+      href: 'https://twitter.com/sendexaHQ',
+      label: 'Twitter/X',
+      className: 'hover:text-blue-400',
     },
     {
       icon: FaLinkedin,
-      href: "https://linkedin.com/company/sendexa",
-      label: "LinkedIn",
-      className: "hover:text-blue-600",
+      href: 'https://linkedin.com/company/sendexa',
+      label: 'LinkedIn',
+      className: 'hover:text-blue-600',
     },
     {
       icon: FaBook,
-      href: "https://docs.sendexa.co",
-      label: "Documentation",
-      className: "hover:text-purple-500",
+      href: 'https://docs.sendexa.co',
+      label: 'Documentation',
+      className: 'hover:text-purple-500',
     },
   ];
 
@@ -117,8 +107,8 @@ export const Footer = () => {
               </motion.div>
             </Link>
             <p className="text-sm text-gray-400 font-mono leading-relaxed">
-              Build with Sendexa's powerful APIs. Comprehensive documentation, 
-              SDKs, and tools to integrate messaging, verification, and voice 
+              Build with Sendexa's powerful APIs. Comprehensive documentation,
+              SDKs, and tools to integrate messaging, verification, and voice
               capabilities into your applications.
             </p>
 
@@ -144,20 +134,22 @@ export const Footer = () => {
 
             {/* Social Icons */}
             <div className="flex space-x-3 mt-6">
-              {socialIcons.map(({ icon: Icon, href, label, className }, idx) => (
-                <motion.a
-                  key={idx}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className={`p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-all border border-gray-700 ${className}`}
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Icon className="h-4 w-4" />
-                </motion.a>
-              ))}
+              {socialIcons.map(
+                ({ icon: Icon, href, label, className }, idx) => (
+                  <motion.a
+                    key={idx}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className={`p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-all border border-gray-700 ${className}`}
+                    whileHover={{ y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Icon className="h-4 w-4" />
+                  </motion.a>
+                )
+              )}
             </div>
           </div>
 
@@ -207,10 +199,10 @@ export const Footer = () => {
             className="text-sm text-gray-500 font-mono"
             aria-label={`Copyright ${currentYear} Sendexa, Inc.`}
           >
-            &copy; {currentYear}{" "}
+            &copy; {currentYear}{' '}
             <span className="font-medium text-[#f8971d] transition-colors duration-300">
               Sendexa LLC.
-            </span>{" "}
+            </span>{' '}
             All rights reserved.
           </motion.p>
 

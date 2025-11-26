@@ -407,6 +407,7 @@ export const PopoverContent = ({
   // Initialize position calculation in a layout effect to prevent flicker
   useEffect(() => {
     if (isOpen && contentRef.current && triggerRef.current) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       updatePosition();
     }
     return undefined;

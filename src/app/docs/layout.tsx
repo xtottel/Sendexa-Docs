@@ -183,6 +183,7 @@ import {
   UserAvatar,
   NestedLink,
   SidebarHeaderLogo,
+  // SidebarHeaderTitle,
 } from '@/components/sidebar';
 import { Github } from 'lucide-react';
 import Script from 'next/script';
@@ -192,6 +193,7 @@ import Header from '@/components/header';
 import { ModeToggle } from '@/components/mode-toggle';
 import { Button } from '@/components/button';
 import { useIsMobile } from '@/hooks/use-mobile';
+//import Link from 'next/link';
 
 export default function DocsLayout({
   children,
@@ -230,6 +232,11 @@ export default function DocsLayout({
                 />
               }
             />
+            {/* <Link href={'/'} className="flex flex-1 gap-3">
+              <SidebarHeaderTitle>
+                Sendexa Docs
+              </SidebarHeaderTitle>
+            </Link> */}
           </SidebarHeader>
           <SidebarContent>
             {sidebarNav.map((section) => (

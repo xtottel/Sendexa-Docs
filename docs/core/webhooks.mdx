@@ -34,12 +34,12 @@ Webhooks are HTTP callbacks that Sendexa sends to your server when specific even
 ## How Webhooks Work
 
 ```
-┌─────────────┐         ┌─────────────┐         ┌─────────────┐
-│             │         │             │         │             │
-│  Sendexa    │─(1)────▶│ Your Server │─(2)────▶│  Sendexa    │
-│   Server    │  POST   │  Endpoint   │ 200 OK  │   Server    │
-│             │  Event  │             │         │             │
-└─────────────┘         └─────────────┘         └─────────────┘
+┌─────────────┐           ┌─────────────┐           ┌─────────────┐
+│             │           │             │           │             │
+│  Sendexa    │─(1)────▶  │ Your Server │─(2)────▶ │  Sendexa    │
+│   Server    │  POST     │  Endpoint   │ 200 OK    │   Server    │
+│             │  Event    │             │           │             │
+└─────────────┘           └─────────────┘           └─────────────┘
 ```
 
 1. **Event occurs** - SMS delivered, OTP verified, etc.

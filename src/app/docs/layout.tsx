@@ -21,6 +21,7 @@ import {
   SidebarHeaderLogo,
 } from '@/components/sidebar';
 import { Github } from 'lucide-react';
+
 import { useRouter } from 'next/navigation';
 
 import Header from '@/components/header';
@@ -56,12 +57,8 @@ export default function DocsLayout({
                   height={100}
                   src={`/favicon.png`}
                 />
-                
               }
             />
-           
-
-            
           </SidebarHeader>
           <SidebarContent>
             {sidebarNav.map((section) => (

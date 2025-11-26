@@ -1,6 +1,6 @@
 // import createMDX from '@next/mdx';
 import { createContentlayerPlugin } from 'next-contentlayer2';
-import { webpack } from 'next/dist/compiled/webpack/webpack';
+//import { webpack } from 'next/dist/compiled/webpack/webpack';
 
 const nextConfig = {
   // pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],

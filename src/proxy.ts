@@ -6,7 +6,7 @@ export function proxy(req: NextRequest) {
   if (req.nextUrl.pathname.startsWith('/docs')) {
     // Redirect to /documentation/getting-started
     return NextResponse.redirect(
-      new URL('/docs/getting-started/introduction', req.url)
+      new URL('/docs/getting-started/overview', req.url)
     );
   }
 

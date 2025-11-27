@@ -129,7 +129,7 @@ export const sidebarNav = [
       { title: 'Verify OTP', href: '/docs/verify/verify' },
       { title: 'Resend OTP', href: '/docs/verify/resend' },
       { title: 'Webhooks', href: '/docs/verify/webhooks' },
-      { title: 'API Reference', href: '/api/verify/v1' },
+      { title: 'API Reference', href: '/docs/verify/v1' },
     ],
   },
 
@@ -144,7 +144,7 @@ export const sidebarNav = [
       { title: 'Overview', href: '/docs/push/overview' },
       { title: 'Send Push', href: '/docs/push/send' },
       { title: 'Manage Devices', href: '/docs/push/devices' },
-      { title: 'API Reference', href: '/api/push/v1' },
+      { title: 'API Reference', href: '/docs/push/v1' },
     ],
   },
 
@@ -161,7 +161,7 @@ export const sidebarNav = [
       { title: 'Text-to-Speech (TTS)', href: '/docs/voice/tts' },
       { title: 'IVR', href: '/docs/voice/ivr' },
       { title: 'Call Events & Webhooks', href: '/docs/voice/webhooks' },
-      { title: 'API Reference', href: '/api/voice/v1' },
+      { title: 'API Reference', href: '/docs/voice/v1' },
     ],
   },
 
@@ -178,7 +178,7 @@ export const sidebarNav = [
       { title: 'Templates', href: '/docs/email/templates' },
       { title: 'Attachments', href: '/docs/email/attachments' },
       { title: 'Webhooks', href: '/docs/email/webhooks' },
-      { title: 'API Reference', href: '/api/email/v1' },
+      { title: 'API Reference', href: '/docs/email/v1' },
     ],
   },
 
@@ -196,7 +196,7 @@ export const sidebarNav = [
       { title: 'Contacts', href: '/docs/whatsapp/contacts' },
       { title: 'Templates', href: '/docs/whatsapp/templates' },
       { title: 'Webhooks', href: '/docs/whatsapp/webhooks' },
-      { title: 'API Reference', href: '/api/whatsapp/v1' },
+      { title: 'API Reference', href: '/docs/whatsapp/v1' },
     ],
   },
 

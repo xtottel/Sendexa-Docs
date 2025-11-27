@@ -777,26 +777,392 @@ export const TocData: TocData = {
       ],
     },
   ],
+
   'verify/overview': [
     {
-      title: 'Verify API Overview',
+      title: 'Enhanced OTP API Overview',
       href: '/docs/verify/overview',
       pages: [
         {
-          title: 'What is OTP Verification',
-          href: '/docs/verify/overview#what-is-otp-verification',
+          title: 'Why Choose Enhanced OTP API?',
+          href: '/docs/verify/overview#why-choose-enhanced-otp-api',
         },
         {
-          title: 'How It Works',
-          href: '/docs/verify/overview#how-it-works',
+          title: 'Key Features',
+          href: '/docs/verify/overview#key-features',
         },
         {
-          title: 'Use Cases',
-          href: '/docs/verify/overview#use-cases',
+          title: 'Getting Started',
+          href: '/docs/verify/overview#getting-started',
+        },
+        {
+          title: 'Base URL',
+          href: '/docs/verify/overview#base-url',
+        },
+        {
+          title: 'Authentication',
+          href: '/docs/verify/overview#authentication',
+        },
+        {
+          title: 'API Endpoints Summary',
+          href: '/docs/verify/overview#api-endpoints-summary',
+        },
+        {
+          title: 'PIN Configuration',
+          href: '/docs/verify/overview#pin-configuration',
+        },
+        {
+          title: 'Message Templates',
+          href: '/docs/verify/overview#message-templates',
+        },
+        {
+          title: 'Expiry Configuration',
+          href: '/docs/verify/overview#expiry-configuration',
+        },
+        {
+          title: 'Common Use Cases',
+          href: '/docs/verify/overview#common-use-cases',
+        },
+        {
+          title: 'Rate Limits',
+          href: '/docs/verify/overview#rate-limits',
+        },
+        {
+          title: 'Pricing',
+          href: '/docs/verify/overview#pricing',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/verify/overview#best-practices',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/verify/overview#testing',
+        },
+        {
+          title: 'Error Handling',
+          href: '/docs/verify/overview#error-handling',
+        },
+        {
+          title: 'Support',
+          href: '/docs/verify/overview#support',
+        },
+        {
+          title: 'Next Steps',
+          href: '/docs/verify/overview#next-steps',
         },
       ],
     },
   ],
+  'verify/v1': [
+    {
+      title: 'Enhanced OTP API v1 Reference',
+      href: '/docs/verify/v1',
+      pages: [
+        {
+          title: 'Base URL',
+          href: '/docs/verify/v1#base-url',
+        },
+        {
+          title: 'Authentication',
+          href: '/docs/verify/v1#authentication',
+        },
+        {
+          title: 'Endpoints Overview',
+          href: '/docs/verify/v1#endpoints-overview',
+        },
+        {
+          title: 'Request OTP',
+          href: '/docs/verify/v1#request-otp',
+        },
+        {
+          title: 'Verify OTP',
+          href: '/docs/verify/v1#verify-otp',
+        },
+        {
+          title: 'Resend OTP',
+          href: '/docs/verify/v1#resend-otp',
+        },
+        {
+          title: 'HTTP Status Codes',
+          href: '/docs/verify/v1#http-status-codes',
+        },
+        {
+          title: 'Error Code Reference',
+          href: '/docs/verify/v1#error-code-reference',
+        },
+        {
+          title: 'Rate Limits',
+          href: '/docs/verify/v1#rate-limits',
+        },
+        {
+          title: 'PIN Configuration',
+          href: '/docs/verify/v1#pin-configuration',
+        },
+        {
+          title: 'Message Templates',
+          href: '/docs/verify/v1#message-templates',
+        },
+        {
+          title: 'Expiry Configuration',
+          href: '/docs/verify/v1#expiry-configuration',
+        },
+        {
+          title: 'Webhook Events',
+          href: '/docs/verify/v1#webhook-events',
+        },
+        {
+          title: 'SDKs & Code Examples',
+          href: '/docs/verify/v1#sdks--code-examples',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/verify/v1#testing',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/verify/v1#best-practices',
+        },
+        {
+          title: 'Pricing',
+          href: '/docs/verify/v1#pricing',
+        },
+        {
+          title: 'Support',
+          href: '/docs/verify/v1#support',
+        },
+        {
+          title: 'Changelog',
+          href: '/docs/verify/v1#changelog',
+        },
+      ],
+    },
+  ],
+  'verify/request': [
+    {
+      title: 'Request OTP',
+      href: '/docs/verify/request',
+      pages: [
+        {
+          title: 'Endpoint',
+          href: '/docs/verify/request#endpoint',
+        },
+        {
+          title: 'Authentication',
+          href: '/docs/verify/request#authentication',
+        },
+        {
+          title: 'Request Body',
+          href: '/docs/verify/request#request-body',
+        },
+        {
+          title: 'Request Examples',
+          href: '/docs/verify/request#request-examples',
+        },
+        {
+          title: 'Response',
+          href: '/docs/verify/request#response',
+        },
+        {
+          title: 'Code Examples',
+          href: '/docs/verify/request#code-examples',
+        },
+        {
+          title: 'Template Messages',
+          href: '/docs/verify/request#template-messages',
+        },
+        {
+          title: 'PIN Configuration',
+          href: '/docs/verify/request#pin-configuration',
+        },
+        {
+          title: 'Error Responses',
+          href: '/docs/verify/request#error-responses',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/verify/request#best-practices',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/verify/request#testing',
+        },
+        {
+          title: 'Next Steps',
+          href: '/docs/verify/request#next-steps',
+        },
+      ],
+    },
+  ],
+  'verify/resend': [
+    {
+      title: 'Resend OTP',
+      href: '/docs/verify/resend',
+      pages: [
+        {
+          title: 'Endpoint',
+          href: '/docs/verify/resend#endpoint',
+        },
+        {
+          title: 'Authentication',
+          href: '/docs/verify/resend#authentication',
+        },
+        {
+          title: 'Request Body',
+          href: '/docs/verify/resend#request-body',
+        },
+        {
+          title: 'How It Works',
+          href: '/docs/verify/resend#how-it-works',
+        },
+        {
+          title: 'Request Examples',
+          href: '/docs/verify/resend#request-examples',
+        },
+        {
+          title: 'Response',
+          href: '/docs/verify/resend#response',
+        },
+        {
+          title: 'Error Responses',
+          href: '/docs/verify/resend#error-responses',
+        },
+        {
+          title: 'Code Examples',
+          href: '/docs/verify/resend#code-examples',
+        },
+        {
+          title: 'Frontend Integration',
+          href: '/docs/verify/resend#frontend-integration',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/verify/resend#best-practices',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/verify/resend#testing',
+        },
+        {
+          title: 'Next Steps',
+          href: '/docs/verify/resend#next-steps',
+        },
+      ],
+    },
+  ],
+  'verify/verify': [
+    {
+      title: 'Verify OTP',
+      href: '/docs/verify/verify',
+      pages: [
+        {
+          title: 'Endpoint',
+          href: '/docs/verify/verify#endpoint',
+        },
+        {
+          title: 'Authentication',
+          href: '/docs/verify/verify#authentication',
+        },
+        {
+          title: 'Request Body',
+          href: '/docs/verify/verify#request-body',
+        },
+        {
+          title: 'Security Features',
+          href: '/docs/verify/verify#security-features',
+        },
+        {
+          title: 'Request Examples',
+          href: '/docs/verify/verify#request-examples',
+        },
+        {
+          title: 'Response',
+          href: '/docs/verify/verify#response',
+        },
+        {
+          title: 'Error Responses',
+          href: '/docs/verify/verify#error-responses',
+        },
+        {
+          title: 'Code Examples',
+          href: '/docs/verify/verify#code-examples',
+        },
+        {
+          title: 'Frontend Integration',
+          href: '/docs/verify/verify#frontend-integration',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/verify/verify#best-practices',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/verify/verify#testing',
+        },
+        {
+          title: 'Next Steps',
+          href: '/docs/verify/verify#next-steps',
+        },
+      ],
+    },
+  ],
+  'verify/webhooks': [
+    {
+      title: 'OTP Webhooks',
+      href: '/docs/verify/webhooks',
+      pages: [
+        {
+          title: 'Overview',
+          href: '/docs/verify/webhooks#overview',
+        },
+        {
+          title: 'Configuration',
+          href: '/docs/verify/webhooks#configuration',
+        },
+        {
+          title: 'Webhook Events',
+          href: '/docs/verify/webhooks#webhook-events',
+        },
+        {
+          title: 'Implementing Webhook Handlers',
+          href: '/docs/verify/webhooks#implementing-webhook-handlers',
+        },
+        {
+          title: 'Security',
+          href: '/docs/verify/webhooks#security',
+        },
+        {
+          title: 'Retry Policy',
+          href: '/docs/verify/webhooks#retry-policy',
+        },
+        {
+          title: 'Testing Webhooks',
+          href: '/docs/verify/webhooks#testing-webhooks',
+        },
+        {
+          title: 'Monitoring',
+          href: '/docs/verify/webhooks#monitoring',
+        },
+        {
+          title: 'Use Cases',
+          href: '/docs/verify/webhooks#use-cases',
+        },
+        {
+          title: 'Best Practices Checklist',
+          href: '/docs/verify/webhooks#best-practices-checklist',
+        },
+        {
+          title: 'Need Help?',
+          href: '/docs/verify/webhooks#need-help',
+        },
+        {
+          title: 'Next Steps',
+          href: '/docs/verify/webhooks#next-steps',
+        },
+      ],
+    },
+  ],
+
   'voice/overview': [
     {
       title: 'Voice API Overview',

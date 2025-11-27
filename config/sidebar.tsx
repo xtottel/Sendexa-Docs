@@ -9,6 +9,7 @@ import {
   Mail01Icon,
   Message01Icon,
   NotificationSquareIcon,
+  ServerStack03Icon,
   StartUp02Icon,
   ToolsIcon,
   TransactionHistoryIcon,
@@ -113,6 +114,23 @@ export const sidebarNav = [
       { title: 'Delivery Reports', href: '/docs/sms/dlr' },
       { title: 'Webhooks', href: '/docs/sms/webhooks' },
       { title: 'API Reference', href: '/docs/sms/v1' },
+    ],
+  },
+
+  // ------------------------------------------------------
+  // SMPP API
+  // ------------------------------------------------------
+  {
+    title: 'SMPP Direct',
+    icon: <HugeiconsIcon icon={ServerStack03Icon} />,
+    defaultOpen: false,
+    pages: [
+      { title: 'Overview', href: '/docs/smpp/overview' },
+      { title: 'Connect to SMPP', href: '/docs/smpp/connect' },
+      { title: 'Send SMS via SMPP', href: '/docs/smpp/send' },
+      { title: 'Delivery Reports', href: '/docs/smpp/dlr' },
+      { title: 'Webhooks', href: '/docs/smpp/webhooks' },
+      { title: 'API Reference', href: '/docs/smpp/v1' },
     ],
   },
 

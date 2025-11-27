@@ -1163,6 +1163,66 @@ export const TocData: TocData = {
     },
   ],
 
+  'push/overview': [
+    {
+      title: 'Push Notification API Overview',
+      href: '/docs/push/overview',
+      pages: [
+        {
+          title: 'Introduction',
+          href: '/docs/push/overview#introduction',
+        },
+        {
+          title: 'Why Choose Sendexa Push?',
+          href: '/docs/push/overview#why-choose-sendexa-push',
+        },
+        {
+          title: 'Key Features',
+          href: '/docs/push/overview#key-features',
+        },
+        {
+          title: 'Getting Started',
+          href: '/docs/push/overview#getting-started',
+        },
+        {
+          title: 'Base URL',
+          href: '/docs/push/overview#base-url',
+        },
+        {
+          title: 'Authentication',
+          href: '/docs/push/overview#authentication',
+        },
+        {
+          title: 'API Endpoints Summary',
+          href: '/docs/push/overview#api-endpoints-summary',
+        },
+        //notification types
+        {
+          title: 'Notification Types',
+          href: '/docs/push/overview#notification-types',
+        },
+        {
+          title: 'Platform Support',
+          href: '/docs/push/overview#platform-support',
+        },
+        {
+          title: 'Message Pricing',
+          href: '/docs/push/overview#pricing',
+        },
+        {
+          title: 'Common Use Cases',
+          href: '/docs/push/overview#common-use-cases',
+        },
+        { title: 'Best Practices', href: '/docs/push/overview#best-practices' },
+        { title: 'Testing', href: '/docs/push/overview#testing' },
+        {
+          title: 'Notification Anatomy',
+          href: '/docs/push/overview#notification-anatomy',
+        },
+      ],
+    },
+  ],
+
   'voice/overview': [
     {
       title: 'Voice API Overview',
@@ -1189,17 +1249,154 @@ export const TocData: TocData = {
       href: '/docs/email/overview',
       pages: [
         {
-          title: 'Introduction',
-          href: '/docs/email/overview#introduction',
+          title: 'Why Choose Sendexa Email?',
+          href: '/docs/email/overview#why-choose-sendexa-email',
+        },
+        { title: 'Key Features', href: '/docs/email/overview#key-features' },
+        {
+          title: 'Getting Started',
+          href: '/docs/email/overview#getting-started',
         },
         {
-          title: 'Features',
-          href: '/docs/email/overview#features',
+          title: 'Common Use Cases',
+          href: '/docs/email/overview#common-use-cases',
         },
         {
-          title: 'Use Cases',
-          href: '/docs/email/overview#use-cases',
+          title: 'Email Lifecycle',
+          href: '/docs/email/overview#email-lifecycle',
         },
+        {
+          title: 'Domain Verification',
+          href: '/docs/email/overview#domain-verification',
+        },
+        { title: 'Rate Limits', href: '/docs/email/overview#rate-limits' },
+        {
+          title: 'Best Practices',
+          href: '/docs/email/overview#best-practices',
+        },
+      ],
+    },
+  ],
+  'email/send': [
+    {
+      title: 'Send Email',
+      href: '/docs/email/send',
+      pages: [
+        { title: 'Quick Start', href: '/docs/email/send#quick-start' },
+        { title: 'Endpoint', href: '/docs/email/send#endpoint' },
+        {
+          title: 'Request Parameters',
+          href: '/docs/email/send#request-parameters',
+        },
+        { title: 'Code Examples', href: '/docs/email/send#code-examples' },
+        {
+          title: 'Advanced Features',
+          href: '/docs/email/send#advanced-features',
+        },
+        { title: 'Batch Sending', href: '/docs/email/send#batch-sending' },
+        { title: 'Error Responses', href: '/docs/email/send#error-responses' },
+        { title: 'Best Practices', href: '/docs/email/send#best-practices' },
+      ],
+    },
+  ],
+  'email/templates': [
+    {
+      title: 'Email Templates',
+      href: '/docs/email/templates',
+      pages: [
+        { title: 'Overview', href: '/docs/email/templates#overview' },
+        {
+          title: 'Create Template',
+          href: '/docs/email/templates#create-template',
+        },
+        {
+          title: 'List Templates',
+          href: '/docs/email/templates#list-templates',
+        },
+        {
+          title: 'Update Template',
+          href: '/docs/email/templates#update-template',
+        },
+        {
+          title: 'Template Variables',
+          href: '/docs/email/templates#template-variables',
+        },
+        { title: 'Code Examples', href: '/docs/email/templates#code-examples' },
+        {
+          title: 'Template Examples',
+          href: '/docs/email/templates#template-examples',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/email/templates#template-best-practices',
+        },
+      ],
+    },
+  ],
+  'email/attachments': [
+    {
+      title: 'Email Attachments',
+      href: '/docs/email/attachments',
+      pages: [
+        {
+          title: 'Quick Example',
+          href: '/docs/email/attachments#quick-example',
+        },
+        {
+          title: 'Attachment Format',
+          href: '/docs/email/attachments#attachment-format',
+        },
+        {
+          title: 'Supported File Types',
+          href: '/docs/email/attachments#supported-file-types',
+        },
+        {
+          title: 'Code Examples',
+          href: '/docs/email/attachments#code-examples',
+        },
+        {
+          title: 'Inline Images',
+          href: '/docs/email/attachments#inline-images',
+        },
+        {
+          title: 'Multiple Attachments',
+          href: '/docs/email/attachments#multiple-attachments',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/email/attachments#best-practices',
+        },
+      ],
+    },
+  ],
+  'email/webhooks': [
+    {
+      title: 'Email Webhooks',
+      href: '/docs/email/webhooks',
+      pages: [
+        {
+          title: 'Webhook Events',
+          href: '/docs/email/webhooks#webhook-events',
+        },
+        { title: 'Configuration', href: '/docs/email/webhooks#configuration' },
+        {
+          title: 'Webhook Handler Example',
+          href: '/docs/email/webhooks#webhook-handler-example',
+        },
+      ],
+    },
+  ],
+  'email/v1': [
+    {
+      title: 'Email API v1 Reference',
+      href: '/docs/email/v1',
+      pages: [
+        { title: 'Base URL', href: '/docs/email/v1#base-url' },
+        { title: 'Authentication', href: '/docs/email/v1#authentication' },
+        { title: 'Endpoints', href: '/docs/email/v1#endpoints' },
+        { title: 'Rate Limits', href: '/docs/email/v1#rate-limits' },
+        { title: 'Error Codes', href: '/docs/email/v1#error-codes' },
+        { title: 'SDKs', href: '/docs/email/v1#sdks' },
       ],
     },
   ],

@@ -176,6 +176,7 @@ export const sidebarNav = [
     pages: [
       { title: 'Overview', href: '/docs/voice/overview' },
       { title: 'Make a Call', href: '/docs/voice/make-call' },
+      { title: 'Call Broadcast', href: '/docs/voice/broadcast' },
       { title: 'Text-to-Speech (TTS)', href: '/docs/voice/tts' },
       { title: 'IVR', href: '/docs/voice/ivr' },
       { title: 'Call Events & Webhooks', href: '/docs/voice/webhooks' },

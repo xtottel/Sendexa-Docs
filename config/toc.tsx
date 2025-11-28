@@ -1169,10 +1169,6 @@ export const TocData: TocData = {
       href: '/docs/push/overview',
       pages: [
         {
-          title: 'Introduction',
-          href: '/docs/push/overview#introduction',
-        },
-        {
           title: 'Why Choose Sendexa Push?',
           href: '/docs/push/overview#why-choose-sendexa-push',
         },
@@ -1196,28 +1192,260 @@ export const TocData: TocData = {
           title: 'API Endpoints Summary',
           href: '/docs/push/overview#api-endpoints-summary',
         },
-        //notification types
         {
           title: 'Notification Types',
           href: '/docs/push/overview#notification-types',
         },
         {
-          title: 'Platform Support',
-          href: '/docs/push/overview#platform-support',
+          title: 'Supported Platforms',
+          href: '/docs/push/overview#supported-platforms',
         },
         {
-          title: 'Message Pricing',
+          title: 'Pricing',
           href: '/docs/push/overview#pricing',
         },
         {
           title: 'Common Use Cases',
           href: '/docs/push/overview#common-use-cases',
         },
-        { title: 'Best Practices', href: '/docs/push/overview#best-practices' },
-        { title: 'Testing', href: '/docs/push/overview#testing' },
+        {
+          title: 'Best Practices',
+          href: '/docs/push/overview#best-practices',
+        },
         {
           title: 'Notification Anatomy',
           href: '/docs/push/overview#notification-anatomy',
+        },
+        {
+          title: 'Analytics & Tracking',
+          href: '/docs/push/overview#analytics--tracking',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/push/overview#testing',
+        },
+        {
+          title: 'Migration Guide',
+          href: '/docs/push/overview#migration-guide',
+        },
+        {
+          title: 'SDKs & Libraries',
+          href: '/docs/push/overview#sdks--libraries',
+        },
+        {
+          title: 'Supported Features by Platform',
+          href: '/docs/push/overview#supported-features-by-platform',
+        },
+        {
+          title: 'Support',
+          href: '/docs/push/overview#support',
+        },
+      ],
+    },
+  ],
+
+  'push/send': [
+    {
+      title: 'Send Push Notifications',
+      href: '/docs/push/send',
+      pages: [
+        {
+          title: 'Quick Start',
+          href: '/docs/push/send#quick-start',
+        },
+        {
+          title: 'Endpoint',
+          href: '/docs/push/send#endpoint',
+        },
+        {
+          title: 'Request Parameters',
+          href: '/docs/push/send#request-parameters',
+        },
+        {
+          title: 'Parameter Details',
+          href: '/docs/push/send#parameter-details',
+        },
+        {
+          title: 'Response Format',
+          href: '/docs/push/send#response-format',
+        },
+        {
+          title: 'Code Examples',
+          href: '/docs/push/send#code-examples',
+        },
+        {
+          title: 'Topic Broadcasting',
+          href: '/docs/push/send#topic-broadcasting',
+        },
+        {
+          title: 'Advanced Features',
+          href: '/docs/push/send#advanced-features',
+        },
+        {
+          title: 'Platform-Specific Features',
+          href: '/docs/push/send#platform-specific-features',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/push/send#best-practices',
+        },
+        {
+          title: 'Error Handling',
+          href: '/docs/push/send#error-handling',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/push/send#testing',
+        },
+      ],
+    },
+  ],
+
+  'push/devices': [
+    {
+      title: 'Manage Push Devices',
+      href: '/docs/push/devices',
+      pages: [
+        {
+          title: 'Overview',
+          href: '/docs/push/devices#overview',
+        },
+        {
+          title: 'Register Device',
+          href: '/docs/push/devices#register-device',
+        },
+        {
+          title: 'SDK Integration',
+          href: '/docs/push/devices#sdk-integration',
+        },
+        {
+          title: 'Get Device Details',
+          href: '/docs/push/devices#get-device-details',
+        },
+        {
+          title: 'List Devices',
+          href: '/docs/push/devices#list-devices',
+        },
+        {
+          title: 'Update Device',
+          href: '/docs/push/devices#update-device',
+        },
+        {
+          title: 'Delete Device',
+          href: '/docs/push/devices#delete-device',
+        },
+        {
+          title: 'Topic Subscriptions',
+          href: '/docs/push/devices#topic-subscriptions',
+        },
+        {
+          title: 'Managing Topics in SDK',
+          href: '/docs/push/devices#managing-topics-in-sdk',
+        },
+        {
+          title: 'User Preferences',
+          href: '/docs/push/devices#user-preferences',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/push/devices#best-practices',
+        },
+        {
+          title: 'Troubleshooting',
+          href: '/docs/push/devices#troubleshooting',
+        },
+      ],
+    },
+  ],
+
+  'push/v1': [
+    {
+      title: 'Push Notification API v1 Reference',
+      href: '/docs/push/v1',
+      pages: [
+        {
+          title: 'Base URL',
+          href: '/docs/push/v1#base-url',
+        },
+        {
+          title: 'Authentication',
+          href: '/docs/push/v1#authentication',
+        },
+        {
+          title: 'Endpoints Overview',
+          href: '/docs/push/v1#endpoints-overview',
+        },
+        {
+          title: 'Send Notification',
+          href: '/docs/push/v1#send-notification',
+        },
+        {
+          title: 'Send to Topic',
+          href: '/docs/push/v1#send-to-topic',
+        },
+        {
+          title: 'Register Device',
+          href: '/docs/push/v1#register-device',
+        },
+        {
+          title: 'List Devices',
+          href: '/docs/push/v1#list-devices',
+        },
+        {
+          title: 'Get Device Details',
+          href: '/docs/push/v1#get-device-details',
+        },
+        {
+          title: 'Update Device',
+          href: '/docs/push/v1#update-device',
+        },
+        {
+          title: 'Delete Device',
+          href: '/docs/push/v1#delete-device',
+        },
+        {
+          title: 'Subscribe to Topic',
+          href: '/docs/push/v1#subscribe-to-topic',
+        },
+        {
+          title: 'Unsubscribe from Topic',
+          href: '/docs/push/v1#unsubscribe-from-topic',
+        },
+        {
+          title: 'List Device Topics',
+          href: '/docs/push/v1#list-device-topics',
+        },
+        {
+          title: 'Get Analytics',
+          href: '/docs/push/v1#get-analytics',
+        },
+        {
+          title: 'Error Codes',
+          href: '/docs/push/v1#error-codes',
+        },
+        {
+          title: 'Rate Limits',
+          href: '/docs/push/v1#rate-limits',
+        },
+        {
+          title: 'Webhooks',
+          href: '/docs/push/v1#webhooks',
+        },
+        {
+          title: 'SDKs',
+          href: '/docs/push/v1#sdks',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/push/v1#testing',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/push/v1#best-practices',
+        },
+        {
+          title: 'Support',
+          href: '/docs/push/v1#support',
         },
       ],
     },
@@ -1243,6 +1471,7 @@ export const TocData: TocData = {
       ],
     },
   ],
+
   'email/overview': [
     {
       title: 'Email API Overview',
@@ -1400,6 +1629,7 @@ export const TocData: TocData = {
       ],
     },
   ],
+
   'whatsapp/overview': [
     {
       title: 'WhatsApp API Overview',

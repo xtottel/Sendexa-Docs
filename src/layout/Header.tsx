@@ -2,30 +2,33 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import { HugeiconsIcon } from '@hugeicons/react';
 import {
-  Menu,
-  X,
-  ChevronDown,
-  BookOpen,
-  Code2,
-  Github,
-  Search,
-  // Sun,
-  // Moon,
-  Zap,
-  BarChart3,
-  Cloud,
-  Server,
-  Workflow,
-  // Users,
-  Rocket,
-  MapPin,
-} from 'lucide-react';
+  BookOpen01Icon,
+  Rocket01Icon,
+  AccessIcon,
+  AiBrowserIcon,
+  WebDesign01Icon,
+  CommandLineIcon,
+  WorkflowSquare06Icon,
+  MapsLocation02Icon,
+  Search02Icon,
+  GithubIcon,
+  ZapIcon,
+  MenuIcon,
+  MultiplicationSignIcon,
+  CpuChargeIcon,
+  LiveStreaming02Icon,
+  WifiError01Icon,
+  SecurityBlockIcon,
+  Github01Icon,
+  RocketIcon,
+} from '@hugeicons/core-free-icons';
+import { ChevronDown } from 'lucide-react';
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  // const [isDarkMode, setIsDarkMode] = useState(true);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   useEffect(() => {
@@ -36,99 +39,93 @@ export const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const docsResources = [
+  // Getting Started Items - Updated with Hugeicons
+  const gettingStartedItems = [
     {
-      name: 'API Reference',
-      href: '/docs/api-reference',
-      icon: Code2,
-      description: 'Comprehensive API docs',
-      color: 'blue',
+      name: 'Overview',
+      href: '/docs/getting-started/overview',
+      icon: BookOpen01Icon,
+      description: 'Platform introduction',
     },
     {
-      name: 'SDKs & Libraries',
-      href: '/docs/sdks',
-      icon: BookOpen,
-      description: 'Client libraries',
-      color: 'green',
+      name: 'Quickstart',
+      href: '/docs/getting-started/quickstart',
+      icon: Rocket01Icon,
+      description: '5-minute setup guide',
     },
     {
-      name: 'Sandbox Environment',
-      href: '/docs/sandbox',
-      icon: Cloud,
-      description: 'Test APIs safely',
-      color: 'yellow',
-    },
-    {
-      name: 'Postman Collection',
-      href: '/docs/postman',
-      icon: Server,
-      description: 'Importable API collection',
-      color: 'red',
+      name: 'Authentication',
+      href: '/docs/getting-started/authentication',
+      icon: AccessIcon,
+      description: 'API keys and security',
     },
   ];
 
-  const toolItems = [
+  // Core Concepts Items - Updated with Hugeicons
+  const coreConceptsItems = [
     {
-      name: 'API Playground',
+      name: 'Rate Limits',
+      href: '/docs/core/rate-limits',
+      icon: SecurityBlockIcon,
+      description: 'Usage limits and quotas',
+    },
+    {
+      name: 'Error Handling',
+      href: '/docs/core/errors',
+      icon: WifiError01Icon,
+      description: 'Error codes and responses',
+    },
+    {
+      name: 'Webhooks',
+      href: '/docs/core/webhooks',
+      icon: WorkflowSquare06Icon,
+      description: 'Real-time event handling',
+    },
+    {
+      name: 'Idempotency',
+      href: '/docs/core/idempotency',
+      icon: CpuChargeIcon, // Already using Hugeicons
+      description: 'Duplicate request handling',
+    },
+  ];
+
+  // Developer Tools Items - Updated with Hugeicons
+  const developerToolsItems = [
+    {
+      name: 'Sendexa UIs',
+      href: '/docs/tools/exa-ui',
+      icon: WebDesign01Icon,
+      description: 'Ready-to-use UI components',
+    },
+    {
+      name: 'Playground',
       href: '/docs/tools/playground',
-      icon: Cloud,
+      icon: AiBrowserIcon,
       description: 'Test API endpoints',
     },
     {
       name: 'CLI Tool',
       href: '/docs/tools/cli',
-      icon: Server,
+      icon: CommandLineIcon,
       description: 'Command line interface',
     },
   ];
 
-  const guideItems = [
-    {
-      name: 'Quick Start',
-      href: '/docs/quickstart',
-      icon: Rocket,
-      description: '5-minute setup guide',
-    },
-    {
-      name: 'Webhooks',
-      href: '/docs/webhooks',
-      icon: Workflow,
-      description: 'Real-time event handling',
-    },
-    {
-      name: 'Best Practices',
-      href: '/docs/best-practices',
-      icon: BookOpen,
-      description: 'Production recommendations',
-    },
-  ];
-
+  // Company Items - Updated with Hugeicons
   const companyItems = [
     {
       name: 'African Coverage',
       href: '/coverage',
-      icon: MapPin,
+      icon: MapsLocation02Icon,
       description: '54 countries supported',
     },
     {
       name: 'Status',
       href: 'https://status.sendexa.co',
-      icon: BarChart3,
+      icon: LiveStreaming02Icon,
       description: 'System status',
       external: true,
     },
-    // {
-    //   name: "Pricing",
-    //   href: "/pricing",
-    //   icon: PieChart,
-    //   description: "Transparent pricing"
-    // },
-    // {
-    //   name: 'Support',
-    //   href: '/support',
-    //   icon: Users,
-    //   description: 'Help & support',
-    // },
   ];
 
   return (
@@ -155,8 +152,15 @@ export const Header = () => {
                 className="flex items-center space-x-3"
               >
                 <div className="relative">
-                  <div className="w-10 h-10 bg-gradient-to-br from-yellow-500 to-red-500 rounded-xl flex items-center justify-center shadow-lg">
+                  {/* <div className="w-10 h-10 bg-gradient-to-br from-yellow-500 to-red-500 rounded-xl flex items-center justify-center shadow-lg">
                     <Zap className="h-6 w-6 text-white" />
+                  </div> */}
+                  <div className="w-10 h-10 bg-gradient-to-br from-yellow-500 to-red-500 rounded-xl flex items-center justify-center shadow-lg">
+                    <HugeiconsIcon
+                      icon={ZapIcon}
+                      size={24}
+                      className="h-6 w-6 text-white"
+                    />
                   </div>
                   <motion.div
                     animate={{ rotate: 360 }}
@@ -181,47 +185,44 @@ export const Header = () => {
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-1">
-              {/* Products Dropdown */}
+              {/* Getting Started Dropdown */}
               <div
                 className="relative group"
-                onMouseEnter={() => setActiveDropdown('docs')}
+                onMouseEnter={() => setActiveDropdown('getting-started')}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
                 <button className="flex items-center px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-all duration-300 group">
-                  {/* <Code2 className="h-4 w-4 mr-2" /> */}
-                  Docs
+                  Getting Started
                   <ChevronDown className="h-4 w-4 ml-1 transition-transform group-hover:rotate-180" />
                 </button>
 
                 <AnimatePresence>
-                  {activeDropdown === 'docs' && (
+                  {activeDropdown === 'getting-started' && (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
-                      className="absolute top-full left-0 w-96 mt-2"
+                      className="absolute top-full left-0 w-64 mt-2"
                     >
-                      <div className="bg-gray-800/95 backdrop-blur-xl border border-gray-700/80 rounded-2xl shadow-2xl p-6">
-                        <div className="grid grid-cols-2 gap-4">
-                          {docsResources.map((docs) => (
+                      <div className="bg-gray-800/95 backdrop-blur-xl border border-gray-700/80 rounded-2xl shadow-2xl p-4">
+                        <div className="space-y-1">
+                          {gettingStartedItems.map((item) => (
                             <Link
-                              key={docs.name}
-                              href={docs.href}
-                              className="flex items-start p-3 rounded-xl hover:bg-gray-700/50 transition-all duration-300 group"
+                              key={item.href}
+                              href={item.href}
+                              className="flex items-center p-3 rounded-lg hover:bg-gray-700/50 transition-all duration-300 group"
                             >
-                              <div
-                                className={`w-10 h-10 bg-gradient-to-br from-${docs.color}-500 to-${docs.color}-600 rounded-lg flex items-center justify-center mr-3`}
-                              >
-                                <docs.icon className="h-5 w-5 text-white" />
-                              </div>
-                              <div className="flex-1">
-                                <div className="flex items-center gap-2">
-                                  <div className="text-sm font-semibold text-white font-mono">
-                                    {docs.name}
-                                  </div>
+                              {/* <item.icon className="h-4 w-4 text-yellow-400 mr-3 group-hover:scale-110 transition-transform" /> */}
+                              <HugeiconsIcon
+                                icon={item.icon}
+                                className="h-4 w-4 text-yellow-400 mr-3 group-hover:scale-110 transition-transform"
+                              />
+                              <div>
+                                <div className="text-sm font-medium text-white">
+                                  {item.name}
                                 </div>
-                                <div className="text-xs text-gray-400 mt-1">
-                                  {docs.description}
+                                <div className="text-xs text-gray-400">
+                                  {item.description}
                                 </div>
                               </div>
                             </Link>
@@ -233,41 +234,43 @@ export const Header = () => {
                 </AnimatePresence>
               </div>
 
-              {/* Guides Dropdown */}
+              {/* Core Concepts Dropdown */}
               <div
                 className="relative group"
-                onMouseEnter={() => setActiveDropdown('guides')}
+                onMouseEnter={() => setActiveDropdown('core-concepts')}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
                 <button className="flex items-center px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-all duration-300 group">
-                  {/* <Terminal className="h-4 w-4 mr-2" /> */}
-                  Guides
+                  Core Concepts
                   <ChevronDown className="h-4 w-4 ml-1 transition-transform group-hover:rotate-180" />
                 </button>
 
                 <AnimatePresence>
-                  {activeDropdown === 'guides' && (
+                  {activeDropdown === 'core-concepts' && (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
-                      className="absolute top-full left-0 w-70 mt-2"
+                      className="absolute top-full left-0 w-64 mt-2"
                     >
                       <div className="bg-gray-800/95 backdrop-blur-xl border border-gray-700/80 rounded-2xl shadow-2xl p-4">
                         <div className="space-y-1">
-                          {guideItems.map((Items) => (
+                          {coreConceptsItems.map((item) => (
                             <Link
-                              key={Items.name}
-                              href={Items.href}
+                              key={item.href}
+                              href={item.href}
                               className="flex items-center p-3 rounded-lg hover:bg-gray-700/50 transition-all duration-300 group"
                             >
-                              <Items.icon className="h-4 w-4 text-gray-400 mr-3 group-hover:text-white" />
+                              <HugeiconsIcon
+                                icon={item.icon}
+                                className="h-4 w-4 text-blue-400 mr-3 group-hover:scale-110 transition-transform"
+                              />
                               <div>
                                 <div className="text-sm font-medium text-white">
-                                  {Items.name}
+                                  {item.name}
                                 </div>
                                 <div className="text-xs text-gray-400">
-                                  {Items.description}
+                                  {item.description}
                                 </div>
                               </div>
                             </Link>
@@ -279,41 +282,43 @@ export const Header = () => {
                 </AnimatePresence>
               </div>
 
-              {/* Tools Dropdown */}
+              {/* Developer Tools Dropdown */}
               <div
                 className="relative group"
-                onMouseEnter={() => setActiveDropdown('tools')}
+                onMouseEnter={() => setActiveDropdown('developer-tools')}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
                 <button className="flex items-center px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-all duration-300 group">
-                  {/* <Terminal className="h-4 w-4 mr-2" /> */}
-                  Tools
+                  Developer Tools
                   <ChevronDown className="h-4 w-4 ml-1 transition-transform group-hover:rotate-180" />
                 </button>
 
                 <AnimatePresence>
-                  {activeDropdown === 'tools' && (
+                  {activeDropdown === 'developer-tools' && (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
-                      className="absolute top-full left-0 w-50 mt-2"
+                      className="absolute top-full left-0 w-64 mt-2"
                     >
                       <div className="bg-gray-800/95 backdrop-blur-xl border border-gray-700/80 rounded-2xl shadow-2xl p-4">
                         <div className="space-y-1">
-                          {toolItems.map((resource) => (
+                          {developerToolsItems.map((item) => (
                             <Link
-                              key={resource.name}
-                              href={resource.href}
+                              key={item.href}
+                              href={item.href}
                               className="flex items-center p-3 rounded-lg hover:bg-gray-700/50 transition-all duration-300 group"
                             >
-                              <resource.icon className="h-4 w-4 text-gray-400 mr-3 group-hover:text-white" />
+                              <HugeiconsIcon
+                                icon={item.icon}
+                                className="h-4 w-4 text-blue-400 mr-3 group-hover:scale-110 transition-transform"
+                              />
                               <div>
                                 <div className="text-sm font-medium text-white">
-                                  {resource.name}
+                                  {item.name}
                                 </div>
                                 <div className="text-xs text-gray-400">
-                                  {resource.description}
+                                  {item.description}
                                 </div>
                               </div>
                             </Link>
@@ -333,7 +338,10 @@ export const Header = () => {
                   target={item.external ? '_blank' : '_self'}
                   className="flex items-center px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-all duration-300"
                 >
-                  <item.icon className="h-4 w-4 mr-2" />
+                  <HugeiconsIcon
+                    icon={item.icon}
+                    className="h-4 w-4 text-blue-400 mr-3 group-hover:scale-110 transition-transform"
+                  />
                   {item.name}
                 </Link>
               ))}
@@ -342,12 +350,14 @@ export const Header = () => {
             {/* Right Side Actions */}
             <div className="hidden lg:flex items-center space-x-3">
               {/* Search Button */}
+
+              {/* Search Button */}
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="p-2 text-gray-400 hover:text-white transition-colors border border-gray-700 rounded-xl hover:border-gray-600"
               >
-                <Search className="h-4 w-4" />
+                <HugeiconsIcon icon={Search02Icon} className="h-4 w-4" />
               </motion.button>
 
               {/* GitHub Link */}
@@ -359,7 +369,7 @@ export const Header = () => {
                 whileTap={{ scale: 0.95 }}
                 className="p-2 text-gray-400 hover:text-white transition-colors border border-gray-700 rounded-xl hover:border-gray-600"
               >
-                <Github className="h-4 w-4" />
+                <HugeiconsIcon icon={GithubIcon} className="h-4 w-4" />
               </motion.a>
 
               {/* Get Started Button */}
@@ -369,7 +379,7 @@ export const Header = () => {
                 whileTap={{ scale: 0.95 }}
                 className="px-6 py-2.5 bg-gradient-to-r from-yellow-500 to-red-500 text-white text-sm font-semibold rounded-xl hover:shadow-lg hover:shadow-yellow-500/25 transition-all duration-300 flex items-center gap-2"
               >
-                <Rocket className="h-4 w-4" />
+                <HugeiconsIcon icon={Rocket01Icon} className="h-4 w-4" />
                 Get Started
               </motion.a>
             </div>
@@ -382,9 +392,12 @@ export const Header = () => {
               className="lg:hidden p-2 text-gray-400 hover:text-white transition-colors border border-gray-700 rounded-xl"
             >
               {isMobileMenuOpen ? (
-                <X className="h-5 w-5" />
+                <HugeiconsIcon
+                  icon={MultiplicationSignIcon}
+                  className="h-5 w-5"
+                />
               ) : (
-                <Menu className="h-5 w-5" />
+                <HugeiconsIcon icon={MenuIcon} className="h-5 w-5" />
               )}
             </motion.button>
           </div>
@@ -421,7 +434,10 @@ export const Header = () => {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     <div className="w-10 h-10 bg-gradient-to-br from-yellow-500 to-red-500 rounded-xl flex items-center justify-center">
-                      <Zap className="h-6 w-6 text-white" />
+                      <HugeiconsIcon
+                        icon={ZapIcon}
+                        className="h-6 w-6 text-white"
+                      />
                     </div>
                     <div className="flex flex-col">
                       <div className="text-lg font-bold text-white font-mono">
@@ -436,13 +452,19 @@ export const Header = () => {
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="p-2 text-gray-400 hover:text-white transition-colors"
                   >
-                    <X className="h-5 w-5" />
+                    <HugeiconsIcon
+                      icon={MultiplicationSignIcon}
+                      className="h-5 w-5"
+                    />
                   </button>
                 </div>
 
                 {/* Search Bar */}
                 <div className="relative mb-6">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
+                  <HugeiconsIcon
+                    icon={Search02Icon}
+                    className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500"
+                  />
                   <input
                     type="text"
                     placeholder="Search documentation..."
@@ -452,67 +474,94 @@ export const Header = () => {
 
                 {/* Mobile Navigation */}
                 <nav className="space-y-6">
-                  {/* Products Section */}
+                  {/* Getting Started Section */}
                   <div>
                     <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">
-                      Docs
+                      Getting Started
                     </h3>
-                    <div className="grid grid-cols-2 gap-2">
-                      {docsResources.slice(0, 4).map((product) => (
+                    <div className="space-y-2">
+                      {gettingStartedItems.map((item) => (
                         <Link
-                          key={product.name}
-                          href={product.href}
+                          key={item.href}
+                          href={item.href}
                           onClick={() => setIsMobileMenuOpen(false)}
-                          className="flex flex-col items-center p-3 bg-gray-800 rounded-xl hover:bg-gray-700 transition-colors text-center"
+                          className="flex items-center p-3 rounded-lg hover:bg-gray-800 transition-colors"
                         >
-                          <product.icon className="h-5 w-5 text-gray-400 mb-1" />
-                          <div className="text-xs font-medium text-white">
-                            {product.name}
+                          {/* <item.icon className="h-4 w-4 text-yellow-400 mr-3" /> */}
+                          <HugeiconsIcon
+                            icon={item.icon}
+                            className="h-4 w-4 text-blue-400 mr-3 group-hover:scale-110 transition-transform"
+                          />
+                          <div>
+                            <div className="text-sm font-medium text-white">
+                              {item.name}
+                            </div>
+                            <div className="text-xs text-gray-400">
+                              {item.description}
+                            </div>
                           </div>
                         </Link>
                       ))}
                     </div>
                   </div>
 
-                  {/* Guides Resources */}
+                  {/* Core Concepts Section */}
                   <div>
                     <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">
-                      Guides
+                      Core Concepts
                     </h3>
                     <div className="space-y-2">
-                      {guideItems.map((resource) => (
+                      {coreConceptsItems.map((item) => (
                         <Link
-                          key={resource.name}
-                          href={resource.href}
+                          key={item.href}
+                          href={item.href}
                           onClick={() => setIsMobileMenuOpen(false)}
                           className="flex items-center p-3 rounded-lg hover:bg-gray-800 transition-colors"
                         >
-                          <resource.icon className="h-4 w-4 text-gray-400 mr-3" />
-                          <span className="text-sm text-white">
-                            {resource.name}
-                          </span>
+                          {/* <item.icon className="h-4 w-4 text-blue-400 mr-3" /> */}
+                          <HugeiconsIcon
+                            icon={item.icon}
+                            className="h-4 w-4 text-blue-400 mr-3 group-hover:scale-110 transition-transform"
+                          />
+                          <div>
+                            <div className="text-sm font-medium text-white">
+                              {item.name}
+                            </div>
+                            <div className="text-xs text-gray-400">
+                              {item.description}
+                            </div>
+                          </div>
                         </Link>
                       ))}
                     </div>
                   </div>
 
-                  {/* Tools Resources */}
+                  {/* Developer Tools Section */}
                   <div>
                     <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">
-                      Tools
+                      Developer Tools
                     </h3>
                     <div className="space-y-2">
-                      {toolItems.map((resource) => (
+                      {developerToolsItems.map((item) => (
                         <Link
-                          key={resource.name}
-                          href={resource.href}
+                          key={item.href}
+                          href={item.href}
                           onClick={() => setIsMobileMenuOpen(false)}
                           className="flex items-center p-3 rounded-lg hover:bg-gray-800 transition-colors"
                         >
-                          <resource.icon className="h-4 w-4 text-gray-400 mr-3" />
-                          <span className="text-sm text-white">
-                            {resource.name}
-                          </span>
+                          {/* <item.icon className="h-4 w-4 text-green-400 mr-3" /> */}
+                          <HugeiconsIcon
+                            icon={item.icon}
+                            className="h-4 w-4 text-blue-400 mr-3 group-hover:scale-110 transition-transform"
+                          />
+                          <div>
+                            <div className="text-sm font-medium text-white">
+                              {item.name}
+                            </div>
+                            <div className="text-xs text-gray-400">
+                              {item.description}
+                            </div>
+                          </div>
                         </Link>
                       ))}
                     </div>
@@ -531,10 +580,19 @@ export const Header = () => {
                           onClick={() => setIsMobileMenuOpen(false)}
                           className="flex items-center p-3 rounded-lg hover:bg-gray-800 transition-colors"
                         >
-                          <item.icon className="h-4 w-4 text-gray-400 mr-3" />
-                          <span className="text-sm text-white">
-                            {item.name}
-                          </span>
+                          {/* <item.icon className="h-4 w-4 text-gray-400 mr-3" /> */}
+                          <HugeiconsIcon
+                            icon={item.icon}
+                            className="h-4 w-4 text-blue-400 mr-3 group-hover:scale-110 transition-transform"
+                          />
+                          <div>
+                            <div className="text-sm font-medium text-white">
+                              {item.name}
+                            </div>
+                            <div className="text-xs text-gray-400">
+                              {item.description}
+                            </div>
+                          </div>
                         </Link>
                       ))}
                     </div>
@@ -548,7 +606,10 @@ export const Header = () => {
                       whileTap={{ scale: 0.95 }}
                       className="block w-full px-4 py-3 bg-gradient-to-r from-yellow-500 to-red-500 text-white text-sm font-semibold rounded-xl hover:shadow-lg hover:shadow-yellow-500/25 transition-all duration-300 text-center"
                     >
-                      <Rocket className="h-4 w-4 inline mr-2" />
+                      <HugeiconsIcon
+                        icon={RocketIcon}
+                        className="h-4 w-4 inline mr-2"
+                      />
                       Get Started
                     </motion.a>
                     <motion.a
@@ -557,7 +618,10 @@ export const Header = () => {
                       whileTap={{ scale: 0.95 }}
                       className="block w-full px-4 py-3 border border-gray-700 text-gray-300 text-sm font-medium rounded-xl hover:border-gray-600 hover:text-white transition-colors text-center"
                     >
-                      <Github className="h-4 w-4 inline mr-2" />
+                      <HugeiconsIcon
+                        icon={Github01Icon}
+                        className="h-4 w-4 inline mr-2"
+                      />
                       GitHub
                     </motion.a>
                   </div>

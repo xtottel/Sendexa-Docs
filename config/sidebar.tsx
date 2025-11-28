@@ -1,7 +1,7 @@
 import { HugeiconsIcon } from '@hugeicons/react';
 import {
   CallRinging04Icon,
-  Certificate01Icon,
+  ValidationApprovalIcon,
   ContactBookIcon,
   CpuChargeIcon,
   CreditCardIcon,
@@ -89,7 +89,7 @@ export const sidebarNav = [
   // ------------------------------------------------------
   {
     title: 'Lookup API',
-    icon: <HugeiconsIcon icon={Certificate01Icon} />,
+    icon: <HugeiconsIcon icon={ValidationApprovalIcon} />,
     defaultOpen: false,
     pages: [
       { title: 'Overview', href: '/docs/lookup/overview' },

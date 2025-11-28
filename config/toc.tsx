@@ -441,6 +441,372 @@ export const TocData: TocData = {
     },
   ],
 
+  'lookup/overview': [
+    {
+      title: 'Lookup API Overview',
+      href: '/docs/lookup/overview',
+      pages: [
+        {
+          title: 'Why Choose Sendexa Lookup?',
+          href: '/docs/lookup/overview#why-choose-sendexa-lookup',
+        },
+        {
+          title: 'Key Features',
+          href: '/docs/lookup/overview#key-features',
+        },
+        {
+          title: 'Getting Started',
+          href: '/docs/lookup/overview#getting-started',
+        },
+        {
+          title: 'Base URL',
+          href: '/docs/lookup/overview#base-url',
+        },
+        {
+          title: 'Authentication',
+          href: '/docs/lookup/overview#authentication',
+        },
+        {
+          title: 'API Endpoints Summary',
+          href: '/docs/lookup/overview#api-endpoints-summary',
+        },
+        {
+          title: 'Pricing',
+          href: '/docs/lookup/overview#pricing',
+        },
+        {
+          title: 'Supported Countries',
+          href: '/docs/lookup/overview#supported-countries',
+        },
+        {
+          title: 'Common Use Cases',
+          href: '/docs/lookup/overview#common-use-cases',
+        },
+        {
+          title: 'Response Format',
+          href: '/docs/lookup/overview#response-format',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/lookup/overview#best-practices',
+        },
+        {
+          title: 'Data Privacy & Compliance',
+          href: '/docs/lookup/overview#data-privacy--compliance',
+        },
+        {
+          title: 'Integration Examples',
+          href: '/docs/lookup/overview#integration-examples',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/lookup/overview#testing',
+        },
+        {
+          title: 'Rate Limits',
+          href: '/docs/lookup/overview#rate-limits',
+        },
+        {
+          title: 'SDKs & Libraries',
+          href: '/docs/lookup/overview#sdks--libraries',
+        },
+        {
+          title: 'Support',
+          href: '/docs/lookup/overview#support',
+        },
+      ],
+    },
+  ],
+
+  'lookup/carrier': [
+    {
+      title: 'Carrier Lookup',
+      href: '/docs/lookup/carrier',
+      pages: [
+        {
+          title: 'Quick Start',
+          href: '/docs/lookup/carrier#quick-start',
+        },
+        {
+          title: 'Endpoint',
+          href: '/docs/lookup/carrier#endpoint',
+        },
+        {
+          title: 'Request Parameters',
+          href: '/docs/lookup/carrier#request-parameters',
+        },
+        {
+          title: 'Parameter Details',
+          href: '/docs/lookup/carrier#parameter-details',
+        },
+        {
+          title: 'Response Format',
+          href: '/docs/lookup/carrier#response-format',
+        },
+        {
+          title: 'Code Examples',
+          href: '/docs/lookup/carrier#code-examples',
+        },
+        {
+          title: 'Common Use Cases',
+          href: '/docs/lookup/carrier#common-use-cases',
+        },
+        {
+          title: 'Bulk Carrier Lookup',
+          href: '/docs/lookup/carrier#bulk-carrier-lookup',
+        },
+        {
+          title: 'Caching Best Practices',
+          href: '/docs/lookup/carrier#caching-best-practices',
+        },
+        {
+          title: 'Error Handling',
+          href: '/docs/lookup/carrier#error-handling',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/lookup/carrier#testing',
+        },
+      ],
+    },
+  ],
+
+  'lookup/validate': [
+    {
+      title: 'Phone Number Validation',
+      href: '/docs/lookup/validate',
+      pages: [
+        {
+          title: 'Quick Start',
+          href: '/docs/lookup/validate#quick-start',
+        },
+        {
+          title: 'What Gets Validated',
+          href: '/docs/lookup/validate#what-gets-validated',
+        },
+        {
+          title: 'Request Parameters',
+          href: '/docs/lookup/validate#request-parameters',
+        },
+        {
+          title: 'Response Format',
+          href: '/docs/lookup/validate#response-format',
+        },
+        {
+          title: 'Code Examples',
+          href: '/docs/lookup/validate#code-examples',
+        },
+        {
+          title: 'Common Use Cases',
+          href: '/docs/lookup/validate#common-use-cases',
+        },
+        {
+          title: 'Validation Rules',
+          href: '/docs/lookup/validate#validation-rules',
+        },
+        {
+          title: 'Error Codes',
+          href: '/docs/lookup/validate#error-codes',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/lookup/validate#best-practices',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/lookup/validate#testing',
+        },
+      ],
+    },
+  ],
+
+  'lookup/email-verification': [
+    {
+      title: 'Email Verification',
+      href: '/docs/lookup/email-verification',
+      pages: [
+        {
+          title: 'Quick Start',
+          href: '/docs/lookup/email-verification#quick-start',
+        },
+        {
+          title: 'What Gets Verified',
+          href: '/docs/lookup/email-verification#what-gets-verified',
+        },
+        {
+          title: 'Request Parameters',
+          href: '/docs/lookup/email-verification#request-parameters',
+        },
+        {
+          title: 'Response Format',
+          href: '/docs/lookup/email-verification#response-format',
+        },
+        {
+          title: 'Code Examples',
+          href: '/docs/lookup/email-verification#code-examples',
+        },
+        {
+          title: 'Common Use Cases',
+          href: '/docs/lookup/email-verification#common-use-cases',
+        },
+        {
+          title: 'Email Quality Score',
+          href: '/docs/lookup/email-verification#email-quality-score',
+        },
+        {
+          title: 'Disposable Email Detection',
+          href: '/docs/lookup/email-verification#disposable-email-detection',
+        },
+        {
+          title: 'Role-Based Email Detection',
+          href: '/docs/lookup/email-verification#role-based-email-detection',
+        },
+        {
+          title: 'Catch-All Detection',
+          href: '/docs/lookup/email-verification#catch-all-detection',
+        },
+        {
+          title: 'Email Suggestions',
+          href: '/docs/lookup/email-verification#email-suggestions',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/lookup/email-verification#best-practices',
+        },
+        {
+          title: 'Error Handling',
+          href: '/docs/lookup/email-verification#error-handling',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/lookup/email-verification#testing',
+        },
+      ],
+    },
+  ],
+
+  'lookup/line-type': [
+    {
+      title: 'Line Type Detection',
+      href: '/docs/lookup/line-type',
+      pages: [
+        {
+          title: 'Quick Start',
+          href: '/docs/lookup/line-type#quick-start',
+        },
+        {
+          title: 'Line Types',
+          href: '/docs/lookup/line-type#line-types',
+        },
+        {
+          title: 'Request Parameters',
+          href: '/docs/lookup/line-type#request-parameters',
+        },
+        {
+          title: 'Response Format',
+          href: '/docs/lookup/line-type#response-format',
+        },
+        {
+          title: 'Code Examples',
+          href: '/docs/lookup/line-type#code-examples',
+        },
+        {
+          title: 'Common Use Cases',
+          href: '/docs/lookup/line-type#common-use-cases',
+        },
+        {
+          title: 'Line Type Distribution Analysis',
+          href: '/docs/lookup/line-type#line-type-distribution-analysis',
+        },
+        {
+          title: 'Bulk Line Type Detection',
+          href: '/docs/lookup/line-type#bulk-line-type-detection',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/lookup/line-type#best-practices',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/lookup/line-type#testing',
+        },
+      ],
+    },
+  ],
+
+  'lookup/v1': [
+    {
+      title: 'Lookup API v1 Reference',
+      href: '/docs/lookup/v1',
+      pages: [
+        {
+          title: 'Base URL',
+          href: '/docs/lookup/v1#base-url',
+        },
+        {
+          title: 'Authentication',
+          href: '/docs/lookup/v1#authentication',
+        },
+        {
+          title: 'Endpoints Overview',
+          href: '/docs/lookup/v1#endpoints-overview',
+        },
+        {
+          title: 'Carrier Lookup',
+          href: '/docs/lookup/v1#carrier-lookup',
+        },
+        {
+          title: 'Phone Number Validation',
+          href: '/docs/lookup/v1#phone-number-validation',
+        },
+        {
+          title: 'Email Verification',
+          href: '/docs/lookup/v1#email-verification',
+        },
+        {
+          title: 'Line Type Detection',
+          href: '/docs/lookup/v1#line-type-detection',
+        },
+        {
+          title: 'Bulk Lookup',
+          href: '/docs/lookup/v1#bulk-lookup',
+        },
+        {
+          title: 'Error Codes',
+          href: '/docs/lookup/v1#error-codes',
+        },
+        {
+          title: 'Rate Limits',
+          href: '/docs/lookup/v1#rate-limits',
+        },
+        {
+          title: 'Response Field Reference',
+          href: '/docs/lookup/v1#response-field-reference',
+        },
+        {
+          title: 'SDKs',
+          href: '/docs/lookup/v1#sdks',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/lookup/v1#testing',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/lookup/v1#best-practices',
+        },
+        {
+          title: 'Pricing Summary',
+          href: '/docs/lookup/v1#pricing-summary',
+        },
+        {
+          title: 'Support',
+          href: '/docs/lookup/v1#support',
+        },
+      ],
+    },
+  ],
+
   'sms/overview': [
     {
       title: 'SMS API Overview',

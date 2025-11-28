@@ -1457,16 +1457,446 @@ export const TocData: TocData = {
       href: '/docs/voice/overview',
       pages: [
         {
-          title: 'Introduction',
-          href: '/docs/voice/overview#introduction',
+          title: 'Why Choose Sendexa Voice?',
+          href: '/docs/voice/overview#why-choose-sendexa-voice',
         },
         {
-          title: 'Capabilities',
-          href: '/docs/voice/overview#capabilities',
+          title: 'Key Features',
+          href: '/docs/voice/overview#key-features',
         },
         {
           title: 'Getting Started',
           href: '/docs/voice/overview#getting-started',
+        },
+        {
+          title: 'Base URL',
+          href: '/docs/voice/overview#base-url',
+        },
+        {
+          title: 'Authentication',
+          href: '/docs/voice/overview#authentication',
+        },
+        {
+          title: 'API Endpoints Summary',
+          href: '/docs/voice/overview#api-endpoints-summary',
+        },
+        {
+          title: 'Call Flow Architecture',
+          href: '/docs/voice/overview#call-flow-architecture',
+        },
+        {
+          title: 'Voice Pricing',
+          href: '/docs/voice/overview#voice-pricing',
+        },
+        {
+          title: 'Supported Countries',
+          href: '/docs/voice/overview#supported-countries',
+        },
+        {
+          title: 'VoiceXML (Voice Markup)',
+          href: '/docs/voice/overview#voicexml-voice-markup',
+        },
+        {
+          title: 'Common Use Cases',
+          href: '/docs/voice/overview#common-use-cases',
+        },
+        {
+          title: 'Text-to-Speech (TTS)',
+          href: '/docs/voice/overview#text-to-speech-tts',
+        },
+        {
+          title: 'Call Events & Webhooks',
+          href: '/docs/voice/overview#call-events--webhooks',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/voice/overview#best-practices',
+        },
+        {
+          title: 'Call Recording',
+          href: '/docs/voice/overview#call-recording',
+        },
+        {
+          title: 'Analytics & Reporting',
+          href: '/docs/voice/overview#analytics--reporting',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/voice/overview#testing',
+        },
+        {
+          title: 'SDKs & Libraries',
+          href: '/docs/voice/overview#sdks--libraries',
+        },
+        {
+          title: 'Rate Limits',
+          href: '/docs/voice/overview#rate-limits',
+        },
+        {
+          title: 'Support',
+          href: '/docs/voice/overview#support',
+        },
+      ],
+    },
+  ],
+
+  'voice/make-call': [
+    {
+      title: 'Make a Voice Call',
+      href: '/docs/voice/make-call',
+      pages: [
+        {
+          title: 'Quick Start',
+          href: '/docs/voice/make-call#quick-start',
+        },
+        {
+          title: 'Endpoint',
+          href: '/docs/voice/make-call#endpoint',
+        },
+        {
+          title: 'Request Parameters',
+          href: '/docs/voice/make-call#request-parameters',
+        },
+        {
+          title: 'Parameter Details',
+          href: '/docs/voice/make-call#parameter-details',
+        },
+        {
+          title: 'Response Format',
+          href: '/docs/voice/make-call#response-format',
+        },
+        {
+          title: 'Code Examples',
+          href: '/docs/voice/make-call#code-examples',
+        },
+        {
+          title: 'VoiceXML Examples',
+          href: '/docs/voice/make-call#voicexml-examples',
+        },
+        {
+          title: 'Advanced Use Cases',
+          href: '/docs/voice/make-call#advanced-use-cases',
+        },
+        {
+          title: 'Error Handling',
+          href: '/docs/voice/make-call#error-handling',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/voice/make-call#best-practices',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/voice/make-call#testing',
+        },
+      ],
+    },
+  ],
+
+  'voice/broadcast': [
+    {
+      title: 'Voice Call Broadcasting',
+      href: '/docs/voice/broadcast',
+      pages: [
+        {
+          title: 'Quick Start',
+          href: '/docs/voice/broadcast#quick-start',
+        },
+        {
+          title: 'Endpoint',
+          href: '/docs/voice/broadcast#endpoint',
+        },
+        {
+          title: 'Request Parameters',
+          href: '/docs/voice/broadcast#request-parameters',
+        },
+        {
+          title: 'Parameter Details',
+          href: '/docs/voice/broadcast#parameter-details',
+        },
+        {
+          title: 'Response Format',
+          href: '/docs/voice/broadcast#response-format',
+        },
+        {
+          title: 'Code Examples',
+          href: '/docs/voice/broadcast#code-examples',
+        },
+        {
+          title: 'Common Use Cases',
+          href: '/docs/voice/broadcast#common-use-cases',
+        },
+        {
+          title: 'Batch Processing',
+          href: '/docs/voice/broadcast#batch-processing',
+        },
+        {
+          title: 'Monitor Broadcast Status',
+          href: '/docs/voice/broadcast#monitor-broadcast-status',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/voice/broadcast#best-practices',
+        },
+        {
+          title: 'Error Handling',
+          href: '/docs/voice/broadcast#error-handling',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/voice/broadcast#testing',
+        },
+      ],
+    },
+  ],
+
+  'voice/tts': [
+    {
+      title: 'Text-to-Speech (TTS)',
+      href: '/docs/voice/tts',
+      pages: [
+        {
+          title: 'Quick Start',
+          href: '/docs/voice/tts#quick-start',
+        },
+        {
+          title: 'Endpoint',
+          href: '/docs/voice/tts#endpoint',
+        },
+        {
+          title: 'Request Parameters',
+          href: '/docs/voice/tts#request-parameters',
+        },
+        {
+          title: 'Parameter Details',
+          href: '/docs/voice/tts#parameter-details',
+        },
+        {
+          title: 'Response Format',
+          href: '/docs/voice/tts#response-format',
+        },
+        {
+          title: 'Code Examples',
+          href: '/docs/voice/tts#code-examples',
+        },
+        {
+          title: 'TTS in VoiceXML',
+          href: '/docs/voice/tts#tts-in-voicexml',
+        },
+        {
+          title: 'SSML Support',
+          href: '/docs/voice/tts#ssml-support',
+        },
+        {
+          title: 'Common Use Cases',
+          href: '/docs/voice/tts#common-use-cases',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/voice/tts#best-practices',
+        },
+        {
+          title: 'Caching & Performance',
+          href: '/docs/voice/tts#caching--performance',
+        },
+        {
+          title: 'Error Handling',
+          href: '/docs/voice/tts#error-handling',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/voice/tts#testing',
+        },
+      ],
+    },
+  ],
+
+  'voice/ivr': [
+    {
+      title: 'Interactive Voice Response (IVR)',
+      href: '/docs/voice/ivr',
+      pages: [
+        {
+          title: 'Overview',
+          href: '/docs/voice/ivr#overview',
+        },
+        {
+          title: 'VoiceXML Basics',
+          href: '/docs/voice/ivr#voicexml-basics',
+        },
+        {
+          title: 'Simple IVR Menu',
+          href: '/docs/voice/ivr#simple-ivr-menu',
+        },
+        {
+          title: 'Advanced IVR Patterns',
+          href: '/docs/voice/ivr#advanced-ivr-patterns',
+        },
+        {
+          title: 'Voice Recording',
+          href: '/docs/voice/ivr#voice-recording',
+        },
+        {
+          title: 'Call Forwarding & Routing',
+          href: '/docs/voice/ivr#call-forwarding--routing',
+        },
+        {
+          title: 'Advanced Features',
+          href: '/docs/voice/ivr#advanced-features',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/voice/ivr#best-practices',
+        },
+        {
+          title: 'Testing IVR Flows',
+          href: '/docs/voice/ivr#testing-ivr-flows',
+        },
+        {
+          title: 'Complete IVR Example',
+          href: '/docs/voice/ivr#complete-ivr-example',
+        },
+      ],
+    },
+  ],
+
+  'voice/webhooks': [
+    {
+      title: 'Voice Call Events & Webhooks',
+      href: '/docs/voice/webhooks',
+      pages: [
+        {
+          title: 'Overview',
+          href: '/docs/voice/webhooks#overview',
+        },
+        {
+          title: 'Webhook Events',
+          href: '/docs/voice/webhooks#webhook-events',
+        },
+        {
+          title: 'Webhook Payload',
+          href: '/docs/voice/webhooks#webhook-payload',
+        },
+        {
+          title: 'Configuration',
+          href: '/docs/voice/webhooks#configuration',
+        },
+        {
+          title: 'Implementing Webhook Handlers',
+          href: '/docs/voice/webhooks#implementing-webhook-handlers',
+        },
+        {
+          title: 'Security',
+          href: '/docs/voice/webhooks#security',
+        },
+        {
+          title: 'Retry Policy',
+          href: '/docs/voice/webhooks#retry-policy',
+        },
+        {
+          title: 'Testing Webhooks',
+          href: '/docs/voice/webhooks#testing-webhooks',
+        },
+        {
+          title: 'Common Use Cases',
+          href: '/docs/voice/webhooks#common-use-cases',
+        },
+        {
+          title: 'Monitoring & Debugging',
+          href: '/docs/voice/webhooks#monitoring--debugging',
+        },
+        {
+          title: 'Best Practices Checklist',
+          href: '/docs/voice/webhooks#best-practices-checklist',
+        },
+      ],
+    },
+  ],
+
+  'voice/v1': [
+    {
+      title: 'Voice API v1 Reference',
+      href: '/docs/voice/v1',
+      pages: [
+        {
+          title: 'Base URL',
+          href: '/docs/voice/v1#base-url',
+        },
+        {
+          title: 'Authentication',
+          href: '/docs/voice/v1#authentication',
+        },
+        {
+          title: 'Endpoints Overview',
+          href: '/docs/voice/v1#endpoints-overview',
+        },
+        {
+          title: 'Make a Call',
+          href: '/docs/voice/v1#make-a-call',
+        },
+        {
+          title: 'Broadcast Voice Message',
+          href: '/docs/voice/v1#broadcast-voice-message',
+        },
+        {
+          title: 'Text-to-Speech',
+          href: '/docs/voice/v1#text-to-speech',
+        },
+        {
+          title: 'Get Call Details',
+          href: '/docs/voice/v1#get-call-details',
+        },
+        {
+          title: 'List Calls',
+          href: '/docs/voice/v1#list-calls',
+        },
+        {
+          title: 'Get Call Recording',
+          href: '/docs/voice/v1#get-call-recording',
+        },
+        {
+          title: 'Get Broadcast Details',
+          href: '/docs/voice/v1#get-broadcast-details',
+        },
+        {
+          title: 'List Phone Numbers',
+          href: '/docs/voice/v1#list-phone-numbers',
+        },
+        {
+          title: 'Purchase Phone Number',
+          href: '/docs/voice/v1#purchase-phone-number',
+        },
+        {
+          title: 'VoiceXML Reference',
+          href: '/docs/voice/v1#voicexml-reference',
+        },
+        {
+          title: 'Error Codes',
+          href: '/docs/voice/v1#error-codes',
+        },
+        {
+          title: 'Rate Limits',
+          href: '/docs/voice/v1#rate-limits',
+        },
+        {
+          title: 'Webhooks',
+          href: '/docs/voice/v1#webhooks',
+        },
+        {
+          title: 'SDKs',
+          href: '/docs/voice/v1#sdks',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/voice/v1#testing',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/voice/v1#best-practices',
+        },
+        {
+          title: 'Support',
+          href: '/docs/voice/v1#support',
         },
       ],
     },

@@ -17,6 +17,7 @@ Monitor your Sendexa credit balance programmatically or through the dashboard.
 Retrieve your current credit balance and account information.
 
 **Base URL:**
+
 ```
 https://api.sendexa.co
 ```
@@ -31,15 +32,12 @@ https://api.sendexa.co
 import axios from 'axios';
 
 async function checkBalance() {
-  const res = await axios.get(
-    'https://api.sendexa.co/v1/billing/balance',
-    {
-      headers: {
-        Authorization: `Bearer YOUR_TOKEN_HERE`,
-        'Content-Type': 'application/json',
-      },
-    }
-  );
+  const res = await axios.get('https://api.sendexa.co/v1/billing/balance', {
+    headers: {
+      Authorization: `Bearer YOUR_TOKEN_HERE`,
+      'Content-Type': 'application/json',
+    },
+  });
 
   console.log(res.data);
 }
@@ -79,7 +77,7 @@ print(response.json())
 ```json
 {
   "status": "success",
-  "balance": 150.50,
+  "balance": 150.5,
   "currency": "GHS",
   "account_status": "active",
   "last_updated": "2025-03-12T10:30:00Z"
@@ -88,13 +86,13 @@ print(response.json())
 
 ### Response Fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `status` | string | Request status (`success` or `error`) |
-| `balance` | float | Current credit balance |
-| `currency` | string | Currency code (GHS, USD, etc.) |
+| Field            | Type   | Description                                  |
+| ---------------- | ------ | -------------------------------------------- |
+| `status`         | string | Request status (`success` or `error`)        |
+| `balance`        | float  | Current credit balance                       |
+| `currency`       | string | Currency code (GHS, USD, etc.)               |
 | `account_status` | string | Account status (`active`, `suspended`, etc.) |
-| `last_updated` | string | Last balance update timestamp (ISO 8601) |
+| `last_updated`   | string | Last balance update timestamp (ISO 8601)     |
 
 ---
 
@@ -123,6 +121,7 @@ print(response.json())
 ## Check Balance in Dashboard
 
 **Manual Check:**
+
 1. Log in to your dashboard
 2. View balance in top navigation bar
 3. Click **Billing** for detailed breakdown
@@ -132,6 +131,7 @@ print(response.json())
 ## Low Balance Alerts
 
 Set up automatic notifications:
+
 1. Go to **Settings → Notifications**
 2. Enable **Low Balance Alerts**
 3. Set threshold amount
@@ -153,5 +153,6 @@ You'll receive alerts when balance drops below your threshold.
 ## Support
 
 Need help?
+
 - Email: **support@sendexa.co**
 - Documentation: [https://docs.sendexa.co](https://docs.sendexa.co)

@@ -20,9 +20,9 @@ await sendEmail({
     {
       filename: 'invoice.pdf',
       content: 'JVBERi0xLjQKJeLjz9MKMyAwIG9...',
-      type: 'application/pdf'
-    }
-  ]
+      type: 'application/pdf',
+    },
+  ],
 });
 ```
 
@@ -40,26 +40,26 @@ await sendEmail({
 
 ### Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `filename` | string | Yes | File name with extension |
-| `content` | string | Yes | Base64 encoded file content |
-| `type` | string | Yes | MIME type |
-| `disposition` | string | No | 'attachment' or 'inline' |
-| `contentId` | string | No | For inline images |
+| Parameter     | Type   | Required | Description                 |
+| ------------- | ------ | -------- | --------------------------- |
+| `filename`    | string | Yes      | File name with extension    |
+| `content`     | string | Yes      | Base64 encoded file content |
+| `type`        | string | Yes      | MIME type                   |
+| `disposition` | string | No       | 'attachment' or 'inline'    |
+| `contentId`   | string | No       | For inline images           |
 
 ## Supported File Types
 
-| Type | MIME Type | Max Size |
-|------|-----------|----------|
-| PDF | application/pdf | 10MB |
-| JPEG | image/jpeg | 5MB |
-| PNG | image/png | 5MB |
-| GIF | image/gif | 5MB |
-| DOCX | application/vnd.openxmlformats-officedocument.wordprocessingml.document | 10MB |
-| XLSX | application/vnd.openxmlformats-officedocument.spreadsheetml.sheet | 10MB |
-| TXT | text/plain | 1MB |
-| ZIP | application/zip | 10MB |
+| Type | MIME Type                                                               | Max Size |
+| ---- | ----------------------------------------------------------------------- | -------- |
+| PDF  | application/pdf                                                         | 10MB     |
+| JPEG | image/jpeg                                                              | 5MB      |
+| PNG  | image/png                                                               | 5MB      |
+| GIF  | image/gif                                                               | 5MB      |
+| DOCX | application/vnd.openxmlformats-officedocument.wordprocessingml.document | 10MB     |
+| XLSX | application/vnd.openxmlformats-officedocument.spreadsheetml.sheet       | 10MB     |
+| TXT  | text/plain                                                              | 1MB      |
+| ZIP  | application/zip                                                         | 10MB     |
 
 ## Code Examples
 
@@ -85,14 +85,14 @@ async function sendEmailWithPDF(recipient, pdfPath) {
         {
           filename: 'invoice.pdf',
           content: base64Content,
-          type: 'application/pdf'
-        }
-      ]
+          type: 'application/pdf',
+        },
+      ],
     },
     {
       headers: {
-        'Authorization': `Bearer ${process.env.SENDEXA_API_TOKEN}`
-      }
+        Authorization: `Bearer ${process.env.SENDEXA_API_TOKEN}`,
+      },
     }
   );
 }
@@ -108,7 +108,7 @@ def send_email_with_attachment(recipient, file_path):
     # Read and encode file
     with open(file_path, 'rb') as f:
         content = base64.b64encode(f.read()).decode()
-    
+
     response = requests.post(
         'https://api.sendexa.co/v1/email/send',
         json={
@@ -146,9 +146,9 @@ await sendEmail({
       content: base64ImageContent,
       type: 'image/png',
       disposition: 'inline',
-      contentId: 'logo'
-    }
-  ]
+      contentId: 'logo',
+    },
+  ],
 });
 ```
 
@@ -159,19 +159,19 @@ attachments: [
   {
     filename: 'invoice.pdf',
     content: pdfBase64,
-    type: 'application/pdf'
+    type: 'application/pdf',
   },
   {
     filename: 'receipt.pdf',
     content: receiptBase64,
-    type: 'application/pdf'
+    type: 'application/pdf',
   },
   {
     filename: 'terms.pdf',
     content: termsBase64,
-    type: 'application/pdf'
-  }
-]
+    type: 'application/pdf',
+  },
+];
 ```
 
 ## Best Practices

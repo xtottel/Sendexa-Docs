@@ -13,6 +13,7 @@ Welcome to the **Sendexa Phonebook API**. Manage your contacts, create groups, a
 ## Why Choose Sendexa Phonebook?
 
 ### Centralized Contact Management
+
 - **Unified Database** - Single source of truth for contacts
 - **Custom Fields** - Store custom attributes
 - **Smart Groups** - Dynamic segmentation
@@ -20,6 +21,7 @@ Welcome to the **Sendexa Phonebook API**. Manage your contacts, create groups, a
 - **Deduplication** - Automatic duplicate detection
 
 ### Advanced Segmentation
+
 - **Group Management** - Organize contacts into groups
 - **Dynamic Filters** - Auto-updating segments
 - **Tag System** - Flexible categorization
@@ -27,6 +29,7 @@ Welcome to the **Sendexa Phonebook API**. Manage your contacts, create groups, a
 - **Nested Groups** - Hierarchical organization
 
 ### Integration Ready
+
 - **REST API** - Easy integration
 - **Webhooks** - Real-time updates
 - **Bulk Operations** - Handle thousands of contacts
@@ -38,7 +41,9 @@ Welcome to the **Sendexa Phonebook API**. Manage your contacts, create groups, a
 ## Key Features
 
 ### Contact Management
+
 Create, update, and manage individual contacts:
+
 - Store phone numbers, emails, names
 - Add custom fields
 - Track subscription status
@@ -61,7 +66,9 @@ Create, update, and manage individual contacts:
 ```
 
 ### Group Management
+
 Organize contacts into groups for targeted campaigns:
+
 - Create multiple groups
 - Add/remove contacts
 - Nested group structure
@@ -79,7 +86,9 @@ Organize contacts into groups for targeted campaigns:
 ```
 
 ### Bulk Operations
+
 Import or update thousands of contacts at once:
+
 - CSV import
 - Bulk create/update
 - Batch delete
@@ -89,7 +98,9 @@ Import or update thousands of contacts at once:
 **Endpoint:** `POST /v1/phonebook/contacts/bulk`
 
 ### Smart Segments
+
 Create dynamic groups based on criteria:
+
 - Filter by custom fields
 - Date-based segments
 - Behavior-based groups
@@ -101,9 +112,11 @@ Create dynamic groups based on criteria:
 ## Getting Started
 
 ### 1. Create an Account
+
 Sign up at [app.sendexa.co](https://app.sendexa.co) and verify your email.
 
 ### 2. Generate API Token
+
 1. Navigate to **Settings → API Tokens**
 2. Click **Create New Token**
 3. Copy your token securely
@@ -161,6 +174,7 @@ https://api.sendexa.co
 ```
 
 **Environment URLs:**
+
 - **Production:** `https://api.sendexa.co`
 - **Sandbox:** `https://sandbox.api.sendexa.co`
 
@@ -178,21 +192,21 @@ Authorization: Bearer YOUR_API_TOKEN
 
 ## API Endpoints Summary
 
-| Endpoint | Method | Purpose | Rate Limit |
-|----------|--------|---------|------------|
-| `/v1/phonebook/contacts` | POST | Create contact | 100/min |
-| `/v1/phonebook/contacts` | GET | List contacts | 60/min |
-| `/v1/phonebook/contacts/:id` | GET | Get contact | 100/min |
-| `/v1/phonebook/contacts/:id` | PUT | Update contact | 100/min |
-| `/v1/phonebook/contacts/:id` | DELETE | Delete contact | 60/min |
-| `/v1/phonebook/contacts/bulk` | POST | Bulk import | 10/min |
-| `/v1/phonebook/groups` | POST | Create group | 60/min |
-| `/v1/phonebook/groups` | GET | List groups | 60/min |
-| `/v1/phonebook/groups/:id` | GET | Get group | 100/min |
-| `/v1/phonebook/groups/:id` | PUT | Update group | 60/min |
-| `/v1/phonebook/groups/:id` | DELETE | Delete group | 30/min |
-| `/v1/phonebook/groups/:id/contacts` | POST | Add to group | 100/min |
-| `/v1/phonebook/groups/:id/contacts` | GET | List group contacts | 60/min |
+| Endpoint                            | Method | Purpose             | Rate Limit |
+| ----------------------------------- | ------ | ------------------- | ---------- |
+| `/v1/phonebook/contacts`            | POST   | Create contact      | 100/min    |
+| `/v1/phonebook/contacts`            | GET    | List contacts       | 60/min     |
+| `/v1/phonebook/contacts/:id`        | GET    | Get contact         | 100/min    |
+| `/v1/phonebook/contacts/:id`        | PUT    | Update contact      | 100/min    |
+| `/v1/phonebook/contacts/:id`        | DELETE | Delete contact      | 60/min     |
+| `/v1/phonebook/contacts/bulk`       | POST   | Bulk import         | 10/min     |
+| `/v1/phonebook/groups`              | POST   | Create group        | 60/min     |
+| `/v1/phonebook/groups`              | GET    | List groups         | 60/min     |
+| `/v1/phonebook/groups/:id`          | GET    | Get group           | 100/min    |
+| `/v1/phonebook/groups/:id`          | PUT    | Update group        | 60/min     |
+| `/v1/phonebook/groups/:id`          | DELETE | Delete group        | 30/min     |
+| `/v1/phonebook/groups/:id/contacts` | POST   | Add to group        | 100/min    |
+| `/v1/phonebook/groups/:id/contacts` | GET    | List group contacts | 60/min     |
 
 ---
 
@@ -223,20 +237,20 @@ Authorization: Bearer YOUR_API_TOKEN
 
 ### Field Descriptions
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | string | Unique contact identifier |
-| `phone` | string | Phone number (international format) |
-| `email` | string | Email address |
-| `first_name` | string | First name |
-| `last_name` | string | Last name |
-| `status` | string | active/inactive/blocked |
-| `subscribed` | boolean | Subscription status |
-| `custom_fields` | object | Custom attributes |
-| `tags` | array | Contact tags |
-| `groups` | array | Group IDs |
-| `created_at` | string | Creation timestamp |
-| `updated_at` | string | Last update timestamp |
+| Field           | Type    | Description                         |
+| --------------- | ------- | ----------------------------------- |
+| `id`            | string  | Unique contact identifier           |
+| `phone`         | string  | Phone number (international format) |
+| `email`         | string  | Email address                       |
+| `first_name`    | string  | First name                          |
+| `last_name`     | string  | Last name                           |
+| `status`        | string  | active/inactive/blocked             |
+| `subscribed`    | boolean | Subscription status                 |
+| `custom_fields` | object  | Custom attributes                   |
+| `tags`          | array   | Contact tags                        |
+| `groups`        | array   | Group IDs                           |
+| `created_at`    | string  | Creation timestamp                  |
+| `updated_at`    | string  | Last update timestamp               |
 
 ---
 
@@ -258,15 +272,15 @@ Authorization: Bearer YOUR_API_TOKEN
 
 ### Field Descriptions
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | string | Unique group identifier |
-| `name` | string | Group name |
-| `description` | string | Group description |
-| `contact_count` | integer | Number of contacts |
-| `tags` | array | Group tags |
-| `created_at` | string | Creation timestamp |
-| `updated_at` | string | Last update timestamp |
+| Field           | Type    | Description             |
+| --------------- | ------- | ----------------------- |
+| `id`            | string  | Unique group identifier |
+| `name`          | string  | Group name              |
+| `description`   | string  | Group description       |
+| `contact_count` | integer | Number of contacts      |
+| `tags`          | array   | Group tags              |
+| `created_at`    | string  | Creation timestamp      |
+| `updated_at`    | string  | Last update timestamp   |
 
 ---
 
@@ -278,7 +292,7 @@ Authorization: Bearer YOUR_API_TOKEN
 // Create newsletter group
 const group = await createGroup({
   name: 'Newsletter Subscribers',
-  description: 'Users who opted in to newsletter'
+  description: 'Users who opted in to newsletter',
 });
 
 // Add subscriber
@@ -288,12 +302,12 @@ async function subscribeToNewsletter(email, name) {
     email,
     first_name: name,
     subscribed: true,
-    tags: ['newsletter']
+    tags: ['newsletter'],
   });
-  
+
   // Add to group
   await addContactToGroup(group.id, contact.id);
-  
+
   return contact;
 }
 ```
@@ -305,7 +319,7 @@ async function subscribeToNewsletter(email, name) {
 const segments = {
   premium: await createGroup({ name: 'Premium Customers' }),
   active: await createGroup({ name: 'Active Users' }),
-  inactive: await createGroup({ name: 'Inactive Users' })
+  inactive: await createGroup({ name: 'Inactive Users' }),
 };
 
 // Segment customers
@@ -316,22 +330,22 @@ async function segmentCustomer(customer) {
     first_name: customer.name,
     custom_fields: {
       plan: customer.plan,
-      last_purchase: customer.lastPurchase
-    }
+      last_purchase: customer.lastPurchase,
+    },
   });
-  
+
   // Add to appropriate segment
   if (customer.plan === 'premium') {
     await addContactToGroup(segments.premium.id, contact.id);
   }
-  
+
   const daysSinceLastPurchase = getDaysSince(customer.lastPurchase);
   if (daysSinceLastPurchase < 30) {
     await addContactToGroup(segments.active.id, contact.id);
   } else {
     await addContactToGroup(segments.inactive.id, contact.id);
   }
-  
+
   return contact;
 }
 ```
@@ -343,7 +357,7 @@ async function segmentCustomer(customer) {
 const eventGroup = await createGroup({
   name: 'Tech Conference 2025',
   description: 'Registered attendees',
-  tags: ['event', 'conference']
+  tags: ['event', 'conference'],
 });
 
 // Register attendee
@@ -356,16 +370,19 @@ async function registerAttendee(attendeeData) {
     custom_fields: {
       ticket_type: attendeeData.ticketType,
       dietary_restrictions: attendeeData.dietary,
-      company: attendeeData.company
+      company: attendeeData.company,
     },
-    tags: ['attendee', `ticket:${attendeeData.ticketType}`]
+    tags: ['attendee', `ticket:${attendeeData.ticketType}`],
   });
-  
+
   await addContactToGroup(eventGroup.id, contact.id);
-  
+
   // Send confirmation SMS
-  await sendSMS(contact.phone, `Thanks for registering! Your ticket: ${attendeeData.ticketType}`);
-  
+  await sendSMS(
+    contact.phone,
+    `Thanks for registering! Your ticket: ${attendeeData.ticketType}`
+  );
+
   return contact;
 }
 ```
@@ -376,28 +393,28 @@ async function registerAttendee(attendeeData) {
 // Create birthday group
 const birthdayGroup = await createGroup({
   name: 'Birthday This Month',
-  description: 'Customers with birthdays this month'
+  description: 'Customers with birthdays this month',
 });
 
 // Update daily
 async function updateBirthdayGroup() {
   const today = new Date();
   const currentMonth = today.getMonth() + 1;
-  
+
   // Get all contacts
   const contacts = await listContacts();
-  
+
   // Filter by birthday month
   for (const contact of contacts) {
     if (contact.custom_fields?.birthday) {
       const birthday = new Date(contact.custom_fields.birthday);
-      
+
       if (birthday.getMonth() + 1 === currentMonth) {
         await addContactToGroup(birthdayGroup.id, contact.id);
       }
     }
   }
-  
+
   // Send birthday messages
   const birthdayContacts = await getGroupContacts(birthdayGroup.id);
   for (const contact of birthdayContacts) {
@@ -416,7 +433,7 @@ async function updateBirthdayGroup() {
 async function syncCRMContacts() {
   const crmContacts = await fetchFromCRM();
   const batch = [];
-  
+
   for (const crmContact of crmContacts) {
     batch.push({
       phone: crmContact.phone,
@@ -427,17 +444,17 @@ async function syncCRMContacts() {
         crm_id: crmContact.id,
         account_value: crmContact.accountValue,
         last_contact: crmContact.lastContact,
-        sales_rep: crmContact.salesRep
+        sales_rep: crmContact.salesRep,
       },
-      tags: crmContact.tags
+      tags: crmContact.tags,
     });
   }
-  
+
   // Bulk import
   const result = await bulkCreateContacts(batch);
-  
+
   console.log(`Synced ${result.created} contacts`);
-  
+
   return result;
 }
 ```
@@ -458,25 +475,25 @@ const contact = await createContact({
     // Customer data
     customer_id: 'CUS-12345',
     membership_tier: 'gold',
-    account_balance: 1500.00,
-    
+    account_balance: 1500.0,
+
     // Preferences
     preferred_language: 'en',
     contact_preference: 'sms',
-    
+
     // Dates
     registration_date: '2024-01-15',
     last_purchase: '2025-03-10',
-    
+
     // Behavioral
     total_orders: 25,
-    average_order_value: 85.50,
-    
+    average_order_value: 85.5,
+
     // Location
     city: 'Accra',
     country: 'Ghana',
-    timezone: 'Africa/Accra'
-  }
+    timezone: 'Africa/Accra',
+  },
 });
 ```
 
@@ -486,15 +503,15 @@ const contact = await createContact({
 // Find high-value customers
 const contacts = await listContacts({
   filter: {
-    'custom_fields.account_balance': { $gte: 1000 }
-  }
+    'custom_fields.account_balance': { $gte: 1000 },
+  },
 });
 
 // Find by location
 const accraContacts = await listContacts({
   filter: {
-    'custom_fields.city': 'Accra'
-  }
+    'custom_fields.city': 'Accra',
+  },
 });
 ```
 
@@ -509,22 +526,22 @@ const accraContacts = await listContacts({
 const contact = await createContact({
   phone: '233501234567',
   first_name: 'John',
-  tags: ['vip', 'newsletter', 'early-adopter']
+  tags: ['vip', 'newsletter', 'early-adopter'],
 });
 
 // Add tags later
 await updateContact(contact.id, {
-  tags: [...contact.tags, 'premium-customer']
+  tags: [...contact.tags, 'premium-customer'],
 });
 
 // Query by tags
 const vipContacts = await listContacts({
-  tags: ['vip']
+  tags: ['vip'],
 });
 
 // Multiple tags (AND)
 const vipNewsletterContacts = await listContacts({
-  tags: ['vip', 'newsletter']
+  tags: ['vip', 'newsletter'],
 });
 ```
 
@@ -538,32 +555,38 @@ const vipNewsletterContacts = await listContacts({
 // Opt-in
 async function optIn(phone) {
   const contact = await findOrCreateContact(phone);
-  
+
   await updateContact(contact.id, {
     subscribed: true,
     custom_fields: {
       opt_in_date: new Date().toISOString(),
-      opt_in_source: 'web_form'
-    }
+      opt_in_source: 'web_form',
+    },
   });
-  
+
   // Send confirmation
-  await sendSMS(phone, 'You have subscribed to our updates. Reply STOP to unsubscribe.');
+  await sendSMS(
+    phone,
+    'You have subscribed to our updates. Reply STOP to unsubscribe.'
+  );
 }
 
 // Opt-out
 async function optOut(phone) {
   const contact = await getContactByPhone(phone);
-  
+
   if (contact) {
     await updateContact(contact.id, {
       subscribed: false,
       custom_fields: {
-        opt_out_date: new Date().toISOString()
-      }
+        opt_out_date: new Date().toISOString(),
+      },
     });
-    
-    await sendSMS(phone, 'You have been unsubscribed. Reply START to resubscribe.');
+
+    await sendSMS(
+      phone,
+      'You have been unsubscribed. Reply START to resubscribe.'
+    );
   }
 }
 
@@ -585,12 +608,12 @@ async function isSubscribed(phone) {
 async function createContactSafe(data) {
   // Check by phone
   let contact = await getContactByPhone(data.phone);
-  
+
   if (contact) {
     // Update existing
     return await updateContact(contact.id, data);
   }
-  
+
   // Check by email if provided
   if (data.email) {
     contact = await getContactByEmail(data.email);
@@ -598,7 +621,7 @@ async function createContactSafe(data) {
       return await updateContact(contact.id, data);
     }
   }
-  
+
   // Create new
   return await createContact(data);
 }
@@ -639,10 +662,12 @@ async function safeCreateContact(data) {
 // Monitor group sizes
 async function checkGroupLimits() {
   const groups = await listGroups();
-  
+
   for (const group of groups) {
     if (group.contact_count > 10000) {
-      console.warn(`Large group: ${group.name} (${group.contact_count} contacts)`);
+      console.warn(
+        `Large group: ${group.name} (${group.contact_count} contacts)`
+      );
     }
   }
 }
@@ -654,29 +679,29 @@ async function checkGroupLimits() {
 // Validate before creating
 function validateContact(data) {
   const errors = [];
-  
+
   if (!data.phone && !data.email) {
     errors.push('Phone or email required');
   }
-  
+
   if (data.phone && !isValidPhone(data.phone)) {
     errors.push('Invalid phone number');
   }
-  
+
   if (data.email && !isValidEmail(data.email)) {
     errors.push('Invalid email address');
   }
-  
+
   return errors;
 }
 
 async function createValidatedContact(data) {
   const errors = validateContact(data);
-  
+
   if (errors.length > 0) {
     throw new Error(`Validation failed: ${errors.join(', ')}`);
   }
-  
+
   return await createContact(data);
 }
 ```
@@ -691,24 +716,24 @@ async function createValidatedContact(data) {
 // Export user data (GDPR right to data portability)
 async function exportUserData(phone) {
   const contact = await getContactByPhone(phone);
-  
+
   return {
     personal_data: {
       phone: contact.phone,
       email: contact.email,
       name: `${contact.first_name} ${contact.last_name}`,
-      created_at: contact.created_at
+      created_at: contact.created_at,
     },
     custom_fields: contact.custom_fields,
     groups: contact.groups,
-    tags: contact.tags
+    tags: contact.tags,
   };
 }
 
 // Delete user data (GDPR right to be forgotten)
 async function deleteUserData(phone) {
   const contact = await getContactByPhone(phone);
-  
+
   if (contact) {
     await deleteContact(contact.id);
     console.log(`Deleted contact: ${phone}`);
@@ -720,23 +745,25 @@ async function deleteUserData(phone) {
 
 ## Rate Limits
 
-| Endpoint Type | Rate Limit | Window |
-|---------------|------------|--------|
-| Read operations | 100/min | 1 minute |
-| Write operations | 60/min | 1 minute |
-| Bulk operations | 10/min | 1 minute |
+| Endpoint Type    | Rate Limit | Window   |
+| ---------------- | ---------- | -------- |
+| Read operations  | 100/min    | 1 minute |
+| Write operations | 60/min     | 1 minute |
+| Bulk operations  | 10/min     | 1 minute |
 
 ---
 
 ## Support
 
 ### Documentation
+
 - [Contact API](/docs/phonebook/contact)
 - [Group API](/docs/phonebook/group)
 - [Webhooks](/docs/phonebook/webhooks)
 - [API Reference](/docs/phonebook/v1)
 
 ### Get Help
+
 - **Email:** support@sendexa.co
 - **Discord:** [Join our community](https://discord.gg/sendexa)
 - **Twitter:** [@sendexaHQ](https://twitter.com/sendexaHQ)

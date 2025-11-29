@@ -13,12 +13,14 @@ Welcome to the **Sendexa Email API**. A professional email delivery platform des
 ## Why Choose Sendexa Email?
 
 ### Built for Africa
+
 - **Local Infrastructure** - Fast delivery across African regions
 - **Multi-Currency Support** - GHS, NGN, KES, and more
 - **Affordable Pricing** - Competitive rates for African markets
 - **99.9% Uptime** - Reliable email infrastructure
 
 ### Developer-Friendly
+
 - **Simple REST API** - Send emails in minutes
 - **Rich Templates** - HTML templates with variables
 - **File Attachments** - Support for multiple file types
@@ -26,6 +28,7 @@ Welcome to the **Sendexa Email API**. A professional email delivery platform des
 - **Comprehensive SDKs** - JavaScript, Python, PHP
 
 ### Enterprise Features
+
 - **Template Engine** - Reusable email templates
 - **Batch Sending** - Send to multiple recipients
 - **Personalization** - Dynamic content per recipient
@@ -37,7 +40,9 @@ Welcome to the **Sendexa Email API**. A professional email delivery platform des
 ## Key Features
 
 ### Send Email
+
 Send transactional and marketing emails:
+
 - Single or bulk sending
 - HTML and plain text support
 - Custom from name and email
@@ -57,7 +62,9 @@ Send transactional and marketing emails:
 ```
 
 ### Email Templates
+
 Create and manage reusable templates:
+
 - HTML template editor
 - Variable substitution
 - Template versioning
@@ -77,13 +84,16 @@ Create and manage reusable templates:
 ```
 
 ### Attachments
+
 Send files with your emails:
+
 - Multiple file support
 - Base64 encoding
 - Common file types (PDF, images, documents)
 - Size limits: 10MB per email
 
 **Example:**
+
 ```json
 {
   "to": "user@example.com",
@@ -99,7 +109,9 @@ Send files with your emails:
 ```
 
 ### Webhooks
+
 Real-time email event notifications:
+
 - Email delivered
 - Email opened
 - Link clicked
@@ -111,15 +123,18 @@ Real-time email event notifications:
 ## Getting Started
 
 ### 1. Create an Account
+
 Sign up at [dashboard.sendexa.co](https://dashboard.sendexa.co) and verify your email.
 
 ### 2. Verify Your Domain
+
 1. Go to **Settings → Domains**
 2. Add your sending domain
 3. Add DNS records (SPF, DKIM, DMARC)
 4. Wait for verification (usually 24 hours)
 
 ### 3. Generate API Token
+
 1. Navigate to **Settings → API Tokens**
 2. Click **Create New Token**
 3. Copy your token securely
@@ -153,6 +168,7 @@ https://api.sendexa.co
 ```
 
 **Environment URLs:**
+
 - **Production:** `https://api.sendexa.co`
 - **Sandbox:** `https://sandbox.api.sendexa.co`
 
@@ -167,6 +183,7 @@ Authorization: Bearer YOUR_API_TOKEN
 ```
 
 **Security Best Practices:**
+
 - Never expose API tokens in client-side code
 - Use environment variables
 - Rotate tokens regularly
@@ -177,22 +194,24 @@ Authorization: Bearer YOUR_API_TOKEN
 
 ## API Endpoints Summary
 
-| Endpoint | Method | Purpose | Rate Limit |
-|----------|--------|---------|------------|
-| `/v1/email/send` | POST | Send email | 100/min |
-| `/v1/email/send/batch` | POST | Send bulk emails | 10/min |
-| `/v1/email/status/:id` | GET | Check delivery status | 100/min |
-| `/v1/email/templates` | GET | List templates | 60/min |
-| `/v1/email/templates` | POST | Create template | 30/min |
-| `/v1/email/templates/:id` | PUT | Update template | 30/min |
-| `/v1/email/templates/:id` | DELETE | Delete template | 30/min |
+| Endpoint                  | Method | Purpose               | Rate Limit |
+| ------------------------- | ------ | --------------------- | ---------- |
+| `/v1/email/send`          | POST   | Send email            | 100/min    |
+| `/v1/email/send/batch`    | POST   | Send bulk emails      | 10/min     |
+| `/v1/email/status/:id`    | GET    | Check delivery status | 100/min    |
+| `/v1/email/templates`     | GET    | List templates        | 60/min     |
+| `/v1/email/templates`     | POST   | Create template       | 30/min     |
+| `/v1/email/templates/:id` | PUT    | Update template       | 30/min     |
+| `/v1/email/templates/:id` | DELETE | Delete template       | 30/min     |
 
 ---
 
 ## Email Types
 
 ### Transactional Emails
+
 Time-sensitive, user-triggered emails:
+
 - Order confirmations
 - Password resets
 - Account notifications
@@ -200,13 +219,16 @@ Time-sensitive, user-triggered emails:
 - Welcome emails
 
 **Characteristics:**
+
 - High priority delivery
 - Personalized content
 - Immediate sending
 - High delivery rates
 
 ### Marketing Emails
+
 Promotional and engagement emails:
+
 - Newsletters
 - Product announcements
 - Special offers
@@ -214,6 +236,7 @@ Promotional and engagement emails:
 - Re-engagement campaigns
 
 **Characteristics:**
+
 - Bulk sending
 - Unsubscribe links required
 - Template-based
@@ -225,29 +248,30 @@ Promotional and engagement emails:
 
 ### Ghana (GHS)
 
-| Volume | Price per Email |
-|--------|-----------------|
-| 0 - 10,000 | 0.02 GHS |
-| 10,001 - 50,000 | 0.015 GHS |
-| 50,001+ | Custom |
+| Volume          | Price per Email |
+| --------------- | --------------- |
+| 0 - 10,000      | 0.02 GHS        |
+| 10,001 - 50,000 | 0.015 GHS       |
+| 50,001+         | Custom          |
 
 ### Nigeria (NGN)
 
-| Volume | Price per Email |
-|--------|-----------------|
-| 0 - 10,000 | 1.50 NGN |
-| 10,001 - 50,000 | 1.20 NGN |
-| 50,001+ | Custom |
+| Volume          | Price per Email |
+| --------------- | --------------- |
+| 0 - 10,000      | 1.50 NGN        |
+| 10,001 - 50,000 | 1.20 NGN        |
+| 50,001+         | Custom          |
 
 ### Kenya (KES)
 
-| Volume | Price per Email |
-|--------|-----------------|
-| 0 - 10,000 | 0.50 KES |
-| 10,001 - 50,000 | 0.40 KES |
-| 50,001+ | Custom |
+| Volume          | Price per Email |
+| --------------- | --------------- |
+| 0 - 10,000      | 0.50 KES        |
+| 10,001 - 50,000 | 0.40 KES        |
+| 50,001+         | Custom          |
 
 **Additional Costs:**
+
 - Attachments: +0.005 per email
 - Advanced analytics: +0.002 per email
 
@@ -266,8 +290,8 @@ await sendEmail({
   templateId: 'welcome_email',
   variables: {
     name: 'John Doe',
-    verificationLink: 'https://app.com/verify/abc123'
-  }
+    verificationLink: 'https://app.com/verify/abc123',
+  },
 });
 ```
 
@@ -283,15 +307,15 @@ await sendEmail({
     orderNumber: '12345',
     items: orderItems,
     total: '500.00',
-    currency: 'GHS'
+    currency: 'GHS',
   },
   attachments: [
     {
       filename: 'invoice.pdf',
       content: invoicePdfBase64,
-      type: 'application/pdf'
-    }
-  ]
+      type: 'application/pdf',
+    },
+  ],
 });
 ```
 
@@ -307,7 +331,7 @@ await sendEmail({
     <p>Click the link below to reset your password:</p>
     <a href="${resetLink}">Reset Password</a>
     <p>This link expires in 1 hour.</p>
-  `
+  `,
 });
 ```
 
@@ -320,13 +344,13 @@ await sendBatchEmail({
   from: 'newsletter@yourapp.com',
   subject: 'This Week in Tech',
   templateId: 'newsletter_weekly',
-  recipients: subscribers.map(sub => ({
+  recipients: subscribers.map((sub) => ({
     to: sub.email,
     variables: {
       name: sub.name,
-      unsubscribeLink: `https://app.com/unsubscribe/${sub.id}`
-    }
-  }))
+      unsubscribeLink: `https://app.com/unsubscribe/${sub.id}`,
+    },
+  })),
 });
 ```
 
@@ -345,9 +369,9 @@ await sendEmail({
     {
       filename: `invoice-${invoiceNumber}.pdf`,
       content: pdfBase64,
-      type: 'application/pdf'
-    }
-  ]
+      type: 'application/pdf',
+    },
+  ],
 });
 ```
 
@@ -369,15 +393,15 @@ await sendEmail({
 
 ### Status Descriptions
 
-| Status | Description |
-|--------|-------------|
-| **queued** | Email is in send queue |
-| **sent** | Email sent to recipient's mail server |
-| **delivered** | Email accepted by recipient's server |
-| **opened** | Recipient opened the email |
-| **clicked** | Recipient clicked a link |
-| **bounced** | Email bounced (hard or soft) |
-| **complained** | Marked as spam by recipient |
+| Status         | Description                           |
+| -------------- | ------------------------------------- |
+| **queued**     | Email is in send queue                |
+| **sent**       | Email sent to recipient's mail server |
+| **delivered**  | Email accepted by recipient's server  |
+| **opened**     | Recipient opened the email            |
+| **clicked**    | Recipient clicked a link              |
+| **bounced**    | Email bounced (hard or soft)          |
+| **complained** | Marked as spam by recipient           |
 
 ---
 
@@ -393,16 +417,19 @@ await sendEmail({
 ### DNS Records Required
 
 **SPF Record:**
+
 ```
 v=spf1 include:spf.sendexa.co ~all
 ```
 
 **DKIM Record:**
+
 ```
 sendexa._domainkey.yourdomain.com
 ```
 
 **DMARC Record:**
+
 ```
 v=DMARC1; p=none; rua=mailto:dmarc@yourdomain.com
 ```
@@ -421,22 +448,22 @@ v=DMARC1; p=none; rua=mailto:dmarc@yourdomain.com
 
 ### Sending Limits
 
-| Plan | Emails/Minute | Emails/Day |
-|------|---------------|------------|
-| **Free** | 10 | 100 |
-| **Starter** | 50 | 5,000 |
-| **Professional** | 100 | 50,000 |
-| **Business** | 500 | 500,000 |
-| **Enterprise** | Custom | Custom |
+| Plan             | Emails/Minute | Emails/Day |
+| ---------------- | ------------- | ---------- |
+| **Free**         | 10            | 100        |
+| **Starter**      | 50            | 5,000      |
+| **Professional** | 100           | 50,000     |
+| **Business**     | 500           | 500,000    |
+| **Enterprise**   | Custom        | Custom     |
 
 ### API Rate Limits
 
-| Endpoint Type | Limit |
-|---------------|-------|
-| Send Email | 100/min |
-| Batch Send | 10/min |
-| Status Check | 100/min |
-| Template Operations | 30/min |
+| Endpoint Type       | Limit   |
+| ------------------- | ------- |
+| Send Email          | 100/min |
+| Batch Send          | 10/min  |
+| Status Check        | 100/min |
+| Template Operations | 30/min  |
 
 ---
 
@@ -483,6 +510,7 @@ v=DMARC1; p=none; rua=mailto:dmarc@yourdomain.com
 **Sandbox URL:** `https://sandbox.api.sendexa.co`
 
 **Features:**
+
 - No credits consumed
 - No actual delivery
 - Test all endpoints
@@ -490,18 +518,19 @@ v=DMARC1; p=none; rua=mailto:dmarc@yourdomain.com
 
 ### Test Email Addresses
 
-| Email | Behavior |
-|-------|----------|
-| `success@sendexa.test` | Always delivers |
-| `bounce@sendexa.test` | Simulates hard bounce |
-| `spam@sendexa.test` | Simulates spam complaint |
-| `delay@sendexa.test` | Delayed delivery |
+| Email                  | Behavior                 |
+| ---------------------- | ------------------------ |
+| `success@sendexa.test` | Always delivers          |
+| `bounce@sendexa.test`  | Simulates hard bounce    |
+| `spam@sendexa.test`    | Simulates spam complaint |
+| `delay@sendexa.test`   | Delayed delivery         |
 
 ---
 
 ## Supported Features
 
 ### Email Content
+
 - ✅ HTML emails
 - ✅ Plain text emails
 - ✅ Inline images
@@ -509,6 +538,7 @@ v=DMARC1; p=none; rua=mailto:dmarc@yourdomain.com
 - ✅ Unicode support
 
 ### Recipients
+
 - ✅ Single recipient
 - ✅ Multiple recipients
 - ✅ CC and BCC
@@ -516,6 +546,7 @@ v=DMARC1; p=none; rua=mailto:dmarc@yourdomain.com
 - ✅ Batch sending
 
 ### Attachments
+
 - ✅ PDF documents
 - ✅ Images (JPEG, PNG, GIF)
 - ✅ Office documents (DOCX, XLSX)
@@ -523,6 +554,7 @@ v=DMARC1; p=none; rua=mailto:dmarc@yourdomain.com
 - ✅ Multiple attachments
 
 ### Tracking
+
 - ✅ Open tracking
 - ✅ Click tracking
 - ✅ Bounce tracking
@@ -536,16 +568,19 @@ v=DMARC1; p=none; rua=mailto:dmarc@yourdomain.com
 ### Official SDKs
 
 **Node.js**
+
 ```bash
 npm install @sendexa/email-sdk
 ```
 
 **Python**
+
 ```bash
 pip install sendexa-email
 ```
 
 **PHP**
+
 ```bash
 composer require sendexa/email-sdk
 ```
@@ -560,7 +595,7 @@ await client.send({
   to: 'user@example.com',
   from: 'hello@yourdomain.com',
   subject: 'Hello World',
-  html: '<h1>Hello from Sendexa!</h1>'
+  html: '<h1>Hello from Sendexa!</h1>',
 });
 ```
 
@@ -571,13 +606,14 @@ await client.send({
 ### From Other Providers
 
 **From SendGrid:**
+
 ```javascript
 // Before (SendGrid)
 sgMail.send({
   to: 'user@example.com',
   from: 'sender@example.com',
   subject: 'Hello',
-  text: 'Hello World'
+  text: 'Hello World',
 });
 
 // After (Sendexa)
@@ -585,18 +621,19 @@ sendexaClient.send({
   to: 'user@example.com',
   from: 'sender@example.com',
   subject: 'Hello',
-  text: 'Hello World'
+  text: 'Hello World',
 });
 ```
 
 **From Mailgun:**
+
 ```javascript
 // Before (Mailgun)
 mg.messages.create('yourdomain.com', {
   from: 'sender@example.com',
   to: ['user@example.com'],
   subject: 'Hello',
-  text: 'Hello World'
+  text: 'Hello World',
 });
 
 // After (Sendexa)
@@ -604,7 +641,7 @@ sendexaClient.send({
   to: 'user@example.com',
   from: 'sender@example.com',
   subject: 'Hello',
-  text: 'Hello World'
+  text: 'Hello World',
 });
 ```
 
@@ -613,6 +650,7 @@ sendexaClient.send({
 ## Support
 
 ### Documentation
+
 - [Send Email](/docs/email/send)
 - [Templates](/docs/email/templates)
 - [Attachments](/docs/email/attachments)
@@ -620,11 +658,13 @@ sendexaClient.send({
 - [API Reference](/docs/email/v1)
 
 ### Get Help
+
 - **Email:** support@sendexa.co
 - **Discord:** [Join community](https://discord.gg/sendexa)
 - **Twitter:** [@sendexaHQ](https://twitter.com/sendexaHQ)
 
 ### Report Issues
+
 - **GitHub:** [github.com/sendexa/email-issues](https://github.com/sendexa/email-issues)
 - **Status:** [status.sendexa.co](https://status.sendexa.co)
 

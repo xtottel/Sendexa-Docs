@@ -55,10 +55,13 @@ const SearchButton = React.forwardRef<HTMLButtonElement, SearchButtonProps>(
       <Button
         ref={ref}
         variant={'outline'}
-        className={cn('flex flex-1 space-x-2 bg-muted hover:brightness-100 dark:hover:brightness-[1.28]', className)}
+        className={cn(
+          'flex flex-1 space-x-2 bg-muted hover:brightness-100 dark:hover:brightness-[1.28]',
+          className
+        )}
         {...props}
       >
-        <Search size={16}/>
+        <Search size={16} />
         <span>{placeholder}</span>
         <span
           className={clsx(

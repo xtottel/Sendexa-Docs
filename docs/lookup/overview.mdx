@@ -13,6 +13,7 @@ Welcome to the **Sendexa Lookup API**. Our platform provides real-time phone num
 ## Why Choose Sendexa Lookup?
 
 ### Data Accuracy
+
 - **Real-time Validation** - Instant phone number verification
 - **Carrier Detection** - Identify network operators
 - **Line Type Detection** - Mobile, landline, or VoIP
@@ -20,12 +21,14 @@ Welcome to the **Sendexa Lookup API**. Our platform provides real-time phone num
 - **Email Verification** - Validate email addresses
 
 ### Cost Optimization
+
 - **Reduce Failed Messages** - Validate before sending
 - **Save Money** - Avoid sending to invalid numbers
 - **Improve Delivery Rates** - Target valid contacts only
 - **Database Cleaning** - Remove invalid entries
 
 ### Developer-Friendly
+
 - **Simple REST API** - Easy integration
 - **Comprehensive SDKs** - Multiple programming languages
 - **Fast Response** - Sub-second validation
@@ -36,7 +39,9 @@ Welcome to the **Sendexa Lookup API**. Our platform provides real-time phone num
 ## Key Features
 
 ### Carrier Lookup
+
 Identify the mobile network operator for any phone number:
+
 - Network name (MTN, Vodafone, Airtel, etc.)
 - Network type (mobile, landline, VoIP)
 - Country information
@@ -51,7 +56,9 @@ Identify the mobile network operator for any phone number:
 ```
 
 ### Number Validation
+
 Verify if a phone number is valid and active:
+
 - Format validation
 - Active status check
 - International format conversion
@@ -66,7 +73,9 @@ Verify if a phone number is valid and active:
 ```
 
 ### Email Verification
+
 Validate email addresses before sending:
+
 - Format validation
 - Domain validation
 - MX record checks
@@ -82,7 +91,9 @@ Validate email addresses before sending:
 ```
 
 ### Line Type Detection
+
 Determine the type of phone line:
+
 - Mobile
 - Landline
 - VoIP
@@ -102,9 +113,11 @@ Determine the type of phone line:
 ## Getting Started
 
 ### 1. Create an Account
+
 Sign up at [app.sendexa.co](https://app.sendexa.co) and verify your email.
 
 ### 2. Generate API Token
+
 1. Navigate to **Settings → API Tokens**
 2. Click **Create New Token**
 3. Copy your token securely
@@ -136,6 +149,7 @@ https://api.sendexa.co
 ```
 
 **Environment URLs:**
+
 - **Production:** `https://api.sendexa.co`
 - **Sandbox:** `https://sandbox.api.sendexa.co`
 
@@ -150,6 +164,7 @@ Authorization: Bearer YOUR_API_TOKEN
 ```
 
 **Security Best Practices:**
+
 - Never expose API tokens in client-side code
 - Use environment variables to store tokens
 - Rotate tokens regularly
@@ -160,13 +175,13 @@ Authorization: Bearer YOUR_API_TOKEN
 
 ## API Endpoints Summary
 
-| Endpoint | Method | Purpose | Rate Limit |
-|----------|--------|---------|------------|
-| `/v1/lookup/carrier` | POST | Get carrier information | 100/min |
-| `/v1/lookup/validate` | POST | Validate phone number | 100/min |
-| `/v1/lookup/email` | POST | Verify email address | 100/min |
-| `/v1/lookup/line-type` | POST | Detect line type | 100/min |
-| `/v1/lookup/bulk` | POST | Bulk lookup (up to 100) | 30/min |
+| Endpoint               | Method | Purpose                 | Rate Limit |
+| ---------------------- | ------ | ----------------------- | ---------- |
+| `/v1/lookup/carrier`   | POST   | Get carrier information | 100/min    |
+| `/v1/lookup/validate`  | POST   | Validate phone number   | 100/min    |
+| `/v1/lookup/email`     | POST   | Verify email address    | 100/min    |
+| `/v1/lookup/line-type` | POST   | Detect line type        | 100/min    |
+| `/v1/lookup/bulk`      | POST   | Bulk lookup (up to 100) | 30/min     |
 
 ---
 
@@ -174,20 +189,20 @@ Authorization: Bearer YOUR_API_TOKEN
 
 ### Pay As You Go
 
-| Lookup Type | Price per Request |
-|-------------|-------------------|
-| Carrier Lookup | $0.005 (₵0.03) |
-| Number Validation | $0.005 (₵0.03) |
-| Email Verification | $0.002 (₵0.01) |
-| Line Type Detection | $0.005 (₵0.03) |
+| Lookup Type         | Price per Request |
+| ------------------- | ----------------- |
+| Carrier Lookup      | $0.005 (₵0.03)    |
+| Number Validation   | $0.005 (₵0.03)    |
+| Email Verification  | $0.002 (₵0.01)    |
+| Line Type Detection | $0.005 (₵0.03)    |
 
 ### Volume Discounts
 
-| Monthly Volume | Discount |
-|----------------|----------|
-| 10,000+ lookups | 10% off |
-| 100,000+ lookups | 20% off |
-| 1,000,000+ lookups | 30% off |
+| Monthly Volume     | Discount |
+| ------------------ | -------- |
+| 10,000+ lookups    | 10% off  |
+| 100,000+ lookups   | 20% off  |
+| 1,000,000+ lookups | 30% off  |
 
 **Enterprise Plans:** Contact sales@sendexa.co
 
@@ -198,6 +213,7 @@ Authorization: Bearer YOUR_API_TOKEN
 Sendexa Lookup currently supports:
 
 ### Africa
+
 - 🇬🇭 Ghana
 - 🇳🇬 Nigeria
 - 🇰🇪 Kenya
@@ -229,12 +245,12 @@ Validate numbers before sending SMS or making calls:
 async function sendSMSWithValidation(phoneNumber, message) {
   // First, validate the number
   const lookup = await validateNumber(phoneNumber);
-  
+
   if (!lookup.valid) {
     console.log('Invalid number, skipping SMS');
     return { error: 'Invalid phone number' };
   }
-  
+
   // Number is valid, proceed with SMS
   return await sendSMS(phoneNumber, message);
 }
@@ -251,34 +267,34 @@ async function cleanContactsDatabase() {
   const results = {
     valid: [],
     invalid: [],
-    checked: 0
+    checked: 0,
   };
-  
+
   for (const contact of contacts) {
     const lookup = await validateNumber(contact.phone);
-    
+
     if (lookup.valid) {
       results.valid.push(contact);
       // Update with correct format
       await db.contacts.update({
         where: { id: contact.id },
-        data: { 
+        data: {
           phone: lookup.international_format,
-          carrier: lookup.carrier
-        }
+          carrier: lookup.carrier,
+        },
       });
     } else {
       results.invalid.push(contact);
       // Mark as invalid
       await db.contacts.update({
         where: { id: contact.id },
-        data: { valid: false }
+        data: { valid: false },
       });
     }
-    
+
     results.checked++;
   }
-  
+
   return results;
 }
 ```
@@ -291,16 +307,16 @@ Route messages based on carrier:
 // Route SMS based on carrier
 async function sendSMSWithRouting(phoneNumber, message) {
   const lookup = await carrierLookup(phoneNumber);
-  
+
   // Different routing for different carriers
   const routing = {
-    'MTN': 'route_mtn',
-    'Vodafone': 'route_vodafone',
-    'AirtelTigo': 'route_airteltigo'
+    MTN: 'route_mtn',
+    Vodafone: 'route_vodafone',
+    AirtelTigo: 'route_airteltigo',
   };
-  
+
   const route = routing[lookup.carrier] || 'route_default';
-  
+
   return await sendSMS(phoneNumber, message, { route });
 }
 ```
@@ -313,35 +329,35 @@ Validate phone numbers during user registration:
 // Validate during signup
 app.post('/register', async (req, res) => {
   const { phone, email, name } = req.body;
-  
+
   // Validate phone number
   const phoneLookup = await validateNumber(phone);
-  
+
   if (!phoneLookup.valid) {
     return res.status(400).json({
       error: 'Invalid phone number',
-      details: phoneLookup.error
+      details: phoneLookup.error,
     });
   }
-  
+
   // Validate email
   const emailLookup = await verifyEmail(email);
-  
+
   if (!emailLookup.valid) {
     return res.status(400).json({
-      error: 'Invalid email address'
+      error: 'Invalid email address',
     });
   }
-  
+
   // Create user with validated data
   const user = await db.users.create({
     name,
     phone: phoneLookup.international_format,
     email,
     carrier: phoneLookup.carrier,
-    line_type: phoneLookup.line_type
+    line_type: phoneLookup.line_type,
   });
-  
+
   res.json({ success: true, user });
 });
 ```
@@ -356,17 +372,17 @@ async function bulkValidateContacts(phoneNumbers) {
   // Split into batches of 100
   const batches = chunkArray(phoneNumbers, 100);
   const results = [];
-  
+
   for (const batch of batches) {
     const response = await axios.post(
       'https://api.sendexa.co/v1/lookup/bulk',
       { phone_numbers: batch },
       { headers: { Authorization: 'Bearer sk_live_your_token' } }
     );
-    
+
     results.push(...response.data.results);
   }
-  
+
   return results;
 }
 ```
@@ -422,16 +438,16 @@ async function lookupWithCache(phoneNumber) {
   if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
     return cached.data;
   }
-  
+
   // Lookup
   const result = await carrierLookup(phoneNumber);
-  
+
   // Cache result
   cache.set(phoneNumber, {
     data: result,
-    timestamp: Date.now()
+    timestamp: Date.now(),
   });
-  
+
   return result;
 }
 ```
@@ -460,10 +476,10 @@ async function safeLookup(phoneNumber) {
   } catch (error) {
     if (error.code === 'RATE_LIMIT_EXCEEDED') {
       // Wait and retry
-      await new Promise(r => setTimeout(r, 1000));
+      await new Promise((r) => setTimeout(r, 1000));
       return await carrierLookup(phoneNumber);
     }
-    
+
     // Log error and return default
     console.error('Lookup failed:', error);
     return { valid: false, error: error.message };
@@ -495,7 +511,7 @@ await db.contacts.create({
   phone: phoneNumber,
   carrier: lookup.carrier,
   line_type: lookup.line_type,
-  validated_at: new Date()
+  validated_at: new Date(),
 });
 
 // Revalidate periodically (e.g., every 90 days)
@@ -506,10 +522,10 @@ if (daysSinceValidation > 90) {
   const lookup = await carrierLookup(contact.phone);
   await db.contacts.update({
     where: { id: contact.id },
-    data: { 
+    data: {
       carrier: lookup.carrier,
-      validated_at: new Date()
-    }
+      validated_at: new Date(),
+    },
   });
 }
 ```
@@ -521,6 +537,7 @@ if (daysSinceValidation > 90) {
 ### GDPR Compliance
 
 Sendexa Lookup is GDPR compliant:
+
 - No personal data stored
 - Lookup results not logged
 - Encrypted transmission
@@ -542,17 +559,17 @@ Sendexa Lookup is GDPR compliant:
 // Validate when adding contact to CRM
 async function addContactToCRM(contactData) {
   const { phone, email, name } = contactData;
-  
+
   // Validate phone
   const phoneLookup = await validateNumber(phone);
-  
+
   if (!phoneLookup.valid) {
     throw new Error('Invalid phone number');
   }
-  
+
   // Validate email
   const emailLookup = await verifyEmail(email);
-  
+
   // Create contact with enriched data
   return await crm.contacts.create({
     name,
@@ -561,7 +578,7 @@ async function addContactToCRM(contactData) {
     carrier: phoneLookup.carrier,
     line_type: phoneLookup.line_type,
     country: phoneLookup.country_name,
-    verified: true
+    verified: true,
   });
 }
 ```
@@ -572,29 +589,29 @@ async function addContactToCRM(contactData) {
 // Validate checkout phone number
 app.post('/checkout/validate-phone', async (req, res) => {
   const { phone } = req.body;
-  
+
   const lookup = await validateNumber(phone);
-  
+
   if (!lookup.valid) {
     return res.status(400).json({
       error: 'Please enter a valid phone number',
-      suggestion: lookup.suggestion // If available
+      suggestion: lookup.suggestion, // If available
     });
   }
-  
+
   // Check if mobile (for SMS notifications)
   if (lookup.line_type !== 'mobile') {
     return res.json({
       valid: true,
       warning: 'This appears to be a landline. SMS notifications may not work.',
-      phone: lookup.international_format
+      phone: lookup.international_format,
     });
   }
-  
+
   res.json({
     valid: true,
     phone: lookup.international_format,
-    carrier: lookup.carrier
+    carrier: lookup.carrier,
   });
 });
 ```
@@ -628,12 +645,12 @@ Test without charges:
 
 ## Rate Limits
 
-| Tier | Rate Limit | Burst |
-|------|------------|-------|
-| Free | 10/min | 20 |
-| Basic | 100/min | 200 |
-| Pro | 500/min | 1000 |
-| Enterprise | Custom | Custom |
+| Tier       | Rate Limit | Burst  |
+| ---------- | ---------- | ------ |
+| Free       | 10/min     | 20     |
+| Basic      | 100/min    | 200    |
+| Pro        | 500/min    | 1000   |
+| Enterprise | Custom     | Custom |
 
 ### Rate Limit Headers
 
@@ -650,10 +667,13 @@ X-RateLimit-Reset: 1678627800
 ### Official SDKs
 
 **Node.js**
+
 ```bash
 npm install @sendexa/node-sdk
 ```
+
 ---
+
 ```javascript
 const Sendexa = require('@sendexa/node-sdk');
 const client = new Sendexa('sk_live_your_token');
@@ -662,10 +682,13 @@ const result = await client.lookup.carrier('233501234567');
 ```
 
 **Python**
+
 ```bash
 pip install sendexa
 ```
+
 ---
+
 ```python
 from sendexa import Sendexa
 
@@ -674,10 +697,13 @@ result = client.lookup.carrier('233501234567')
 ```
 
 **PHP**
+
 ```bash
 composer require sendexa/php-sdk
 ```
+
 ---
+
 ```php
 <?php
 use Sendexa\Client;
@@ -691,16 +717,19 @@ $result = $client->lookup->carrier('233501234567');
 ## Support
 
 ### Documentation
+
 - [API Reference](/docs/lookup/v1)
 - [Code Examples](https://github.com/sendexa/examples)
 - [FAQ](/docs/faq)
 
 ### Get Help
+
 - **Email:** support@sendexa.co
 - **Discord:** [Join our community](https://discord.gg/sendexa)
 - **Twitter:** [@sendexaHQ](https://twitter.com/sendexaHQ)
 
 ### Report Issues
+
 - **GitHub:** [github.com/sendexa/api-issues](https://github.com/sendexa/api-issues)
 - **Status Page:** [status.sendexa.co](https://status.sendexa.co)
 

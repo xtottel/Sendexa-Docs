@@ -30,24 +30,24 @@ Webhooks are HTTP callbacks that Sendexa sends to your server when call events o
 
 ### Call Lifecycle Events
 
-| Event | Description | When Triggered |
-|-------|-------------|----------------|
-| `call.initiated` | Call started | Immediately after API call |
-| `call.ringing` | Phone is ringing | When recipient's phone rings |
-| `call.answered` | Call was answered | When call is picked up |
-| `call.completed` | Call ended normally | When call ends successfully |
-| `call.failed` | Call failed | When call fails to connect |
-| `call.busy` | Number was busy | When recipient is busy |
-| `call.no-answer` | No one answered | When call times out |
-| `call.canceled` | Call was canceled | When call is canceled |
+| Event            | Description         | When Triggered               |
+| ---------------- | ------------------- | ---------------------------- |
+| `call.initiated` | Call started        | Immediately after API call   |
+| `call.ringing`   | Phone is ringing    | When recipient's phone rings |
+| `call.answered`  | Call was answered   | When call is picked up       |
+| `call.completed` | Call ended normally | When call ends successfully  |
+| `call.failed`    | Call failed         | When call fails to connect   |
+| `call.busy`      | Number was busy     | When recipient is busy       |
+| `call.no-answer` | No one answered     | When call times out          |
+| `call.canceled`  | Call was canceled   | When call is canceled        |
 
 ### IVR Events
 
-| Event | Description | When Triggered |
-|-------|-------------|----------------|
-| `gather.complete` | Input collected | After user presses keys |
-| `recording.completed` | Recording ready | After recording finishes |
-| `dial.completed` | Call forwarding ended | After dial completes |
+| Event                 | Description           | When Triggered           |
+| --------------------- | --------------------- | ------------------------ |
+| `gather.complete`     | Input collected       | After user presses keys  |
+| `recording.completed` | Recording ready       | After recording finishes |
+| `dial.completed`      | Call forwarding ended | After dial completes     |
 
 ---
 
@@ -72,16 +72,16 @@ Webhooks are HTTP callbacks that Sendexa sends to your server when call events o
 
 ### Common Fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `event` | string | Event type |
-| `call_id` | string | Unique call identifier |
-| `account_id` | string | Your account ID |
-| `from` | string | Caller phone number |
-| `to` | string | Recipient phone number |
-| `direction` | string | `outbound` or `inbound` |
-| `status` | string | Current call status |
-| `timestamp` | string | Event timestamp (ISO 8601) |
+| Field        | Type   | Description                |
+| ------------ | ------ | -------------------------- |
+| `event`      | string | Event type                 |
+| `call_id`    | string | Unique call identifier     |
+| `account_id` | string | Your account ID            |
+| `from`       | string | Caller phone number        |
+| `to`         | string | Recipient phone number     |
+| `direction`  | string | `outbound` or `inbound`    |
+| `status`     | string | Current call status        |
+| `timestamp`  | string | Event timestamp (ISO 8601) |
 
 ### Call Completed Event
 
@@ -153,12 +153,14 @@ Webhooks are HTTP callbacks that Sendexa sends to your server when call events o
 ### Webhook URL Requirements
 
 ✅ **Required:**
+
 - Must use HTTPS (not HTTP)
 - Must be publicly accessible
 - Should respond within 10 seconds
 - Should return 200 OK on success
 
 ❌ **Not Allowed:**
+
 - HTTP URLs (security requirement)
 - Localhost/private IPs
 - URLs requiring authentication
@@ -184,7 +186,7 @@ function verifySignature(payload, signature) {
     .createHmac('sha256', WEBHOOK_SECRET)
     .update(JSON.stringify(payload))
     .digest('hex');
-  
+
   return crypto.timingSafeEqual(
     Buffer.from(signature),
     Buffer.from(expectedSignature)
@@ -194,79 +196,81 @@ function verifySignature(payload, signature) {
 // Webhook endpoint
 app.post('/webhooks/voice', async (req, res) => {
   const signature = req.headers['x-sendexa-signature'];
-  
+
   // Verify signature
   if (!verifySignature(req.body, signature)) {
     console.error('Invalid signature');
     return res.status(401).send('Unauthorized');
   }
-  
+
   const event = req.body;
   console.log('Received event:', event.event);
-  
+
   // Handle different event types
   switch (event.event) {
     case 'call.initiated':
       await handleCallInitiated(event);
       break;
-      
+
     case 'call.answered':
       await handleCallAnswered(event);
       break;
-      
+
     case 'call.completed':
       await handleCallCompleted(event);
       break;
-      
+
     case 'call.failed':
       await handleCallFailed(event);
       break;
-      
+
     case 'recording.completed':
       await handleRecordingCompleted(event);
       break;
-      
+
     default:
       console.log('Unknown event:', event.event);
   }
-  
+
   // Respond quickly (within 10 seconds)
   res.status(200).send('OK');
 });
 
 async function handleCallInitiated(event) {
   console.log(`Call initiated: ${event.call_id}`);
-  
+
   // Update database
   await db.calls.create({
     id: event.call_id,
     from: event.from,
     to: event.to,
     status: 'initiated',
-    createdAt: event.timestamp
+    createdAt: event.timestamp,
   });
 }
 
 async function handleCallAnswered(event) {
   console.log(`Call answered: ${event.call_id}`);
-  
+
   // Update database
   await db.calls.update({
     where: { id: event.call_id },
     data: {
       status: 'answered',
-      answeredAt: event.answered_at
-    }
+      answeredAt: event.answered_at,
+    },
   });
-  
+
   // Send notification
   await notifyUser(event.call_id, 'Your call was answered');
 }
 
 async function handleCallCompleted(event) {
   console.log(`Call completed: ${event.call_id}`);
-  console.log(`Duration: ${event.duration}s, Cost: ${event.cost} ${event.currency}`);
-  
+  console.log(
+    `Duration: ${event.duration}s, Cost: ${event.cost} ${event.currency}`
+  );
+
   // Update database
   await db.calls.update({
     where: { id: event.call_id },
@@ -274,43 +278,43 @@ async function handleCallCompleted(event) {
       status: 'completed',
       duration: event.duration,
       cost: event.cost,
-      completedAt: event.completed_at
-    }
+      completedAt: event.completed_at,
+    },
   });
-  
+
   // Generate invoice
   await generateInvoice(event.call_id);
 }
 
 async function handleCallFailed(event) {
   console.error(`Call failed: ${event.call_id}`, event.error);
-  
+
   // Update database
   await db.calls.update({
     where: { id: event.call_id },
     data: {
       status: 'failed',
       errorCode: event.error.code,
-      errorMessage: event.error.message
-    }
+      errorMessage: event.error.message,
+    },
   });
-  
+
   // Notify admin
   await alertAdmin(`Call ${event.call_id} failed: ${event.error.message}`);
 }
 
 async function handleRecordingCompleted(event) {
   console.log(`Recording ready: ${event.recording_id}`);
-  
+
   // Save recording info
   await db.recordings.create({
     id: event.recording_id,
     callId: event.call_id,
     url: event.recording_url,
     duration: event.duration,
-    createdAt: event.timestamp
+    createdAt: event.timestamp,
   });
-  
+
   // Notify user
   await notifyRecordingReady(event.call_id, event.recording_url);
 }
@@ -339,21 +343,21 @@ def verify_signature(payload, signature):
         json.dumps(payload).encode(),
         hashlib.sha256
     ).hexdigest()
-    
+
     return hmac.compare_digest(signature, expected_signature)
 
 @app.route('/webhooks/voice', methods=['POST'])
 def handle_webhook():
     signature = request.headers.get('X-Sendexa-Signature')
     payload = request.get_json()
-    
+
     # Verify signature
     if not verify_signature(payload, signature):
         return jsonify({'error': 'Invalid signature'}), 401
-    
+
     event_type = payload.get('event')
     print(f"Received event: {event_type}")
-    
+
     # Handle different event types
     if event_type == 'call.initiated':
         handle_call_initiated(payload)
@@ -367,7 +371,7 @@ def handle_webhook():
         handle_recording_completed(payload)
     else:
         print(f"Unknown event: {event_type}")
-    
+
     return jsonify({'status': 'success'}), 200
 
 def handle_call_initiated(event):
@@ -432,23 +436,23 @@ switch ($event['event']) {
     case 'call.initiated':
         handleCallInitiated($event);
         break;
-        
+
     case 'call.answered':
         handleCallAnswered($event);
         break;
-        
+
     case 'call.completed':
         handleCallCompleted($event);
         break;
-        
+
     case 'call.failed':
         handleCallFailed($event);
         break;
-        
+
     case 'recording.completed':
         handleRecordingCompleted($event);
         break;
-        
+
     default:
         error_log("Unknown event: " . $event['event']);
 }
@@ -498,6 +502,7 @@ function handleRecordingCompleted($event) {
 Every webhook includes a signature in the `X-Sendexa-Signature` header. **Always verify** this signature.
 
 **How Signature is Generated:**
+
 ```
 HMAC-SHA256(webhook_secret, request_body)
 ```
@@ -518,13 +523,13 @@ HMAC-SHA256(webhook_secret, request_body)
 
 If your endpoint doesn't respond with `200 OK`, Sendexa will retry:
 
-| Attempt | Delay | Total Elapsed |
-|---------|-------|---------------|
-| 1 | Immediate | 0s |
-| 2 | 30 seconds | 30s |
-| 3 | 2 minutes | 2.5 min |
-| 4 | 10 minutes | 12.5 min |
-| 5 | 1 hour | 1h 12.5min |
+| Attempt | Delay      | Total Elapsed |
+| ------- | ---------- | ------------- |
+| 1       | Immediate  | 0s            |
+| 2       | 30 seconds | 30s           |
+| 3       | 2 minutes  | 2.5 min       |
+| 4       | 10 minutes | 12.5 min      |
+| 5       | 1 hour     | 1h 12.5min    |
 
 After 5 failed attempts, the webhook is marked as failed.
 
@@ -544,19 +549,19 @@ const processedEvents = new Set();
 
 app.post('/webhooks/voice', (req, res) => {
   const deliveryId = req.headers['x-sendexa-delivery-id'];
-  
+
   // Check if already processed
   if (processedEvents.has(deliveryId)) {
     console.log('Event already processed:', deliveryId);
     return res.status(200).send('OK');
   }
-  
+
   // Process event
   handleEvent(req.body);
-  
+
   // Mark as processed
   processedEvents.add(deliveryId);
-  
+
   res.status(200).send('OK');
 });
 ```
@@ -566,23 +571,23 @@ app.post('/webhooks/voice', (req, res) => {
 ```javascript
 app.post('/webhooks/voice', async (req, res) => {
   const deliveryId = req.headers['x-sendexa-delivery-id'];
-  
+
   // Check database
   const exists = await db.webhookEvents.findOne({ deliveryId });
-  
+
   if (exists) {
     return res.status(200).send('OK');
   }
-  
+
   // Store and process
   await db.webhookEvents.create({
     deliveryId,
     event: req.body,
-    processedAt: new Date()
+    processedAt: new Date(),
   });
-  
+
   await handleEvent(req.body);
-  
+
   res.status(200).send('OK');
 });
 ```
@@ -628,7 +633,7 @@ Test webhooks from your dashboard:
   "direction": "outbound",
   "status": "completed",
   "duration": 120,
-  "cost": 0.30,
+  "cost": 0.3,
   "currency": "GHS",
   "answered_at": "2025-03-12T14:20:15Z",
   "completed_at": "2025-03-12T14:22:15Z",
@@ -651,15 +656,15 @@ async function handleCallCompleted(event) {
     to: event.to,
     duration: event.duration,
     cost: event.cost,
-    completedAt: event.completed_at
+    completedAt: event.completed_at,
   });
-  
+
   // Update analytics
   await updateAnalytics({
     totalCalls: 1,
     totalDuration: event.duration,
     totalCost: event.cost,
-    date: new Date(event.completed_at).toDateString()
+    date: new Date(event.completed_at).toDateString(),
   });
 }
 ```
@@ -671,7 +676,7 @@ async function handleCallAnswered(event) {
   // Notify customer their call was answered
   await sendSMS({
     to: event.from,
-    message: `Your call to ${event.to} was answered and is in progress.`
+    message: `Your call to ${event.to} was answered and is in progress.`,
   });
 }
 
@@ -684,7 +689,7 @@ async function handleCallCompleted(event) {
       Call Duration: ${event.duration} seconds
       Cost: ${event.cost} ${event.currency}
       Time: ${event.completed_at}
-    `
+    `,
   });
 }
 ```
@@ -694,26 +699,29 @@ async function handleCallCompleted(event) {
 ```javascript
 async function handleCallFailed(event) {
   const call = await db.calls.findOne({ id: event.call_id });
-  
+
   // Retry if busy or no answer
   if (['BUSY', 'NO_ANSWER'].includes(event.error.code)) {
     const retryCount = call.retryCount || 0;
-    
+
     if (retryCount < 3) {
       // Wait and retry
-      setTimeout(async () => {
-        await makeCall({
-          to: event.to,
-          from: event.from,
-          url: call.voiceUrl
-        });
-        
-        // Update retry count
-        await db.calls.update({
-          where: { id: event.call_id },
-          data: { retryCount: retryCount + 1 }
-        });
-      }, (retryCount + 1) * 60000); // Wait 1, 2, 3 minutes
+      setTimeout(
+        async () => {
+          await makeCall({
+            to: event.to,
+            from: event.from,
+            url: call.voiceUrl,
+          });
+
+          // Update retry count
+          await db.calls.update({
+            where: { id: event.call_id },
+            data: { retryCount: retryCount + 1 },
+          });
+        },
+        (retryCount + 1) * 60000
+      ); // Wait 1, 2, 3 minutes
     }
   }
 }
@@ -725,19 +733,19 @@ async function handleCallFailed(event) {
 async function handleRecordingCompleted(event) {
   // Download recording
   const audioBuffer = await downloadFile(event.recording_url);
-  
+
   // Send to transcription service
   const transcription = await transcribeAudio(audioBuffer);
-  
+
   // Save transcription
   await db.recordings.update({
     where: { id: event.recording_id },
     data: {
       transcription: transcription.text,
-      transcribedAt: new Date()
-    }
+      transcribedAt: new Date(),
+    },
   });
-  
+
   // Notify user
   await notifyUser(event.call_id, 'Recording transcription is ready');
 }
@@ -756,6 +764,7 @@ View webhook delivery logs in your dashboard:
 3. View **Delivery Logs** tab
 
 **Log Information:**
+
 - Timestamp
 - Event type
 - HTTP status code

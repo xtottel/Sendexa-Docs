@@ -52,15 +52,15 @@ curl -X POST 'https://api.sendexa.co/v1/email/templates' \
 
 ### Request Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `name` | string | Yes | Unique template identifier |
-| `subject` | string | Yes | Email subject (supports variables) |
-| `html` | string | Yes | HTML template content |
-| `text` | string | No | Plain text version |
-| `category` | string | No | Template category |
-| `tags` | array | No | Tags for organization |
-| `variables` | array | No | List of required variables |
+| Parameter   | Type   | Required | Description                        |
+| ----------- | ------ | -------- | ---------------------------------- |
+| `name`      | string | Yes      | Unique template identifier         |
+| `subject`   | string | Yes      | Email subject (supports variables) |
+| `html`      | string | Yes      | HTML template content              |
+| `text`      | string | No       | Plain text version                 |
+| `category`  | string | No       | Template category                  |
+| `tags`      | array  | No       | Tags for organization              |
+| `variables` | array  | No       | List of required variables         |
 
 ### Success Response
 
@@ -89,12 +89,12 @@ curl -X GET 'https://api.sendexa.co/v1/email/templates?category=transactional' \
 
 ### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `category` | string | Filter by category |
-| `tag` | string | Filter by tag |
-| `limit` | integer | Results per page (default: 50) |
-| `offset` | integer | Pagination offset |
+| Parameter  | Type    | Description                    |
+| ---------- | ------- | ------------------------------ |
+| `category` | string  | Filter by category             |
+| `tag`      | string  | Filter by tag                  |
+| `limit`    | integer | Results per page (default: 50) |
+| `offset`   | integer | Pagination offset              |
 
 ### Response
 
@@ -221,13 +221,13 @@ await axios.post(
     variables: {
       appName: 'YourApp',
       name: 'John Doe',
-      verificationLink: 'https://app.com/verify/123'
-    }
+      verificationLink: 'https://app.com/verify/123',
+    },
   },
   {
     headers: {
-      'Authorization': `Bearer ${process.env.SENDEXA_API_TOKEN}`
-    }
+      Authorization: `Bearer ${process.env.SENDEXA_API_TOKEN}`,
+    },
   }
 );
 ```
@@ -250,11 +250,9 @@ Use `{{variableName}}` in your templates:
 
 ```html
 {{#if isPremium}}
-  <p>Thanks for being a premium member!</p>
-{{/if}}
-
-{{#unless verified}}
-  <a href="{{verificationLink}}">Verify your email</a>
+<p>Thanks for being a premium member!</p>
+{{/if}} {{#unless verified}}
+<a href="{{verificationLink}}">Verify your email</a>
 {{/unless}}
 ```
 
@@ -263,9 +261,9 @@ Use `{{variableName}}` in your templates:
 ```html
 <h2>Your Orders:</h2>
 <ul>
-{{#each orders}}
+  {{#each orders}}
   <li>Order #{{orderNumber}}: {{status}}</li>
-{{/each}}
+  {{/each}}
 </ul>
 ```
 
@@ -285,16 +283,12 @@ class EmailTemplateManager {
   }
 
   async createTemplate(template) {
-    const response = await axios.post(
-      `${this.baseUrl}/templates`,
-      template,
-      {
-        headers: {
-          'Authorization': `Bearer ${this.apiToken}`,
-          'Content-Type': 'application/json'
-        }
-      }
-    );
+    const response = await axios.post(`${this.baseUrl}/templates`, template, {
+      headers: {
+        Authorization: `Bearer ${this.apiToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
     return response.data;
   }
 
@@ -305,13 +299,13 @@ class EmailTemplateManager {
         to,
         from: 'noreply@yourdomain.com',
         templateId,
-        variables
+        variables,
       },
       {
         headers: {
-          'Authorization': `Bearer ${this.apiToken}`,
-          'Content-Type': 'application/json'
-        }
+          Authorization: `Bearer ${this.apiToken}`,
+          'Content-Type': 'application/json',
+        },
       }
     );
     return response.data;
@@ -331,7 +325,7 @@ await manager.createTemplate({
     <p>Your order #{{orderNumber}} has been confirmed.</p>
     <p>Total: {{currency}}{{total}}</p>
   `,
-  category: 'transactional'
+  category: 'transactional',
 });
 
 // Send using template
@@ -342,7 +336,7 @@ await manager.sendWithTemplate(
     customerName: 'John Doe',
     orderNumber: '12345',
     currency: '$',
-    total: '99.99'
+    total: '99.99',
   }
 );
 ```
@@ -360,7 +354,7 @@ class EmailTemplateManager:
             'Authorization': f'Bearer {api_token}',
             'Content-Type': 'application/json'
         }
-    
+
     def create_template(self, template):
         response = requests.post(
             f'{self.base_url}/templates',
@@ -369,7 +363,7 @@ class EmailTemplateManager:
         )
         response.raise_for_status()
         return response.json()
-    
+
     def send_with_template(self, to, template_id, variables):
         response = requests.post(
             f'{self.base_url}/send',
@@ -420,28 +414,45 @@ manager.send_with_template(
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-  <style>
-    body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; }
-    .header { background: #4F46E5; color: white; padding: 20px; text-align: center; }
-    .content { padding: 30px 20px; }
-    .button { display: inline-block; padding: 12px 24px; background: #4F46E5; 
-              color: white; text-decoration: none; border-radius: 5px; }
-  </style>
-</head>
-<body>
-  <div class="header">
-    <h1>Welcome to {{appName}}!</h1>
-  </div>
-  <div class="content">
-    <h2>Hi {{name}},</h2>
-    <p>Thanks for signing up! We're excited to have you on board.</p>
-    <p>To get started, verify your email address:</p>
-    <a href="{{verificationLink}}" class="button">Verify Email</a>
-    <p>If you have questions, reply to this email.</p>
-    <p>Best regards,<br>The {{appName}} Team</p>
-  </div>
-</body>
+  <head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .header {
+        background: #4f46e5;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+      .content {
+        padding: 30px 20px;
+      }
+      .button {
+        display: inline-block;
+        padding: 12px 24px;
+        background: #4f46e5;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Welcome to {{appName}}!</h1>
+    </div>
+    <div class="content">
+      <h2>Hi {{name}},</h2>
+      <p>Thanks for signing up! We're excited to have you on board.</p>
+      <p>To get started, verify your email address:</p>
+      <a href="{{verificationLink}}" class="button">Verify Email</a>
+      <p>If you have questions, reply to this email.</p>
+      <p>Best regards,<br />The {{appName}} Team</p>
+    </div>
+  </body>
 </html>
 ```
 
@@ -450,30 +461,32 @@ manager.send_with_template(
 ```html
 <!DOCTYPE html>
 <html>
-<body style="font-family: Arial, sans-serif;">
-  <h1>Order Confirmed!</h1>
-  <p>Hi {{customerName}},</p>
-  <p>Your order #{{orderNumber}} has been confirmed and will be delivered to:</p>
-  <div style="background: #f5f5f5; padding: 15px; margin: 20px 0;">
-    <strong>Shipping Address:</strong><br>
-    {{shippingAddress}}
-  </div>
-  <h3>Order Details:</h3>
-  <table style="width: 100%; border-collapse: collapse;">
-    {{#each items}}
-    <tr>
-      <td>{{name}}</td>
-      <td>x{{quantity}}</td>
-      <td>{{currency}}{{price}}</td>
-    </tr>
-    {{/each}}
-    <tr style="font-weight: bold; border-top: 2px solid #000;">
-      <td colspan="2">Total:</td>
-      <td>{{currency}}{{total}}</td>
-    </tr>
-  </table>
-  <p>Track your order: <a href="{{trackingLink}}">{{trackingNumber}}</a></p>
-</body>
+  <body style="font-family: Arial, sans-serif;">
+    <h1>Order Confirmed!</h1>
+    <p>Hi {{customerName}},</p>
+    <p>
+      Your order #{{orderNumber}} has been confirmed and will be delivered to:
+    </p>
+    <div style="background: #f5f5f5; padding: 15px; margin: 20px 0;">
+      <strong>Shipping Address:</strong><br />
+      {{shippingAddress}}
+    </div>
+    <h3>Order Details:</h3>
+    <table style="width: 100%; border-collapse: collapse;">
+      {{#each items}}
+      <tr>
+        <td>{{name}}</td>
+        <td>x{{quantity}}</td>
+        <td>{{currency}}{{price}}</td>
+      </tr>
+      {{/each}}
+      <tr style="font-weight: bold; border-top: 2px solid #000;">
+        <td colspan="2">Total:</td>
+        <td>{{currency}}{{total}}</td>
+      </tr>
+    </table>
+    <p>Track your order: <a href="{{trackingLink}}">{{trackingNumber}}</a></p>
+  </body>
 </html>
 ```
 
@@ -482,52 +495,62 @@ manager.send_with_template(
 ```html
 <!DOCTYPE html>
 <html>
-<body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-  <div style="text-align: center; padding: 20px;">
-    <h1>INVOICE</h1>
-    <p>Invoice #{{invoiceNumber}}</p>
-    <p>Date: {{invoiceDate}}</p>
-  </div>
-  
-  <div style="display: flex; justify-content: space-between; padding: 20px 0;">
-    <div>
-      <strong>From:</strong><br>
-      {{companyName}}<br>
-      {{companyAddress}}
+  <body
+    style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;"
+  >
+    <div style="text-align: center; padding: 20px;">
+      <h1>INVOICE</h1>
+      <p>Invoice #{{invoiceNumber}}</p>
+      <p>Date: {{invoiceDate}}</p>
     </div>
-    <div>
-      <strong>To:</strong><br>
-      {{clientName}}<br>
-      {{clientAddress}}
+
+    <div
+      style="display: flex; justify-content: space-between; padding: 20px 0;"
+    >
+      <div>
+        <strong>From:</strong><br />
+        {{companyName}}<br />
+        {{companyAddress}}
+      </div>
+      <div>
+        <strong>To:</strong><br />
+        {{clientName}}<br />
+        {{clientAddress}}
+      </div>
     </div>
-  </div>
-  
-  <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
-    <thead>
-      <tr style="background: #f5f5f5;">
-        <th style="padding: 10px; text-align: left;">Description</th>
-        <th style="padding: 10px; text-align: right;">Amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each items}}
-      <tr>
-        <td style="padding: 10px; border-bottom: 1px solid #ddd;">{{description}}</td>
-        <td style="padding: 10px; text-align: right; border-bottom: 1px solid #ddd;">
-          {{currency}}{{amount}}
-        </td>
-      </tr>
-      {{/each}}
-      <tr style="font-weight: bold;">
-        <td style="padding: 10px; text-align: right;">Total:</td>
-        <td style="padding: 10px; text-align: right;">{{currency}}{{total}}</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <p>Payment due: {{dueDate}}</p>
-  <p>Thank you for your business!</p>
-</body>
+
+    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+      <thead>
+        <tr style="background: #f5f5f5;">
+          <th style="padding: 10px; text-align: left;">Description</th>
+          <th style="padding: 10px; text-align: right;">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each items}}
+        <tr>
+          <td style="padding: 10px; border-bottom: 1px solid #ddd;">
+            {{description}}
+          </td>
+          <td
+            style="padding: 10px; text-align: right; border-bottom: 1px solid #ddd;"
+          >
+            {{currency}}{{amount}}
+          </td>
+        </tr>
+        {{/each}}
+        <tr style="font-weight: bold;">
+          <td style="padding: 10px; text-align: right;">Total:</td>
+          <td style="padding: 10px; text-align: right;">
+            {{currency}}{{total}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Payment due: {{dueDate}}</p>
+    <p>Thank you for your business!</p>
+  </body>
 </html>
 ```
 

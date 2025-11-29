@@ -58,22 +58,22 @@ Make an outbound voice call.
 
 ## Request Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `to` | string | Yes | Recipient phone number (international format) |
-| `from` | string | Yes | Your Sendexa phone number |
-| `url` | string | Yes* | VoiceXML endpoint URL (HTTPS required) |
-| `tts` | object | Yes* | Text-to-speech object (alternative to url) |
-| `method` | string | No | HTTP method for URL (GET or POST, default: POST) |
-| `status_callback` | string | No | Webhook URL for call events |
-| `status_callback_method` | string | No | HTTP method for callback (default: POST) |
-| `timeout` | integer | No | Seconds to wait for answer (default: 60) |
-| `record` | boolean | No | Record the call (default: false) |
-| `recording_status_callback` | string | No | Webhook for recording events |
-| `fallback_url` | string | No | Fallback URL if primary fails |
-| `machine_detection` | string | No | Detect answering machines (enable/disable) |
+| Parameter                   | Type    | Required | Description                                      |
+| --------------------------- | ------- | -------- | ------------------------------------------------ |
+| `to`                        | string  | Yes      | Recipient phone number (international format)    |
+| `from`                      | string  | Yes      | Your Sendexa phone number                        |
+| `url`                       | string  | Yes\*    | VoiceXML endpoint URL (HTTPS required)           |
+| `tts`                       | object  | Yes\*    | Text-to-speech object (alternative to url)       |
+| `method`                    | string  | No       | HTTP method for URL (GET or POST, default: POST) |
+| `status_callback`           | string  | No       | Webhook URL for call events                      |
+| `status_callback_method`    | string  | No       | HTTP method for callback (default: POST)         |
+| `timeout`                   | integer | No       | Seconds to wait for answer (default: 60)         |
+| `record`                    | boolean | No       | Record the call (default: false)                 |
+| `recording_status_callback` | string  | No       | Webhook for recording events                     |
+| `fallback_url`              | string  | No       | Fallback URL if primary fails                    |
+| `machine_detection`         | string  | No       | Detect answering machines (enable/disable)       |
 
-*Either `url` or `tts` is required
+\*Either `url` or `tts` is required
 
 ---
 
@@ -90,6 +90,7 @@ The phone number to call in international format:
 ```
 
 **Format Requirements:**
+
 - International format (country code + number)
 - No spaces, dashes, or special characters
 - Examples: `233501234567`, `254712345678`, `27812345678`
@@ -105,6 +106,7 @@ Your Sendexa phone number:
 ```
 
 **Requirements:**
+
 - Must be a number you own in Sendexa
 - Must be from the same country as recipient (for local calls)
 - Purchase numbers at [dashboard.sendexa.co/voice/numbers](https://app.sendexa.co/voice/numbers)
@@ -120,12 +122,14 @@ URL that returns VoiceXML to control the call:
 ```
 
 **Requirements:**
+
 - Must use HTTPS (not HTTP)
 - Must return valid VoiceXML
 - Should respond within 5 seconds
 - Must be publicly accessible
 
 **Example VoiceXML Response:**
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
@@ -166,6 +170,7 @@ Receive real-time call events:
 ```
 
 **Events Sent:**
+
 - `call.initiated`
 - `call.ringing`
 - `call.answered`
@@ -183,6 +188,7 @@ Seconds to wait for call to be answered:
 ```
 
 **Values:**
+
 - Minimum: 5 seconds
 - Maximum: 120 seconds
 - Default: 60 seconds
@@ -209,6 +215,7 @@ Detect if call is answered by machine:
 ```
 
 **Options:**
+
 - `enable` - Detect answering machines
 - `disable` - Don't detect (default)
 
@@ -235,31 +242,31 @@ Detect if call is answered by machine:
 
 ### Response Fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `success` | boolean | Whether request succeeded |
-| `message` | string | Human-readable status |
-| `call` | object | Call details |
-| `id` | string | Unique call identifier |
-| `to` | string | Recipient number |
-| `from` | string | Caller number |
-| `status` | string | Call status |
-| `direction` | string | Call direction (outbound) |
-| `created_at` | string | Call creation timestamp |
+| Field        | Type    | Description               |
+| ------------ | ------- | ------------------------- |
+| `success`    | boolean | Whether request succeeded |
+| `message`    | string  | Human-readable status     |
+| `call`       | object  | Call details              |
+| `id`         | string  | Unique call identifier    |
+| `to`         | string  | Recipient number          |
+| `from`       | string  | Caller number             |
+| `status`     | string  | Call status               |
+| `direction`  | string  | Call direction (outbound) |
+| `created_at` | string  | Call creation timestamp   |
 
 ### Call Status Values
 
-| Status | Description |
-|--------|-------------|
-| `queued` | Call is queued |
-| `initiated` | Call initiated |
-| `ringing` | Phone is ringing |
-| `in-progress` | Call is active |
-| `completed` | Call ended successfully |
-| `failed` | Call failed |
-| `busy` | Number was busy |
-| `no-answer` | No one answered |
-| `canceled` | Call was canceled |
+| Status        | Description             |
+| ------------- | ----------------------- |
+| `queued`      | Call is queued          |
+| `initiated`   | Call initiated          |
+| `ringing`     | Phone is ringing        |
+| `in-progress` | Call is active          |
+| `completed`   | Call ended successfully |
+| `failed`      | Call failed             |
+| `busy`        | Number was busy         |
+| `no-answer`   | No one answered         |
+| `canceled`    | Call was canceled       |
 
 ---
 
@@ -280,13 +287,13 @@ async function makeCall(to, from, voiceUrl) {
         url: voiceUrl,
         status_callback: 'https://yourapp.com/webhooks/voice',
         timeout: 60,
-        record: true
+        record: true,
       },
       {
         headers: {
-          'Authorization': 'Bearer sk_live_your_token',
-          'Content-Type': 'application/json'
-        }
+          Authorization: 'Bearer sk_live_your_token',
+          'Content-Type': 'application/json',
+        },
       }
     );
 
@@ -299,11 +306,7 @@ async function makeCall(to, from, voiceUrl) {
 }
 
 // Make a call
-await makeCall(
-  '233501234567',
-  '233302123456',
-  'https://yourapp.com/voice.xml'
-);
+await makeCall('233501234567', '233302123456', 'https://yourapp.com/voice.xml');
 
 // Make call with TTS
 async function makeCallWithTTS(to, from, message) {
@@ -315,17 +318,17 @@ async function makeCallWithTTS(to, from, message) {
       tts: {
         text: message,
         voice: 'female',
-        language: 'en-US'
-      }
+        language: 'en-US',
+      },
     },
     {
       headers: {
-        'Authorization': 'Bearer sk_live_your_token',
-        'Content-Type': 'application/json'
-      }
+        Authorization: 'Bearer sk_live_your_token',
+        'Content-Type': 'application/json',
+      },
     }
   );
-  
+
   return response.data;
 }
 
@@ -361,7 +364,7 @@ def make_call(to, from_number, voice_url):
         response = requests.post(url, json=payload, headers=headers)
         response.raise_for_status()
         data = response.json()
-        
+
         print(f"Call initiated: {data['call']['id']}")
         return data
     except requests.exceptions.RequestException as e:
@@ -392,7 +395,7 @@ def make_call_with_tts(to, from_number, message):
             'language': 'en-US'
         }
     }
-    
+
     response = requests.post(url, json=payload, headers=headers)
     response.raise_for_status()
     return response.json()
@@ -412,7 +415,7 @@ make_call_with_tts(
 function makeCall($to, $from, $voiceUrl) {
     $url = 'https://api.sendexa.co/v1/voice/call';
     $token = 'sk_live_your_token';
-    
+
     $data = [
         'to' => $to,
         'from' => $from,
@@ -421,7 +424,7 @@ function makeCall($to, $from, $voiceUrl) {
         'timeout' => 60,
         'record' => true
     ];
-    
+
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
@@ -430,11 +433,11 @@ function makeCall($to, $from, $voiceUrl) {
         'Authorization: Bearer ' . $token,
         'Content-Type: application/json'
     ]);
-    
+
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
-    
+
     if ($httpCode === 200) {
         $result = json_decode($response, true);
         echo "Call initiated: " . $result['call']['id'] . "\n";
@@ -455,7 +458,7 @@ makeCall(
 function makeCallWithTTS($to, $from, $message) {
     $url = 'https://api.sendexa.co/v1/voice/call';
     $token = 'sk_live_your_token';
-    
+
     $data = [
         'to' => $to,
         'from' => $from,
@@ -465,7 +468,7 @@ function makeCallWithTTS($to, $from, $message) {
             'language' => 'en-US'
         ]
     ];
-    
+
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
@@ -474,10 +477,10 @@ function makeCallWithTTS($to, $from, $message) {
         'Authorization: Bearer ' . $token,
         'Content-Type: application/json'
     ]);
-    
+
     $response = curl_exec($ch);
     curl_close($ch);
-    
+
     return json_decode($response, true);
 }
 
@@ -548,8 +551,8 @@ makeCallWithTTS(
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
   <Say>Please leave a message after the beep</Say>
-  <Record 
-    maxLength="60" 
+  <Record
+    maxLength="60"
     playBeep="true"
     action="https://yourapp.com/handle-recording"
     method="POST"
@@ -568,7 +571,7 @@ makeCallWithTTS(
 // Server endpoint that generates VoiceXML
 app.post('/appointment-reminder', (req, res) => {
   const { appointmentId, patientName, appointmentTime } = req.query;
-  
+
   const xml = `
     <?xml version="1.0" encoding="UTF-8"?>
     <Response>
@@ -582,7 +585,7 @@ app.post('/appointment-reminder', (req, res) => {
       <Say>We didn't receive your response. We'll call again later.</Say>
     </Response>
   `;
-  
+
   res.set('Content-Type', 'text/xml');
   res.send(xml);
 });
@@ -591,9 +594,9 @@ app.post('/appointment-reminder', (req, res) => {
 app.post('/confirm-appointment', async (req, res) => {
   const { Digits, CallSid } = req.body;
   const { id } = req.query;
-  
+
   let xml;
-  
+
   if (Digits === '1') {
     await confirmAppointment(id);
     xml = `
@@ -614,13 +617,15 @@ app.post('/confirm-appointment', async (req, res) => {
       </Response>
     `;
   }
-  
+
   res.set('Content-Type', 'text/xml');
   res.send(xml);
 });
 
 // Make the call
-await makeCall(patientPhone, clinicPhone, 
+await makeCall(
+  patientPhone,
+  clinicPhone,
   `https://yourapp.com/appointment-reminder?appointmentId=123&patientName=John&appointmentTime=2PM`
 );
 ```
@@ -632,7 +637,7 @@ await makeCall(patientPhone, clinicPhone,
 app.post('/order-status', async (req, res) => {
   const { orderId } = req.query;
   const order = await getOrder(orderId);
-  
+
   let message;
   switch (order.status) {
     case 'confirmed':
@@ -647,7 +652,7 @@ app.post('/order-status', async (req, res) => {
     default:
       message = `Your order ${orderId} is being processed.`;
   }
-  
+
   const xml = `
     <?xml version="1.0" encoding="UTF-8"?>
     <Response>
@@ -655,7 +660,7 @@ app.post('/order-status', async (req, res) => {
       <Say>Thank you for shopping with us!</Say>
     </Response>
   `;
-  
+
   res.set('Content-Type', 'text/xml');
   res.send(xml);
 });
@@ -668,7 +673,7 @@ app.post('/order-status', async (req, res) => {
 async function sendPaymentReminder(customerId) {
   const customer = await getCustomer(customerId);
   const invoice = await getOutstandingInvoice(customerId);
-  
+
   await makeCall(
     customer.phone,
     companyPhone,
@@ -679,7 +684,7 @@ async function sendPaymentReminder(customerId) {
 // VoiceXML endpoint
 app.post('/payment-reminder', (req, res) => {
   const { customerId, amount } = req.query;
-  
+
   const xml = `
     <?xml version="1.0" encoding="UTF-8"?>
     <Response>
@@ -693,7 +698,7 @@ app.post('/payment-reminder', (req, res) => {
       </Gather>
     </Response>
   `;
-  
+
   res.set('Content-Type', 'text/xml');
   res.send(xml);
 });
@@ -743,6 +748,7 @@ app.post('/payment-reminder', (req, res) => {
 ```
 
 **Solutions:**
+
 - Ensure URL uses HTTPS
 - Check firewall settings
 - Verify SSL certificate
@@ -755,8 +761,8 @@ app.post('/payment-reminder', (req, res) => {
   "success": false,
   "error": "INSUFFICIENT_BALANCE",
   "message": "Not enough credits to make this call",
-  "required": 0.30,
-  "available": 0.10
+  "required": 0.3,
+  "available": 0.1
 }
 ```
 
@@ -797,8 +803,8 @@ app.post('/payment-reminder', (req, res) => {
 <!-- Too Long -->
 <Response>
   <Say>
-    Hello, we are calling to inform you that your appointment that 
-    you scheduled last week for tomorrow at 2 in the afternoon PM 
+    Hello, we are calling to inform you that your appointment that
+    you scheduled last week for tomorrow at 2 in the afternoon PM
     has been successfully confirmed in our system...
   </Say>
 </Response>
@@ -813,9 +819,9 @@ async function makeCallWithRetry(to, from, url, maxRetries = 3) {
       return await makeCall(to, from, url);
     } catch (error) {
       if (attempt === maxRetries - 1) throw error;
-      
+
       // Wait before retry (exponential backoff)
-      await new Promise(r => setTimeout(r, Math.pow(2, attempt) * 1000));
+      await new Promise((r) => setTimeout(r, Math.pow(2, attempt) * 1000));
     }
   }
 }
@@ -839,7 +845,7 @@ async function scheduleCall(to, from, url) {
       .add(1, 'day')
       .hour(9)
       .minute(0);
-    
+
     await scheduleCallFor(to, from, url, scheduledTime);
   }
 }
@@ -865,12 +871,12 @@ await makeCall(
 
 ### Test Numbers
 
-| Number | Behavior |
-|--------|----------|
+| Number         | Behavior                   |
+| -------------- | -------------------------- |
 | `233500000001` | Always answers immediately |
-| `233500000002` | Always busy |
-| `233500000003` | Rings but no answer |
-| `233500000004` | Answers after 10 seconds |
+| `233500000002` | Always busy                |
+| `233500000003` | Rings but no answer        |
+| `233500000004` | Answers after 10 seconds   |
 
 ---
 

@@ -42,17 +42,20 @@ Webhooks are HTTP POST requests that Sendexa sends to your server when OTP-relat
 ### Webhook URL Requirements
 
 ✅ **Required:**
+
 - Must use HTTPS (not HTTP)
 - Must be publicly accessible
 - Should respond within 5 seconds
 - Should return 200 OK on success
 
 ❌ **Not Allowed:**
+
 - HTTP URLs
 - Localhost/private IPs
 - URLs requiring authentication
 
 **Example URLs:**
+
 ```
 ✅ https://api.yourdomain.com/webhooks/otp
 ✅ https://yourdomain.com/api/v1/otp-events
@@ -224,7 +227,7 @@ function verifySignature(payload, signature) {
     .createHmac('sha256', WEBHOOK_SECRET)
     .update(JSON.stringify(payload))
     .digest('hex');
-  
+
   return crypto.timingSafeEqual(
     Buffer.from(signature),
     Buffer.from(expectedSignature)
@@ -234,47 +237,47 @@ function verifySignature(payload, signature) {
 // Webhook endpoint
 app.post('/webhooks/otp', async (req, res) => {
   const signature = req.headers['x-sendexa-signature'];
-  
+
   // Verify signature
   if (!verifySignature(req.body, signature)) {
     console.error('Invalid signature');
     return res.status(401).send('Unauthorized');
   }
-  
+
   const event = req.body;
   console.log('Received event:', event.event);
-  
+
   // Handle different event types
   try {
     switch (event.event) {
       case 'otp.requested':
         await handleOTPRequested(event);
         break;
-        
+
       case 'otp.verified':
         await handleOTPVerified(event);
         break;
-        
+
       case 'otp.failed':
         await handleOTPFailed(event);
         break;
-        
+
       case 'otp.expired':
         await handleOTPExpired(event);
         break;
-        
+
       case 'otp.blocked':
         await handleOTPBlocked(event);
         break;
-        
+
       case 'otp.resent':
         await handleOTPResent(event);
         break;
-        
+
       default:
         console.log('Unknown event:', event.event);
     }
-    
+
     // Respond quickly (within 5 seconds)
     res.status(200).send('OK');
   } catch (error) {
@@ -287,7 +290,7 @@ app.post('/webhooks/otp', async (req, res) => {
 
 async function handleOTPRequested(event) {
   console.log(`OTP sent to ${event.phone || event.email}`);
-  
+
   // Log OTP request
   await db.otpLogs.create({
     id: event.id,
@@ -295,52 +298,55 @@ async function handleOTPRequested(event) {
     channel: event.channel,
     status: 'requested',
     expiresAt: event.expiry.expiresAt,
-    metadata: event.metadata
+    metadata: event.metadata,
   });
 }
 
 async function handleOTPVerified(event) {
   console.log(`OTP verified for ${event.phone || event.email}`);
-  
+
   // Update database
   await db.otpLogs.update({
     where: { id: event.id },
     data: {
       status: 'verified',
       verifiedAt: event.verifiedAt,
-      attempts: event.attempts
-    }
+      attempts: event.attempts,
+    },
   });
-  
+
   // Process based on metadata
   const { transactionId, userId } = event.metadata;
-  
+
   if (transactionId) {
     // Approve transaction
     await approveTransaction(transactionId);
   }
-  
+
   if (userId) {
     // Mark user as verified
     await markUserAsVerified(userId);
   }
-  
+
   // Send success notification
-  await sendNotification(event.phone || event.email, 'Verification successful!');
+  await sendNotification(
+    event.phone || event.email,
+    'Verification successful!'
+  );
 }
 
 async function handleOTPFailed(event) {
   console.log(`OTP verification failed for ${event.phone || event.email}`);
-  
+
   // Log failed attempt
   await db.otpLogs.update({
     where: { id: event.id },
     data: {
       failedAttempts: event.attempts,
-      lastFailedAt: event.timestamp
-    }
+      lastFailedAt: event.timestamp,
+    },
   });
-  
+
   // Alert if approaching max attempts
   if (event.attemptsRemaining === 1) {
     await sendAlert(
@@ -352,16 +358,16 @@ async function handleOTPFailed(event) {
 
 async function handleOTPExpired(event) {
   console.log(`OTP expired for ${event.phone || event.email}`);
-  
+
   // Update database
   await db.otpLogs.update({
     where: { id: event.id },
     data: {
       status: 'expired',
-      expiredAt: event.expiredAt
-    }
+      expiredAt: event.expiredAt,
+    },
   });
-  
+
   // Notify user
   await sendNotification(
     event.phone || event.email,
@@ -371,24 +377,24 @@ async function handleOTPExpired(event) {
 
 async function handleOTPBlocked(event) {
   console.log(`OTP blocked for ${event.phone || event.email}`);
-  
+
   // Update database
   await db.otpLogs.update({
     where: { id: event.id },
     data: {
       status: 'blocked',
-      blockedUntil: event.blockedUntil
-    }
+      blockedUntil: event.blockedUntil,
+    },
   });
-  
+
   // Alert security team
   await alertSecurityTeam({
     destination: event.phone || event.email,
     reason: event.reason,
     attempts: event.attempts,
-    metadata: event.metadata
+    metadata: event.metadata,
   });
-  
+
   // Notify user
   await sendNotification(
     event.phone || event.email,
@@ -398,7 +404,7 @@ async function handleOTPBlocked(event) {
 
 async function handleOTPResent(event) {
   console.log(`OTP resent to ${event.phone || event.email}`);
-  
+
   // Log resend
   await db.otpLogs.create({
     id: event.id,
@@ -406,7 +412,7 @@ async function handleOTPResent(event) {
     destination: event.phone || event.email,
     status: 'resent',
     resendCount: event.resendCount,
-    expiresAt: event.expiry.expiresAt
+    expiresAt: event.expiry.expiresAt,
   });
 }
 
@@ -434,21 +440,21 @@ def verify_signature(payload, signature):
         json.dumps(payload).encode(),
         hashlib.sha256
     ).hexdigest()
-    
+
     return hmac.compare_digest(signature, expected_signature)
 
 @app.route('/webhooks/otp', methods=['POST'])
 def handle_webhook():
     signature = request.headers.get('X-Sendexa-Signature')
     payload = request.get_json()
-    
+
     # Verify signature
     if not verify_signature(payload, signature):
         return jsonify({'error': 'Invalid signature'}), 401
-    
+
     event_type = payload.get('event')
     print(f"Received event: {event_type}")
-    
+
     try:
         # Handle different event types
         if event_type == 'otp.requested':
@@ -465,9 +471,9 @@ def handle_webhook():
             handle_otp_resent(payload)
         else:
             print(f"Unknown event: {event_type}")
-        
+
         return jsonify({'status': 'success'}), 200
-        
+
     except Exception as e:
         print(f"Error processing webhook: {e}")
         return jsonify({'error': 'Internal server error'}), 500
@@ -476,7 +482,7 @@ def handle_otp_requested(event):
     """Handle OTP requested event"""
     destination = event.get('phone') or event.get('email')
     print(f"OTP sent to {destination}")
-    
+
     # Log OTP request
     db.otp_logs.create({
         'id': event['id'],
@@ -491,7 +497,7 @@ def handle_otp_verified(event):
     """Handle OTP verified event"""
     destination = event.get('phone') or event.get('email')
     print(f"OTP verified for {destination}")
-    
+
     # Update database
     db.otp_logs.update(
         event['id'],
@@ -499,16 +505,16 @@ def handle_otp_verified(event):
         verified_at=event['verifiedAt'],
         attempts=event['attempts']
     )
-    
+
     # Process metadata
     metadata = event.get('metadata', {})
-    
+
     if metadata.get('transactionId'):
         approve_transaction(metadata['transactionId'])
-    
+
     if metadata.get('userId'):
         mark_user_as_verified(metadata['userId'])
-    
+
     # Send notification
     send_notification(destination, 'Verification successful!')
 
@@ -516,14 +522,14 @@ def handle_otp_failed(event):
     """Handle OTP failed event"""
     destination = event.get('phone') or event.get('email')
     print(f"OTP verification failed for {destination}")
-    
+
     # Log failed attempt
     db.otp_logs.update(
         event['id'],
         failed_attempts=event['attempts'],
         last_failed_at=event['timestamp']
     )
-    
+
     # Alert if last attempt
     if event.get('attemptsRemaining') == 1:
         send_alert(destination, 'Warning: 1 attempt remaining')
@@ -532,26 +538,26 @@ def handle_otp_expired(event):
     """Handle OTP expired event"""
     destination = event.get('phone') or event.get('email')
     print(f"OTP expired for {destination}")
-    
+
     db.otp_logs.update(
         event['id'],
         status='expired',
         expired_at=event['expiredAt']
     )
-    
+
     send_notification(destination, 'Your code has expired')
 
 def handle_otp_blocked(event):
     """Handle OTP blocked event"""
     destination = event.get('phone') or event.get('email')
     print(f"OTP blocked for {destination}")
-    
+
     db.otp_logs.update(
         event['id'],
         status='blocked',
         blocked_until=event['blockedUntil']
     )
-    
+
     # Alert security
     alert_security_team({
         'destination': destination,
@@ -564,7 +570,7 @@ def handle_otp_resent(event):
     """Handle OTP resent event"""
     destination = event.get('phone') or event.get('email')
     print(f"OTP resent to {destination}")
-    
+
     db.otp_logs.create({
         'id': event['id'],
         'previous_id': event.get('previousId'),
@@ -586,6 +592,7 @@ if __name__ == '__main__':
 Every webhook includes a signature in the `X-Sendexa-Signature` header. **Always verify** this signature.
 
 **Signature Generation:**
+
 ```
 HMAC-SHA256(webhook_secret, request_body)
 ```
@@ -606,13 +613,13 @@ HMAC-SHA256(webhook_secret, request_body)
 
 If your endpoint doesn't respond with `200 OK`, Sendexa will retry:
 
-| Attempt | Delay | Total Elapsed |
-|---------|-------|---------------|
-| 1 | Immediate | 0s |
-| 2 | 30 seconds | 30s |
-| 3 | 2 minutes | 2.5 min |
-| 4 | 10 minutes | 12.5 min |
-| 5 | 1 hour | 1h 12.5min |
+| Attempt | Delay      | Total Elapsed |
+| ------- | ---------- | ------------- |
+| 1       | Immediate  | 0s            |
+| 2       | 30 seconds | 30s           |
+| 3       | 2 minutes  | 2.5 min       |
+| 4       | 10 minutes | 12.5 min      |
+| 5       | 1 hour     | 1h 12.5min    |
 
 After 5 failed attempts, the webhook is marked as failed.
 
@@ -630,19 +637,19 @@ const processedEvents = new Set();
 
 app.post('/webhooks/otp', (req, res) => {
   const deliveryId = req.headers['x-sendexa-delivery-id'];
-  
+
   // Check if already processed
   if (processedEvents.has(deliveryId)) {
     console.log('Event already processed:', deliveryId);
     return res.status(200).send('OK');
   }
-  
+
   // Process event
   handleEvent(req.body);
-  
+
   // Mark as processed
   processedEvents.add(deliveryId);
-  
+
   res.status(200).send('OK');
 });
 ```
@@ -684,11 +691,13 @@ Test webhooks from your dashboard:
 ### Webhook Logs
 
 View delivery logs in your dashboard:
+
 1. Navigate to **Settings → Webhooks**
 2. Click on webhook URL
 3. View **Delivery Logs** tab
 
 **Log Information:**
+
 - Timestamp
 - Event type
 - HTTP status code
@@ -705,15 +714,15 @@ View delivery logs in your dashboard:
 ```javascript
 async function handleOTPVerified(event) {
   const { transactionId, amount, currency } = event.metadata;
-  
+
   // Verify OTP matched transaction
   const transaction = await getTransaction(transactionId);
-  
+
   if (transaction.amount === amount) {
     // Approve and process transaction
     await approveTransaction(transactionId);
     await processPayment(transactionId);
-    
+
     // Notify user
     await sendSMS(
       event.phone,
@@ -728,19 +737,19 @@ async function handleOTPVerified(event) {
 ```javascript
 async function handleOTPVerified(event) {
   const { userId } = event.metadata;
-  
+
   // Mark user as verified
   await db.users.update({
     where: { id: userId },
     data: {
       phoneVerified: true,
-      phoneVerifiedAt: event.verifiedAt
-    }
+      phoneVerifiedAt: event.verifiedAt,
+    },
   });
-  
+
   // Grant access
   await grantUserAccess(userId);
-  
+
   // Send welcome message
   await sendWelcomeEmail(userId);
 }
@@ -751,23 +760,23 @@ async function handleOTPVerified(event) {
 ```javascript
 async function handleOTPBlocked(event) {
   const { phone, attempts, metadata } = event;
-  
+
   // Log security incident
   await db.securityLogs.create({
     type: 'otp_blocked',
     destination: phone,
     attempts,
     metadata,
-    timestamp: event.timestamp
+    timestamp: event.timestamp,
   });
-  
+
   // Alert security team
   await alertSecurityTeam({
     message: `OTP blocked for ${phone} after ${attempts} failed attempts`,
     severity: 'high',
-    metadata
+    metadata,
   });
-  
+
   // Block user if suspicious
   if (metadata.userId) {
     await temporarilyBlockUser(metadata.userId, '1 hour');

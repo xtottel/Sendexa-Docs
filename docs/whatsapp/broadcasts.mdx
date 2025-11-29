@@ -63,27 +63,23 @@ Create and send a broadcast campaign.
 
 ## Request Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `name` | string | Yes | Broadcast campaign name |
-| `contacts` | array | Yes* | Array of phone numbers |
-| `contact_ids` | array | Yes* | Array of contact IDs from contact management |
-| `tags` | array | No | Send to contacts with these tags |
-| `message` | object | Yes | Message object (same as send endpoint) |
-| `schedule_at` | string | No | ISO 8601 timestamp for scheduling |
+| Parameter     | Type   | Required | Description                                  |
+| ------------- | ------ | -------- | -------------------------------------------- |
+| `name`        | string | Yes      | Broadcast campaign name                      |
+| `contacts`    | array  | Yes\*    | Array of phone numbers                       |
+| `contact_ids` | array  | Yes\*    | Array of contact IDs from contact management |
+| `tags`        | array  | No       | Send to contacts with these tags             |
+| `message`     | object | Yes      | Message object (same as send endpoint)       |
+| `schedule_at` | string | No       | ISO 8601 timestamp for scheduling            |
 
-*Either `contacts`, `contact_ids`, or `tags` required
+\*Either `contacts`, `contact_ids`, or `tags` required
 
 ### Request Example
 
 ```json
 {
   "name": "Flash Sale Campaign",
-  "contacts": [
-    "233501234567",
-    "233509876543",
-    "233543219876"
-  ],
+  "contacts": ["233501234567", "233509876543", "233543219876"],
   "message": {
     "type": "template",
     "template": {
@@ -132,14 +128,14 @@ Create and send a broadcast campaign.
 
 ### Response Fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | string | Unique broadcast identifier |
-| `name` | string | Broadcast campaign name |
-| `status` | string | processing, completed, failed, scheduled |
-| `total_recipients` | integer | Number of recipients |
-| `created_at` | string | ISO 8601 timestamp |
-| `scheduled_at` | string | Scheduled delivery time (if applicable) |
+| Field              | Type    | Description                              |
+| ------------------ | ------- | ---------------------------------------- |
+| `id`               | string  | Unique broadcast identifier              |
+| `name`             | string  | Broadcast campaign name                  |
+| `status`           | string  | processing, completed, failed, scheduled |
+| `total_recipients` | integer | Number of recipients                     |
+| `created_at`       | string  | ISO 8601 timestamp                       |
+| `scheduled_at`     | string  | Scheduled delivery time (if applicable)  |
 
 ---
 
@@ -181,7 +177,7 @@ curl -X GET 'https://api.sendexa.co/v1/whatsapp/broadcasts/bcast_abc123def456' \
       "read": 450
     },
     "cost": {
-      "total": 450.00,
+      "total": 450.0,
       "currency": "GHS",
       "per_message": 0.45
     },
@@ -220,11 +216,7 @@ Send to specific saved contacts:
 ```json
 {
   "name": "Abandoned Cart Reminder",
-  "contact_ids": [
-    "cont_abc123",
-    "cont_def456",
-    "cont_ghi789"
-  ],
+  "contact_ids": ["cont_abc123", "cont_def456", "cont_ghi789"],
   "message": {
     "type": "template",
     "template": {
@@ -284,13 +276,13 @@ Retrieve all broadcast campaigns.
 
 #### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `status` | string | Filter by status (processing, completed, failed, scheduled) |
-| `limit` | integer | Results per page (max 100, default 50) |
-| `offset` | integer | Pagination offset |
-| `date_from` | string | Start date (ISO 8601) |
-| `date_to` | string | End date (ISO 8601) |
+| Parameter   | Type    | Description                                                 |
+| ----------- | ------- | ----------------------------------------------------------- |
+| `status`    | string  | Filter by status (processing, completed, failed, scheduled) |
+| `limit`     | integer | Results per page (max 100, default 50)                      |
+| `offset`    | integer | Pagination offset                                           |
+| `date_from` | string  | Start date (ISO 8601)                                       |
+| `date_to`   | string  | End date (ISO 8601)                                         |
 
 #### Request Example
 
@@ -443,13 +435,13 @@ class BroadcastManager {
         {
           name,
           contacts: recipients,
-          message
+          message,
         },
         {
           headers: {
-            'Authorization': `Bearer ${this.apiToken}`,
-            'Content-Type': 'application/json'
-          }
+            Authorization: `Bearer ${this.apiToken}`,
+            'Content-Type': 'application/json',
+          },
         }
       );
 
@@ -466,8 +458,8 @@ class BroadcastManager {
       `${this.baseUrl}/broadcasts/${broadcastId}`,
       {
         headers: {
-          'Authorization': `Bearer ${this.apiToken}`
-        }
+          Authorization: `Bearer ${this.apiToken}`,
+        },
       }
     );
 
@@ -476,20 +468,20 @@ class BroadcastManager {
 
   async waitForCompletion(broadcastId, maxWait = 300000) {
     const start = Date.now();
-    
+
     while (Date.now() - start < maxWait) {
       const broadcast = await this.getBroadcastStatus(broadcastId);
-      
+
       if (broadcast.status === 'completed') {
         return broadcast;
       } else if (broadcast.status === 'failed') {
         throw new Error('Broadcast failed');
       }
-      
+
       // Wait 5 seconds before checking again
-      await new Promise(resolve => setTimeout(resolve, 5000));
+      await new Promise((resolve) => setTimeout(resolve, 5000));
     }
-    
+
     throw new Error('Broadcast timeout');
   }
 }
@@ -505,8 +497,8 @@ const broadcast = await manager.createBroadcast(
     type: 'template',
     template: {
       name: 'flash_sale',
-      language: 'en'
-    }
+      language: 'en',
+    },
   }
 );
 
@@ -529,7 +521,7 @@ class BroadcastManager:
             'Authorization': f'Bearer {api_token}',
             'Content-Type': 'application/json'
         }
-    
+
     def create_broadcast(self, name, recipients, message):
         """Create a new broadcast"""
         url = f'{self.base_url}/broadcasts'
@@ -538,35 +530,35 @@ class BroadcastManager:
             'contacts': recipients,
             'message': message
         }
-        
+
         response = requests.post(url, json=payload, headers=self.headers)
         response.raise_for_status()
-        
+
         broadcast = response.json()['broadcast']
         print(f"Broadcast created: {broadcast['id']}")
         return broadcast
-    
+
     def get_broadcast_status(self, broadcast_id):
         """Get broadcast status"""
         url = f'{self.base_url}/broadcasts/{broadcast_id}'
         response = requests.get(url, headers=self.headers)
         response.raise_for_status()
         return response.json()['broadcast']
-    
+
     def wait_for_completion(self, broadcast_id, max_wait=300):
         """Wait for broadcast to complete"""
         start = time.time()
-        
+
         while time.time() - start < max_wait:
             broadcast = self.get_broadcast_status(broadcast_id)
-            
+
             if broadcast['status'] == 'completed':
                 return broadcast
             elif broadcast['status'] == 'failed':
                 raise Exception('Broadcast failed')
-            
+
             time.sleep(5)
-        
+
         raise Exception('Broadcast timeout')
 
 # Usage
@@ -598,20 +590,20 @@ print(f"Delivered: {completed['stats']['delivered']}/{completed['stats']['total'
 class BroadcastManager {
     private $apiToken;
     private $baseUrl = 'https://api.sendexa.co/v1/whatsapp';
-    
+
     public function __construct($apiToken) {
         $this->apiToken = $apiToken;
     }
-    
+
     public function createBroadcast($name, $recipients, $message) {
         $url = $this->baseUrl . '/broadcasts';
-        
+
         $payload = [
             'name' => $name,
             'contacts' => $recipients,
             'message' => $message
         ];
-        
+
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -620,11 +612,11 @@ class BroadcastManager {
             'Authorization: Bearer ' . $this->apiToken,
             'Content-Type: application/json'
         ]);
-        
+
         $response = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
-        
+
         if ($httpCode === 200) {
             $data = json_decode($response, true);
             echo "Broadcast created: " . $data['broadcast']['id'] . "\n";
@@ -633,19 +625,19 @@ class BroadcastManager {
             throw new Exception("Broadcast creation failed: " . $response);
         }
     }
-    
+
     public function getBroadcastStatus($broadcastId) {
         $url = $this->baseUrl . '/broadcasts/' . $broadcastId;
-        
+
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Authorization: Bearer ' . $this->apiToken
         ]);
-        
+
         $response = curl_exec($ch);
         curl_close($ch);
-        
+
         $data = json_decode($response, true);
         return $data['broadcast'];
     }
@@ -706,14 +698,10 @@ const allContacts = await getAllContacts(); // 50,000 contacts
 const batches = chunkArray(allContacts, 5000);
 
 for (const [index, batch] of batches.entries()) {
-  await createBroadcast(
-    `Campaign Batch ${index + 1}`,
-    batch,
-    message
-  );
-  
+  await createBroadcast(`Campaign Batch ${index + 1}`, batch, message);
+
   // Small delay between batches
-  await new Promise(r => setTimeout(r, 2000));
+  await new Promise((r) => setTimeout(r, 2000));
 }
 ```
 
@@ -723,18 +711,18 @@ for (const [index, batch] of batches.entries()) {
 async function monitorBroadcast(broadcastId) {
   const broadcast = await getBroadcastStatus(broadcastId);
   const stats = broadcast.stats;
-  
+
   const deliveryRate = (stats.delivered / stats.total) * 100;
   const failureRate = (stats.failed / stats.total) * 100;
-  
+
   console.log(`Delivery Rate: ${deliveryRate.toFixed(2)}%`);
   console.log(`Failure Rate: ${failureRate.toFixed(2)}%`);
-  
+
   if (failureRate > 5) {
     // Alert if failure rate too high
     await alertAdmin(`High failure rate in broadcast ${broadcastId}`);
   }
-  
+
   return { deliveryRate, failureRate };
 }
 ```
@@ -746,12 +734,7 @@ async function monitorBroadcast(broadcastId) {
 const timezoneOffset = '+00:00'; // UTC
 const scheduleTime = '2025-03-15T09:00:00' + timezoneOffset;
 
-await createBroadcast(
-  'Morning Promotion',
-  contacts,
-  message,
-  scheduleTime
-);
+await createBroadcast('Morning Promotion', contacts, message, scheduleTime);
 ```
 
 ### 5. Test Before Broadcasting
@@ -788,21 +771,25 @@ if (testResult.stats.delivered === testContacts.length) {
 async function generateBroadcastReport(broadcastId) {
   const broadcast = await getBroadcastStatus(broadcastId);
   const recipients = await getBroadcastRecipients(broadcastId);
-  
+
   const report = {
     name: broadcast.name,
     sent: broadcast.stats.sent,
     delivered: broadcast.stats.delivered,
     failed: broadcast.stats.failed,
     read: broadcast.stats.read,
-    deliveryRate: ((broadcast.stats.delivered / broadcast.stats.total) * 100).toFixed(2) + '%',
-    readRate: ((broadcast.stats.read / broadcast.stats.delivered) * 100).toFixed(2) + '%',
+    deliveryRate:
+      ((broadcast.stats.delivered / broadcast.stats.total) * 100).toFixed(2) +
+      '%',
+    readRate:
+      ((broadcast.stats.read / broadcast.stats.delivered) * 100).toFixed(2) +
+      '%',
     cost: broadcast.cost.total,
     currency: broadcast.cost.currency,
     duration: calculateDuration(broadcast.created_at, broadcast.completed_at),
-    failedRecipients: recipients.filter(r => r.status === 'failed')
+    failedRecipients: recipients.filter((r) => r.status === 'failed'),
   };
-  
+
   return report;
 }
 
@@ -822,8 +809,8 @@ console.log(JSON.stringify(report, null, 2));
   "error": "INSUFFICIENT_BALANCE",
   "message": "Not enough credits for broadcast",
   "details": {
-    "required": 450.00,
-    "available": 200.00,
+    "required": 450.0,
+    "available": 200.0,
     "currency": "GHS"
   }
 }

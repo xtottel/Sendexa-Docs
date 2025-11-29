@@ -13,18 +13,21 @@ Welcome to the **Sendexa SMS API**. Our platform is designed specifically for Af
 ## Why Choose Sendexa SMS?
 
 ### Built for Africa
+
 - **Local Infrastructure** - Servers hosted across Africa for low latency
 - **Local Providers** - Direct connections with major African telecom operators
 - **Competitive Pricing** - Affordable rates tailored for African markets
 - **Multi-Currency** - Support for GHS, NGN, KES, ZAR, and more
 
 ### Developer-Friendly
+
 - **Simple REST API** - Easy integration in minutes
 - **Comprehensive SDKs** - JavaScript, Python, PHP, and more
 - **Real-time Webhooks** - Instant delivery notifications
 - **Detailed Documentation** - Clear guides and examples
 
 ### Enterprise-Ready
+
 - **99.9% Uptime SLA** - Reliable infrastructure
 - **High Throughput** - Send millions of messages per day
 - **Auto-Failover** - Automatic provider switching
@@ -35,7 +38,9 @@ Welcome to the **Sendexa SMS API**. Our platform is designed specifically for Af
 ## Key Features
 
 ### Quick Send
+
 Send SMS to a single recipient instantly. Perfect for:
+
 - OTP verification codes
 - Transactional alerts
 - Appointment reminders
@@ -52,7 +57,9 @@ Send SMS to a single recipient instantly. Perfect for:
 ```
 
 ### Bulk Send
+
 Send the same message to multiple recipients with one API call:
+
 - Marketing campaigns
 - Announcements
 - Mass notifications
@@ -69,7 +76,9 @@ Send the same message to multiple recipients with one API call:
 ```
 
 ### Delivery Reports
+
 Track message delivery in real-time:
+
 - Check delivery status
 - Get delivery timestamps
 - Monitor failed messages
@@ -78,7 +87,9 @@ Track message delivery in real-time:
 **Endpoint:** `GET /v1/sms/status/:messageId`
 
 ### Smart Resend
+
 Automatically retry failed messages:
+
 - Up to 3 retry attempts
 - Exponential backoff
 - Different provider routing
@@ -91,9 +102,11 @@ Automatically retry failed messages:
 ## Getting Started
 
 ### 1. Create an Account
+
 Sign up at [app.sendexa.co](https://app.sendexa.co) and verify your email.
 
 ### 2. Generate API Token
+
 1. Navigate to **Settings → API Tokens**
 2. Click **Create New Token**
 3. Copy your token securely
@@ -104,7 +117,9 @@ Authorization: Bearer sk_live_your_token_here
 ```
 
 ### 3. Register Sender ID
+
 Before sending SMS:
+
 1. Go to **Settings → Sender IDs**
 2. Submit your desired Sender ID
 3. Await approval (usually within 24 hours)
@@ -134,6 +149,7 @@ https://api.sendexa.co
 ```
 
 **Environment URLs:**
+
 - **Production:** `https://api.sendexa.co`
 - **Sandbox:** `https://sandbox.api.sendexa.co`
 
@@ -148,6 +164,7 @@ Authorization: Bearer YOUR_API_TOKEN
 ```
 
 **Security Best Practices:**
+
 - Never expose API tokens in client-side code
 - Use environment variables to store tokens
 - Rotate tokens regularly
@@ -158,40 +175,44 @@ Authorization: Bearer YOUR_API_TOKEN
 
 ## API Endpoints Summary
 
-| Endpoint | Method | Purpose | Rate Limit |
-|----------|--------|---------|------------|
-| `/v1/sms/send` | POST | Send single or bulk SMS | 60/min |
-| `/v1/sms/status/:id` | GET | Check delivery status | 100/min |
-| `/v1/sms/resend/:id` | POST | Resend failed message | 30/min |
-| `/v1/sms/history` | GET | Get message history | 30/min |
+| Endpoint             | Method | Purpose                 | Rate Limit |
+| -------------------- | ------ | ----------------------- | ---------- |
+| `/v1/sms/send`       | POST   | Send single or bulk SMS | 60/min     |
+| `/v1/sms/status/:id` | GET    | Check delivery status   | 100/min    |
+| `/v1/sms/resend/:id` | POST   | Resend failed message   | 30/min     |
+| `/v1/sms/history`    | GET    | Get message history     | 30/min     |
 
 ---
 
 ## Message Pricing
 
 ### Ghana (GHS)
-| Network | Price per SMS |
-|---------|---------------|
-| MTN | 0.035 GHS |
-| Vodafone | 0.035 GHS |
-| AirtelTigo | 0.035 GHS |
+
+| Network    | Price per SMS |
+| ---------- | ------------- |
+| MTN        | 0.035 GHS     |
+| Vodafone   | 0.035 GHS     |
+| AirtelTigo | 0.035 GHS     |
 
 ### Nigeria (NGN)
+
 | Network | Price per SMS |
-|---------|---------------|
-| MTN | 2.50 NGN |
-| Glo | 2.50 NGN |
-| Airtel | 2.50 NGN |
-| 9mobile | 2.50 NGN |
+| ------- | ------------- |
+| MTN     | 2.50 NGN      |
+| Glo     | 2.50 NGN      |
+| Airtel  | 2.50 NGN      |
+| 9mobile | 2.50 NGN      |
 
 ### Kenya (KES)
-| Network | Price per SMS |
-|---------|---------------|
-| Safaricom | 0.80 KES |
-| Airtel | 0.80 KES |
-| Telkom | 0.80 KES |
+
+| Network   | Price per SMS |
+| --------- | ------------- |
+| Safaricom | 0.80 KES      |
+| Airtel    | 0.80 KES      |
+| Telkom    | 0.80 KES      |
 
 **Message Length:**
+
 - 1 SMS part = 160 characters
 - Messages longer than 160 characters are split into multiple parts
 - Each part is billed separately
@@ -214,12 +235,12 @@ Authorization: Bearer YOUR_API_TOKEN
 
 ### Status Descriptions
 
-| Status | Description | Next Action |
-|--------|-------------|-------------|
-| **queued** | Message is in our send queue | Wait for processing |
-| **sent** | Message sent to carrier | Wait for delivery |
-| **delivered** | Message delivered to recipient | No action needed |
-| **failed** | Message delivery failed | Check error & resend |
+| Status        | Description                    | Next Action          |
+| ------------- | ------------------------------ | -------------------- |
+| **queued**    | Message is in our send queue   | Wait for processing  |
+| **sent**      | Message sent to carrier        | Wait for delivery    |
+| **delivered** | Message delivered to recipient | No action needed     |
+| **failed**    | Message delivery failed        | Check error & resend |
 
 ---
 
@@ -228,6 +249,7 @@ Authorization: Bearer YOUR_API_TOKEN
 Sendexa currently supports SMS delivery in:
 
 ### West Africa
+
 - 🇬🇭 Ghana
 - 🇳🇬 Nigeria
 - 🇨🇮 Ivory Coast
@@ -238,12 +260,14 @@ Sendexa currently supports SMS delivery in:
 - 🇱🇷 Liberia
 
 ### East Africa
+
 - 🇰🇪 Kenya
 - 🇺🇬 Uganda
 - 🇹🇿 Tanzania
 - 🇷🇼 Rwanda
 
 ### Southern Africa
+
 - 🇿🇦 South Africa
 - 🇿🇲 Zambia
 - 🇿🇼 Zimbabwe
@@ -255,42 +279,47 @@ Sendexa currently supports SMS delivery in:
 ## Common Use Cases
 
 ### 1. Authentication & Verification
+
 ```javascript
 // Send OTP for login
 await sendSMS({
-  to: "+233501234567",
-  from: "YourApp",
-  content: "Your verification code is 123456. Valid for 10 minutes."
+  to: '+233501234567',
+  from: 'YourApp',
+  content: 'Your verification code is 123456. Valid for 10 minutes.',
 });
 ```
 
 ### 2. Transactional Notifications
+
 ```javascript
 // Order confirmation
 await sendSMS({
-  to: "+233501234567",
-  from: "YourShop",
-  content: "Order #12345 confirmed! Estimated delivery: 2-3 days."
+  to: '+233501234567',
+  from: 'YourShop',
+  content: 'Order #12345 confirmed! Estimated delivery: 2-3 days.',
 });
 ```
 
 ### 3. Marketing Campaigns
+
 ```javascript
 // Bulk promotional SMS
 await sendBulkSMS({
   to: customerPhoneNumbers,
-  from: "YourBrand",
-  content: "FLASH SALE! 50% off all items. Use code FLASH50. Valid today only!"
+  from: 'YourBrand',
+  content: 'FLASH SALE! 50% off all items. Use code FLASH50. Valid today only!',
 });
 ```
 
 ### 4. Appointment Reminders
+
 ```javascript
 // Reminder 24h before appointment
 await sendSMS({
-  to: "+233501234567",
-  from: "HealthClinic",
-  content: "Reminder: You have an appointment tomorrow at 2PM. Reply CONFIRM to confirm."
+  to: '+233501234567',
+  from: 'HealthClinic',
+  content:
+    'Reminder: You have an appointment tomorrow at 2PM. Reply CONFIRM to confirm.',
 });
 ```
 
@@ -299,6 +328,7 @@ await sendSMS({
 ## Best Practices
 
 ### 1. Message Content
+
 - Keep messages clear and concise
 - Include sender identification
 - Provide opt-out instructions for marketing
@@ -306,12 +336,15 @@ await sendSMS({
 - Avoid ALL CAPS (looks like spam)
 
 ### 2. Phone Number Formatting
+
 Always use international format:
+
 - ✅ **Correct:** `+233501234567`
 - ❌ **Wrong:** `0501234567`
 - ❌ **Wrong:** `233501234567` (missing +)
 
 ### 3. Sender ID Guidelines
+
 - 3-11 characters max
 - Alphanumeric only (no special characters)
 - Use your brand name for recognition
@@ -319,18 +352,21 @@ Always use international format:
 - Don't use generic IDs like "INFO" or "ALERT"
 
 ### 4. Rate Limiting
+
 - Respect rate limits (60 requests/min for SMS)
 - Use bulk endpoints for multiple recipients
 - Implement exponential backoff for retries
 - Cache frequently used data
 
 ### 5. Error Handling
+
 - Always check response status
 - Log errors with message IDs
 - Implement retry logic for transient errors
 - Monitor failed messages dashboard
 
 ### 6. Webhooks
+
 - Use webhooks instead of polling
 - Verify webhook signatures
 - Respond with 200 OK quickly
@@ -347,6 +383,7 @@ Test your integration without sending real SMS:
 **Sandbox URL:** `https://sandbox.api.sendexa.co`
 
 **Features:**
+
 - No credits consumed
 - Simulated delivery reports
 - Test all API endpoints
@@ -356,11 +393,11 @@ Test your integration without sending real SMS:
 
 Use these numbers in sandbox for specific scenarios:
 
-| Phone Number | Behavior |
-|--------------|----------|
-| `+233500000001` | Always delivers successfully |
-| `+233500000002` | Always fails (invalid number) |
-| `+233500000003` | Delivers after 30 second delay |
+| Phone Number    | Behavior                          |
+| --------------- | --------------------------------- |
+| `+233500000001` | Always delivers successfully      |
+| `+233500000002` | Always fails (invalid number)     |
+| `+233500000003` | Delivers after 30 second delay    |
 | `+233500000004` | Fails after retry (network error) |
 
 ---
@@ -372,12 +409,14 @@ Use these numbers in sandbox for specific scenarios:
 If you're upgrading from our legacy v0 API:
 
 **What Changed:**
+
 - New authentication (Bearer tokens vs API keys)
 - Simplified request structure
 - Enhanced error messages
 - Real-time webhooks
 
 **Migration Steps:**
+
 1. Generate new API token from dashboard
 2. Update base URL to `v1`
 3. Change authentication header
@@ -387,6 +426,7 @@ If you're upgrading from our legacy v0 API:
 **Example Changes:**
 
 **v0 (Old):**
+
 ```json
 {
   "api_key": "your_key",
@@ -397,6 +437,7 @@ If you're upgrading from our legacy v0 API:
 ```
 
 **v1 (New):**
+
 ```json
 {
   "to": "233501234567",
@@ -412,21 +453,25 @@ If you're upgrading from our legacy v0 API:
 ### Official SDKs
 
 **Node.js / JavaScript**
+
 ```bash
 npm install @sendexa/node-sdk
 ```
 
 **Python**
+
 ```bash
 pip install sendexa
 ```
 
 **PHP**
+
 ```bash
 composer require sendexa/php-sdk
 ```
 
 **Go**
+
 ```bash
 go get github.com/sendexa/go-sdk
 ```
@@ -440,6 +485,7 @@ Check out community-contributed libraries on our [GitHub](https://github.com/sen
 ## Rate Limits
 
 Free tier limits:
+
 - 10 requests per minute
 - 100 requests per hour
 - 1,000 SMS per month
@@ -451,16 +497,19 @@ Paid plans: See [Pricing](/pricing) for details.
 ## Support
 
 ### Documentation
+
 - [API Reference](/docs/sms/v1)
 - [Code Examples](https://github.com/sendexa/examples)
 - [FAQ](/docs/faq)
 
 ### Get Help
+
 - **Email:** support@sendexa.co
 - **Discord:** [Join our community](https://discord.gg/sendexa)
 - **Twitter:** [@sendexaHQ](https://twitter.com/sendexaHQ)
 
 ### Report Issues
+
 - **GitHub Issues:** [github.com/sendexa/api-issues](https://github.com/sendexa/api-issues)
 - **Status Page:** [status.sendexa.co](https://status.sendexa.co)
 

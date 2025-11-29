@@ -1,11 +1,10 @@
-import { cn } from '@/lib/utils'
-import { HTMLAttributes, forwardRef, createElement, JSX } from 'react'
+import { cn } from '@/lib/utils';
+import { HTMLAttributes, forwardRef, createElement, JSX } from 'react';
 
 interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
-   
-  as?: keyof JSX.IntrinsicElements | React.ComponentType<any>
-  size?: 'default' | 'sm' | 'lg' | 'xl' | 'full'
-  padded?: boolean
+  as?: keyof JSX.IntrinsicElements | React.ComponentType<any>;
+  size?: 'default' | 'sm' | 'lg' | 'xl' | 'full';
+  padded?: boolean;
 }
 
 const Container = forwardRef<HTMLDivElement, ContainerProps>(
@@ -37,10 +36,10 @@ const Container = forwardRef<HTMLDivElement, ContainerProps>(
         ),
       },
       children
-    )
+    );
   }
-)
+);
 
-Container.displayName = 'Container'
+Container.displayName = 'Container';
 
-export { Container }
+export { Container };

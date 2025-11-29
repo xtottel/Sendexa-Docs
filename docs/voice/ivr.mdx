@@ -54,16 +54,16 @@ Interactive Voice Response (IVR) allows callers to interact with your system thr
 
 ### Core Elements
 
-| Element | Purpose | Example |
-|---------|---------|---------|
-| `<Say>` | Speak text | `<Say>Hello</Say>` |
-| `<Play>` | Play audio | `<Play>music.mp3</Play>` |
-| `<Gather>` | Collect input | `<Gather numDigits="1">` |
-| `<Record>` | Record audio | `<Record maxLength="60">` |
-| `<Dial>` | Connect call | `<Dial>233501234567</Dial>` |
-| `<Hangup>` | End call | `<Hangup/>` |
+| Element      | Purpose       | Example                         |
+| ------------ | ------------- | ------------------------------- |
+| `<Say>`      | Speak text    | `<Say>Hello</Say>`              |
+| `<Play>`     | Play audio    | `<Play>music.mp3</Play>`        |
+| `<Gather>`   | Collect input | `<Gather numDigits="1">`        |
+| `<Record>`   | Record audio  | `<Record maxLength="60">`       |
+| `<Dial>`     | Connect call  | `<Dial>233501234567</Dial>`     |
+| `<Hangup>`   | End call      | `<Hangup/>`                     |
 | `<Redirect>` | Redirect flow | `<Redirect>/new-url</Redirect>` |
-| `<Pause>` | Add silence | `<Pause length="2"/>` |
+| `<Pause>`    | Add silence   | `<Pause length="2"/>`           |
 
 ---
 
@@ -75,14 +75,14 @@ Interactive Voice Response (IVR) allows callers to interact with your system thr
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
   <Say voice="female">Welcome to ABC Company</Say>
-  
+
   <Gather numDigits="1" action="/handle-main-menu" method="POST">
     <Say>Press 1 for Sales</Say>
     <Say>Press 2 for Support</Say>
     <Say>Press 3 for Billing</Say>
     <Say>Press 0 to speak with an operator</Say>
   </Gather>
-  
+
   <Say>We didn't receive your input. Goodbye.</Say>
   <Hangup/>
 </Response>
@@ -94,7 +94,7 @@ Interactive Voice Response (IVR) allows callers to interact with your system thr
 app.post('/handle-main-menu', (req, res) => {
   const { Digits } = req.body;
   let xml;
-  
+
   switch (Digits) {
     case '1':
       xml = `
@@ -104,7 +104,7 @@ app.post('/handle-main-menu', (req, res) => {
         </Response>
       `;
       break;
-      
+
     case '2':
       xml = `
         <Response>
@@ -112,7 +112,7 @@ app.post('/handle-main-menu', (req, res) => {
         </Response>
       `;
       break;
-      
+
     case '3':
       xml = `
         <Response>
@@ -120,7 +120,7 @@ app.post('/handle-main-menu', (req, res) => {
         </Response>
       `;
       break;
-      
+
     case '0':
       xml = `
         <Response>
@@ -129,7 +129,7 @@ app.post('/handle-main-menu', (req, res) => {
         </Response>
       `;
       break;
-      
+
     default:
       xml = `
         <Response>
@@ -138,7 +138,7 @@ app.post('/handle-main-menu', (req, res) => {
         </Response>
       `;
   }
-  
+
   res.set('Content-Type', 'text/xml');
   res.send(xml);
 });
@@ -153,12 +153,12 @@ app.post('/handle-main-menu', (req, res) => {
 ```javascript
 app.post('/account-ivr', async (req, res) => {
   const { From } = req.body; // Caller's phone number
-  
+
   // Look up account
   const account = await findAccountByPhone(From);
-  
+
   let xml;
-  
+
   if (account) {
     xml = `
       <Response>
@@ -184,7 +184,7 @@ app.post('/account-ivr', async (req, res) => {
       </Response>
     `;
   }
-  
+
   res.set('Content-Type', 'text/xml');
   res.send(xml);
 });
@@ -197,7 +197,7 @@ app.post('/account-ivr', async (req, res) => {
 app.post('/verify-account', async (req, res) => {
   const { Digits } = req.body;
   const account = await findAccountByNumber(Digits);
-  
+
   if (account) {
     const xml = `
       <Response>
@@ -224,9 +224,9 @@ app.post('/verify-account', async (req, res) => {
 app.post('/verify-pin', async (req, res) => {
   const { Digits } = req.body;
   const { account } = req.query;
-  
+
   const valid = await verifyPIN(account, Digits);
-  
+
   if (valid) {
     const xml = `
       <Response>
@@ -256,23 +256,23 @@ const surveyQuestions = [
   {
     id: 'satisfaction',
     text: 'On a scale of 1 to 5, how satisfied are you with our service?',
-    digits: 1
+    digits: 1,
   },
   {
     id: 'recommend',
     text: 'Would you recommend us to a friend? Press 1 for yes, 2 for no',
-    digits: 1
+    digits: 1,
   },
   {
     id: 'support_rating',
     text: 'Rate our customer support from 1 to 5',
-    digits: 1
-  }
+    digits: 1,
+  },
 ];
 
 app.post('/survey', (req, res) => {
   const questionIndex = parseInt(req.query.q || '0');
-  
+
   if (questionIndex >= surveyQuestions.length) {
     // Survey complete
     const xml = `
@@ -284,7 +284,7 @@ app.post('/survey', (req, res) => {
     res.set('Content-Type', 'text/xml');
     return res.send(xml);
   }
-  
+
   const question = surveyQuestions[questionIndex];
   const xml = `
     <Response>
@@ -296,7 +296,7 @@ app.post('/survey', (req, res) => {
       </Gather>
     </Response>
   `;
-  
+
   res.set('Content-Type', 'text/xml');
   res.send(xml);
 });
@@ -304,10 +304,10 @@ app.post('/survey', (req, res) => {
 app.post('/survey-answer', async (req, res) => {
   const { Digits, CallSid } = req.body;
   const { q, id } = req.query;
-  
+
   // Save answer
   await saveSurveyAnswer(CallSid, id, Digits);
-  
+
   // Next question
   const nextQuestion = parseInt(q) + 1;
   const xml = `
@@ -315,7 +315,7 @@ app.post('/survey-answer', async (req, res) => {
       <Redirect>/survey?q=${nextQuestion}</Redirect>
     </Response>
   `;
-  
+
   res.set('Content-Type', 'text/xml');
   res.send(xml);
 });
@@ -330,16 +330,16 @@ app.post('/survey-answer', async (req, res) => {
 ```xml
 <Response>
   <Say>Please leave a message after the beep</Say>
-  
-  <Record 
-    maxLength="120" 
+
+  <Record
+    maxLength="120"
     playBeep="true"
     action="/handle-recording"
     method="POST"
     transcribe="true"
     transcribeCallback="/transcription-ready"
   />
-  
+
   <Say>Thank you for your message. Goodbye.</Say>
 </Response>
 ```
@@ -349,26 +349,26 @@ app.post('/survey-answer', async (req, res) => {
 ```javascript
 app.post('/handle-recording', async (req, res) => {
   const { RecordingUrl, RecordingDuration, CallSid, From } = req.body;
-  
+
   // Save recording metadata
   await saveRecording({
     callId: CallSid,
     from: From,
     url: RecordingUrl,
     duration: RecordingDuration,
-    createdAt: new Date()
+    createdAt: new Date(),
   });
-  
+
   // Notify team
   await notifyTeam(`New voicemail from ${From}`);
-  
+
   const xml = `
     <Response>
       <Say>Your message has been recorded. Thank you!</Say>
       <Hangup/>
     </Response>
   `;
-  
+
   res.set('Content-Type', 'text/xml');
   res.send(xml);
 });
@@ -383,15 +383,15 @@ app.post('/handle-recording', async (req, res) => {
 ```javascript
 app.post('/route-call', async (req, res) => {
   const { From, Digits } = req.body;
-  
+
   // Get business hours
   const isBusinessHours = checkBusinessHours();
-  
+
   // Get available agents
   const availableAgents = await getAvailableAgents(Digits);
-  
+
   let xml;
-  
+
   if (!isBusinessHours) {
     xml = `
       <Response>
@@ -422,7 +422,7 @@ app.post('/route-call', async (req, res) => {
       </Response>
     `;
   }
-  
+
   res.set('Content-Type', 'text/xml');
   res.send(xml);
 });
@@ -433,14 +433,14 @@ app.post('/route-call', async (req, res) => {
 ```xml
 <Response>
   <Say>Connecting you to the next available agent</Say>
-  
+
   <Dial timeout="20">
     <!-- Try agents in sequence -->
     <Number>233501234567</Number>
     <Number>233501234568</Number>
     <Number>233501234569</Number>
   </Dial>
-  
+
   <Say>All agents are unavailable</Say>
   <Redirect>/voicemail</Redirect>
 </Response>
@@ -451,14 +451,14 @@ app.post('/route-call', async (req, res) => {
 ```xml
 <Response>
   <Say>Calling all available agents</Say>
-  
+
   <Dial timeout="30">
     <!-- Ring all numbers simultaneously -->
     <Number>233501234567</Number>
     <Number>233501234568</Number>
     <Number>233501234569</Number>
   </Dial>
-  
+
   <Redirect>/voicemail</Redirect>
 </Response>
 ```
@@ -472,7 +472,7 @@ app.post('/route-call', async (req, res) => {
 ```javascript
 app.post('/main-menu', (req, res) => {
   const attempts = parseInt(req.query.attempts || '0');
-  
+
   if (attempts >= 3) {
     // Too many attempts, transfer to operator
     const xml = `
@@ -483,7 +483,7 @@ app.post('/main-menu', (req, res) => {
     `;
     return res.set('Content-Type', 'text/xml').send(xml);
   }
-  
+
   const xml = `
     <Response>
       <Gather 
@@ -501,7 +501,7 @@ app.post('/main-menu', (req, res) => {
       <Redirect>/main-menu?attempts=${attempts + 1}</Redirect>
     </Response>
   `;
-  
+
   res.set('Content-Type', 'text/xml');
   res.send(xml);
 });
@@ -509,12 +509,12 @@ app.post('/main-menu', (req, res) => {
 app.post('/handle-menu', (req, res) => {
   const { Digits } = req.body;
   const { attempts } = req.query;
-  
+
   if (Digits === '9') {
     // Repeat menu
     return res.redirect('/main-menu?attempts=' + attempts);
   }
-  
+
   // Handle other selections...
 });
 ```
@@ -525,35 +525,36 @@ app.post('/handle-menu', (req, res) => {
 function getRoutingDestination() {
   const hour = new Date().getHours();
   const day = new Date().getDay();
-  
+
   // Weekend
   if (day === 0 || day === 6) {
     return {
       available: false,
-      message: 'We are closed on weekends'
+      message: 'We are closed on weekends',
     };
   }
-  
+
   // Business hours (9 AM - 6 PM)
   if (hour >= 9 && hour < 18) {
     return {
       available: true,
-      destination: '233501234567'
+      destination: '233501234567',
     };
   }
-  
+
   // After hours
   return {
     available: false,
-    message: 'Our office is closed. Our hours are 9 AM to 6 PM, Monday to Friday'
+    message:
+      'Our office is closed. Our hours are 9 AM to 6 PM, Monday to Friday',
   };
 }
 
 app.post('/time-based-route', (req, res) => {
   const routing = getRoutingDestination();
-  
+
   let xml;
-  
+
   if (routing.available) {
     xml = `
       <Response>
@@ -568,7 +569,7 @@ app.post('/time-based-route', (req, res) => {
       </Response>
     `;
   }
-  
+
   res.set('Content-Type', 'text/xml');
   res.send(xml);
 });
@@ -587,31 +588,31 @@ app.post('/language-select', (req, res) => {
       </Gather>
     </Response>
   `;
-  
+
   res.set('Content-Type', 'text/xml');
   res.send(xml);
 });
 
 app.post('/set-language', (req, res) => {
   const { Digits, CallSid } = req.body;
-  
+
   const languageMap = {
-    '1': 'en-US',
-    '2': 'fr-FR',
-    '3': 'sw-KE'
+    1: 'en-US',
+    2: 'fr-FR',
+    3: 'sw-KE',
   };
-  
+
   const language = languageMap[Digits] || 'en-US';
-  
+
   // Store language preference for this call
   storeCallLanguage(CallSid, language);
-  
+
   const xml = `
     <Response>
       <Redirect>/main-menu?lang=${language}</Redirect>
     </Response>
   `;
-  
+
   res.set('Content-Type', 'text/xml');
   res.send(xml);
 });
@@ -667,14 +668,14 @@ app.post('/set-language', (req, res) => {
 
 ```xml
 <Response>
-  <Gather 
-    numDigits="1" 
+  <Gather
+    numDigits="1"
     timeout="5"
     action="/handle-input"
   >
     <Say>Please make your selection</Say>
   </Gather>
-  
+
   <Say>We didn't receive your input</Say>
   <Redirect>/main-menu</Redirect>
 </Response>
@@ -696,7 +697,7 @@ app.post('/set-language', (req, res) => {
 app.post('/handle-input', (req, res) => {
   const { Digits } = req.body;
   const validOptions = ['1', '2', '3', '0'];
-  
+
   if (!validOptions.includes(Digits)) {
     const xml = `
       <Response>
@@ -706,7 +707,7 @@ app.post('/handle-input', (req, res) => {
     `;
     return res.set('Content-Type', 'text/xml').send(xml);
   }
-  
+
   // Handle valid input...
 });
 ```
@@ -726,14 +727,14 @@ async function testIVRFlow() {
     { path: '/handle-menu', input: '2', expectedRedirect: '/support' },
     { path: '/handle-menu', input: '9', expectedRedirect: '/voice' },
   ];
-  
+
   for (const test of tests) {
     console.log(`Testing: ${test.path}`);
     const response = await fetch(`http://localhost:3000${test.path}`, {
       method: 'POST',
-      body: new URLSearchParams({ Digits: test.input || '' })
+      body: new URLSearchParams({ Digits: test.input || '' }),
     });
-    
+
     const xml = await response.text();
     console.log(xml);
     // Verify expected behavior
@@ -766,7 +767,7 @@ app.post('/customer-service', (req, res) => {
       <Redirect>/customer-service</Redirect>
     </Response>
   `;
-  
+
   res.set('Content-Type', 'text/xml');
   res.send(xml);
 });
@@ -775,7 +776,7 @@ app.post('/customer-service', (req, res) => {
 app.post('/cs-main-menu', async (req, res) => {
   const { Digits, From } = req.body;
   let xml;
-  
+
   switch (Digits) {
     case '1':
       // Account information - require authentication
@@ -785,7 +786,7 @@ app.post('/cs-main-menu', async (req, res) => {
         </Response>
       `;
       break;
-      
+
     case '2':
       // Technical support
       xml = `
@@ -794,7 +795,7 @@ app.post('/cs-main-menu', async (req, res) => {
         </Response>
       `;
       break;
-      
+
     case '3':
       // Billing
       xml = `
@@ -803,7 +804,7 @@ app.post('/cs-main-menu', async (req, res) => {
         </Response>
       `;
       break;
-      
+
     case '9':
       // Repeat
       xml = `
@@ -812,7 +813,7 @@ app.post('/cs-main-menu', async (req, res) => {
         </Response>
       `;
       break;
-      
+
     case '0':
       // Speak with representative
       const available = await checkAgentAvailability();
@@ -834,7 +835,7 @@ app.post('/cs-main-menu', async (req, res) => {
         `;
       }
       break;
-      
+
     default:
       xml = `
         <Response>
@@ -843,7 +844,7 @@ app.post('/cs-main-menu', async (req, res) => {
         </Response>
       `;
   }
-  
+
   res.set('Content-Type', 'text/xml');
   res.send(xml);
 });

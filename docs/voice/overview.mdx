@@ -13,6 +13,7 @@ Welcome to the **Sendexa Voice API**. Our platform enables you to make voice cal
 ## Why Choose Sendexa Voice?
 
 ### Built for Africa
+
 - **Local Numbers** - Local phone numbers in 15+ African countries
 - **High-Quality Audio** - Crystal clear voice calls
 - **Low Latency** - Infrastructure optimized for African networks
@@ -20,6 +21,7 @@ Welcome to the **Sendexa Voice API**. Our platform enables you to make voice cal
 - **Multi-Language TTS** - Support for major African languages
 
 ### Developer-Friendly
+
 - **Simple REST API** - Easy integration in minutes
 - **Comprehensive SDKs** - JavaScript, Python, PHP, and more
 - **Real-time Webhooks** - Instant call event notifications
@@ -27,6 +29,7 @@ Welcome to the **Sendexa Voice API**. Our platform enables you to make voice cal
 - **Detailed Call Logs** - Complete call history and analytics
 
 ### Enterprise-Ready
+
 - **99.9% Uptime SLA** - Reliable voice infrastructure
 - **High Call Quality** - HD voice support
 - **Scalable** - Handle thousands of concurrent calls
@@ -38,7 +41,9 @@ Welcome to the **Sendexa Voice API**. Our platform enables you to make voice cal
 ## Key Features
 
 ### Make a Call
+
 Place outbound calls to any phone number:
+
 - Person-to-person calls
 - Automated notifications
 - Appointment reminders
@@ -55,7 +60,9 @@ Place outbound calls to any phone number:
 ```
 
 ### Call Broadcasting
+
 Send voice messages to multiple recipients:
+
 - Emergency alerts
 - Political campaigns
 - Event announcements
@@ -73,7 +80,9 @@ Send voice messages to multiple recipients:
 ```
 
 ### Text-to-Speech (TTS)
+
 Convert text to natural-sounding speech:
+
 - Multi-language support
 - Multiple voice options
 - Custom pronunciation
@@ -90,13 +99,16 @@ Convert text to natural-sounding speech:
 ```
 
 ### Interactive Voice Response (IVR)
+
 Build interactive voice menus:
+
 - Customer support systems
 - Automated surveys
 - Payment systems
 - Appointment booking
 
 **Using VoiceXML:**
+
 ```xml
 <Response>
   <Gather numDigits="1" action="/handle-choice">
@@ -110,9 +122,11 @@ Build interactive voice menus:
 ## Getting Started
 
 ### 1. Create an Account
+
 Sign up at [app.sendexa.co](https://app.sendexa.co) and verify your email.
 
 ### 2. Generate API Token
+
 1. Navigate to **Settings → API Tokens**
 2. Click **Create New Token**
 3. Copy your token securely
@@ -123,6 +137,7 @@ Authorization: Bearer sk_live_your_token_here
 ```
 
 ### 3. Get a Phone Number
+
 1. Go to **Voice → Phone Numbers**
 2. Click **Buy Number**
 3. Select country and number type
@@ -153,6 +168,7 @@ https://api.sendexa.co
 ```
 
 **Environment URLs:**
+
 - **Production:** `https://api.sendexa.co`
 - **Sandbox:** `https://sandbox.api.sendexa.co`
 
@@ -167,6 +183,7 @@ Authorization: Bearer YOUR_API_TOKEN
 ```
 
 **Security Best Practices:**
+
 - Never expose API tokens in client-side code
 - Use environment variables to store tokens
 - Rotate tokens regularly
@@ -177,16 +194,16 @@ Authorization: Bearer YOUR_API_TOKEN
 
 ## API Endpoints Summary
 
-| Endpoint | Method | Purpose | Rate Limit |
-|----------|--------|---------|------------|
-| `/v1/voice/call` | POST | Make outbound call | 60/min |
-| `/v1/voice/broadcast` | POST | Broadcast voice message | 30/min |
-| `/v1/voice/tts` | POST | Generate speech from text | 100/min |
-| `/v1/voice/calls/:id` | GET | Get call details | 100/min |
-| `/v1/voice/calls` | GET | List calls | 60/min |
-| `/v1/voice/calls/:id/recording` | GET | Get call recording | 100/min |
-| `/v1/voice/numbers` | GET | List phone numbers | 60/min |
-| `/v1/voice/numbers` | POST | Purchase phone number | 30/min |
+| Endpoint                        | Method | Purpose                   | Rate Limit |
+| ------------------------------- | ------ | ------------------------- | ---------- |
+| `/v1/voice/call`                | POST   | Make outbound call        | 60/min     |
+| `/v1/voice/broadcast`           | POST   | Broadcast voice message   | 30/min     |
+| `/v1/voice/tts`                 | POST   | Generate speech from text | 100/min    |
+| `/v1/voice/calls/:id`           | GET    | Get call details          | 100/min    |
+| `/v1/voice/calls`               | GET    | List calls                | 60/min     |
+| `/v1/voice/calls/:id/recording` | GET    | Get call recording        | 100/min    |
+| `/v1/voice/numbers`             | GET    | List phone numbers        | 60/min     |
+| `/v1/voice/numbers`             | POST   | Purchase phone number     | 30/min     |
 
 ---
 
@@ -217,27 +234,31 @@ Authorization: Bearer YOUR_API_TOKEN
 ## Voice Pricing
 
 ### Ghana (GHS)
-| Type | Price per minute |
-|------|------------------|
-| Outbound Local | 0.15 GHS |
-| Inbound | 0.10 GHS |
-| TTS | 0.05 GHS/request |
+
+| Type           | Price per minute |
+| -------------- | ---------------- |
+| Outbound Local | 0.15 GHS         |
+| Inbound        | 0.10 GHS         |
+| TTS            | 0.05 GHS/request |
 
 ### Nigeria (NGN)
-| Type | Price per minute |
-|------|------------------|
-| Outbound Local | 12.50 NGN |
-| Inbound | 8.50 NGN |
-| TTS | 5.00 NGN/request |
+
+| Type           | Price per minute |
+| -------------- | ---------------- |
+| Outbound Local | 12.50 NGN        |
+| Inbound        | 8.50 NGN         |
+| TTS            | 5.00 NGN/request |
 
 ### Kenya (KES)
-| Type | Price per minute |
-|------|------------------|
-| Outbound Local | 4.50 KES |
-| Inbound | 3.00 KES |
-| TTS | 2.00 KES/request |
+
+| Type           | Price per minute |
+| -------------- | ---------------- |
+| Outbound Local | 4.50 KES         |
+| Inbound        | 3.00 KES         |
+| TTS            | 2.00 KES/request |
 
 **Phone Number Rental:**
+
 - Local Numbers: $5/month
 - Toll-Free Numbers: $20/month
 
@@ -248,6 +269,7 @@ Authorization: Bearer YOUR_API_TOKEN
 Sendexa Voice currently supports:
 
 ### West Africa
+
 - 🇬🇭 Ghana
 - 🇳🇬 Nigeria
 - 🇨🇮 Ivory Coast
@@ -256,12 +278,14 @@ Sendexa Voice currently supports:
 - 🇹🇬 Togo
 
 ### East Africa
+
 - 🇰🇪 Kenya
 - 🇺🇬 Uganda
 - 🇹🇿 Tanzania
 - 🇷🇼 Rwanda
 
 ### Southern Africa
+
 - 🇿🇦 South Africa
 - 🇿🇲 Zambia
 - 🇿🇼 Zimbabwe
@@ -289,28 +313,29 @@ Sendexa uses VoiceXML to control call flow. When a call is answered, Sendexa fet
 
 ### VoiceXML Verbs
 
-| Verb | Purpose | Example |
-|------|---------|---------|
-| `<Say>` | Speak text using TTS | `<Say>Hello World</Say>` |
-| `<Play>` | Play audio file | `<Play>audio.mp3</Play>` |
-| `<Gather>` | Collect DTMF input | `<Gather numDigits="4">` |
-| `<Record>` | Record caller's voice | `<Record maxLength="60">` |
-| `<Dial>` | Connect to another number | `<Dial>233501234567</Dial>` |
-| `<Hangup>` | End the call | `<Hangup/>` |
-| `<Redirect>` | Redirect to new URL | `<Redirect>/new-url</Redirect>` |
-| `<Pause>` | Add silence | `<Pause length="2"/>` |
+| Verb         | Purpose                   | Example                         |
+| ------------ | ------------------------- | ------------------------------- |
+| `<Say>`      | Speak text using TTS      | `<Say>Hello World</Say>`        |
+| `<Play>`     | Play audio file           | `<Play>audio.mp3</Play>`        |
+| `<Gather>`   | Collect DTMF input        | `<Gather numDigits="4">`        |
+| `<Record>`   | Record caller's voice     | `<Record maxLength="60">`       |
+| `<Dial>`     | Connect to another number | `<Dial>233501234567</Dial>`     |
+| `<Hangup>`   | End the call              | `<Hangup/>`                     |
+| `<Redirect>` | Redirect to new URL       | `<Redirect>/new-url</Redirect>` |
+| `<Pause>`    | Add silence               | `<Pause length="2"/>`           |
 
 ---
 
 ## Common Use Cases
 
 ### 1. Order Confirmation Calls
+
 ```javascript
 // Make automated order confirmation call
 await makeCall({
-  to: "+233501234567",
-  from: "233302123456",
-  url: "https://yourapp.com/order-confirmation.xml"
+  to: '+233501234567',
+  from: '233302123456',
+  url: 'https://yourapp.com/order-confirmation.xml',
 });
 
 // order-confirmation.xml
@@ -318,28 +343,33 @@ await makeCall({
   <Say>Hello, this is a confirmation for order number 12345.</Say>
   <Say>Your order will be delivered tomorrow between 10 AM and 2 PM.</Say>
   <Say>Thank you for shopping with us!</Say>
-</Response>
+</Response>;
 ```
 
 ### 2. Appointment Reminders
+
 ```javascript
 // Send appointment reminder
 await makeCall({
-  to: "+233501234567",
-  from: "233302123456",
-  url: "https://yourapp.com/appointment-reminder.xml?name=John&time=2PM"
+  to: '+233501234567',
+  from: '233302123456',
+  url: 'https://yourapp.com/appointment-reminder.xml?name=John&time=2PM',
 });
 
 // appointment-reminder.xml
 <Response>
-  <Say>Hello {{name}}, this is a reminder about your appointment tomorrow at {{time}}.</Say>
+  <Say>
+    Hello {{ name }}, this is a reminder about your appointment tomorrow at{' '}
+    {{ time }}.
+  </Say>
   <Gather numDigits="1" action="/confirm-appointment">
     <Say>Press 1 to confirm, or 2 to reschedule.</Say>
   </Gather>
-</Response>
+</Response>;
 ```
 
 ### 3. Customer Support IVR
+
 ```xml
 <Response>
   <Say>Welcome to Customer Support</Say>
@@ -353,13 +383,15 @@ await makeCall({
 ```
 
 ### 4. Emergency Broadcast
+
 ```javascript
 // Broadcast emergency alert
 await broadcastCall({
   to: emergencyContactNumbers,
-  from: "233302123456",
-  message: "Emergency alert: Building evacuation in progress. Please exit immediately.",
-  priority: "high"
+  from: '233302123456',
+  message:
+    'Emergency alert: Building evacuation in progress. Please exit immediately.',
+  priority: 'high',
 });
 ```
 
@@ -369,38 +401,38 @@ await broadcastCall({
 
 ### Supported Languages
 
-| Language | Code | Voice Options |
-|----------|------|---------------|
-| English (US) | en-US | male, female |
-| English (UK) | en-GB | male, female |
-| English (Ghana) | en-GH | male, female |
-| English (Nigeria) | en-NG | male, female |
-| English (Kenya) | en-KE | male, female |
-| French | fr-FR | male, female |
-| Swahili | sw-KE | male, female |
-| Hausa | ha-NG | male, female |
-| Yoruba | yo-NG | male, female |
-| Igbo | ig-NG | male, female |
+| Language          | Code  | Voice Options |
+| ----------------- | ----- | ------------- |
+| English (US)      | en-US | male, female  |
+| English (UK)      | en-GB | male, female  |
+| English (Ghana)   | en-GH | male, female  |
+| English (Nigeria) | en-NG | male, female  |
+| English (Kenya)   | en-KE | male, female  |
+| French            | fr-FR | male, female  |
+| Swahili           | sw-KE | male, female  |
+| Hausa             | ha-NG | male, female  |
+| Yoruba            | yo-NG | male, female  |
+| Igbo              | ig-NG | male, female  |
 
 ### TTS Example
 
 ```javascript
 // Generate speech
 const audio = await generateTTS({
-  text: "Hello, your delivery is on the way",
-  language: "en-US",
-  voice: "female"
+  text: 'Hello, your delivery is on the way',
+  language: 'en-US',
+  voice: 'female',
 });
 
 // Use in call
 await makeCall({
-  to: "+233501234567",
-  from: "233302123456",
+  to: '+233501234567',
+  from: '233302123456',
   tts: {
-    text: "Hello, your delivery is on the way",
-    language: "en-US",
-    voice: "female"
-  }
+    text: 'Hello, your delivery is on the way',
+    language: 'en-US',
+    voice: 'female',
+  },
 });
 ```
 
@@ -412,16 +444,16 @@ Sendexa sends webhook notifications for call events:
 
 ### Events
 
-| Event | Description |
-|-------|-------------|
-| `call.initiated` | Call initiated |
-| `call.ringing` | Phone is ringing |
-| `call.answered` | Call was answered |
-| `call.completed` | Call ended successfully |
-| `call.failed` | Call failed |
-| `call.busy` | Number was busy |
-| `call.no-answer` | No one answered |
-| `recording.completed` | Recording ready |
+| Event                 | Description             |
+| --------------------- | ----------------------- |
+| `call.initiated`      | Call initiated          |
+| `call.ringing`        | Phone is ringing        |
+| `call.answered`       | Call was answered       |
+| `call.completed`      | Call ended successfully |
+| `call.failed`         | Call failed             |
+| `call.busy`           | Number was busy         |
+| `call.no-answer`      | No one answered         |
+| `recording.completed` | Recording ready         |
 
 ### Webhook Payload
 
@@ -442,30 +474,35 @@ Sendexa sends webhook notifications for call events:
 ## Best Practices
 
 ### 1. Voice Quality
+
 - Use clear, professional voice messages
 - Test TTS with different voices
 - Keep messages concise
 - Use appropriate pacing
 
 ### 2. User Experience
+
 - Provide clear instructions
 - Offer option to repeat menu
 - Allow users to go back
 - Keep IVR menus shallow (max 3 levels)
 
 ### 3. Timing
+
 - Respect calling hours (9 AM - 8 PM)
 - Consider time zones
 - Avoid holidays and weekends for non-urgent calls
 - Set retry limits
 
 ### 4. Call Flow
+
 - Start with identification
 - Provide clear menu options
 - Confirm user input
 - Always offer escape option
 
 ### 5. Compliance
+
 - Get consent before automated calls
 - Provide opt-out mechanism
 - Follow local calling regulations
@@ -480,8 +517,8 @@ Sendexa sends webhook notifications for call events:
 ```xml
 <Response>
   <Say>This call may be recorded for quality purposes</Say>
-  <Record 
-    maxLength="300" 
+  <Record
+    maxLength="300"
     playBeep="true"
     action="/handle-recording"
   />
@@ -517,6 +554,7 @@ curl -X GET 'https://api.sendexa.co/v1/voice/calls/call_abc123/recording' \
 ### Key Metrics
 
 Track voice call performance:
+
 - **Answer Rate** - % of calls answered
 - **Average Call Duration** - Mean call length
 - **Completion Rate** - % of calls completed
@@ -526,6 +564,7 @@ Track voice call performance:
 ### Dashboard Reports
 
 View detailed analytics:
+
 1. Log in to [dashboard.sendexa.co](https://app.sendexa.co)
 2. Navigate to **Voice → Analytics**
 3. View:
@@ -568,10 +607,13 @@ Test without charges:
 ### Official SDKs
 
 **Node.js**
+
 ```bash
 npm install @sendexa/node-sdk
 ```
+
 ---
+
 ```javascript
 const Sendexa = require('@sendexa/node-sdk');
 const client = new Sendexa('sk_live_your_token');
@@ -579,15 +621,18 @@ const client = new Sendexa('sk_live_your_token');
 await client.voice.call({
   to: '233501234567',
   from: '233302123456',
-  url: 'https://yourapp.com/voice.xml'
+  url: 'https://yourapp.com/voice.xml',
 });
 ```
 
 **Python**
+
 ```bash
 pip install sendexa
 ```
+
 ---
+
 ```python
 from sendexa import Sendexa
 
@@ -601,10 +646,13 @@ client.voice.call(
 ```
 
 **PHP**
+
 ```bash
 composer require sendexa/php-sdk
 ```
+
 ---
+
 ```php
 <?php
 use Sendexa\Client;
@@ -622,29 +670,32 @@ $client->voice->call([
 
 ## Rate Limits
 
-| Endpoint | Rate Limit | Window |
-|----------|------------|--------|
-| `/v1/voice/call` | 60 requests | 1 minute |
-| `/v1/voice/broadcast` | 30 requests | 1 minute |
-| `/v1/voice/tts` | 100 requests | 1 minute |
-| `/v1/voice/calls` | 60 requests | 1 minute |
+| Endpoint              | Rate Limit   | Window   |
+| --------------------- | ------------ | -------- |
+| `/v1/voice/call`      | 60 requests  | 1 minute |
+| `/v1/voice/broadcast` | 30 requests  | 1 minute |
+| `/v1/voice/tts`       | 100 requests | 1 minute |
+| `/v1/voice/calls`     | 60 requests  | 1 minute |
 
 ---
 
 ## Support
 
 ### Documentation
+
 - [API Reference](/docs/voice/v1)
 - [VoiceXML Guide](/docs/voice/ivr)
 - [Code Examples](https://github.com/sendexa/examples)
 - [FAQ](/docs/faq)
 
 ### Get Help
+
 - **Email:** support@sendexa.co
 - **Discord:** [Join our community](https://discord.gg/sendexa)
 - **Twitter:** [@sendexaHQ](https://twitter.com/sendexaHQ)
 
 ### Report Issues
+
 - **GitHub:** [github.com/sendexa/api-issues](https://github.com/sendexa/api-issues)
 - **Status Page:** [status.sendexa.co](https://status.sendexa.co)
 

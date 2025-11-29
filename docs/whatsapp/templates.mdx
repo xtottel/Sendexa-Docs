@@ -15,17 +15,18 @@ Create reusable message templates for WhatsApp Business messaging. Templates mus
 ### What are Templates?
 
 WhatsApp templates are pre-approved message formats used to initiate conversations with customers. They're required for:
+
 - First contact with customers
 - Messages sent after 24-hour conversation window expires
 - Notifications and alerts
 
 ### Template Categories
 
-| Category | Use Case | Examples |
-|----------|----------|----------|
-| **Utility** | Account updates, order tracking | Order confirmations, delivery updates |
-| **Authentication** | OTP, verification codes | Login codes, verification |
-| **Marketing** | Promotions, offers | Sales, new products, special offers |
+| Category           | Use Case                        | Examples                              |
+| ------------------ | ------------------------------- | ------------------------------------- |
+| **Utility**        | Account updates, order tracking | Order confirmations, delivery updates |
+| **Authentication** | OTP, verification codes         | Login codes, verification             |
+| **Marketing**      | Promotions, offers              | Sales, new products, special offers   |
 
 ---
 
@@ -68,6 +69,7 @@ Templates consist of multiple components:
 #### 1. Header Component
 
 **Text Header:**
+
 ```json
 {
   "type": "HEADER",
@@ -77,6 +79,7 @@ Templates consist of multiple components:
 ```
 
 **Image Header:**
+
 ```json
 {
   "type": "HEADER",
@@ -88,6 +91,7 @@ Templates consist of multiple components:
 ```
 
 **Video Header:**
+
 ```json
 {
   "type": "HEADER",
@@ -99,6 +103,7 @@ Templates consist of multiple components:
 ```
 
 **Document Header:**
+
 ```json
 {
   "type": "HEADER",
@@ -119,6 +124,7 @@ Templates consist of multiple components:
 ```
 
 **Variables:**
+
 - Use `{{1}}`, `{{2}}`, etc. for dynamic content
 - Maximum 10 variables per body
 - Variables must be numbered sequentially
@@ -133,6 +139,7 @@ Templates consist of multiple components:
 ```
 
 **Limits:**
+
 - Maximum 60 characters
 - No variables allowed
 - Plain text only
@@ -140,6 +147,7 @@ Templates consist of multiple components:
 #### 4. Button Components
 
 **Quick Reply Buttons:**
+
 ```json
 {
   "type": "BUTTONS",
@@ -157,6 +165,7 @@ Templates consist of multiple components:
 ```
 
 **Call Button:**
+
 ```json
 {
   "type": "BUTTONS",
@@ -171,6 +180,7 @@ Templates consist of multiple components:
 ```
 
 **URL Button:**
+
 ```json
 {
   "type": "BUTTONS",
@@ -185,6 +195,7 @@ Templates consist of multiple components:
 ```
 
 **Button Limits:**
+
 - Maximum 3 buttons per template
 - Maximum 25 characters per button text
 - Only 1 variable allowed in URL buttons (at the end)
@@ -201,12 +212,12 @@ Create a new message template.
 
 ### Request Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `name` | string | Yes | Template name (lowercase, underscore separated) |
-| `category` | string | Yes | UTILITY, AUTHENTICATION, or MARKETING |
-| `language` | string | Yes | Language code (e.g., en, fr, es) |
-| `components` | array | Yes | Array of template components |
+| Parameter    | Type   | Required | Description                                     |
+| ------------ | ------ | -------- | ----------------------------------------------- |
+| `name`       | string | Yes      | Template name (lowercase, underscore separated) |
+| `category`   | string | Yes      | UTILITY, AUTHENTICATION, or MARKETING           |
+| `language`   | string | Yes      | Language code (e.g., en, fr, es)                |
+| `components` | array  | Yes      | Array of template components                    |
 
 ### Complete Example
 
@@ -270,13 +281,13 @@ Create a new message template.
 
 ## Template Status
 
-| Status | Description |
-|--------|-------------|
-| `PENDING` | Awaiting Meta approval |
-| `APPROVED` | Approved and ready to use |
-| `REJECTED` | Rejected by Meta (see reason) |
-| `PAUSED` | Temporarily paused (quality issues) |
-| `DISABLED` | Disabled by business |
+| Status     | Description                         |
+| ---------- | ----------------------------------- |
+| `PENDING`  | Awaiting Meta approval              |
+| `APPROVED` | Approved and ready to use           |
+| `REJECTED` | Rejected by Meta (see reason)       |
+| `PAUSED`   | Temporarily paused (quality issues) |
+| `DISABLED` | Disabled by business                |
 
 ---
 
@@ -323,13 +334,13 @@ Retrieve all templates.
 
 #### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `status` | string | Filter by status (PENDING, APPROVED, REJECTED) |
-| `category` | string | Filter by category |
-| `language` | string | Filter by language |
-| `limit` | integer | Results per page (max 100) |
-| `offset` | integer | Pagination offset |
+| Parameter  | Type    | Description                                    |
+| ---------- | ------- | ---------------------------------------------- |
+| `status`   | string  | Filter by status (PENDING, APPROVED, REJECTED) |
+| `category` | string  | Filter by category                             |
+| `language` | string  | Filter by language                             |
+| `limit`    | integer | Results per page (max 100)                     |
+| `offset`   | integer | Pagination offset                              |
 
 #### Request Example
 
@@ -414,11 +425,13 @@ curl -X DELETE 'https://api.sendexa.co/v1/whatsapp/templates/tmpl_abc123' \
 ### 1. Clear and Concise
 
 ✅ **Good:**
+
 ```
 Your order {{1}} has been confirmed. Total: {{2}}.
 ```
 
 ❌ **Bad:**
+
 ```
 Hello dear valued customer! We are super excited to inform you that...
 ```
@@ -426,11 +439,13 @@ Hello dear valued customer! We are super excited to inform you that...
 ### 2. Proper Variable Usage
 
 ✅ **Good:**
+
 ```
 Hi {{1}}, your appointment with {{2}} is on {{3}} at {{4}}.
 ```
 
 ❌ **Bad:**
+
 ```
 Hi there, your appointment is tomorrow.
 ```
@@ -438,16 +453,19 @@ Hi there, your appointment is tomorrow.
 ### 3. Category Guidelines
 
 **Utility Templates:**
+
 - Transactional updates only
 - No promotional content
 - Clear, informative purpose
 
 **Authentication:**
+
 - OTP and verification only
 - Short and direct
 - Include expiry time
 
 **Marketing:**
+
 - Clear opt-out instructions
 - Relevant offers only
 - Not too frequent
@@ -584,6 +602,7 @@ Hi there, your appointment is tomorrow.
 ### Review Criteria
 
 Meta reviews templates for:
+
 - Policy compliance
 - Clear purpose
 - Proper category
@@ -613,15 +632,16 @@ Meta reviews templates for:
 ## Quality Scores
 
 Templates receive quality scores based on:
+
 - User block rate
 - User report rate
 - Delivery success rate
 
-| Score | Status | Action |
-|-------|--------|--------|
-| **HIGH** | ✅ Good | No action needed |
-| **MEDIUM** | ⚠️ Warning | Monitor usage |
-| **LOW** | ❌ Problem | Template may be paused |
+| Score      | Status     | Action                 |
+| ---------- | ---------- | ---------------------- |
+| **HIGH**   | ✅ Good    | No action needed       |
+| **MEDIUM** | ⚠️ Warning | Monitor usage          |
+| **LOW**    | ❌ Problem | Template may be paused |
 
 ### Maintaining Quality
 
@@ -648,16 +668,12 @@ class TemplateManager {
 
   async createTemplate(templateData) {
     try {
-      const response = await axios.post(
-        this.baseUrl,
-        templateData,
-        {
-          headers: {
-            'Authorization': `Bearer ${this.apiToken}`,
-            'Content-Type': 'application/json'
-          }
-        }
-      );
+      const response = await axios.post(this.baseUrl, templateData, {
+        headers: {
+          Authorization: `Bearer ${this.apiToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
 
       console.log(`Template created: ${response.data.template.id}`);
       console.log(`Status: ${response.data.template.status}`);
@@ -669,14 +685,11 @@ class TemplateManager {
   }
 
   async getApprovedTemplates() {
-    const response = await axios.get(
-      `${this.baseUrl}?status=APPROVED`,
-      {
-        headers: {
-          'Authorization': `Bearer ${this.apiToken}`
-        }
-      }
-    );
+    const response = await axios.get(`${this.baseUrl}?status=APPROVED`, {
+      headers: {
+        Authorization: `Bearer ${this.apiToken}`,
+      },
+    });
 
     return response.data.data;
   }
@@ -684,30 +697,27 @@ class TemplateManager {
   async waitForApproval(templateId, maxWait = 172800000) {
     // 48 hours max wait
     const start = Date.now();
-    
+
     while (Date.now() - start < maxWait) {
-      const response = await axios.get(
-        `${this.baseUrl}/${templateId}`,
-        {
-          headers: {
-            'Authorization': `Bearer ${this.apiToken}`
-          }
-        }
-      );
+      const response = await axios.get(`${this.baseUrl}/${templateId}`, {
+        headers: {
+          Authorization: `Bearer ${this.apiToken}`,
+        },
+      });
 
       const template = response.data.template;
-      
+
       if (template.status === 'APPROVED') {
         console.log('Template approved!');
         return template;
       } else if (template.status === 'REJECTED') {
         throw new Error('Template rejected');
       }
-      
+
       // Check every hour
-      await new Promise(resolve => setTimeout(resolve, 3600000));
+      await new Promise((resolve) => setTimeout(resolve, 3600000));
     }
-    
+
     throw new Error('Approval timeout');
   }
 }
@@ -723,9 +733,9 @@ const template = await manager.createTemplate({
   components: [
     {
       type: 'BODY',
-      text: 'Your order {{1}} has been shipped! Track: {{2}}'
-    }
-  ]
+      text: 'Your order {{1}} has been shipped! Track: {{2}}',
+    },
+  ],
 });
 
 // List approved templates
@@ -740,6 +750,7 @@ console.log(`${approved.length} approved templates`);
 ### Template Rejected
 
 **Common Reasons:**
+
 1. Wrong category selection
 2. Marketing content in utility template
 3. Missing opt-out for marketing
@@ -753,6 +764,7 @@ console.log(`${approved.length} approved templates`);
 **Reason:** Low quality score due to blocks/reports
 
 **Solution:**
+
 - Review message relevance
 - Reduce send frequency
 - Improve targeting
@@ -763,6 +775,7 @@ console.log(`${approved.length} approved templates`);
 **Problem:** Template shows `{{1}}` instead of value
 
 **Solution:**
+
 ```javascript
 // Ensure parameters match template variables
 {

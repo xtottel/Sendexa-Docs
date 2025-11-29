@@ -9,6 +9,7 @@ date: 2025-03-12
 Welcome to the **Sendexa Quickstart Guide**. This guide helps you make your first API request in just a few steps.
 
 By the end, you will:
+
 - Create an API Token
 - Send your first SMS using the **/v1/sms/send** endpoint
 - Understand basic request/response structures
@@ -16,15 +17,18 @@ By the end, you will:
 ---
 
 ## 1. Get Your API Token
+
 Sendexa v1 uses **Token-based Authorization** for improved security.
 
 To generate a token:
+
 1. Log in to your dashboard.
 2. Go to **Settings → API Tokens**.
 3. Click **Create Token**.
 4. Copy your token securely.
 
 Use it in all requests:
+
 ```http
 Authorization: Bearer YOUR_TOKEN_HERE
 ```
@@ -32,7 +36,9 @@ Authorization: Bearer YOUR_TOKEN_HERE
 ---
 
 ## 2. Base URL
+
 All SMS requests use the base:
+
 ```
 https://api.sendexa.co
 ```
@@ -40,6 +46,7 @@ https://api.sendexa.co
 ---
 
 ## 3. Send Your First SMS
+
 Below is a simple example using JavaScript (Node.js):
 
 ```js
@@ -70,6 +77,7 @@ sendSms();
 ---
 
 ## 4. Example cURL Request
+
 ```bash
 curl -X POST https://api.sendexa.co/v1/sms/send \
   -H "Authorization: Bearer YOUR_TOKEN_HERE" \
@@ -84,6 +92,7 @@ curl -X POST https://api.sendexa.co/v1/sms/send \
 ---
 
 ## 5. Response Structure
+
 Example successful response:
 
 ```json
@@ -100,7 +109,9 @@ Example successful response:
 ---
 
 ## 6. Troubleshooting
+
 Common issues:
+
 - **401 Unauthorized:** Token missing or invalid.
 - **400 Bad Request:** Missing `to`, `message`, or invalid sender ID.
 - **Provider Down:** System auto-switches to alternative route.

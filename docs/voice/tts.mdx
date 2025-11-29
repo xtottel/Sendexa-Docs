@@ -58,15 +58,15 @@ Generate speech audio from text.
 
 ## Request Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `text` | string | Yes | Text to convert to speech (max 3000 chars) |
-| `language` | string | No | Language code (default: en-US) |
-| `voice` | string | No | Voice type (male/female, default: female) |
-| `speed` | float | No | Speech speed (0.5 to 2.0, default: 1.0) |
-| `pitch` | integer | No | Voice pitch (-20 to 20, default: 0) |
-| `format` | string | No | Audio format (mp3/wav/ogg, default: mp3) |
-| `save` | boolean | No | Save audio file (default: false) |
+| Parameter  | Type    | Required | Description                                |
+| ---------- | ------- | -------- | ------------------------------------------ |
+| `text`     | string  | Yes      | Text to convert to speech (max 3000 chars) |
+| `language` | string  | No       | Language code (default: en-US)             |
+| `voice`    | string  | No       | Voice type (male/female, default: female)  |
+| `speed`    | float   | No       | Speech speed (0.5 to 2.0, default: 1.0)    |
+| `pitch`    | integer | No       | Voice pitch (-20 to 20, default: 0)        |
+| `format`   | string  | No       | Audio format (mp3/wav/ogg, default: mp3)   |
+| `save`     | boolean | No       | Save audio file (default: false)           |
 
 ---
 
@@ -85,6 +85,7 @@ The text to be converted to speech:
 **Character Limit:** 3000 characters
 
 **Tips:**
+
 - Use punctuation for natural pauses
 - Break long text into sentences
 - Avoid complex abbreviations
@@ -102,22 +103,22 @@ Language and accent for speech:
 
 **Supported Languages:**
 
-| Language | Code | Description |
-|----------|------|-------------|
-| English (US) | en-US | American English |
-| English (UK) | en-GB | British English |
-| English (Ghana) | en-GH | Ghanaian English |
-| English (Nigeria) | en-NG | Nigerian English |
-| English (Kenya) | en-KE | Kenyan English |
+| Language               | Code  | Description           |
+| ---------------------- | ----- | --------------------- |
+| English (US)           | en-US | American English      |
+| English (UK)           | en-GB | British English       |
+| English (Ghana)        | en-GH | Ghanaian English      |
+| English (Nigeria)      | en-NG | Nigerian English      |
+| English (Kenya)        | en-KE | Kenyan English        |
 | English (South Africa) | en-ZA | South African English |
-| French | fr-FR | Standard French |
-| French (Africa) | fr-CM | African French |
-| Swahili | sw-KE | Swahili |
-| Hausa | ha-NG | Hausa |
-| Yoruba | yo-NG | Yoruba |
-| Igbo | ig-NG | Igbo |
-| Zulu | zu-ZA | Zulu |
-| Afrikaans | af-ZA | Afrikaans |
+| French                 | fr-FR | Standard French       |
+| French (Africa)        | fr-CM | African French        |
+| Swahili                | sw-KE | Swahili               |
+| Hausa                  | ha-NG | Hausa                 |
+| Yoruba                 | yo-NG | Yoruba                |
+| Igbo                   | ig-NG | Igbo                  |
+| Zulu                   | zu-ZA | Zulu                  |
+| Afrikaans              | af-ZA | Afrikaans             |
 
 ### voice
 
@@ -131,10 +132,10 @@ Voice gender and style:
 
 **Available Voices:**
 
-| Voice | Description |
-|-------|-------------|
+| Voice    | Description            |
+| -------- | ---------------------- |
 | `female` | Female voice (default) |
-| `male` | Male voice |
+| `male`   | Male voice             |
 
 ### speed
 
@@ -147,11 +148,13 @@ Control speech rate:
 ```
 
 **Values:**
+
 - Minimum: 0.5 (half speed)
 - Maximum: 2.0 (double speed)
 - Default: 1.0 (normal speed)
 
 **Use Cases:**
+
 - 0.5-0.8: Important announcements, elderly audience
 - 1.0: Normal conversations
 - 1.2-1.5: Quick updates, time-sensitive info
@@ -167,6 +170,7 @@ Adjust voice pitch:
 ```
 
 **Values:**
+
 - Range: -20 to 20
 - Default: 0 (normal pitch)
 - Positive: Higher pitch
@@ -183,6 +187,7 @@ Audio file format:
 ```
 
 **Formats:**
+
 - `mp3` - MP3 format (default, recommended)
 - `wav` - WAV format (higher quality, larger size)
 - `ogg` - OGG Vorbis format
@@ -213,20 +218,20 @@ Audio file format:
 
 ### Response Fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `success` | boolean | Whether request succeeded |
-| `tts` | object | TTS details |
-| `id` | string | Unique TTS identifier |
-| `text` | string | Original text |
-| `language` | string | Language used |
-| `voice` | string | Voice used |
-| `duration` | float | Audio duration in seconds |
-| `audio_url` | string | URL to download audio |
-| `format` | string | Audio format |
-| `size` | integer | File size in bytes |
-| `created_at` | string | Creation timestamp |
-| `expires_at` | string | Expiration timestamp (7 days) |
+| Field        | Type    | Description                   |
+| ------------ | ------- | ----------------------------- |
+| `success`    | boolean | Whether request succeeded     |
+| `tts`        | object  | TTS details                   |
+| `id`         | string  | Unique TTS identifier         |
+| `text`       | string  | Original text                 |
+| `language`   | string  | Language used                 |
+| `voice`      | string  | Voice used                    |
+| `duration`   | float   | Audio duration in seconds     |
+| `audio_url`  | string  | URL to download audio         |
+| `format`     | string  | Audio format                  |
+| `size`       | integer | File size in bytes            |
+| `created_at` | string  | Creation timestamp            |
+| `expires_at` | string  | Expiration timestamp (7 days) |
 
 ---
 
@@ -246,13 +251,13 @@ async function generateSpeech(text, language = 'en-US', voice = 'female') {
         language,
         voice,
         speed: 1.0,
-        format: 'mp3'
+        format: 'mp3',
       },
       {
         headers: {
-          'Authorization': 'Bearer sk_live_your_token',
-          'Content-Type': 'application/json'
-        }
+          Authorization: 'Bearer sk_live_your_token',
+          'Content-Type': 'application/json',
+        },
       }
     );
 
@@ -283,17 +288,17 @@ async function callWithTTS(to, from, message) {
         text: message,
         language: 'en-US',
         voice: 'female',
-        speed: 1.0
-      }
+        speed: 1.0,
+      },
     },
     {
       headers: {
-        'Authorization': 'Bearer sk_live_your_token',
-        'Content-Type': 'application/json'
-      }
+        Authorization: 'Bearer sk_live_your_token',
+        'Content-Type': 'application/json',
+      },
     }
   );
-  
+
   return response.data;
 }
 
@@ -328,7 +333,7 @@ def generate_speech(text, language='en-US', voice='female'):
         response = requests.post(url, json=payload, headers=headers)
         response.raise_for_status()
         data = response.json()
-        
+
         print(f"Audio generated: {data['tts']['audio_url']}")
         print(f"Duration: {data['tts']['duration']} seconds")
         return data
@@ -361,7 +366,7 @@ def call_with_tts(to, from_number, message):
             'speed': 1.0
         }
     }
-    
+
     response = requests.post(url, json=payload, headers=headers)
     response.raise_for_status()
     return response.json()
@@ -381,7 +386,7 @@ call_with_tts(
 function generateSpeech($text, $language = 'en-US', $voice = 'female') {
     $url = 'https://api.sendexa.co/v1/voice/tts';
     $token = 'sk_live_your_token';
-    
+
     $data = [
         'text' => $text,
         'language' => $language,
@@ -389,7 +394,7 @@ function generateSpeech($text, $language = 'en-US', $voice = 'female') {
         'speed' => 1.0,
         'format' => 'mp3'
     ];
-    
+
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
@@ -398,11 +403,11 @@ function generateSpeech($text, $language = 'en-US', $voice = 'female') {
         'Authorization: Bearer ' . $token,
         'Content-Type: application/json'
     ]);
-    
+
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
-    
+
     if ($httpCode === 200) {
         $result = json_decode($response, true);
         echo "Audio generated: " . $result['tts']['audio_url'] . "\n";
@@ -424,7 +429,7 @@ generateSpeech(
 function callWithTTS($to, $from, $message) {
     $url = 'https://api.sendexa.co/v1/voice/call';
     $token = 'sk_live_your_token';
-    
+
     $data = [
         'to' => $to,
         'from' => $from,
@@ -435,7 +440,7 @@ function callWithTTS($to, $from, $message) {
             'speed' => 1.0
         ]
     ];
-    
+
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
@@ -444,10 +449,10 @@ function callWithTTS($to, $from, $message) {
         'Authorization: Bearer ' . $token,
         'Content-Type: application/json'
     ]);
-    
+
     $response = curl_exec($ch);
     curl_close($ch);
-    
+
     return json_decode($response, true);
 }
 
@@ -471,11 +476,11 @@ callWithTTS(
   <Say voice="female" language="en-US">
     Hello, welcome to our customer service line.
   </Say>
-  
+
   <Say voice="female" language="en-US">
     Your account balance is 150 dollars.
   </Say>
-  
+
   <Gather numDigits="1" action="/handle-menu">
     <Say voice="female" language="en-US">
       Press 1 for account information.
@@ -493,7 +498,7 @@ callWithTTS(
 app.post('/order-status', async (req, res) => {
   const { orderId } = req.query;
   const order = await getOrder(orderId);
-  
+
   const xml = `
     <?xml version="1.0" encoding="UTF-8"?>
     <Response>
@@ -512,7 +517,7 @@ app.post('/order-status', async (req, res) => {
       </Say>
     </Response>
   `;
-  
+
   res.set('Content-Type', 'text/xml');
   res.send(xml);
 });
@@ -534,20 +539,20 @@ Use SSML for advanced control over speech:
       <prosody rate="slow">
         Please listen carefully to the following information.
       </prosody>
-      
+
       <break time="1s"/>
-      
-      Your account number is 
+
+      Your account number is
       <say-as interpret-as="digits">1234567890</say-as>
-      
+
       <break time="500ms"/>
-      
+
       <emphasis level="strong">
         This is important information.
       </emphasis>
-      
+
       <break time="1s"/>
-      
+
       <prosody pitch="high">
         Thank you for calling!
       </prosody>
@@ -558,13 +563,13 @@ Use SSML for advanced control over speech:
 
 ### SSML Tags Supported
 
-| Tag | Purpose | Example |
-|-----|---------|---------|
-| `<break>` | Add pause | `<break time="1s"/>` |
-| `<emphasis>` | Emphasize text | `<emphasis level="strong">Important</emphasis>` |
-| `<prosody>` | Control rate/pitch | `<prosody rate="slow">Slow text</prosody>` |
-| `<say-as>` | Interpret text | `<say-as interpret-as="digits">123</say-as>` |
-| `<phoneme>` | Phonetic pronunciation | `<phoneme ph="təˈmeɪtoʊ">tomato</phoneme>` |
+| Tag          | Purpose                | Example                                         |
+| ------------ | ---------------------- | ----------------------------------------------- |
+| `<break>`    | Add pause              | `<break time="1s"/>`                            |
+| `<emphasis>` | Emphasize text         | `<emphasis level="strong">Important</emphasis>` |
+| `<prosody>`  | Control rate/pitch     | `<prosody rate="slow">Slow text</prosody>`      |
+| `<say-as>`   | Interpret text         | `<say-as interpret-as="digits">123</say-as>`    |
+| `<phoneme>`  | Phonetic pronunciation | `<phoneme ph="təˈmeɪtoʊ">tomato</phoneme>`      |
 
 ---
 
@@ -577,13 +582,14 @@ async function notifyOrderStatus(order) {
   const message = `
     Hello ${order.customerName}, 
     your order number ${order.id} has been ${order.status}. 
-    ${order.status === 'shipped' 
-      ? `It will arrive in ${order.estimatedDays} days.` 
-      : 'You will receive another update soon.'
+    ${
+      order.status === 'shipped'
+        ? `It will arrive in ${order.estimatedDays} days.`
+        : 'You will receive another update soon.'
     }
     Thank you for your business!
   `;
-  
+
   await callWithTTS(order.phone, companyPhone, message);
 }
 ```
@@ -599,12 +605,8 @@ async function sendAppointmentReminder(appointment) {
     tomorrow at ${appointment.time}. 
     Please call us if you need to reschedule.
   `;
-  
-  await callWithTTS(
-    appointment.phone,
-    clinicPhone,
-    message
-  );
+
+  await callWithTTS(appointment.phone, clinicPhone, message);
 }
 ```
 
@@ -618,12 +620,8 @@ async function confirmPayment(payment) {
     Transaction reference: ${payment.reference}. 
     Thank you!
   `;
-  
-  await callWithTTS(
-    payment.customerPhone,
-    companyPhone,
-    message
-  );
+
+  await callWithTTS(payment.customerPhone, companyPhone, message);
 }
 ```
 
@@ -632,22 +630,22 @@ async function confirmPayment(payment) {
 ```javascript
 async function callInUserLanguage(user, message) {
   const languageMap = {
-    'en': 'en-US',
-    'fr': 'fr-FR',
-    'sw': 'sw-KE',
-    'ha': 'ha-NG'
+    en: 'en-US',
+    fr: 'fr-FR',
+    sw: 'sw-KE',
+    ha: 'ha-NG',
   };
-  
+
   const language = languageMap[user.preferredLanguage] || 'en-US';
-  
+
   await axios.post(callUrl, {
     to: user.phone,
     from: companyPhone,
     tts: {
       text: message,
       language: language,
-      voice: 'female'
-    }
+      voice: 'female',
+    },
   });
 }
 ```
@@ -658,12 +656,23 @@ async function callInUserLanguage(user, message) {
 function formatNumberForSpeech(number) {
   // Convert number to words for better pronunciation
   const numberWords = {
-    '0': 'zero', '1': 'one', '2': 'two', '3': 'three',
-    '4': 'four', '5': 'five', '6': 'six', '7': 'seven',
-    '8': 'eight', '9': 'nine'
+    0: 'zero',
+    1: 'one',
+    2: 'two',
+    3: 'three',
+    4: 'four',
+    5: 'five',
+    6: 'six',
+    7: 'seven',
+    8: 'eight',
+    9: 'nine',
   };
-  
-  return number.toString().split('').map(d => numberWords[d]).join(' ');
+
+  return number
+    .toString()
+    .split('')
+    .map((d) => numberWords[d])
+    .join(' ');
 }
 
 async function readAccountNumber(accountNumber) {
@@ -671,7 +680,7 @@ async function readAccountNumber(accountNumber) {
     Your account number is: 
     ${formatNumberForSpeech(accountNumber)}
   `;
-  
+
   await generateSpeech(message);
 }
 ```
@@ -684,10 +693,11 @@ async function readAccountNumber(accountNumber) {
 
 ```javascript
 // Bad - Written text
-const bad = "Contact us @ support@company.com or call +233-50-123-4567";
+const bad = 'Contact us @ support@company.com or call +233-50-123-4567';
 
 // Good - Spoken text
-const good = "Contact us by email at support at company dot com, or call us at two three three, five zero, one two three, four five six seven";
+const good =
+  'Contact us by email at support at company dot com, or call us at two three three, five zero, one two three, four five six seven';
 ```
 
 ### 2. Use Natural Pauses
@@ -713,13 +723,13 @@ const betterMessage = `
 
 ```javascript
 // Test message with different settings
-const message = "This is a test message for voice quality";
+const message = 'This is a test message for voice quality';
 
 const tests = [
   { voice: 'female', speed: 1.0 },
   { voice: 'male', speed: 1.0 },
   { voice: 'female', speed: 0.9 },
-  { voice: 'female', speed: 1.2 }
+  { voice: 'female', speed: 1.2 },
 ];
 
 for (const test of tests) {
@@ -745,7 +755,7 @@ function cleanTextForTTS(text) {
     .replace(/>/g, ' greater than ');
 }
 
-const text = "Total: $50 + $5 tax = $55 (10% discount)";
+const text = 'Total: $50 + $5 tax = $55 (10% discount)';
 const cleaned = cleanTextForTTS(text);
 // "Total: dollars 50 plus dollars 5 tax equals dollars 55 (10 percent discount)"
 ```
@@ -756,17 +766,17 @@ const cleaned = cleanTextForTTS(text);
 async function generateAudienceAppropriateMessage(audience, message) {
   let speed = 1.0;
   let language = 'en-US';
-  
+
   if (audience.type === 'elderly') {
     speed = 0.8; // Slower for elderly
   } else if (audience.type === 'urgent') {
     speed = 1.2; // Faster for urgent messages
   }
-  
+
   if (audience.preferredLanguage) {
     language = audience.preferredLanguage;
   }
-  
+
   return await generateSpeech(message, language, 'female', speed);
 }
 ```
@@ -782,20 +792,20 @@ const cache = new Map();
 
 async function getCachedSpeech(text, language, voice) {
   const key = `${text}-${language}-${voice}`;
-  
+
   // Check cache
   if (cache.has(key)) {
     console.log('Using cached audio');
     return cache.get(key);
   }
-  
+
   // Generate new
   const audio = await generateSpeech(text, language, voice);
-  
+
   // Cache for 7 days (same as Sendexa expiration)
   cache.set(key, audio);
   setTimeout(() => cache.delete(key), 7 * 24 * 60 * 60 * 1000);
-  
+
   return audio;
 }
 ```
@@ -805,10 +815,10 @@ async function getCachedSpeech(text, language, voice) {
 ```javascript
 // Pregenerate frequently used messages
 const commonMessages = [
-  "Your order has been confirmed",
-  "Your payment was successful",
-  "Your appointment is tomorrow",
-  "Please hold while we connect you"
+  'Your order has been confirmed',
+  'Your payment was successful',
+  'Your appointment is tomorrow',
+  'Please hold while we connect you',
 ];
 
 async function pregenerateMessages() {
@@ -846,7 +856,7 @@ function splitText(text, maxLength = 2800) {
   const sentences = text.match(/[^.!?]+[.!?]+/g) || [];
   const chunks = [];
   let current = '';
-  
+
   for (const sentence of sentences) {
     if ((current + sentence).length > maxLength) {
       chunks.push(current.trim());
@@ -855,7 +865,7 @@ function splitText(text, maxLength = 2800) {
       current += sentence;
     }
   }
-  
+
   if (current) chunks.push(current.trim());
   return chunks;
 }
@@ -882,7 +892,7 @@ function splitText(text, maxLength = 2800) {
 
 ```javascript
 // Generate test audio
-const testText = "The quick brown fox jumps over the lazy dog";
+const testText = 'The quick brown fox jumps over the lazy dog';
 
 const result = await generateSpeech(testText, 'en-US', 'female');
 

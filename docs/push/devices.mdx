@@ -56,17 +56,17 @@ curl -X POST 'https://api.sendexa.co/v1/push/devices' \
 
 ### Request Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `device_token` | string | Yes | Unique device token from platform |
-| `platform` | string | Yes | `ios`, `android`, or `web` |
-| `user_id` | string | No | Link device to user in your system |
-| `app_version` | string | No | App version (e.g., "2.5.1") |
-| `os_version` | string | No | OS version (e.g., "17.2") |
-| `device_model` | string | No | Device model (e.g., "iPhone 14 Pro") |
-| `language` | string | No | Language code (e.g., "en", "fr") |
-| `timezone` | string | No | Timezone (e.g., "Africa/Accra") |
-| `metadata` | object | No | Custom metadata |
+| Parameter      | Type   | Required | Description                          |
+| -------------- | ------ | -------- | ------------------------------------ |
+| `device_token` | string | Yes      | Unique device token from platform    |
+| `platform`     | string | Yes      | `ios`, `android`, or `web`           |
+| `user_id`      | string | No       | Link device to user in your system   |
+| `app_version`  | string | No       | App version (e.g., "2.5.1")          |
+| `os_version`   | string | No       | OS version (e.g., "17.2")            |
+| `device_model` | string | No       | Device model (e.g., "iPhone 14 Pro") |
+| `language`     | string | No       | Language code (e.g., "en", "fr")     |
+| `timezone`     | string | No       | Timezone (e.g., "Africa/Accra")      |
+| `metadata`     | object | No       | Custom metadata                      |
 
 ### Response
 
@@ -101,12 +101,12 @@ import SendexaPush
 import UserNotifications
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    func application(_ application: UIApplication, 
+    func application(_ application: UIApplication,
                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+
         // Initialize Sendexa Push
         SendexaPush.initialize(appId: "your_app_id", apiKey: "your_api_key")
-        
+
         // Request permission
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if granted {
@@ -115,15 +115,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
-        
+
         return true
     }
-    
+
     // Handle device token
-    func application(_ application: UIApplication, 
+    func application(_ application: UIApplication,
                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let tokenString = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-        
+
         // Register with Sendexa
         SendexaPush.registerDevice(
             deviceToken: tokenString,
@@ -143,9 +143,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
+
     // Handle registration failure
-    func application(_ application: UIApplication, 
+    func application(_ application: UIApplication,
                     didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Push registration failed: \(error)")
     }
@@ -161,10 +161,10 @@ import com.google.firebase.messaging.FirebaseMessaging
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+
         // Initialize Sendexa Push
         SendexaPush.initialize(this, "your_app_id", "your_api_key")
-        
+
         // Get FCM token
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -173,7 +173,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-    
+
     private fun registerDevice(deviceToken: String) {
         SendexaPush.registerDevice(
             deviceToken = deviceToken,
@@ -225,7 +225,7 @@ async function registerDevice() {
   try {
     // Get device token
     const deviceToken = await messaging().getToken();
-    
+
     // Register with Sendexa
     const device = await SendexaPush.registerDevice({
       deviceToken,
@@ -234,10 +234,10 @@ async function registerDevice() {
       metadata: {
         app_version: '2.5.1',
         os_version: Platform.Version,
-        language: 'en'
-      }
+        language: 'en',
+      },
     });
-    
+
     console.log('Device registered:', device.id);
   } catch (error) {
     console.error('Registration failed:', error);
@@ -261,17 +261,17 @@ async function setupPushNotifications() {
   try {
     // Request permission
     const permission = await push.requestPermission();
-    
+
     if (permission === 'granted') {
       // Register service worker
       const registration = await navigator.serviceWorker.register('/sw.js');
-      
+
       // Get push subscription
       const subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
-        applicationServerKey: push.getPublicKey()
+        applicationServerKey: push.getPublicKey(),
       });
-      
+
       // Register device with Sendexa
       const device = await push.registerDevice({
         subscription,
@@ -279,10 +279,10 @@ async function setupPushNotifications() {
         metadata: {
           browser: getBrowserName(),
           os: getOSName(),
-          language: navigator.language
-        }
+          language: navigator.language,
+        },
       });
-      
+
       console.log('Device registered:', device.id);
     }
   } catch (error) {
@@ -348,13 +348,13 @@ curl -X GET 'https://api.sendexa.co/v1/push/devices?user_id=user-123&platform=io
 
 ### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `user_id` | string | Filter by user ID |
-| `platform` | string | Filter by platform (ios/android/web) |
-| `status` | string | Filter by status (active/inactive) |
-| `limit` | integer | Results per page (max 100, default 50) |
-| `offset` | integer | Pagination offset |
+| Parameter  | Type    | Description                            |
+| ---------- | ------- | -------------------------------------- |
+| `user_id`  | string  | Filter by user ID                      |
+| `platform` | string  | Filter by platform (ios/android/web)   |
+| `status`   | string  | Filter by status (active/inactive)     |
+| `limit`    | integer | Results per page (max 100, default 50) |
+| `offset`   | integer | Pagination offset                      |
 
 ### Response
 
@@ -410,12 +410,12 @@ curl -X PUT 'https://api.sendexa.co/v1/push/devices/dev_abc123def456' \
 
 ### Request Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `user_id` | string | Update user association |
-| `language` | string | Update language |
-| `timezone` | string | Update timezone |
-| `metadata` | object | Update custom metadata |
+| Parameter  | Type   | Description             |
+| ---------- | ------ | ----------------------- |
+| `user_id`  | string | Update user association |
+| `language` | string | Update language         |
+| `timezone` | string | Update timezone         |
+| `metadata` | object | Update custom metadata  |
 
 ### Response
 
@@ -459,6 +459,7 @@ curl -X DELETE 'https://api.sendexa.co/v1/push/devices/dev_abc123def456' \
 ### When to Delete Devices
 
 Delete devices when:
+
 - User uninstalls app
 - Device token becomes invalid
 - User explicitly opts out
@@ -623,22 +624,22 @@ const preferences = {
     marketing: false,
     transactional: true,
     news: true,
-    sports: true
+    sports: true,
   },
   quiet_hours: {
     enabled: true,
-    start: "22:00",
-    end: "08:00"
+    start: '22:00',
+    end: '08:00',
   },
   frequency: {
     max_per_day: 5,
-    max_per_hour: 2
-  }
+    max_per_hour: 2,
+  },
 };
 
 // Save to device metadata
 await updateDevice(deviceId, {
-  metadata: { preferences }
+  metadata: { preferences },
 });
 ```
 
@@ -648,29 +649,29 @@ await updateDevice(deviceId, {
 async function sendNotificationWithPreferences(userId, notification) {
   // Get user devices
   const devices = await getDevicesByUser(userId);
-  
+
   for (const device of devices) {
     const prefs = device.metadata?.preferences;
-    
+
     // Check if notifications enabled
     if (!prefs?.enabled) continue;
-    
+
     // Check category preference
     if (!prefs?.categories?.[notification.category]) continue;
-    
+
     // Check quiet hours
     if (isInQuietHours(prefs?.quiet_hours)) {
       // Schedule for later
       const scheduledTime = getNextAllowedTime(prefs.quiet_hours);
       notification.scheduled_at = scheduledTime;
     }
-    
+
     // Check frequency limits
     const recentCount = await getRecentNotificationCount(device.id, '1h');
     if (recentCount >= (prefs?.frequency?.max_per_hour || Infinity)) {
       continue; // Skip this device
     }
-    
+
     // Send notification
     await sendPush(device.device_token, notification);
   }
@@ -688,13 +689,13 @@ async function sendNotificationWithPreferences(userId, notification) {
 async function updateDeviceToken() {
   const currentToken = await getDeviceToken();
   const storedToken = await getStoredToken();
-  
+
   if (currentToken !== storedToken) {
     // Token changed, update on server
     await updateDevice(deviceId, {
-      device_token: currentToken
+      device_token: currentToken,
     });
-    
+
     await storeToken(currentToken);
   }
 }
@@ -704,10 +705,10 @@ async function updateDeviceToken() {
 
 ```javascript
 // iOS - Handle token refresh
-func application(_ application: UIApplication, 
+func application(_ application: UIApplication,
                 didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
     let newToken = deviceToken.hexString
-    
+
     // Always update token
     SendexaPush.updateDeviceToken(newToken)
 }
@@ -727,7 +728,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 // Remove devices with invalid tokens
 async function cleanupInvalidDevices() {
   const devices = await getAllDevices();
-  
+
   for (const device of devices) {
     try {
       // Try to send test notification
@@ -752,11 +753,11 @@ setInterval(cleanupInvalidDevices, 7 * 24 * 60 * 60 * 1000);
 // Send to all user's devices
 async function sendToUser(userId, notification) {
   const devices = await getDevicesByUser(userId);
-  
+
   const tokens = devices
-    .filter(d => d.status === 'active')
-    .map(d => d.device_token);
-  
+    .filter((d) => d.status === 'active')
+    .map((d) => d.device_token);
+
   if (tokens.length > 0) {
     await sendBulkPush(tokens, notification);
   }
@@ -775,16 +776,16 @@ await registerDevice({
     // User preferences
     notification_enabled: true,
     email_fallback: 'user@example.com',
-    
+
     // Device info
     first_install_date: '2025-03-01',
     last_app_version: '2.5.1',
-    
+
     // Business logic
     subscription_tier: 'premium',
     last_purchase_date: '2025-03-10',
-    total_orders: 25
-  }
+    total_orders: 25,
+  },
 });
 ```
 
@@ -795,6 +796,7 @@ await registerDevice({
 ### Device Not Receiving Notifications
 
 **Check:**
+
 1. Device token is valid and current
 2. Device status is "active"
 3. App has notification permissions
@@ -807,11 +809,12 @@ await registerDevice({
 **Cause:** Same device registered multiple times
 
 **Solution:**
+
 ```javascript
 // Check if device exists before registering
 async function registerOrUpdateDevice(deviceToken, userId) {
   const existing = await findDeviceByToken(deviceToken);
-  
+
   if (existing) {
     // Update existing device
     await updateDevice(existing.id, { user_id: userId });
@@ -825,6 +828,7 @@ async function registerOrUpdateDevice(deviceToken, userId) {
 ### User Has Multiple Devices
 
 This is normal! Users can have:
+
 - Multiple phones/tablets
 - Multiple browsers
 - Old devices not yet unregistered

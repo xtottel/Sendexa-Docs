@@ -55,21 +55,21 @@ Send voice messages to multiple recipients.
 
 ## Request Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `to` | array | Yes | Array of recipient phone numbers (max 10,000) |
-| `from` | string | Yes | Your Sendexa phone number |
-| `message` | string | Yes* | Text message to speak (TTS) |
-| `audio_url` | string | Yes* | URL to audio file to play |
-| `voice` | string | No | TTS voice (male/female, default: female) |
-| `language` | string | No | TTS language code (default: en-US) |
-| `status_callback` | string | No | Webhook URL for broadcast events |
-| `priority` | string | No | Broadcast priority (high/normal, default: normal) |
-| `retry_failed` | boolean | No | Retry failed calls (default: true) |
-| `max_retries` | integer | No | Maximum retry attempts (default: 2) |
-| `schedule_at` | string | No | ISO 8601 timestamp for scheduling |
+| Parameter         | Type    | Required | Description                                       |
+| ----------------- | ------- | -------- | ------------------------------------------------- |
+| `to`              | array   | Yes      | Array of recipient phone numbers (max 10,000)     |
+| `from`            | string  | Yes      | Your Sendexa phone number                         |
+| `message`         | string  | Yes\*    | Text message to speak (TTS)                       |
+| `audio_url`       | string  | Yes\*    | URL to audio file to play                         |
+| `voice`           | string  | No       | TTS voice (male/female, default: female)          |
+| `language`        | string  | No       | TTS language code (default: en-US)                |
+| `status_callback` | string  | No       | Webhook URL for broadcast events                  |
+| `priority`        | string  | No       | Broadcast priority (high/normal, default: normal) |
+| `retry_failed`    | boolean | No       | Retry failed calls (default: true)                |
+| `max_retries`     | integer | No       | Maximum retry attempts (default: 2)               |
+| `schedule_at`     | string  | No       | ISO 8601 timestamp for scheduling                 |
 
-*Either `message` or `audio_url` is required
+\*Either `message` or `audio_url` is required
 
 ---
 
@@ -81,16 +81,12 @@ Array of phone numbers in international format:
 
 ```json
 {
-  "to": [
-    "233501234567",
-    "233509876543",
-    "233543219876",
-    "254712345678"
-  ]
+  "to": ["233501234567", "233509876543", "233543219876", "254712345678"]
 }
 ```
 
 **Limits:**
+
 - Minimum: 2 recipients
 - Maximum: 10,000 recipients per request
 - For larger lists, split into batches
@@ -130,6 +126,7 @@ URL to pre-recorded audio file:
 ```
 
 **Requirements:**
+
 - HTTPS URL
 - Formats: MP3, WAV, OGG
 - Max size: 10MB
@@ -146,6 +143,7 @@ Control call urgency:
 ```
 
 **Options:**
+
 - `high` - Immediate delivery (use for emergencies)
 - `normal` - Standard delivery (default)
 
@@ -160,6 +158,7 @@ Schedule broadcast for future time:
 ```
 
 **Requirements:**
+
 - ISO 8601 format with timezone
 - Must be in the future
 - Maximum 30 days ahead
@@ -188,18 +187,18 @@ Schedule broadcast for future time:
 
 ### Response Fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `success` | boolean | Whether request succeeded |
-| `message` | string | Human-readable status |
-| `broadcast` | object | Broadcast details |
-| `id` | string | Unique broadcast identifier |
-| `from` | string | Caller number |
-| `recipients_count` | integer | Number of recipients |
-| `status` | string | Broadcast status |
-| `priority` | string | Priority level |
-| `created_at` | string | Creation timestamp |
-| `scheduled_at` | string | Scheduled time (if scheduled) |
+| Field              | Type    | Description                   |
+| ------------------ | ------- | ----------------------------- |
+| `success`          | boolean | Whether request succeeded     |
+| `message`          | string  | Human-readable status         |
+| `broadcast`        | object  | Broadcast details             |
+| `id`               | string  | Unique broadcast identifier   |
+| `from`             | string  | Caller number                 |
+| `recipients_count` | integer | Number of recipients          |
+| `status`           | string  | Broadcast status              |
+| `priority`         | string  | Priority level                |
+| `created_at`       | string  | Creation timestamp            |
+| `scheduled_at`     | string  | Scheduled time (if scheduled) |
 
 ---
 
@@ -222,13 +221,13 @@ async function broadcastVoiceMessage(recipients, from, message) {
         language: 'en-US',
         status_callback: 'https://yourapp.com/webhooks/broadcast',
         priority: 'normal',
-        retry_failed: true
+        retry_failed: true,
       },
       {
         headers: {
-          'Authorization': 'Bearer sk_live_your_token',
-          'Content-Type': 'application/json'
-        }
+          Authorization: 'Bearer sk_live_your_token',
+          'Content-Type': 'application/json',
+        },
       }
     );
 
@@ -242,11 +241,7 @@ async function broadcastVoiceMessage(recipients, from, message) {
 }
 
 // Send broadcast
-const recipients = [
-  '233501234567',
-  '233509876543',
-  '233543219876'
-];
+const recipients = ['233501234567', '233509876543', '233543219876'];
 
 await broadcastVoiceMessage(
   recipients,
@@ -261,16 +256,16 @@ async function broadcastWithAudio(recipients, from, audioUrl) {
     {
       to: recipients,
       from,
-      audio_url: audioUrl
+      audio_url: audioUrl,
     },
     {
       headers: {
-        'Authorization': 'Bearer sk_live_your_token',
-        'Content-Type': 'application/json'
-      }
+        Authorization: 'Bearer sk_live_your_token',
+        'Content-Type': 'application/json',
+      },
     }
   );
-  
+
   return response.data;
 }
 
@@ -309,7 +304,7 @@ def broadcast_voice_message(recipients, from_number, message):
         response = requests.post(url, json=payload, headers=headers)
         response.raise_for_status()
         data = response.json()
-        
+
         print(f"Broadcast initiated: {data['broadcast']['id']}")
         print(f"Recipients: {data['broadcast']['recipients_count']}")
         return data
@@ -343,7 +338,7 @@ def broadcast_with_audio(recipients, from_number, audio_url):
         'from': from_number,
         'audio_url': audio_url
     }
-    
+
     response = requests.post(url, json=payload, headers=headers)
     response.raise_for_status()
     return response.json()
@@ -368,7 +363,7 @@ def schedule_broadcast(recipients, from_number, message, schedule_time):
         'message': message,
         'schedule_at': schedule_time.isoformat()
     }
-    
+
     response = requests.post(url, json=payload, headers=headers)
     response.raise_for_status()
     return response.json()
@@ -393,7 +388,7 @@ schedule_broadcast(
 function broadcastVoiceMessage($recipients, $from, $message) {
     $url = 'https://api.sendexa.co/v1/voice/broadcast';
     $token = 'sk_live_your_token';
-    
+
     $data = [
         'to' => $recipients,
         'from' => $from,
@@ -404,7 +399,7 @@ function broadcastVoiceMessage($recipients, $from, $message) {
         'priority' => 'normal',
         'retry_failed' => true
     ];
-    
+
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
@@ -413,11 +408,11 @@ function broadcastVoiceMessage($recipients, $from, $message) {
         'Authorization: Bearer ' . $token,
         'Content-Type: application/json'
     ]);
-    
+
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
-    
+
     if ($httpCode === 200) {
         $result = json_decode($response, true);
         echo "Broadcast initiated: " . $result['broadcast']['id'] . "\n";
@@ -445,13 +440,13 @@ broadcastVoiceMessage(
 function broadcastWithAudio($recipients, $from, $audioUrl) {
     $url = 'https://api.sendexa.co/v1/voice/broadcast';
     $token = 'sk_live_your_token';
-    
+
     $data = [
         'to' => $recipients,
         'from' => $from,
         'audio_url' => $audioUrl
     ];
-    
+
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
@@ -460,10 +455,10 @@ function broadcastWithAudio($recipients, $from, $audioUrl) {
         'Authorization: Bearer ' . $token,
         'Content-Type: application/json'
     ]);
-    
+
     $response = curl_exec($ch);
     curl_close($ch);
-    
+
     return json_decode($response, true);
 }
 
@@ -492,7 +487,7 @@ async function sendEmergencyAlert(residents, message) {
     language: 'en-US',
     priority: 'high',
     retry_failed: true,
-    max_retries: 3
+    max_retries: 3,
   });
 }
 
@@ -510,19 +505,15 @@ async function sendCampaignMessage(voters, candidate) {
   const message = `Hello, this is a message from ${candidate.name}. 
     Your vote matters in the upcoming election on ${candidate.electionDate}. 
     Together we can make a difference.`;
-  
+
   // Split into batches of 1000
   const batches = chunkArray(voters, 1000);
-  
+
   for (const batch of batches) {
-    await broadcastVoiceMessage(
-      batch,
-      candidate.phoneNumber,
-      message
-    );
-    
+    await broadcastVoiceMessage(batch, candidate.phoneNumber, message);
+
     // Wait 1 minute between batches to respect rate limits
-    await new Promise(r => setTimeout(r, 60000));
+    await new Promise((r) => setTimeout(r, 60000));
   }
 }
 ```
@@ -535,12 +526,8 @@ async function announceSchoolClosure(parents, date, reason) {
   const message = `This is an announcement from ABC School. 
     School will be closed on ${date} due to ${reason}. 
     All students should stay at home. Regular classes will resume the next day.`;
-  
-  return await broadcastVoiceMessage(
-    parents,
-    schoolPhone,
-    message
-  );
+
+  return await broadcastVoiceMessage(parents, schoolPhone, message);
 }
 
 await announceSchoolClosure(
@@ -558,17 +545,17 @@ async function sendEventReminder(attendees, event) {
   const message = `Hello, this is a reminder about ${event.name} 
     happening tomorrow at ${event.time} at ${event.venue}. 
     We look forward to seeing you there!`;
-  
+
   // Schedule for day before event
   const reminderTime = new Date(event.date);
   reminderTime.setDate(reminderTime.getDate() - 1);
   reminderTime.setHours(18, 0, 0); // 6 PM
-  
+
   return await axios.post(url, {
     to: attendees,
     from: organizerPhone,
     message: message,
-    schedule_at: reminderTime.toISOString()
+    schedule_at: reminderTime.toISOString(),
   });
 }
 ```
@@ -581,9 +568,9 @@ async function sendPaymentReminders(debtors) {
   const message = `This is a friendly reminder about your outstanding payment. 
     Please contact our office to discuss payment options. 
     Thank you.`;
-  
+
   return await broadcastVoiceMessage(
-    debtors.map(d => d.phone),
+    debtors.map((d) => d.phone),
     companyPhone,
     message
   );
@@ -611,30 +598,28 @@ async function sendLargeBroadcast(recipients, from, message) {
   // Split into batches of 1000
   const batches = chunkArray(recipients, 1000);
   const results = [];
-  
-  console.log(`Sending to ${recipients.length} recipients in ${batches.length} batches`);
-  
+
+  console.log(
+    `Sending to ${recipients.length} recipients in ${batches.length} batches`
+  );
+
   for (let i = 0; i < batches.length; i++) {
     console.log(`Sending batch ${i + 1}/${batches.length}...`);
-    
+
     try {
-      const result = await broadcastVoiceMessage(
-        batches[i],
-        from,
-        message
-      );
+      const result = await broadcastVoiceMessage(batches[i], from, message);
       results.push(result);
-      
+
       // Wait to respect rate limits (30 requests per minute)
       if (i < batches.length - 1) {
-        await new Promise(r => setTimeout(r, 2000)); // 2 seconds
+        await new Promise((r) => setTimeout(r, 2000)); // 2 seconds
       }
     } catch (error) {
       console.error(`Batch ${i + 1} failed:`, error.message);
       // Continue with next batch
     }
   }
-  
+
   return results;
 }
 
@@ -687,31 +672,31 @@ curl -X GET 'https://api.sendexa.co/v1/voice/broadcasts/broadcast_abc123' \
 ```javascript
 async function monitorBroadcast(broadcastId) {
   let completed = false;
-  
+
   while (!completed) {
     const status = await axios.get(
       `https://api.sendexa.co/v1/voice/broadcasts/${broadcastId}`,
       {
         headers: {
-          'Authorization': 'Bearer sk_live_your_token'
-        }
+          Authorization: 'Bearer sk_live_your_token',
+        },
       }
     );
-    
+
     const stats = status.data.broadcast.stats;
     const total = status.data.broadcast.recipients_count;
     const done = stats.completed + stats.failed;
     const progress = ((done / total) * 100).toFixed(2);
-    
+
     console.log(`Progress: ${progress}% (${done}/${total})`);
     console.log(`Completed: ${stats.completed}, Failed: ${stats.failed}`);
-    
+
     if (done >= total) {
       completed = true;
       console.log('Broadcast completed!');
     } else {
       // Wait 30 seconds before checking again
-      await new Promise(r => setTimeout(r, 30000));
+      await new Promise((r) => setTimeout(r, 30000));
     }
   }
 }
@@ -733,7 +718,7 @@ function removeDuplicates(recipients) {
 function validateRecipients(recipients) {
   const valid = [];
   const invalid = [];
-  
+
   for (const number of recipients) {
     if (/^\d{10,15}$/.test(number.replace(/[\s\-+]/g, ''))) {
       valid.push(number);
@@ -741,7 +726,7 @@ function validateRecipients(recipients) {
       invalid.push(number);
     }
   }
-  
+
   return { valid, invalid };
 }
 
@@ -764,7 +749,7 @@ await broadcastVoiceMessage(valid, from, message);
 function isGoodTimeToCall(timezone = 'Africa/Accra') {
   const hour = moment().tz(timezone).hour();
   const day = moment().tz(timezone).day();
-  
+
   // Not on Sundays (0) or outside 9 AM - 8 PM
   return day !== 0 && hour >= 9 && hour < 20;
 }
@@ -780,17 +765,17 @@ async function scheduleBroadcast(recipients, message) {
       .add(1, 'day')
       .hour(9)
       .minute(0);
-    
+
     // Skip to Monday if weekend
     while (nextTime.day() === 0 || nextTime.day() === 6) {
       nextTime.add(1, 'day');
     }
-    
+
     return await axios.post(url, {
       to: recipients,
       from: from,
       message: message,
-      schedule_at: nextTime.toISOString()
+      schedule_at: nextTime.toISOString(),
     });
   }
 }
@@ -808,11 +793,11 @@ function estimateCost(recipientCount, durationMinutes, pricePerMinute = 0.15) {
 async function broadcastWithBudgetCheck(recipients, message, maxBudget) {
   const estimatedDuration = 1; // Estimate 1 minute per call
   const cost = estimateCost(recipients.length, estimatedDuration);
-  
+
   if (cost > maxBudget) {
     throw new Error(`Estimated cost ($${cost}) exceeds budget ($${maxBudget})`);
   }
-  
+
   console.log(`Estimated cost: $${cost.toFixed(2)}`);
   return await broadcastVoiceMessage(recipients, from, message);
 }
@@ -845,14 +830,16 @@ const badMessage = `
 async function broadcastWithDNCCheck(recipients, message) {
   // Get Do Not Call list
   const dncList = await getDNCList();
-  
+
   // Filter out DNC numbers
   const allowedRecipients = recipients.filter(
-    number => !dncList.includes(number)
+    (number) => !dncList.includes(number)
   );
-  
-  console.log(`Removed ${recipients.length - allowedRecipients.length} DNC numbers`);
-  
+
+  console.log(
+    `Removed ${recipients.length - allowedRecipients.length} DNC numbers`
+  );
+
   return await broadcastVoiceMessage(allowedRecipients, from, message);
 }
 ```
@@ -867,25 +854,27 @@ async function broadcastWithDNCCheck(recipients, message) {
 async function broadcastWithRetry(recipients, message, maxAttempts = 3) {
   let attempt = 0;
   let lastError;
-  
+
   while (attempt < maxAttempts) {
     try {
       return await broadcastVoiceMessage(recipients, from, message);
     } catch (error) {
       attempt++;
       lastError = error;
-      
+
       console.log(`Attempt ${attempt} failed:`, error.message);
-      
+
       if (attempt < maxAttempts) {
         // Wait before retry (exponential backoff)
         const delay = Math.pow(2, attempt) * 1000;
-        await new Promise(r => setTimeout(r, delay));
+        await new Promise((r) => setTimeout(r, delay));
       }
     }
   }
-  
-  throw new Error(`Broadcast failed after ${maxAttempts} attempts: ${lastError.message}`);
+
+  throw new Error(
+    `Broadcast failed after ${maxAttempts} attempts: ${lastError.message}`
+  );
 }
 ```
 
@@ -899,7 +888,7 @@ async function broadcastWithRetry(recipients, message, maxAttempts = 3) {
 // Test with small group first
 const testRecipients = [
   '233500000001', // Test number
-  yourPhoneNumber
+  yourPhoneNumber,
 ];
 
 await broadcastVoiceMessage(
@@ -909,11 +898,7 @@ await broadcastVoiceMessage(
 );
 
 // If successful, proceed with full broadcast
-await broadcastVoiceMessage(
-  allRecipients,
-  '233302123456',
-  actualMessage
-);
+await broadcastVoiceMessage(allRecipients, '233302123456', actualMessage);
 ```
 
 ---

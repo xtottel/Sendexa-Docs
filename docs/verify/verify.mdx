@@ -19,6 +19,7 @@ Verify an OTP code against a phone number or email address.
 **Base URL:** `https://api.sendexa.co`
 
 **Rate Limit:**
+
 - 10 verification attempts per OTP (configurable)
 - 100 verifications per hour per phone/email
 
@@ -35,12 +36,12 @@ Content-Type: application/json
 
 ## Request Body
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `phone` | string | Conditional | Phone number (for SMS OTP) |
-| `email` | string | Conditional | Email address (for Email OTP) |
-| `code` | string | Yes | The OTP code to verify |
-| `id` | string | No | Specific OTP record ID |
+| Parameter | Type   | Required    | Description                   |
+| --------- | ------ | ----------- | ----------------------------- |
+| `phone`   | string | Conditional | Phone number (for SMS OTP)    |
+| `email`   | string | Conditional | Email address (for Email OTP) |
+| `code`    | string | Yes         | The OTP code to verify        |
+| `id`      | string | No          | Specific OTP record ID        |
 
 **Note:** You must provide either `phone` or `email` (whichever channel was used).
 
@@ -49,21 +50,25 @@ Content-Type: application/json
 ## Security Features
 
 ### 1. Attempt Tracking
+
 - Tracks every verification attempt
 - Configurable maximum attempts (default: 3)
 - Automatic blocking after max attempts
 
 ### 2. Expiry Validation
+
 - Checks if OTP has expired
 - Returns exact expiry timestamp
 - Prevents use of expired codes
 
 ### 3. Single-Use Enforcement
+
 - OTP automatically invalidated after successful verification
 - Cannot be reused even within expiry time
 - Prevents replay attacks
 
 ### 4. Metadata Retrieval
+
 - Returns original metadata from request
 - Useful for transaction validation
 - Maintains context throughout flow
@@ -140,18 +145,18 @@ curl -X POST 'https://api.sendexa.co/v1/otp/verify' \
 
 ### Response Fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `success` | boolean | Whether verification succeeded |
-| `message` | string | Human-readable status message |
-| `data.verified` | boolean | Verification status |
-| `data.phone` | string | Phone number (if SMS) |
-| `data.email` | string | Email address (if Email) |
-| `data.verifiedAt` | string | ISO timestamp of verification |
-| `data.pinLength` | integer | Original PIN length |
-| `data.pinType` | string | Original PIN type |
-| `data.id` | string | OTP record identifier |
-| `data.metadata` | object | Original metadata from request |
+| Field             | Type    | Description                    |
+| ----------------- | ------- | ------------------------------ |
+| `success`         | boolean | Whether verification succeeded |
+| `message`         | string  | Human-readable status message  |
+| `data.verified`   | boolean | Verification status            |
+| `data.phone`      | string  | Phone number (if SMS)          |
+| `data.email`      | string  | Email address (if Email)       |
+| `data.verifiedAt` | string  | ISO timestamp of verification  |
+| `data.pinLength`  | integer | Original PIN length            |
+| `data.pinType`    | string  | Original PIN type              |
+| `data.id`         | string  | OTP record identifier          |
+| `data.metadata`   | object  | Original metadata from request |
 
 ---
 
@@ -260,29 +265,31 @@ class OTPVerificationService {
   async verifyOTP(destination, code, channel = 'sms', otpId = null) {
     // Track local attempts
     const attempts = this.attemptTracking.get(destination) || 0;
-    
+
     if (attempts >= 3) {
-      throw new Error('Maximum local attempts exceeded. Please request a new OTP.');
+      throw new Error(
+        'Maximum local attempts exceeded. Please request a new OTP.'
+      );
     }
 
     try {
       const payload = { code };
-      
+
       if (channel === 'sms') {
         payload.phone = destination;
       } else if (channel === 'email') {
         payload.email = destination;
       }
-      
+
       if (otpId) payload.id = otpId;
 
       const response = await fetch(`${this.baseUrl}/verify`, {
         method: 'POST',
         headers: {
-          'Authorization': `Basic ${this.credentials}`,
-          'Content-Type': 'application/json'
+          Authorization: `Basic ${this.credentials}`,
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
@@ -337,27 +344,27 @@ const verifier = new OTPVerificationService('your_api_key', 'your_api_secret');
 async function handleSMSVerification(phone, code) {
   try {
     const result = await verifier.verifyOTP(phone, code, 'sms');
-    
+
     if (result.success) {
       console.log('✅ Verification successful!');
       console.log('Metadata:', result.data.metadata);
-      
+
       // Process based on metadata
       const { transactionId, amount } = result.data.metadata;
       await processTransaction(transactionId, amount);
-      
+
       return true;
     }
   } catch (error) {
     console.error('❌ Verification failed:', error.message);
-    
+
     const remaining = verifier.getRemainingAttempts(phone);
     if (remaining > 0) {
       alert(`${error.message} ${remaining} attempts left.`);
     } else {
       alert('No attempts remaining. Please request a new OTP.');
     }
-    
+
     return false;
   }
 }
@@ -366,13 +373,13 @@ async function handleSMSVerification(phone, code) {
 async function handleEmailVerification(email, code) {
   try {
     const result = await verifier.verifyOTP(email, code, 'email');
-    
+
     if (result.success) {
       console.log('✅ Email verified!');
-      
+
       // Mark email as verified in database
       await markEmailAsVerified(email);
-      
+
       return true;
     }
   } catch (error) {
@@ -386,25 +393,25 @@ async function loginWithOTP(phone, password, otpCode) {
   try {
     // Step 1: Verify credentials
     const user = await verifyCredentials(phone, password);
-    
+
     if (!user) {
       throw new Error('Invalid credentials');
     }
 
     // Step 2: Verify OTP
     const otpResult = await verifier.verifyOTP(phone, otpCode, 'sms');
-    
+
     if (!otpResult.success) {
       throw new Error('OTP verification failed');
     }
 
     // Step 3: Create session
     const token = await createSession(user.id);
-    
+
     return {
       success: true,
       token,
-      user
+      user,
     };
   } catch (error) {
     console.error('Login failed:', error);
@@ -438,7 +445,7 @@ class OTPVerificationService:
             "Content-Type": "application/json"
         }
         self.attempt_tracking = {}
-    
+
     def verify_otp(
         self,
         destination: str,
@@ -448,73 +455,73 @@ class OTPVerificationService:
     ) -> Dict[str, Any]:
         # Track local attempts
         attempts = self.attempt_tracking.get(destination, 0)
-        
+
         if attempts >= 3:
             raise Exception("Maximum local attempts exceeded")
-        
+
         payload = {"code": code}
-        
+
         if channel == 'sms':
             payload['phone'] = destination
         elif channel == 'email':
             payload['email'] = destination
-        
+
         if otp_id:
             payload['id'] = otp_id
-        
+
         try:
             response = requests.post(
                 f"{self.base_url}/verify",
                 json=payload,
                 headers=self.headers
             )
-            
+
             if response.status_code == 400:
                 # Increment attempts
                 self.attempt_tracking[destination] = attempts + 1
-                
+
                 error_data = response.json()
                 error_type = error_data.get('errorType')
-                
+
                 if error_type == OTPErrorType.INVALID_OTP.value:
                     remaining = error_data.get('data', {}).get('attemptsRemaining', 0)
                     raise ValueError(f"Invalid OTP. {remaining} attempts remaining.")
-                
+
                 elif error_type == OTPErrorType.EXPIRED_OTP.value:
                     raise ValueError("OTP has expired. Please request a new one.")
-                
+
                 elif error_type == OTPErrorType.MAX_ATTEMPTS_EXCEEDED.value:
                     self.attempt_tracking[destination] = 999  # Lock out
                     raise ValueError("Maximum attempts exceeded. Request a new OTP.")
-                
+
                 elif error_type == OTPErrorType.OTP_ALREADY_USED.value:
                     raise ValueError("This OTP has already been used.")
-                
+
                 elif error_type == OTPErrorType.OTP_NOT_FOUND.value:
                     raise ValueError("No OTP found. Please request one first.")
-                
+
                 else:
                     raise ValueError(error_data.get('message', 'Verification failed'))
-            
+
             elif response.status_code == 404:
                 raise ValueError("No OTP found for this destination")
-            
+
             response.raise_for_status()
-            
+
             # Clear attempts on success
             if destination in self.attempt_tracking:
                 del self.attempt_tracking[destination]
-            
+
             return response.json()
-            
+
         except requests.exceptions.RequestException as e:
             raise Exception(f"Verification failed: {str(e)}")
-    
+
     def get_remaining_attempts(self, destination: str) -> int:
         """Get remaining verification attempts"""
         attempts = self.attempt_tracking.get(destination, 0)
         return max(0, 3 - attempts)
-    
+
     def reset_attempts(self, destination: str):
         """Reset attempt counter"""
         if destination in self.attempt_tracking:
@@ -528,17 +535,17 @@ verifier = OTPVerificationService("your_api_key", "your_api_secret")
 def handle_sms_verification(phone: str, code: str) -> bool:
     try:
         result = verifier.verify_otp(phone, code, channel='sms')
-        
+
         if result['success']:
             print("✅ Verification successful!")
             print(f"Metadata: {result['data']['metadata']}")
-            
+
             # Process transaction
             metadata = result['data']['metadata']
             process_transaction(metadata['transactionId'], metadata['amount'])
-            
+
             return True
-            
+
     except ValueError as e:
         print(f"❌ Verification failed: {e}")
         remaining = verifier.get_remaining_attempts(phone)
@@ -553,12 +560,12 @@ def handle_sms_verification(phone: str, code: str) -> bool:
 def handle_email_verification(email: str, code: str) -> bool:
     try:
         result = verifier.verify_otp(email, code, channel='email')
-        
+
         if result['success']:
             print("✅ Email verified!")
             mark_email_as_verified(email)
             return True
-            
+
     except ValueError as e:
         print(f"❌ Verification failed: {e}")
         return False
@@ -574,27 +581,27 @@ async def verify_transaction(
 ):
     try:
         result = verifier.verify_otp(phone, otp_code, channel='sms')
-        
+
         if not result['success']:
             raise HTTPException(status_code=400, detail="Verification failed")
-        
+
         # Extract metadata
         metadata = result['data']['metadata']
-        
+
         # Verify transaction matches
         if metadata.get('transactionId') != transaction_id:
             raise HTTPException(status_code=400, detail="Transaction mismatch")
-        
+
         # Process transaction
         await process_transaction(transaction_id, metadata['amount'])
-        
+
         return {
             "success": True,
             "message": "Transaction completed successfully",
             "transaction_id": transaction_id,
             "amount": metadata['amount']
         }
-        
+
     except ValueError as e:
         remaining = verifier.get_remaining_attempts(phone)
         raise HTTPException(
@@ -626,19 +633,19 @@ class OTPVerificationService {
     public function verifyOTP($destination, $code, $channel = 'sms', $otpId = null) {
         // Track local attempts
         $attempts = $this->attemptTracking[$destination] ?? 0;
-        
+
         if ($attempts >= 3) {
             throw new Exception('Maximum local attempts exceeded');
         }
 
         $payload = ['code' => $code];
-        
+
         if ($channel === 'sms') {
             $payload['phone'] = $destination;
         } elseif ($channel === 'email') {
             $payload['email'] = $destination;
         }
-        
+
         if ($otpId) {
             $payload['id'] = $otpId;
         }
@@ -661,9 +668,9 @@ class OTPVerificationService {
         if ($httpCode === 400) {
             // Increment attempts
             $this->attemptTracking[$destination] = $attempts + 1;
-            
+
             $errorType = $result['errorType'] ?? '';
-            
+
             if ($errorType === 'INVALID_OTP') {
                 $remaining = $result['data']['attemptsRemaining'] ?? 0;
                 throw new Exception("Invalid OTP. $remaining attempts remaining.");
@@ -708,28 +715,28 @@ $verifier = new OTPVerificationService('your_api_key', 'your_api_secret');
 // Verify SMS OTP
 function handleSMSVerification($phone, $code) {
     global $verifier;
-    
+
     try {
         $result = $verifier->verifyOTP($phone, $code, 'sms');
-        
+
         if ($result['success']) {
             echo "✅ Verification successful!\n";
             echo "Metadata: " . json_encode($result['data']['metadata']) . "\n";
-            
+
             // Process transaction
             $metadata = $result['data']['metadata'];
             processTransaction($metadata['transactionId'], $metadata['amount']);
-            
+
             return true;
         }
     } catch (Exception $e) {
         echo "❌ Verification failed: " . $e->getMessage() . "\n";
-        
+
         $remaining = $verifier->getRemainingAttempts($phone);
         if ($remaining > 0) {
             echo "$remaining attempts remaining\n";
         }
-        
+
         return false;
     }
 }
@@ -737,10 +744,10 @@ function handleSMSVerification($phone, $code) {
 // Verify Email OTP
 function handleEmailVerification($email, $code) {
     global $verifier;
-    
+
     try {
         $result = $verifier->verifyOTP($email, $code, 'email');
-        
+
         if ($result['success']) {
             echo "✅ Email verified!\n";
             markEmailAsVerified($email);
@@ -772,7 +779,7 @@ function OTPVerificationForm({ phone, onSuccess }) {
 
   const handleVerify = async (e) => {
     e.preventDefault();
-    
+
     if (otp.length < 4) {
       setError('Please enter complete OTP');
       return;
@@ -785,7 +792,7 @@ function OTPVerificationForm({ phone, onSuccess }) {
       const response = await fetch('/api/verify-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone, code: otp })
+        body: JSON.stringify({ phone, code: otp }),
       });
 
       const data = await response.json();
@@ -795,7 +802,7 @@ function OTPVerificationForm({ phone, onSuccess }) {
       } else {
         setError(data.message);
         setAttemptsRemaining(data.data?.attemptsRemaining || 0);
-        
+
         if (data.errorType === 'MAX_ATTEMPTS_EXCEEDED') {
           setError('Maximum attempts exceeded. Please request a new OTP.');
         }
@@ -817,17 +824,18 @@ function OTPVerificationForm({ phone, onSuccess }) {
         placeholder="Enter OTP"
         disabled={loading || attemptsRemaining === 0}
       />
-      
+
       {error && <p className="error">{error}</p>}
-      
+
       {attemptsRemaining > 0 && attemptsRemaining < 3 && (
         <p className="warning">
-          {attemptsRemaining} attempt{attemptsRemaining > 1 ? 's' : ''} remaining
+          {attemptsRemaining} attempt{attemptsRemaining > 1 ? 's' : ''}{' '}
+          remaining
         </p>
       )}
-      
-      <button 
-        type="submit" 
+
+      <button
+        type="submit"
         disabled={loading || otp.length < 4 || attemptsRemaining === 0}
       >
         {loading ? 'Verifying...' : 'Verify OTP'}
@@ -844,6 +852,7 @@ function OTPVerificationForm({ phone, onSuccess }) {
 ### 1. Always Verify Server-Side
 
 **❌ Never:**
+
 ```javascript
 // INSECURE - Client-side only
 if (userOTP === savedOTP) {
@@ -852,6 +861,7 @@ if (userOTP === savedOTP) {
 ```
 
 **✅ Always:**
+
 ```javascript
 // SECURE - Server verification
 const verified = await verifyOTPOnServer(phone, userOTP);
@@ -886,18 +896,18 @@ async function verifyWithProperErrorHandling(phone, code) {
 ```javascript
 async function verifyTransactionOTP(phone, code, transactionId, amount) {
   const result = await verifyOTP(phone, code);
-  
+
   if (!result.success) {
     throw new Error('OTP verification failed');
   }
 
   // Validate metadata matches transaction
   const metadata = result.data.metadata;
-  
+
   if (metadata.transactionId !== transactionId) {
     throw new Error('Transaction mismatch');
   }
-  
+
   if (metadata.amount !== amount) {
     throw new Error('Amount mismatch');
   }
@@ -912,13 +922,13 @@ async function verifyTransactionOTP(phone, code, transactionId, amount) {
 function handleVerificationError(error, otpInputRef) {
   // Clear OTP input
   otpInputRef.current.value = '';
-  
+
   // Show error
   showError(error.message);
-  
+
   // Focus input
   otpInputRef.current.focus();
-  
+
   // Log for security monitoring
   logSecurityEvent('otp_verification_failed', { error: error.message });
 }
@@ -930,12 +940,12 @@ function handleVerificationError(error, otpInputRef) {
 
 ### Test OTP Codes (Sandbox)
 
-| Code | Behavior |
-|------|----------|
-| `123456` | Always valid |
-| `000000` | Always invalid |
+| Code     | Behavior                    |
+| -------- | --------------------------- |
+| `123456` | Always valid                |
+| `000000` | Always invalid              |
 | `999999` | Triggers max attempts error |
-| `111111` | Simulates expired OTP |
+| `111111` | Simulates expired OTP       |
 
 ---
 

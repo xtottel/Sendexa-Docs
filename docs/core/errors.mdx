@@ -31,14 +31,14 @@ Every error response includes the following fields:
 
 ### Response Fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `status` | string | Always `error` for error responses |
-| `code` | string | Machine-readable error code (see below) |
-| `message` | string | Human-readable error description |
-| `details` | object | Additional context about the error (optional) |
-| `timestamp` | string | ISO 8601 timestamp when error occurred |
-| `request_id` | string | Unique identifier for troubleshooting |
+| Field        | Type   | Description                                   |
+| ------------ | ------ | --------------------------------------------- |
+| `status`     | string | Always `error` for error responses            |
+| `code`       | string | Machine-readable error code (see below)       |
+| `message`    | string | Human-readable error description              |
+| `details`    | object | Additional context about the error (optional) |
+| `timestamp`  | string | ISO 8601 timestamp when error occurred        |
+| `request_id` | string | Unique identifier for troubleshooting         |
 
 ---
 
@@ -48,23 +48,23 @@ Sendexa uses standard HTTP status codes to indicate the type of error:
 
 ### 4xx Client Errors
 
-| Status Code | Meaning | Description |
-|-------------|---------|-------------|
-| **400** | Bad Request | The request was malformed or missing required parameters |
-| **401** | Unauthorized | Authentication failed - invalid or missing API token |
-| **403** | Forbidden | Valid authentication but insufficient permissions |
-| **404** | Not Found | The requested resource does not exist |
-| **422** | Unprocessable Entity | Request is valid but contains semantic errors |
-| **429** | Too Many Requests | Rate limit exceeded - slow down your requests |
+| Status Code | Meaning              | Description                                              |
+| ----------- | -------------------- | -------------------------------------------------------- |
+| **400**     | Bad Request          | The request was malformed or missing required parameters |
+| **401**     | Unauthorized         | Authentication failed - invalid or missing API token     |
+| **403**     | Forbidden            | Valid authentication but insufficient permissions        |
+| **404**     | Not Found            | The requested resource does not exist                    |
+| **422**     | Unprocessable Entity | Request is valid but contains semantic errors            |
+| **429**     | Too Many Requests    | Rate limit exceeded - slow down your requests            |
 
 ### 5xx Server Errors
 
-| Status Code | Meaning | Description |
-|-------------|---------|-------------|
-| **500** | Internal Server Error | Unexpected error on Sendexa servers |
-| **502** | Bad Gateway | Upstream provider error |
-| **503** | Service Unavailable | Temporary service disruption |
-| **504** | Gateway Timeout | Request took too long to process |
+| Status Code | Meaning               | Description                         |
+| ----------- | --------------------- | ----------------------------------- |
+| **500**     | Internal Server Error | Unexpected error on Sendexa servers |
+| **502**     | Bad Gateway           | Upstream provider error             |
+| **503**     | Service Unavailable   | Temporary service disruption        |
+| **504**     | Gateway Timeout       | Request took too long to process    |
 
 ---
 
@@ -73,6 +73,7 @@ Sendexa uses standard HTTP status codes to indicate the type of error:
 ### Authentication Errors
 
 #### INVALID_TOKEN
+
 ```json
 {
   "status": "error",
@@ -86,6 +87,7 @@ Sendexa uses standard HTTP status codes to indicate the type of error:
 ```
 
 **Causes:**
+
 - Token is missing from request headers
 - Token has expired
 - Token is malformed or corrupted
@@ -94,6 +96,7 @@ Sendexa uses standard HTTP status codes to indicate the type of error:
 **Solution:** Generate a new API token from your dashboard.
 
 #### UNAUTHORIZED_ACCESS
+
 ```json
 {
   "status": "error",
@@ -104,6 +107,7 @@ Sendexa uses standard HTTP status codes to indicate the type of error:
 ```
 
 **Causes:**
+
 - Token doesn't have required permissions
 - Account is suspended
 - Feature not available in your plan
@@ -115,6 +119,7 @@ Sendexa uses standard HTTP status codes to indicate the type of error:
 ### Validation Errors
 
 #### INVALID_PARAMETERS
+
 ```json
 {
   "status": "error",
@@ -138,12 +143,14 @@ Sendexa uses standard HTTP status codes to indicate the type of error:
 ```
 
 **Common Validation Issues:**
+
 - Missing required fields (`to`, `message`, `sender_id`)
 - Invalid phone number format
 - Message too long (>1600 characters)
 - Invalid sender ID (>11 characters or contains special chars)
 
 #### INVALID_PHONE_NUMBER
+
 ```json
 {
   "status": "error",
@@ -159,6 +166,7 @@ Sendexa uses standard HTTP status codes to indicate the type of error:
 ```
 
 **Valid Phone Number Format:**
+
 - Must start with `+` and country code
 - Example: `+233500000000` (Ghana)
 - No spaces or special characters
@@ -169,16 +177,17 @@ Sendexa uses standard HTTP status codes to indicate the type of error:
 ### Business Logic Errors
 
 #### INSUFFICIENT_BALANCE
+
 ```json
 {
   "status": "error",
   "code": "INSUFFICIENT_BALANCE",
   "message": "You do not have enough SMS credits to complete this request.",
   "details": {
-    "current_balance": 5.50,
-    "required_balance": 10.00,
+    "current_balance": 5.5,
+    "required_balance": 10.0,
     "currency": "GHS",
-    "deficit": 4.50
+    "deficit": 4.5
   },
   "timestamp": "2025-03-12T10:15:00Z"
 }
@@ -187,6 +196,7 @@ Sendexa uses standard HTTP status codes to indicate the type of error:
 **Solution:** Top up your account via dashboard or API.
 
 #### SENDER_ID_NOT_REGISTERED
+
 ```json
 {
   "status": "error",
@@ -203,6 +213,7 @@ Sendexa uses standard HTTP status codes to indicate the type of error:
 **Solution:** Register your sender ID in **Settings → Sender IDs** before using it.
 
 #### MESSAGE_TOO_LONG
+
 ```json
 {
   "status": "error",
@@ -224,6 +235,7 @@ Sendexa uses standard HTTP status codes to indicate the type of error:
 ### Rate Limiting Errors
 
 #### RATE_LIMIT_EXCEEDED
+
 ```json
 {
   "status": "error",
@@ -239,6 +251,7 @@ Sendexa uses standard HTTP status codes to indicate the type of error:
 ```
 
 **Response Headers:**
+
 ```http
 X-RateLimit-Limit: 60
 X-RateLimit-Remaining: 0
@@ -253,6 +266,7 @@ Retry-After: 30
 ### Server Errors
 
 #### SERVER_ERROR
+
 ```json
 {
   "status": "error",
@@ -268,6 +282,7 @@ Retry-After: 30
 **Solution:** Retry the request. If issue persists, contact support with the `request_id`.
 
 #### PROVIDER_ERROR
+
 ```json
 {
   "status": "error",
@@ -290,23 +305,23 @@ Retry-After: 30
 
 Complete list of error codes:
 
-| Error Code | HTTP Status | Category | Description |
-|------------|-------------|----------|-------------|
-| `INVALID_TOKEN` | 401 | Authentication | Token is invalid or expired |
-| `UNAUTHORIZED_ACCESS` | 403 | Authorization | Insufficient permissions |
-| `INVALID_PARAMETERS` | 400 | Validation | Missing or invalid parameters |
-| `INVALID_PHONE_NUMBER` | 400 | Validation | Phone number format is invalid |
-| `INVALID_SENDER_ID` | 400 | Validation | Sender ID is invalid |
-| `MESSAGE_TOO_LONG` | 400 | Validation | Message exceeds max length |
-| `INSUFFICIENT_BALANCE` | 402 | Business Logic | Not enough credits |
-| `SENDER_ID_NOT_REGISTERED` | 403 | Business Logic | Sender ID not authorized |
-| `DUPLICATE_REQUEST` | 409 | Business Logic | Request already processed |
-| `RATE_LIMIT_EXCEEDED` | 429 | Rate Limiting | Too many requests |
-| `RESOURCE_NOT_FOUND` | 404 | Resource | Requested resource doesn't exist |
-| `SERVER_ERROR` | 500 | Server | Internal server error |
-| `PROVIDER_ERROR` | 502 | Server | Upstream provider error |
-| `SERVICE_UNAVAILABLE` | 503 | Server | Service temporarily unavailable |
-| `GATEWAY_TIMEOUT` | 504 | Server | Request timeout |
+| Error Code                 | HTTP Status | Category       | Description                      |
+| -------------------------- | ----------- | -------------- | -------------------------------- |
+| `INVALID_TOKEN`            | 401         | Authentication | Token is invalid or expired      |
+| `UNAUTHORIZED_ACCESS`      | 403         | Authorization  | Insufficient permissions         |
+| `INVALID_PARAMETERS`       | 400         | Validation     | Missing or invalid parameters    |
+| `INVALID_PHONE_NUMBER`     | 400         | Validation     | Phone number format is invalid   |
+| `INVALID_SENDER_ID`        | 400         | Validation     | Sender ID is invalid             |
+| `MESSAGE_TOO_LONG`         | 400         | Validation     | Message exceeds max length       |
+| `INSUFFICIENT_BALANCE`     | 402         | Business Logic | Not enough credits               |
+| `SENDER_ID_NOT_REGISTERED` | 403         | Business Logic | Sender ID not authorized         |
+| `DUPLICATE_REQUEST`        | 409         | Business Logic | Request already processed        |
+| `RATE_LIMIT_EXCEEDED`      | 429         | Rate Limiting  | Too many requests                |
+| `RESOURCE_NOT_FOUND`       | 404         | Resource       | Requested resource doesn't exist |
+| `SERVER_ERROR`             | 500         | Server         | Internal server error            |
+| `PROVIDER_ERROR`           | 502         | Server         | Upstream provider error          |
+| `SERVICE_UNAVAILABLE`      | 503         | Server         | Service temporarily unavailable  |
+| `GATEWAY_TIMEOUT`          | 504         | Server         | Request timeout                  |
 
 ---
 
@@ -329,35 +344,41 @@ async function sendSMS(to, message) {
         },
       }
     );
-    
+
     return response.data;
   } catch (error) {
     if (error.response) {
       // The request was made and the server responded with an error
       const { status, data } = error.response;
-      
+
       switch (data.code) {
         case 'INSUFFICIENT_BALANCE':
           console.error('Not enough balance. Please top up.');
           // Redirect to billing page
           break;
-          
+
         case 'INVALID_PHONE_NUMBER':
           console.error('Invalid phone number:', data.details);
           // Show validation error to user
           break;
-          
+
         case 'RATE_LIMIT_EXCEEDED':
-          console.error('Rate limit hit. Retrying in', data.details.retry_after, 'seconds');
+          console.error(
+            'Rate limit hit. Retrying in',
+            data.details.retry_after,
+            'seconds'
+          );
           // Implement retry with backoff
-          await new Promise(resolve => setTimeout(resolve, data.details.retry_after * 1000));
+          await new Promise((resolve) =>
+            setTimeout(resolve, data.details.retry_after * 1000)
+          );
           return sendSMS(to, message); // Retry
-          
+
         case 'SERVER_ERROR':
           console.error('Server error. Request ID:', data.request_id);
           // Log for support ticket
           break;
-          
+
         default:
           console.error('Error:', data.message);
       }
@@ -368,7 +389,7 @@ async function sendSMS(to, message) {
       // Something happened in setting up the request
       console.error('Error setting up request:', error.message);
     }
-    
+
     throw error;
   }
 }
@@ -391,37 +412,37 @@ def send_sms(to, message, max_retries=3):
         "message": message,
         "sender_id": "Sendexa"
     }
-    
+
     for attempt in range(max_retries):
         try:
             response = requests.post(url, headers=headers, json=data)
             response.raise_for_status()
             return response.json()
-            
+
         except requests.exceptions.HTTPError as e:
             error_data = e.response.json()
             error_code = error_data.get('code')
-            
+
             if error_code == 'RATE_LIMIT_EXCEEDED':
                 retry_after = error_data.get('details', {}).get('retry_after', 60)
                 print(f"Rate limit exceeded. Waiting {retry_after} seconds...")
                 time.sleep(retry_after)
                 continue
-                
+
             elif error_code == 'INSUFFICIENT_BALANCE':
                 print("Insufficient balance. Please top up your account.")
                 raise
-                
+
             elif error_code == 'SERVER_ERROR':
                 if attempt < max_retries - 1:
                     wait_time = 2 ** attempt  # Exponential backoff
                     print(f"Server error. Retrying in {wait_time} seconds...")
                     time.sleep(wait_time)
                     continue
-                    
+
             print(f"Error: {error_data.get('message')}")
             raise
-            
+
         except requests.exceptions.RequestException as e:
             print(f"Request failed: {str(e)}")
             raise
@@ -432,12 +453,15 @@ def send_sms(to, message, max_retries=3):
 ## Best Practices
 
 ### 1. Always Check Status Code
+
 Don't assume success. Always verify the HTTP status code and response body.
 
 ### 2. Log Request IDs
+
 Store `request_id` from error responses for support inquiries.
 
 ### 3. Implement Retry Logic
+
 For `5xx` errors and rate limits, implement exponential backoff:
 
 ```js
@@ -447,26 +471,30 @@ async function retryWithBackoff(fn, maxRetries = 3) {
       return await fn();
     } catch (error) {
       if (i === maxRetries - 1) throw error;
-      
-      const isRetryable = error.response?.status >= 500 || 
-                         error.response?.data?.code === 'RATE_LIMIT_EXCEEDED';
-      
+
+      const isRetryable =
+        error.response?.status >= 500 ||
+        error.response?.data?.code === 'RATE_LIMIT_EXCEEDED';
+
       if (!isRetryable) throw error;
-      
-      const delay = Math.min(1000 * (2 ** i), 10000); // Max 10 seconds
-      await new Promise(resolve => setTimeout(resolve, delay));
+
+      const delay = Math.min(1000 * 2 ** i, 10000); // Max 10 seconds
+      await new Promise((resolve) => setTimeout(resolve, delay));
     }
   }
 }
 ```
 
 ### 4. Validate Before Sending
+
 Validate phone numbers and parameters on your end before making API calls.
 
 ### 5. Monitor Error Rates
+
 Track error rates in your application to identify patterns and issues early.
 
 ### 6. Handle Rate Limits Gracefully
+
 Implement queuing and respect `Retry-After` headers.
 
 ---

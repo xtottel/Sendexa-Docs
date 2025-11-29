@@ -55,15 +55,15 @@ Create a new contact or update existing one.
 
 ## Request Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `phone` | string | Yes | WhatsApp number (international format) |
-| `name` | string | No | Contact full name |
-| `email` | string | No | Email address |
-| `custom_fields` | object | No | Custom key-value pairs |
-| `tags` | array | No | Array of tag strings |
-| `opted_in` | boolean | No | Marketing consent (default: true) |
-| `metadata` | object | No | Additional metadata |
+| Parameter       | Type    | Required | Description                            |
+| --------------- | ------- | -------- | -------------------------------------- |
+| `phone`         | string  | Yes      | WhatsApp number (international format) |
+| `name`          | string  | No       | Contact full name                      |
+| `email`         | string  | No       | Email address                          |
+| `custom_fields` | object  | No       | Custom key-value pairs                 |
+| `tags`          | array   | No       | Array of tag strings                   |
+| `opted_in`      | boolean | No       | Marketing consent (default: true)      |
+| `metadata`      | object  | No       | Additional metadata                    |
 
 ### Request Example
 
@@ -239,15 +239,15 @@ Retrieve all contacts with filtering and pagination.
 
 #### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `limit` | integer | Results per page (max 100, default 50) |
-| `offset` | integer | Pagination offset |
-| `tags` | string | Filter by tags (comma-separated) |
-| `opted_in` | boolean | Filter by opt-in status |
-| `search` | string | Search by name, email, or phone |
-| `sort` | string | Sort field (name, created_at, updated_at) |
-| `order` | string | Sort order (asc, desc) |
+| Parameter  | Type    | Description                               |
+| ---------- | ------- | ----------------------------------------- |
+| `limit`    | integer | Results per page (max 100, default 50)    |
+| `offset`   | integer | Pagination offset                         |
+| `tags`     | string  | Filter by tags (comma-separated)          |
+| `opted_in` | boolean | Filter by opt-in status                   |
+| `search`   | string  | Search by name, email, or phone           |
+| `sort`     | string  | Sort field (name, created_at, updated_at) |
+| `order`    | string  | Sort order (asc, desc)                    |
 
 #### Request Example
 
@@ -436,21 +436,20 @@ class ContactManager {
 
   async createContact(data) {
     try {
-      const response = await axios.post(
-        this.baseUrl,
-        data,
-        {
-          headers: {
-            'Authorization': `Bearer ${this.apiToken}`,
-            'Content-Type': 'application/json'
-          }
-        }
-      );
+      const response = await axios.post(this.baseUrl, data, {
+        headers: {
+          Authorization: `Bearer ${this.apiToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
 
       console.log(`Contact created: ${response.data.contact.id}`);
       return response.data.contact;
     } catch (error) {
-      console.error('Error creating contact:', error.response?.data || error.message);
+      console.error(
+        'Error creating contact:',
+        error.response?.data || error.message
+      );
       throw error;
     }
   }
@@ -462,23 +461,19 @@ class ContactManager {
       : `${this.baseUrl}?phone=${identifier}`;
 
     const response = await axios.get(url, {
-      headers: { 'Authorization': `Bearer ${this.apiToken}` }
+      headers: { Authorization: `Bearer ${this.apiToken}` },
     });
 
     return response.data.contact;
   }
 
   async updateContact(contactId, updates) {
-    const response = await axios.put(
-      `${this.baseUrl}/${contactId}`,
-      updates,
-      {
-        headers: {
-          'Authorization': `Bearer ${this.apiToken}`,
-          'Content-Type': 'application/json'
-        }
-      }
-    );
+    const response = await axios.put(`${this.baseUrl}/${contactId}`, updates, {
+      headers: {
+        Authorization: `Bearer ${this.apiToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
 
     return response.data.contact;
   }
@@ -487,7 +482,7 @@ class ContactManager {
     const response = await axios.get(
       `${this.baseUrl}?tags=${tag}&limit=${limit}`,
       {
-        headers: { 'Authorization': `Bearer ${this.apiToken}` }
+        headers: { Authorization: `Bearer ${this.apiToken}` },
       }
     );
 
@@ -500,9 +495,9 @@ class ContactManager {
       { contacts },
       {
         headers: {
-          'Authorization': `Bearer ${this.apiToken}`,
-          'Content-Type': 'application/json'
-        }
+          Authorization: `Bearer ${this.apiToken}`,
+          'Content-Type': 'application/json',
+        },
       }
     );
 
@@ -519,7 +514,7 @@ const contact = await manager.createContact({
   phone: '233501234567',
   name: 'John Doe',
   email: 'john@example.com',
-  tags: ['customer', 'vip']
+  tags: ['customer', 'vip'],
 });
 
 // Get contact
@@ -528,7 +523,7 @@ console.log(retrieved.name);
 
 // Update contact
 await manager.updateContact('cont_abc123', {
-  tags: ['customer', 'vip', 'enterprise']
+  tags: ['customer', 'vip', 'enterprise'],
 });
 
 // Get contacts by tag
@@ -538,7 +533,7 @@ console.log(`Found ${vipContacts.length} VIP contacts`);
 // Import bulk contacts
 await manager.importContacts([
   { phone: '233501111111', name: 'Alice', tags: ['new'] },
-  { phone: '233502222222', name: 'Bob', tags: ['new'] }
+  { phone: '233502222222', name: 'Bob', tags: ['new'] },
 ]);
 ```
 
@@ -555,7 +550,7 @@ class ContactManager:
             'Authorization': f'Bearer {api_token}',
             'Content-Type': 'application/json'
         }
-    
+
     def create_contact(self, data):
         """Create a new contact"""
         response = requests.post(
@@ -564,36 +559,36 @@ class ContactManager:
             headers=self.headers
         )
         response.raise_for_status()
-        
+
         contact = response.json()['contact']
         print(f"Contact created: {contact['id']}")
         return contact
-    
+
     def get_contact(self, identifier):
         """Get contact by ID or phone"""
         if identifier.startswith('cont_'):
             url = f'{self.base_url}/{identifier}'
         else:
             url = f'{self.base_url}?phone={identifier}'
-        
+
         response = requests.get(url, headers=self.headers)
         response.raise_for_status()
         return response.json()['contact']
-    
+
     def update_contact(self, contact_id, updates):
         """Update contact information"""
         url = f'{self.base_url}/{contact_id}'
         response = requests.put(url, json=updates, headers=self.headers)
         response.raise_for_status()
         return response.json()['contact']
-    
+
     def get_contacts_by_tag(self, tag, limit=100):
         """Get contacts with specific tag"""
         url = f'{self.base_url}?tags={tag}&limit={limit}'
         response = requests.get(url, headers=self.headers)
         response.raise_for_status()
         return response.json()['data']
-    
+
     def import_contacts(self, contacts):
         """Import multiple contacts"""
         url = f'{self.base_url}/import'
@@ -603,7 +598,7 @@ class ContactManager:
             headers=self.headers
         )
         response.raise_for_status()
-        
+
         result = response.json()
         print(f"Imported {result['imported']} contacts")
         return result
@@ -632,11 +627,11 @@ print(f"Found {len(vip_contacts)} VIP contacts")
 class ContactManager {
     private $apiToken;
     private $baseUrl = 'https://api.sendexa.co/v1/whatsapp/contacts';
-    
+
     public function __construct($apiToken) {
         $this->apiToken = $apiToken;
     }
-    
+
     public function createContact($data) {
         $ch = curl_init($this->baseUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -646,11 +641,11 @@ class ContactManager {
             'Authorization: Bearer ' . $this->apiToken,
             'Content-Type: application/json'
         ]);
-        
+
         $response = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
-        
+
         if ($httpCode === 200) {
             $result = json_decode($response, true);
             echo "Contact created: " . $result['contact']['id'] . "\n";
@@ -659,39 +654,39 @@ class ContactManager {
             throw new Exception("Contact creation failed: " . $response);
         }
     }
-    
+
     public function getContact($identifier) {
         if (strpos($identifier, 'cont_') === 0) {
             $url = $this->baseUrl . '/' . $identifier;
         } else {
             $url = $this->baseUrl . '?phone=' . $identifier;
         }
-        
+
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Authorization: Bearer ' . $this->apiToken
         ]);
-        
+
         $response = curl_exec($ch);
         curl_close($ch);
-        
+
         $data = json_decode($response, true);
         return $data['contact'];
     }
-    
+
     public function getContactsByTag($tag, $limit = 100) {
         $url = $this->baseUrl . '?tags=' . $tag . '&limit=' . $limit;
-        
+
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Authorization: Bearer ' . $this->apiToken
         ]);
-        
+
         $response = curl_exec($ch);
         curl_close($ch);
-        
+
         $data = json_decode($response, true);
         return $data['data'];
     }
@@ -721,22 +716,25 @@ echo "Found " . count($vipContacts) . " VIP contacts\n";
 ```javascript
 function validateContact(contact) {
   const errors = [];
-  
+
   // Validate phone
-  if (!contact.phone || !/^\+?\d{10,15}$/.test(contact.phone.replace(/\s/g, ''))) {
+  if (
+    !contact.phone ||
+    !/^\+?\d{10,15}$/.test(contact.phone.replace(/\s/g, ''))
+  ) {
     errors.push('Invalid phone number');
   }
-  
+
   // Validate email (if provided)
   if (contact.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact.email)) {
     errors.push('Invalid email address');
   }
-  
+
   // Validate tags
   if (contact.tags && !Array.isArray(contact.tags)) {
     errors.push('Tags must be an array');
   }
-  
+
   return errors;
 }
 
@@ -757,7 +755,7 @@ const tagStrategy = {
   lifecycle: ['new', 'active', 'inactive', 'churned'],
   value: ['vip', 'regular', 'trial'],
   campaign: ['summer_2025', 'black_friday', 'newsletter'],
-  behavior: ['engaged', 'at_risk', 'converted']
+  behavior: ['engaged', 'at_risk', 'converted'],
 };
 
 // Apply tags based on behavior
@@ -765,12 +763,12 @@ async function updateContactLifecycle(contactId, status) {
   // Remove old lifecycle tags
   const contact = await getContact(contactId);
   const newTags = contact.tags.filter(
-    tag => !tagStrategy.lifecycle.includes(tag)
+    (tag) => !tagStrategy.lifecycle.includes(tag)
   );
-  
+
   // Add new lifecycle tag
   newTags.push(status);
-  
+
   await updateContact(contactId, { tags: newTags });
 }
 ```
@@ -780,23 +778,23 @@ async function updateContactLifecycle(contactId, status) {
 ```javascript
 async function handleOptOut(phone) {
   const contact = await getContact(phone);
-  
+
   await updateContact(contact.id, {
     opted_in: false,
-    tags: [...contact.tags, 'opted_out']
+    tags: [...contact.tags, 'opted_out'],
   });
-  
+
   console.log(`Contact ${phone} opted out`);
 }
 
 async function handleOptIn(phone) {
   const contact = await getContact(phone);
-  
+
   await updateContact(contact.id, {
     opted_in: true,
-    tags: contact.tags.filter(tag => tag !== 'opted_out')
+    tags: contact.tags.filter((tag) => tag !== 'opted_out'),
   });
-  
+
   console.log(`Contact ${phone} opted in`);
 }
 ```
@@ -809,7 +807,7 @@ async function syncContactFromUser(user) {
   try {
     // Try to get existing contact
     let contact = await getContact(user.phone);
-    
+
     // Update existing
     await updateContact(contact.id, {
       name: user.name,
@@ -817,8 +815,8 @@ async function syncContactFromUser(user) {
       custom_fields: {
         user_id: user.id,
         subscription: user.subscription,
-        last_purchase: user.last_purchase_date
-      }
+        last_purchase: user.last_purchase_date,
+      },
     });
   } catch (error) {
     if (error.response?.status === 404) {
@@ -828,8 +826,8 @@ async function syncContactFromUser(user) {
         name: user.name,
         email: user.email,
         custom_fields: {
-          user_id: user.id
-        }
+          user_id: user.id,
+        },
       });
     }
   }
@@ -843,16 +841,16 @@ async function syncContactFromUser(user) {
 async function cleanupInactiveContacts() {
   const sixMonthsAgo = new Date();
   sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
-  
+
   const contacts = await listContacts({ limit: 100 });
-  
+
   for (const contact of contacts.data) {
     const lastMessage = new Date(contact.last_message_at);
-    
+
     if (lastMessage < sixMonthsAgo && !contact.opted_in) {
       // Tag as inactive
       await updateContact(contact.id, {
-        tags: [...contact.tags, 'inactive']
+        tags: [...contact.tags, 'inactive'],
       });
     }
   }
@@ -877,10 +875,10 @@ async function getHighValueCustomers() {
 async function getRecentSignups(days = 7) {
   const cutoff = new Date();
   cutoff.setDate(cutoff.getDate() - days);
-  
+
   const contacts = await listContacts({ limit: 100 });
-  
-  return contacts.data.filter(contact => {
+
+  return contacts.data.filter((contact) => {
     return new Date(contact.created_at) > cutoff;
   });
 }
@@ -893,8 +891,8 @@ async function getInactiveContacts(months = 3) {
   const contacts = await listContacts({ limit: 100 });
   const cutoff = new Date();
   cutoff.setMonth(cutoff.getMonth() - months);
-  
-  return contacts.data.filter(contact => {
+
+  return contacts.data.filter((contact) => {
     if (!contact.last_message_at) return true;
     return new Date(contact.last_message_at) < cutoff;
   });

@@ -66,23 +66,23 @@ Content-Type: application/json
 
 ## Request Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `to` | string/array | Yes | Recipient email(s) |
-| `from` | string | Yes | Sender email (verified domain) |
-| `fromName` | string | No | Sender display name |
-| `subject` | string | Yes | Email subject line |
-| `html` | string | Conditional | HTML email content |
-| `text` | string | Conditional | Plain text content |
-| `replyTo` | string | No | Reply-to email address |
-| `cc` | string/array | No | CC recipients |
-| `bcc` | string/array | No | BCC recipients |
-| `attachments` | array | No | File attachments |
-| `headers` | object | No | Custom email headers |
-| `tags` | array | No | Tags for categorization |
-| `metadata` | object | No | Custom metadata |
-| `trackOpens` | boolean | No | Track email opens (default: true) |
-| `trackClicks` | boolean | No | Track link clicks (default: true) |
+| Parameter     | Type         | Required    | Description                       |
+| ------------- | ------------ | ----------- | --------------------------------- |
+| `to`          | string/array | Yes         | Recipient email(s)                |
+| `from`        | string       | Yes         | Sender email (verified domain)    |
+| `fromName`    | string       | No          | Sender display name               |
+| `subject`     | string       | Yes         | Email subject line                |
+| `html`        | string       | Conditional | HTML email content                |
+| `text`        | string       | Conditional | Plain text content                |
+| `replyTo`     | string       | No          | Reply-to email address            |
+| `cc`          | string/array | No          | CC recipients                     |
+| `bcc`         | string/array | No          | BCC recipients                    |
+| `attachments` | array        | No          | File attachments                  |
+| `headers`     | object       | No          | Custom email headers              |
+| `tags`        | array        | No          | Tags for categorization           |
+| `metadata`    | object       | No          | Custom metadata                   |
+| `trackOpens`  | boolean      | No          | Track email opens (default: true) |
+| `trackClicks` | boolean      | No          | Track link clicks (default: true) |
 
 **Note:** Either `html` or `text` is required (or both).
 
@@ -93,6 +93,7 @@ Content-Type: application/json
 ### to (Recipient Email)
 
 **Single Recipient:**
+
 ```json
 {
   "to": "user@example.com"
@@ -100,6 +101,7 @@ Content-Type: application/json
 ```
 
 **Multiple Recipients:**
+
 ```json
 {
   "to": ["user1@example.com", "user2@example.com", "user3@example.com"]
@@ -107,6 +109,7 @@ Content-Type: application/json
 ```
 
 **With Display Name:**
+
 ```json
 {
   "to": "John Doe <john@example.com>"
@@ -133,6 +136,7 @@ Must be from a verified domain:
 ```
 
 **Best Practices:**
+
 - Keep under 50 characters
 - Avoid spam trigger words
 - Be clear and descriptive
@@ -147,6 +151,7 @@ Must be from a verified domain:
 ```
 
 **Tips:**
+
 - Use inline CSS for styling
 - Include responsive design
 - Test across email clients
@@ -161,6 +166,7 @@ Must be from a verified domain:
 ```
 
 **Always provide** plain text for:
+
 - Accessibility
 - Email clients that don't support HTML
 - Spam filter compliance
@@ -202,15 +208,15 @@ Must be from a verified domain:
 
 ### Response Fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `success` | boolean | Whether request succeeded |
-| `messageId` | string | Unique message identifier |
-| `to` | array | Recipient email addresses |
-| `from` | string | Sender email address |
-| `subject` | string | Email subject |
-| `status` | string | Current status (queued, sent, delivered) |
-| `queuedAt` | string | ISO timestamp when queued |
+| Field       | Type    | Description                              |
+| ----------- | ------- | ---------------------------------------- |
+| `success`   | boolean | Whether request succeeded                |
+| `messageId` | string  | Unique message identifier                |
+| `to`        | array   | Recipient email addresses                |
+| `from`      | string  | Sender email address                     |
+| `subject`   | string  | Email subject                            |
+| `status`    | string  | Current status (queued, sent, delivered) |
+| `queuedAt`  | string  | ISO timestamp when queued                |
 
 ---
 
@@ -231,20 +237,23 @@ async function sendEmail(options) {
         fromName: options.fromName,
         subject: options.subject,
         html: options.html,
-        text: options.text
+        text: options.text,
       },
       {
         headers: {
-          'Authorization': `Bearer ${process.env.SENDEXA_API_TOKEN}`,
-          'Content-Type': 'application/json'
-        }
+          Authorization: `Bearer ${process.env.SENDEXA_API_TOKEN}`,
+          'Content-Type': 'application/json',
+        },
       }
     );
 
     console.log('Email sent:', response.data.messageId);
     return response.data;
   } catch (error) {
-    console.error('Error sending email:', error.response?.data || error.message);
+    console.error(
+      'Error sending email:',
+      error.response?.data || error.message
+    );
     throw error;
   }
 }
@@ -262,7 +271,7 @@ await sendEmail({
     <p>We're excited to have you on board.</p>
     <a href="https://yourapp.com/get-started">Get Started</a>
   `,
-  text: 'Welcome! Visit https://yourapp.com/get-started to begin.'
+  text: 'Welcome! Visit https://yourapp.com/get-started to begin.',
 });
 
 // Order Confirmation
@@ -276,7 +285,7 @@ await sendEmail({
     <p>Your order #12345 has been confirmed.</p>
     <p>Total: $99.99</p>
   `,
-  text: 'Your order #12345 has been confirmed. Total: $99.99'
+  text: 'Your order #12345 has been confirmed. Total: $99.99',
 });
 
 // Password Reset
@@ -290,7 +299,7 @@ await sendEmail({
     <a href="${resetLink}">Reset Password</a>
     <p>This link expires in 1 hour.</p>
   `,
-  text: `Reset your password: ${resetLink} (expires in 1 hour)`
+  text: `Reset your password: ${resetLink} (expires in 1 hour)`,
 });
 ```
 
@@ -307,7 +316,7 @@ def send_email(**kwargs):
         'Authorization': f"Bearer {os.getenv('SENDEXA_API_TOKEN')}",
         'Content-Type': 'application/json'
     }
-    
+
     payload = {
         'to': kwargs.get('to'),
         'from': kwargs.get('from_email'),
@@ -316,15 +325,15 @@ def send_email(**kwargs):
         'html': kwargs.get('html'),
         'text': kwargs.get('text')
     }
-    
+
     # Remove None values
     payload = {k: v for k, v in payload.items() if v is not None}
-    
+
     try:
         response = requests.post(url, json=payload, headers=headers)
         response.raise_for_status()
         data = response.json()
-        
+
         print(f"Email sent: {data['messageId']}")
         return data
     except requests.exceptions.RequestException as e:
@@ -360,7 +369,7 @@ send_email(
 function sendEmail($options) {
     $url = 'https://api.sendexa.co/v1/email/send';
     $token = getenv('SENDEXA_API_TOKEN');
-    
+
     $data = [
         'to' => $options['to'],
         'from' => $options['from'],
@@ -369,12 +378,12 @@ function sendEmail($options) {
         'html' => $options['html'] ?? null,
         'text' => $options['text'] ?? null
     ];
-    
+
     // Remove null values
     $data = array_filter($data, function($value) {
         return $value !== null;
     });
-    
+
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
@@ -383,11 +392,11 @@ function sendEmail($options) {
         "Authorization: Bearer $token",
         'Content-Type: application/json'
     ]);
-    
+
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
-    
+
     if ($httpCode === 200) {
         $result = json_decode($response, true);
         echo "Email sent: {$result['messageId']}\n";
@@ -430,7 +439,7 @@ sendEmail([
 
 ```javascript
 async function sendPersonalizedEmails(recipients) {
-  const promises = recipients.map(recipient => 
+  const promises = recipients.map((recipient) =>
     sendEmail({
       to: recipient.email,
       from: 'hello@yourapp.com',
@@ -438,17 +447,17 @@ async function sendPersonalizedEmails(recipients) {
       html: `
         <h1>Hello ${recipient.name}!</h1>
         <p>Your account balance: $${recipient.balance}</p>
-      `
+      `,
     })
   );
-  
+
   return Promise.all(promises);
 }
 
 // Usage
 await sendPersonalizedEmails([
   { email: 'john@example.com', name: 'John', balance: 100 },
-  { email: 'jane@example.com', name: 'Jane', balance: 250 }
+  { email: 'jane@example.com', name: 'Jane', balance: 250 },
 ]);
 ```
 
@@ -463,8 +472,8 @@ await sendEmail({
   headers: {
     'X-Priority': '1',
     'X-Mailer': 'YourApp Mailer',
-    'X-Campaign': 'summer-2024'
-  }
+    'X-Campaign': 'summer-2024',
+  },
 });
 ```
 
@@ -480,8 +489,8 @@ await sendEmail({
   metadata: {
     userId: '12345',
     orderId: 'ORD-789',
-    environment: 'production'
-  }
+    environment: 'production',
+  },
 });
 ```
 
@@ -495,7 +504,7 @@ await sendEmail({
   subject: 'Security Alert',
   html: '<p>Your account security notification</p>',
   trackOpens: false,
-  trackClicks: false
+  trackClicks: false,
 });
 ```
 
@@ -517,18 +526,18 @@ await axios.post(
     messages: [
       {
         to: 'user1@example.com',
-        html: '<h1>Hi John!</h1><p>Your personalized content here.</p>'
+        html: '<h1>Hi John!</h1><p>Your personalized content here.</p>',
       },
       {
         to: 'user2@example.com',
-        html: '<h1>Hi Jane!</h1><p>Your personalized content here.</p>'
-      }
-    ]
+        html: '<h1>Hi Jane!</h1><p>Your personalized content here.</p>',
+      },
+    ],
   },
   {
     headers: {
-      'Authorization': `Bearer ${process.env.SENDEXA_API_TOKEN}`
-    }
+      Authorization: `Bearer ${process.env.SENDEXA_API_TOKEN}`,
+    },
   }
 );
 ```
@@ -643,71 +652,71 @@ await axios.post(
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome Email</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    .header {
-      background: #4F46E5;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    .content {
-      padding: 30px 20px;
-    }
-    .button {
-      display: inline-block;
-      padding: 12px 24px;
-      background: #4F46E5;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      margin: 20px 0;
-    }
-    .footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 12px;
-      color: #666;
-      border-top: 1px solid #ddd;
-    }
-  </style>
-</head>
-<body>
-  <div class="header">
-    <h1>Welcome to YourApp!</h1>
-  </div>
-  
-  <div class="content">
-    <h2>Hi {{name}},</h2>
-    <p>Thanks for signing up! We're excited to have you on board.</p>
-    <p>To get started, click the button below:</p>
-    
-    <a href="{{verificationLink}}" class="button">Verify Your Email</a>
-    
-    <p>If you have any questions, feel free to reply to this email.</p>
-    
-    <p>Best regards,<br>The YourApp Team</p>
-  </div>
-  
-  <div class="footer">
-    <p>&copy; 2024 YourApp. All rights reserved.</p>
-    <p>
-      <a href="{{unsubscribeLink}}">Unsubscribe</a> | 
-      <a href="{{preferencesLink}}">Email Preferences</a>
-    </p>
-  </div>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome Email</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .header {
+        background: #4f46e5;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+      .content {
+        padding: 30px 20px;
+      }
+      .button {
+        display: inline-block;
+        padding: 12px 24px;
+        background: #4f46e5;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin: 20px 0;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 12px;
+        color: #666;
+        border-top: 1px solid #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Welcome to YourApp!</h1>
+    </div>
+
+    <div class="content">
+      <h2>Hi {{name}},</h2>
+      <p>Thanks for signing up! We're excited to have you on board.</p>
+      <p>To get started, click the button below:</p>
+
+      <a href="{{verificationLink}}" class="button">Verify Your Email</a>
+
+      <p>If you have any questions, feel free to reply to this email.</p>
+
+      <p>Best regards,<br />The YourApp Team</p>
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2024 YourApp. All rights reserved.</p>
+      <p>
+        <a href="{{unsubscribeLink}}">Unsubscribe</a> |
+        <a href="{{preferencesLink}}">Email Preferences</a>
+      </p>
+    </div>
+  </body>
 </html>
 ```
 
@@ -719,12 +728,12 @@ await axios.post(
 
 In sandbox environment:
 
-| Email | Behavior |
-|-------|----------|
+| Email                  | Behavior                     |
+| ---------------------- | ---------------------------- |
 | `success@sendexa.test` | Always delivers successfully |
-| `bounce@sendexa.test` | Simulates hard bounce |
-| `spam@sendexa.test` | Simulates spam complaint |
-| `delay@sendexa.test` | Simulates delayed delivery |
+| `bounce@sendexa.test`  | Simulates hard bounce        |
+| `spam@sendexa.test`    | Simulates spam complaint     |
+| `delay@sendexa.test`   | Simulates delayed delivery   |
 
 ### Testing Checklist
 

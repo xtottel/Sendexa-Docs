@@ -44,24 +44,28 @@ curl -X POST 'https://api.sendexa.co/v1/lookup/email' \
 ## What Gets Verified
 
 ### Format Validation
+
 - ✅ Email syntax (RFC 5322)
 - ✅ Domain format
 - ✅ Character validation
 - ✅ Special characters
 
 ### Domain Checks
+
 - ✅ Domain existence
 - ✅ MX records
 - ✅ DNS validation
 - ✅ Catch-all detection
 
 ### Deliverability
+
 - ✅ SMTP verification
 - ✅ Mailbox existence
 - ✅ Greylisting detection
 - ✅ Bounce risk
 
 ### Security Checks
+
 - ✅ Disposable email detection
 - ✅ Role-based detection
 - ✅ Spam trap detection
@@ -71,11 +75,11 @@ curl -X POST 'https://api.sendexa.co/v1/lookup/email' \
 
 ## Request Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `email` | string | Yes | Email address to verify |
-| `smtp_check` | boolean | No | Perform SMTP check (default: true) |
-| `catch_all_check` | boolean | No | Check for catch-all (default: true) |
+| Parameter         | Type    | Required | Description                         |
+| ----------------- | ------- | -------- | ----------------------------------- |
+| `email`           | string  | Yes      | Email address to verify             |
+| `smtp_check`      | boolean | No       | Perform SMTP check (default: true)  |
+| `catch_all_check` | boolean | No       | Check for catch-all (default: true) |
 
 ---
 
@@ -126,24 +130,24 @@ curl -X POST 'https://api.sendexa.co/v1/lookup/email' \
 
 ### Response Fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `success` | boolean | Whether request succeeded |
-| `email` | string | Email address checked |
-| `valid` | boolean | Whether email format is valid |
-| `deliverable` | boolean | Whether email can receive mail |
-| `disposable` | boolean | Whether it's a disposable email |
-| `role_based` | boolean | Whether it's a role email (info@, admin@) |
-| `free_provider` | boolean | Whether it's a free email provider |
-| `domain` | string | Email domain |
-| `username` | string | Email username |
-| `mx_records` | boolean | Whether MX records exist |
-| `mx_servers` | array | List of MX servers |
-| `smtp_check` | boolean | Whether SMTP check passed |
-| `catch_all` | boolean | Whether domain is catch-all |
-| `score` | integer | Quality score (0-100) |
-| `risk` | string | Risk level (low/medium/high) |
-| `suggestions` | string | Suggested correction |
+| Field           | Type    | Description                               |
+| --------------- | ------- | ----------------------------------------- |
+| `success`       | boolean | Whether request succeeded                 |
+| `email`         | string  | Email address checked                     |
+| `valid`         | boolean | Whether email format is valid             |
+| `deliverable`   | boolean | Whether email can receive mail            |
+| `disposable`    | boolean | Whether it's a disposable email           |
+| `role_based`    | boolean | Whether it's a role email (info@, admin@) |
+| `free_provider` | boolean | Whether it's a free email provider        |
+| `domain`        | string  | Email domain                              |
+| `username`      | string  | Email username                            |
+| `mx_records`    | boolean | Whether MX records exist                  |
+| `mx_servers`    | array   | List of MX servers                        |
+| `smtp_check`    | boolean | Whether SMTP check passed                 |
+| `catch_all`     | boolean | Whether domain is catch-all               |
+| `score`         | integer | Quality score (0-100)                     |
+| `risk`          | string  | Risk level (low/medium/high)              |
+| `suggestions`   | string  | Suggested correction                      |
 
 ---
 
@@ -161,22 +165,25 @@ async function verifyEmail(email) {
       { email },
       {
         headers: {
-          'Authorization': 'Bearer sk_live_your_token',
-          'Content-Type': 'application/json'
-        }
+          Authorization: 'Bearer sk_live_your_token',
+          'Content-Type': 'application/json',
+        },
       }
     );
 
     const data = response.data;
-    
+
     console.log(`Email: ${data.email}`);
     console.log(`Valid: ${data.valid}`);
     console.log(`Deliverable: ${data.deliverable}`);
     console.log(`Score: ${data.score}`);
-    
+
     return data;
   } catch (error) {
-    console.error('Verification failed:', error.response?.data || error.message);
+    console.error(
+      'Verification failed:',
+      error.response?.data || error.message
+    );
     throw error;
   }
 }
@@ -219,12 +226,12 @@ def verify_email(email):
         response = requests.post(url, json=payload, headers=headers)
         response.raise_for_status()
         data = response.json()
-        
+
         print(f"Email: {data['email']}")
         print(f"Valid: {data['valid']}")
         print(f"Deliverable: {data['deliverable']}")
         print(f"Score: {data['score']}")
-        
+
         return data
     except requests.exceptions.RequestException as e:
         print(f"Verification failed: {e}")
@@ -255,9 +262,9 @@ if result['free_provider']:
 function verifyEmail($email) {
     $url = 'https://api.sendexa.co/v1/lookup/email';
     $token = 'sk_live_your_token';
-    
+
     $data = ['email' => $email];
-    
+
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
@@ -266,19 +273,19 @@ function verifyEmail($email) {
         'Authorization: Bearer ' . $token,
         'Content-Type: application/json'
     ]);
-    
+
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
-    
+
     if ($httpCode === 200) {
         $result = json_decode($response, true);
-        
+
         echo "Email: " . $result['email'] . "\n";
         echo "Valid: " . ($result['valid'] ? 'Yes' : 'No') . "\n";
         echo "Deliverable: " . ($result['deliverable'] ? 'Yes' : 'No') . "\n";
         echo "Score: " . $result['score'] . "\n";
-        
+
         return $result;
     } else {
         throw new Exception("Verification failed: " . $response);
@@ -307,38 +314,38 @@ if ($result['disposable']) {
 ```javascript
 app.post('/register', async (req, res) => {
   const { email, name } = req.body;
-  
+
   // Verify email
   const verification = await verifyEmail(email);
-  
+
   if (!verification.valid) {
     return res.status(400).json({
       error: 'Invalid email address',
-      suggestion: verification.suggestions
+      suggestion: verification.suggestions,
     });
   }
-  
+
   if (verification.disposable) {
     return res.status(400).json({
-      error: 'Disposable email addresses are not allowed'
+      error: 'Disposable email addresses are not allowed',
     });
   }
-  
+
   if (verification.score < 70) {
     return res.status(400).json({
       error: 'Email has low deliverability score',
-      score: verification.score
+      score: verification.score,
     });
   }
-  
+
   // Create user
   await db.users.create({
     name,
     email,
     email_verified: false,
-    email_score: verification.score
+    email_score: verification.score,
   });
-  
+
   res.json({ success: true });
 });
 ```
@@ -348,31 +355,29 @@ app.post('/register', async (req, res) => {
 ```javascript
 async function addToNewsletter(email) {
   const verification = await verifyEmail(email);
-  
+
   // Check deliverability
   if (!verification.deliverable) {
     throw new Error('Email is not deliverable');
   }
-  
+
   // Check for disposable
   if (verification.disposable) {
     throw new Error('Disposable emails not allowed');
   }
-  
+
   // Check for role-based
   if (verification.role_based) {
     console.warn('Role-based email - may have lower engagement');
   }
-  
+
   // Add to list
   await mailchimp.lists.addListMember(listId, {
     email_address: email,
     status: 'pending',
-    tags: [
-      verification.free_provider ? 'free-email' : 'corporate-email'
-    ]
+    tags: [verification.free_provider ? 'free-email' : 'corporate-email'],
   });
-  
+
   return { success: true, verification };
 }
 ```
@@ -386,12 +391,12 @@ async function cleanEmailDatabase() {
     valid: [],
     invalid: [],
     disposable: [],
-    bouncing: []
+    bouncing: [],
   };
-  
+
   for (const subscriber of emails) {
     const verification = await verifyEmail(subscriber.email);
-    
+
     if (!verification.valid || !verification.deliverable) {
       results.invalid.push(subscriber.email);
       await db.subscribers.delete({ where: { id: subscriber.id } });
@@ -402,17 +407,17 @@ async function cleanEmailDatabase() {
       results.bouncing.push(subscriber.email);
       await db.subscribers.update({
         where: { id: subscriber.id },
-        data: { status: 'risky', score: verification.score }
+        data: { status: 'risky', score: verification.score },
       });
     } else {
       results.valid.push(subscriber.email);
       await db.subscribers.update({
         where: { id: subscriber.id },
-        data: { status: 'verified', score: verification.score }
+        data: { status: 'verified', score: verification.score },
       });
     }
   }
-  
+
   return results;
 }
 ```
@@ -423,16 +428,16 @@ async function cleanEmailDatabase() {
 async function sendEmailWithValidation(to, subject, body) {
   // Verify before sending
   const verification = await verifyEmail(to);
-  
+
   if (!verification.valid || !verification.deliverable) {
     console.log('Skipping invalid email:', to);
     return { sent: false, reason: 'invalid_email' };
   }
-  
+
   if (verification.score < 60) {
     console.log('Warning: Low score email:', to, verification.score);
   }
-  
+
   // Send email
   return await sendEmail({
     to,
@@ -440,8 +445,8 @@ async function sendEmailWithValidation(to, subject, body) {
     body,
     tags: {
       email_score: verification.score,
-      free_provider: verification.free_provider
-    }
+      free_provider: verification.free_provider,
+    },
   });
 }
 ```
@@ -453,30 +458,30 @@ async function bulkVerifyEmails(emails) {
   // Split into batches of 100
   const batches = chunkArray(emails, 100);
   const results = [];
-  
+
   for (const batch of batches) {
     const response = await axios.post(
       'https://api.sendexa.co/v1/lookup/email/bulk',
       { emails: batch },
       {
         headers: {
-          'Authorization': 'Bearer sk_live_your_token',
-          'Content-Type': 'application/json'
-        }
+          Authorization: 'Bearer sk_live_your_token',
+          'Content-Type': 'application/json',
+        },
       }
     );
-    
+
     results.push(...response.data.results);
   }
-  
+
   // Categorize results
   const categorized = {
-    valid: results.filter(r => r.valid && r.deliverable),
-    invalid: results.filter(r => !r.valid),
-    disposable: results.filter(r => r.disposable),
-    risky: results.filter(r => r.score < 50)
+    valid: results.filter((r) => r.valid && r.deliverable),
+    invalid: results.filter((r) => !r.valid),
+    disposable: results.filter((r) => r.disposable),
+    risky: results.filter((r) => r.score < 50),
   };
-  
+
   return categorized;
 }
 
@@ -496,24 +501,24 @@ console.log(`Risky: ${verified.risky.length}`);
 
 ### Score Interpretation
 
-| Score | Risk | Description |
-|-------|------|-------------|
-| 90-100 | Low | Excellent deliverability |
-| 70-89 | Medium | Good deliverability |
-| 50-69 | Medium | Fair deliverability |
-| 0-49 | High | Poor deliverability |
+| Score  | Risk   | Description              |
+| ------ | ------ | ------------------------ |
+| 90-100 | Low    | Excellent deliverability |
+| 70-89  | Medium | Good deliverability      |
+| 50-69  | Medium | Fair deliverability      |
+| 0-49   | High   | Poor deliverability      |
 
 ### Score Factors
 
 ```javascript
 // Score calculation factors
 const factors = {
-  valid_format: 20,        // Correct email format
-  mx_records: 20,          // Has MX records
-  smtp_valid: 25,          // SMTP validation passed
-  not_disposable: 15,      // Not disposable
-  not_role_based: 10,      // Not role-based
-  domain_age: 10           // Domain reputation
+  valid_format: 20, // Correct email format
+  mx_records: 20, // Has MX records
+  smtp_valid: 25, // SMTP validation passed
+  not_disposable: 15, // Not disposable
+  not_role_based: 10, // Not role-based
+  domain_age: 10, // Domain reputation
 };
 ```
 
@@ -529,7 +534,7 @@ const disposableProviders = [
   '10minutemail.com',
   'guerrillamail.com',
   'mailinator.com',
-  'trashmail.com'
+  'trashmail.com',
 ];
 
 // Check if disposable
@@ -561,7 +566,7 @@ const roleEmails = [
   'contact@',
   'hello@',
   'team@',
-  'noreply@'
+  'noreply@',
 ];
 
 // Check if role-based
@@ -586,7 +591,7 @@ A catch-all domain accepts emails to ANY address at that domain, making individu
 if (verification.catch_all) {
   console.log('Catch-all domain detected');
   console.log('Cannot verify individual mailbox');
-  
+
   // Lower confidence in deliverability
   if (verification.score < 80) {
     console.log('Consider additional verification');
@@ -613,7 +618,7 @@ if (verification.suggestions) {
 const suggestions = {
   'gmal.com': 'gmail.com',
   'yahooo.com': 'yahoo.com',
-  'hotmial.com': 'hotmail.com'
+  'hotmial.com': 'hotmail.com',
 };
 ```
 
@@ -643,10 +648,10 @@ async function verifyWithCache(email) {
   if (cache.has(email)) {
     return cache.get(email);
   }
-  
+
   const result = await verifyEmail(email);
   cache.set(email, result);
-  
+
   return result;
 }
 ```
@@ -656,16 +661,16 @@ async function verifyWithCache(email) {
 ```javascript
 async function handleEmailByRisk(email) {
   const verification = await verifyEmail(email);
-  
+
   switch (verification.risk) {
     case 'low':
       // Accept immediately
       return { action: 'accept', verification };
-      
+
     case 'medium':
       // Accept but flag for monitoring
       return { action: 'accept_flagged', verification };
-      
+
     case 'high':
       // Require additional verification
       return { action: 'verify_required', verification };
@@ -680,7 +685,7 @@ const SCORE_THRESHOLDS = {
   EXCELLENT: 90,
   GOOD: 70,
   FAIR: 50,
-  POOR: 0
+  POOR: 0,
 };
 
 function categorizeEmail(verification) {
@@ -708,18 +713,18 @@ async function safeVerifyEmail(email) {
     return await verifyEmail(email);
   } catch (error) {
     const code = error.response?.data?.error?.code;
-    
+
     switch (code) {
       case 'INVALID_EMAIL_FORMAT':
         return { valid: false, error: 'Invalid format' };
-        
+
       case 'DOMAIN_NOT_FOUND':
         return { valid: false, error: 'Domain does not exist' };
-        
+
       case 'SMTP_TIMEOUT':
         // Retry once
         return await verifyEmail(email);
-        
+
       default:
         return { valid: false, error: 'Verification failed' };
     }
@@ -733,12 +738,12 @@ async function safeVerifyEmail(email) {
 
 ### Test Emails
 
-| Email | Result |
-|-------|--------|
-| `valid@test.com` | Valid, deliverable |
-| `invalid@test.com` | Invalid format |
-| `disposable@test.com` | Disposable email |
-| `role@test.com` | Role-based email |
+| Email                 | Result             |
+| --------------------- | ------------------ |
+| `valid@test.com`      | Valid, deliverable |
+| `invalid@test.com`    | Invalid format     |
+| `disposable@test.com` | Disposable email   |
+| `role@test.com`       | Role-based email   |
 
 ---
 

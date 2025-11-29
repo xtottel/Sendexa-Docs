@@ -1369,6 +1369,435 @@ export const TocData: TocData = {
     },
   ],
 
+  'smpp/overview': [
+    {
+      title: 'SMPP Direct Overview',
+      href: '/docs/smpp/overview',
+      pages: [
+        {
+          title: 'Why Choose SMPP Direct?',
+          href: '/docs/smpp/overview#why-choose-smpp-direct',
+        },
+        {
+          title: 'SMPP vs HTTP API',
+          href: '/docs/smpp/overview#smpp-vs-http-api',
+        },
+        {
+          title: 'SMPP Protocol Version',
+          href: '/docs/smpp/overview#smpp-protocol-version',
+        },
+        {
+          title: 'Connection Details',
+          href: '/docs/smpp/overview#connection-details',
+        },
+        {
+          title: 'Getting Started',
+          href: '/docs/smpp/overview#getting-started',
+        },
+        {
+          title: 'Message Flow',
+          href: '/docs/smpp/overview#message-flow',
+        },
+        {
+          title: 'Supported Operations',
+          href: '/docs/smpp/overview#supported-operations',
+        },
+        {
+          title: 'Message Types',
+          href: '/docs/smpp/overview#message-types',
+        },
+        {
+          title: 'Pricing',
+          href: '/docs/smpp/overview#pricing',
+        },
+        {
+          title: 'Connection Types',
+          href: '/docs/smpp/overview#connection-types',
+        },
+        {
+          title: 'Throttling & Throughput',
+          href: '/docs/smpp/overview#throttling--throughput',
+        },
+        {
+          title: 'Delivery Reports (DLR)',
+          href: '/docs/smpp/overview#delivery-reports-dlr',
+        },
+        {
+          title: 'Character Encoding',
+          href: '/docs/smpp/overview#character-encoding',
+        },
+        {
+          title: 'TLV Parameters',
+          href: '/docs/smpp/overview#tlv-parameters',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/smpp/overview#best-practices',
+        },
+        {
+          title: 'Security',
+          href: '/docs/smpp/overview#security',
+        },
+        {
+          title: 'Troubleshooting',
+          href: '/docs/smpp/overview#troubleshooting',
+        },
+        {
+          title: 'Monitoring & Logs',
+          href: '/docs/smpp/overview#monitoring--logs',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/smpp/overview#testing',
+        },
+        {
+          title: 'Migration from HTTP API',
+          href: '/docs/smpp/overview#migration-from-http-api',
+        },
+        {
+          title: 'Support',
+          href: '/docs/smpp/overview#support',
+        },
+        {
+          title: 'Next Steps',
+          href: '/docs/smpp/overview#next-steps',
+        },
+      ],
+    },
+  ],
+  'smpp/connect': [
+    {
+      title: 'Connect to SMPP',
+      href: '/docs/smpp/connect',
+      pages: [
+        {
+          title: 'Quick Start',
+          href: '/docs/smpp/connect#quick-start',
+        },
+        {
+          title: 'Connection Parameters',
+          href: '/docs/smpp/connect#connection-parameters',
+        },
+        {
+          title: 'Bind Types',
+          href: '/docs/smpp/connect#bind-types',
+        },
+        {
+          title: 'Connection Examples',
+          href: '/docs/smpp/connect#connection-examples',
+        },
+        {
+          title: 'Connection Pooling',
+          href: '/docs/smpp/connect#connection-pooling',
+        },
+        {
+          title: 'Keep-Alive (Enquire Link)',
+          href: '/docs/smpp/connect#keep-alive-enquire-link',
+        },
+        {
+          title: 'Error Handling',
+          href: '/docs/smpp/connect#error-handling',
+        },
+        {
+          title: 'TLS/SSL Connection',
+          href: '/docs/smpp/connect#tlsssl-connection',
+        },
+        {
+          title: 'Testing Connection',
+          href: '/docs/smpp/connect#testing-connection',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/smpp/connect#best-practices',
+        },
+        {
+          title: 'Troubleshooting',
+          href: '/docs/smpp/connect#troubleshooting',
+        },
+        {
+          title: 'Next Steps',
+          href: '/docs/smpp/connect#next-steps',
+        },
+      ],
+    },
+  ],
+  'smpp/send': [
+    {
+      title: 'Send SMS via SMPP',
+      href: '/docs/smpp/send',
+      pages: [
+        {
+          title: 'Quick Start',
+          href: '/docs/smpp/send#quick-start',
+        },
+        {
+          title: 'Submit_SM Parameters',
+          href: '/docs/smpp/send#submit_sm-parameters',
+        },
+        {
+          title: 'Standard SMS',
+          href: '/docs/smpp/send#standard-sms',
+        },
+        {
+          title: 'Unicode SMS',
+          href: '/docs/smpp/send#unicode-sms',
+        },
+        {
+          title: 'Long Messages',
+          href: '/docs/smpp/send#long-messages',
+        },
+        {
+          title: 'Flash SMS',
+          href: '/docs/smpp/send#flash-sms',
+        },
+        {
+          title: 'Delivery Reports',
+          href: '/docs/smpp/send#delivery-reports',
+        },
+        {
+          title: 'Scheduled Messages',
+          href: '/docs/smpp/send#scheduled-messages',
+        },
+        {
+          title: 'Validity Period',
+          href: '/docs/smpp/send#validity-period',
+        },
+        {
+          title: 'Submit Multiple (submit_multi)',
+          href: '/docs/smpp/send#submit-multiple-submit_multi',
+        },
+        {
+          title: 'Code Examples',
+          href: '/docs/smpp/send#code-examples',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/smpp/send#best-practices',
+        },
+        {
+          title: 'Common Errors',
+          href: '/docs/smpp/send#common-errors',
+        },
+        {
+          title: 'Next Steps',
+          href: '/docs/smpp/send#next-steps',
+        },
+      ],
+    },
+  ],
+  'smpp/dlr': [
+    {
+      title: 'SMPP Delivery Reports',
+      href: '/docs/smpp/dlr',
+      pages: [
+        {
+          title: 'Overview',
+          href: '/docs/smpp/dlr#overview',
+        },
+        {
+          title: 'Quick Start',
+          href: '/docs/smpp/dlr#quick-start',
+        },
+        {
+          title: 'DLR Format',
+          href: '/docs/smpp/dlr#dlr-format',
+        },
+        {
+          title: 'DLR Status Codes',
+          href: '/docs/smpp/dlr#dlr-status-codes',
+        },
+        {
+          title: 'registered_delivery Options',
+          href: '/docs/smpp/dlr#registered_delivery-options',
+        },
+        {
+          title: 'Handling DLRs',
+          href: '/docs/smpp/dlr#handling-dlrs',
+        },
+        {
+          title: 'DLR Error Codes',
+          href: '/docs/smpp/dlr#dlr-error-codes',
+        },
+        {
+          title: 'Code Examples',
+          href: '/docs/smpp/dlr#code-examples',
+        },
+        {
+          title: 'DLR vs Webhooks',
+          href: '/docs/smpp/dlr#dlr-vs-webhooks',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/smpp/dlr#best-practices',
+        },
+        {
+          title: 'Troubleshooting',
+          href: '/docs/smpp/dlr#troubleshooting',
+        },
+        {
+          title: 'Next Steps',
+          href: '/docs/smpp/dlr#next-steps',
+        },
+      ],
+    },
+  ],
+  'smpp/webhooks': [
+    {
+      title: 'SMPP Webhooks',
+      href: '/docs/smpp/webhooks',
+      pages: [
+        {
+          title: 'Overview',
+          href: '/docs/smpp/webhooks#overview',
+        },
+        {
+          title: 'Configuration',
+          href: '/docs/smpp/webhooks#configuration',
+        },
+        {
+          title: 'Webhook Events',
+          href: '/docs/smpp/webhooks#webhook-events',
+        },
+        {
+          title: 'Implementation',
+          href: '/docs/smpp/webhooks#implementation',
+        },
+        {
+          title: 'Security',
+          href: '/docs/smpp/webhooks#security',
+        },
+        {
+          title: 'Retry Policy',
+          href: '/docs/smpp/webhooks#retry-policy',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/smpp/webhooks#testing',
+        },
+        {
+          title: 'Hybrid Approach',
+          href: '/docs/smpp/webhooks#hybrid-approach',
+        },
+        {
+          title: 'Monitoring & Debugging',
+          href: '/docs/smpp/webhooks#monitoring--debugging',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/smpp/webhooks#best-practices',
+        },
+        {
+          title: 'Common Errors',
+          href: '/docs/smpp/webhooks#common-errors',
+        },
+        {
+          title: 'Webhook vs SMPP DLR Comparison',
+          href: '/docs/smpp/webhooks#webhook-vs-smpp-dlr-comparison',
+        },
+        {
+          title: 'Next Steps',
+          href: '/docs/smpp/webhooks#next-steps',
+        },
+      ],
+    },
+  ],
+  'smpp/v1': [
+    {
+      title: 'SMPP API v1 Reference',
+      href: '/docs/smpp/v1',
+      pages: [
+        {
+          title: 'Protocol Version',
+          href: '/docs/smpp/v1#protocol-version',
+        },
+        {
+          title: 'Connection Details',
+          href: '/docs/smpp/v1#connection-details',
+        },
+        {
+          title: 'PDU Structure',
+          href: '/docs/smpp/v1#pdu-structure',
+        },
+        {
+          title: 'Bind Operations',
+          href: '/docs/smpp/v1#bind-operations',
+        },
+        {
+          title: 'Submit Operations',
+          href: '/docs/smpp/v1#submit-operations',
+        },
+        {
+          title: 'Receive Operations',
+          href: '/docs/smpp/v1#receive-operations',
+        },
+        {
+          title: 'Session Management',
+          href: '/docs/smpp/v1#session-management',
+        },
+        {
+          title: 'Command IDs',
+          href: '/docs/smpp/v1#command-ids',
+        },
+        {
+          title: 'Command Status Codes',
+          href: '/docs/smpp/v1#command-status-codes',
+        },
+        {
+          title: 'Type of Number (TON)',
+          href: '/docs/smpp/v1#type-of-number-ton',
+        },
+        {
+          title: 'Numbering Plan Indicator (NPI)',
+          href: '/docs/smpp/v1#numbering-plan-indicator-npi',
+        },
+        {
+          title: 'ESM Class',
+          href: '/docs/smpp/v1#esm-class',
+        },
+        {
+          title: 'Data Coding',
+          href: '/docs/smpp/v1#data-coding',
+        },
+        {
+          title: 'registered_delivery',
+          href: '/docs/smpp/v1#registered_delivery',
+        },
+        {
+          title: 'TLV Parameters',
+          href: '/docs/smpp/v1#tlv-parameters',
+        },
+        {
+          title: 'Message Concatenation',
+          href: '/docs/smpp/v1#message-concatenation',
+        },
+        {
+          title: 'Time Formats',
+          href: '/docs/smpp/v1#time-formats',
+        },
+        {
+          title: 'Rate Limits',
+          href: '/docs/smpp/v1#rate-limits',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/smpp/v1#best-practices',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/smpp/v1#testing',
+        },
+        {
+          title: 'Support',
+          href: '/docs/smpp/v1#support',
+        },
+        {
+          title: 'SMPP Resources',
+          href: '/docs/smpp/v1#smpp-resources',
+        },
+      ],
+    },
+  ],
+
   'verify/overview': [
     {
       title: 'Enhanced OTP API Overview',
@@ -2657,16 +3086,480 @@ export const TocData: TocData = {
       href: '/docs/whatsapp/overview',
       pages: [
         {
-          title: 'Introduction',
-          href: '/docs/whatsapp/overview#introduction',
+          title: 'Why Choose Sendexa WhatsApp?',
+          href: '/docs/whatsapp/overview#why-choose-sendexa-whatsapp',
         },
         {
-          title: 'Business Account Setup',
-          href: '/docs/whatsapp/overview#business-account-setup',
+          title: 'Key Features',
+          href: '/docs/whatsapp/overview#key-features',
+        },
+        {
+          title: 'Getting Started',
+          href: '/docs/whatsapp/overview#getting-started',
+        },
+        {
+          title: 'Base URL',
+          href: '/docs/whatsapp/overview#base-url',
+        },
+        {
+          title: 'Authentication',
+          href: '/docs/whatsapp/overview#authentication',
+        },
+        {
+          title: 'API Endpoints Summary',
+          href: '/docs/whatsapp/overview#api-endpoints-summary',
+        },
+        {
+          title: 'Message Pricing',
+          href: '/docs/whatsapp/overview#message-pricing',
         },
         {
           title: 'Message Types',
           href: '/docs/whatsapp/overview#message-types',
+        },
+        {
+          title: 'Conversation Windows',
+          href: '/docs/whatsapp/overview#conversation-windows',
+        },
+        {
+          title: 'Supported Countries',
+          href: '/docs/whatsapp/overview#supported-countries',
+        },
+        {
+          title: 'Common Use Cases',
+          href: '/docs/whatsapp/overview#common-use-cases',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/whatsapp/overview#best-practices',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/whatsapp/overview#testing',
+        },
+        {
+          title: 'WhatsApp Business Requirements',
+          href: '/docs/whatsapp/overview#whatsapp-business-requirements',
+        },
+        {
+          title: 'Rate Limits',
+          href: '/docs/whatsapp/overview#rate-limits',
+        },
+        {
+          title: 'SDKs & Libraries',
+          href: '/docs/whatsapp/overview#sdks--libraries',
+        },
+        {
+          title: 'Support',
+          href: '/docs/whatsapp/overview#support',
+        },
+        {
+          title: 'Next Steps',
+          href: '/docs/whatsapp/overview#next-steps',
+        },
+      ],
+    },
+  ],
+  'whatsapp/send': [
+    {
+      title: 'Send WhatsApp Messages',
+      href: '/docs/whatsapp/send',
+      pages: [
+        {
+          title: 'Quick Start',
+          href: '/docs/whatsapp/send#quick-start',
+        },
+        {
+          title: 'Endpoint',
+          href: '/docs/whatsapp/send#endpoint',
+        },
+        {
+          title: 'Request Parameters',
+          href: '/docs/whatsapp/send#request-parameters',
+        },
+        {
+          title: 'Text Messages',
+          href: '/docs/whatsapp/send#text-messages',
+        },
+        {
+          title: 'Media Messages',
+          href: '/docs/whatsapp/send#media-messages',
+        },
+        {
+          title: 'Template Messages',
+          href: '/docs/whatsapp/send#template-messages',
+        },
+        {
+          title: 'Interactive Messages',
+          href: '/docs/whatsapp/send#interactive-messages',
+        },
+        {
+          title: 'Location Messages',
+          href: '/docs/whatsapp/send#location-messages',
+        },
+        {
+          title: 'Contact Messages',
+          href: '/docs/whatsapp/send#contact-messages',
+        },
+        {
+          title: 'Reply Context',
+          href: '/docs/whatsapp/send#reply-context',
+        },
+        {
+          title: 'Media Upload',
+          href: '/docs/whatsapp/send#media-upload',
+        },
+        {
+          title: 'Response Format',
+          href: '/docs/whatsapp/send#response-format',
+        },
+        {
+          title: 'Code Examples',
+          href: '/docs/whatsapp/send#code-examples',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/whatsapp/send#best-practices',
+        },
+        {
+          title: 'Common Errors',
+          href: '/docs/whatsapp/send#common-errors',
+        },
+        {
+          title: 'Next Steps',
+          href: '/docs/whatsapp/send#next-steps',
+        },
+      ],
+    },
+  ],
+  'whatsapp/broadcasts': [
+    {
+      title: 'WhatsApp Broadcasts',
+      href: '/docs/whatsapp/broadcasts',
+      pages: [
+        {
+          title: 'Overview',
+          href: '/docs/whatsapp/broadcasts#overview',
+        },
+        {
+          title: 'Quick Start',
+          href: '/docs/whatsapp/broadcasts#quick-start',
+        },
+        {
+          title: 'Endpoint',
+          href: '/docs/whatsapp/broadcasts#endpoint',
+        },
+        {
+          title: 'Request Parameters',
+          href: '/docs/whatsapp/broadcasts#request-parameters',
+        },
+        {
+          title: 'Response Format',
+          href: '/docs/whatsapp/broadcasts#response-format',
+        },
+        {
+          title: 'Get Broadcast Status',
+          href: '/docs/whatsapp/broadcasts#get-broadcast-status',
+        },
+        {
+          title: 'Broadcast with Contact Segments',
+          href: '/docs/whatsapp/broadcasts#broadcast-with-contact-segments',
+        },
+        {
+          title: 'Scheduled Broadcasts',
+          href: '/docs/whatsapp/broadcasts#scheduled-broadcasts',
+        },
+        {
+          title: 'List Broadcasts',
+          href: '/docs/whatsapp/broadcasts#list-broadcasts',
+        },
+        {
+          title: 'Cancel Scheduled Broadcast',
+          href: '/docs/whatsapp/broadcasts#cancel-scheduled-broadcast',
+        },
+        {
+          title: 'Broadcast Recipients',
+          href: '/docs/whatsapp/broadcasts#broadcast-recipients',
+        },
+        {
+          title: 'Code Examples',
+          href: '/docs/whatsapp/broadcasts#code-examples',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/whatsapp/broadcasts#best-practices',
+        },
+        {
+          title: 'Analytics & Reporting',
+          href: '/docs/whatsapp/broadcasts#analytics--reporting',
+        },
+        {
+          title: 'Common Errors',
+          href: '/docs/whatsapp/broadcasts#common-errors',
+        },
+        {
+          title: 'Next Steps',
+          href: '/docs/whatsapp/broadcasts#next-steps',
+        },
+      ],
+    },
+  ],
+  'whatsapp/contacts': [
+    {
+      title: 'WhatsApp Contacts',
+      href: '/docs/whatsapp/contacts',
+      pages: [
+        {
+          title: 'Overview',
+          href: '/docs/whatsapp/contacts#overview',
+        },
+        {
+          title: 'Quick Start',
+          href: '/docs/whatsapp/contacts#quick-start',
+        },
+        {
+          title: 'Endpoints',
+          href: '/docs/whatsapp/contacts#endpoints',
+        },
+        {
+          title: 'Request Parameters',
+          href: '/docs/whatsapp/contacts#request-parameters',
+        },
+        {
+          title: 'Get Contact',
+          href: '/docs/whatsapp/contacts#get-contact',
+        },
+        {
+          title: 'Update Contact',
+          href: '/docs/whatsapp/contacts#update-contact',
+        },
+        {
+          title: 'Delete Contact',
+          href: '/docs/whatsapp/contacts#delete-contact',
+        },
+        {
+          title: 'List Contacts',
+          href: '/docs/whatsapp/contacts#list-contacts',
+        },
+        {
+          title: 'Bulk Operations',
+          href: '/docs/whatsapp/contacts#bulk-operations',
+        },
+        {
+          title: 'Tag Management',
+          href: '/docs/whatsapp/contacts#tag-management',
+        },
+        {
+          title: 'Code Examples',
+          href: '/docs/whatsapp/contacts#code-examples',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/whatsapp/contacts#best-practices',
+        },
+        {
+          title: 'Contact Segmentation Examples',
+          href: '/docs/whatsapp/contacts#contact-segmentation-examples',
+        },
+        {
+          title: 'Next Steps',
+          href: '/docs/whatsapp/contacts#next-steps',
+        },
+      ],
+    },
+  ],
+  'whatsapp/templates': [
+    {
+      title: 'WhatsApp Message Templates',
+      href: '/docs/whatsapp/templates',
+      pages: [
+        {
+          title: 'Overview',
+          href: '/docs/whatsapp/templates#overview',
+        },
+        {
+          title: 'Quick Start',
+          href: '/docs/whatsapp/templates#quick-start',
+        },
+        {
+          title: 'Template Structure',
+          href: '/docs/whatsapp/templates#template-structure',
+        },
+        {
+          title: 'Create Template',
+          href: '/docs/whatsapp/templates#create-template',
+        },
+        {
+          title: 'Template Status',
+          href: '/docs/whatsapp/templates#template-status',
+        },
+        {
+          title: 'Get Template',
+          href: '/docs/whatsapp/templates#get-template',
+        },
+        {
+          title: 'List Templates',
+          href: '/docs/whatsapp/templates#list-templates',
+        },
+        {
+          title: 'Update Template',
+          href: '/docs/whatsapp/templates#update-template',
+        },
+        {
+          title: 'Delete Template',
+          href: '/docs/whatsapp/templates#delete-template',
+        },
+        {
+          title: 'Template Best Practices',
+          href: '/docs/whatsapp/templates#template-best-practices',
+        },
+        {
+          title: 'Common Template Examples',
+          href: '/docs/whatsapp/templates#common-template-examples',
+        },
+        {
+          title: 'Approval Process',
+          href: '/docs/whatsapp/templates#approval-process',
+        },
+        {
+          title: 'Quality Scores',
+          href: '/docs/whatsapp/templates#quality-scores',
+        },
+        {
+          title: 'Code Examples',
+          href: '/docs/whatsapp/templates#code-examples',
+        },
+        {
+          title: 'Troubleshooting',
+          href: '/docs/whatsapp/templates#troubleshooting',
+        },
+        {
+          title: 'Next Steps',
+          href: '/docs/whatsapp/templates#next-steps',
+        },
+      ],
+    },
+  ],
+  'whatsapp/webhooks': [
+    {
+      title: 'WhatsApp Webhooks',
+      href: '/docs/whatsapp/webhooks',
+      pages: [
+        {
+          title: 'Overview',
+          href: '/docs/whatsapp/webhooks#overview',
+        },
+        {
+          title: 'Webhook Events',
+          href: '/docs/whatsapp/webhooks#webhook-events',
+        },
+        {
+          title: 'Configuration',
+          href: '/docs/whatsapp/webhooks#configuration',
+        },
+        {
+          title: 'Implementation',
+          href: '/docs/whatsapp/webhooks#implementation',
+        },
+        {
+          title: 'Security',
+          href: '/docs/whatsapp/webhooks#security',
+        },
+        {
+          title: 'Retry Policy',
+          href: '/docs/whatsapp/webhooks#retry-policy',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/whatsapp/webhooks#testing',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/whatsapp/webhooks#best-practices',
+        },
+        {
+          title: 'Common Errors',
+          href: '/docs/whatsapp/webhooks#common-errors',
+        },
+        {
+          title: 'Next Steps',
+          href: '/docs/whatsapp/webhooks#next-steps',
+        },
+      ],
+    },
+  ],
+  'whatsapp/v1': [
+    {
+      title: 'WhatsApp API v1 Reference',
+      href: '/docs/whatsapp/v1',
+      pages: [
+        {
+          title: 'Base URL',
+          href: '/docs/whatsapp/v1#base-url',
+        },
+        {
+          title: 'Authentication',
+          href: '/docs/whatsapp/v1#authentication',
+        },
+        {
+          title: 'Endpoints Overview',
+          href: '/docs/whatsapp/v1#endpoints-overview',
+        },
+        {
+          title: 'Send Message',
+          href: '/docs/whatsapp/v1#send-message',
+        },
+        {
+          title: 'Broadcasts',
+          href: '/docs/whatsapp/v1#broadcasts',
+        },
+        {
+          title: 'Contacts',
+          href: '/docs/whatsapp/v1#contacts',
+        },
+        {
+          title: 'Templates',
+          href: '/docs/whatsapp/v1#templates',
+        },
+        {
+          title: 'Media',
+          href: '/docs/whatsapp/v1#media',
+        },
+        {
+          title: 'Error Codes',
+          href: '/docs/whatsapp/v1#error-codes',
+        },
+        {
+          title: 'Rate Limits',
+          href: '/docs/whatsapp/v1#rate-limits',
+        },
+        {
+          title: 'Message Types',
+          href: '/docs/whatsapp/v1#message-types',
+        },
+        {
+          title: 'Webhooks',
+          href: '/docs/whatsapp/v1#webhooks',
+        },
+        {
+          title: 'SDKs',
+          href: '/docs/whatsapp/v1#sdks',
+        },
+        {
+          title: 'Testing',
+          href: '/docs/whatsapp/v1#testing',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/whatsapp/v1#best-practices',
+        },
+        {
+          title: 'Support',
+          href: '/docs/whatsapp/v1#support',
+        },
+        {
+          title: 'Changelog',
+          href: '/docs/whatsapp/v1#changelog',
         },
       ],
     },

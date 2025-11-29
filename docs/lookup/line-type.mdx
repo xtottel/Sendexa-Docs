@@ -41,72 +41,87 @@ curl -X POST 'https://api.sendexa.co/v1/lookup/line-type' \
 ## Line Types
 
 ### Mobile
+
 Standard mobile/cellular numbers.
 
 **Characteristics:**
+
 - Can receive SMS
 - Can receive voice calls
 - May support MMS
 - Portable between carriers
 
 **Use for:**
+
 - SMS marketing
 - Voice calls
 - MMS campaigns
 - Mobile app verification
 
 ### Landline
+
 Traditional fixed-line phones.
 
 **Characteristics:**
+
 - Cannot receive SMS
 - Can receive voice calls
 - Fixed location
 - No MMS support
 
 **Use for:**
+
 - Voice calls only
 - Business contacts
 - Home phone numbers
 
 ### VoIP
+
 Voice over IP numbers (Skype, WhatsApp, etc.).
 
 **Characteristics:**
+
 - Internet-based
 - May support SMS
 - Variable reliability
 - Often cheaper
 
 **Use for:**
+
 - Voice calls (quality varies)
 - Some SMS support
 - Verify capabilities first
 
 ### Toll-Free
+
 Free-to-call numbers (800, 888, etc.).
 
 **Characteristics:**
+
 - Free for caller
 - Costs paid by recipient
 - Usually business numbers
 - No SMS support
 
 **Use for:**
+
 - Customer service
 - Business inquiries
 - Voice calls only
 
 ### Premium Rate
+
 High-cost numbers for paid services.
 
 **Characteristics:**
+
 - High per-minute cost
 - Revenue sharing
 - Often for contests/voting
 - Limited SMS support
 
 **Avoid for:**
+
 - Standard communications
 - Marketing messages
 
@@ -114,10 +129,10 @@ High-cost numbers for paid services.
 
 ## Request Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `phone_number` | string | Yes | Phone number to check |
-| `country_hint` | string | No | 2-letter country code |
+| Parameter      | Type   | Required | Description           |
+| -------------- | ------ | -------- | --------------------- |
+| `phone_number` | string | Yes      | Phone number to check |
+| `country_hint` | string | No       | 2-letter country code |
 
 ---
 
@@ -192,18 +207,18 @@ async function detectLineType(phoneNumber) {
       { phone_number: phoneNumber },
       {
         headers: {
-          'Authorization': 'Bearer sk_live_your_token',
-          'Content-Type': 'application/json'
-        }
+          Authorization: 'Bearer sk_live_your_token',
+          'Content-Type': 'application/json',
+        },
       }
     );
 
     const data = response.data;
-    
+
     console.log(`Line Type: ${data.line_type}`);
     console.log(`SMS Capable: ${data.sms_capable}`);
     console.log(`Voice Capable: ${data.voice_capable}`);
-    
+
     return data;
   } catch (error) {
     console.error('Detection failed:', error.response?.data || error.message);
@@ -219,11 +234,11 @@ switch (result.line_type) {
   case 'mobile':
     await sendSMS(phoneNumber, message);
     break;
-    
+
   case 'landline':
     await makeVoiceCall(phoneNumber);
     break;
-    
+
   case 'voip':
     if (result.sms_capable) {
       await sendSMS(phoneNumber, message);
@@ -231,7 +246,7 @@ switch (result.line_type) {
       await makeVoiceCall(phoneNumber);
     }
     break;
-    
+
   default:
     console.log('Unsupported line type');
 }
@@ -255,11 +270,11 @@ def detect_line_type(phone_number):
         response = requests.post(url, json=payload, headers=headers)
         response.raise_for_status()
         data = response.json()
-        
+
         print(f"Line Type: {data['line_type']}")
         print(f"SMS Capable: {data['sms_capable']}")
         print(f"Voice Capable: {data['voice_capable']}")
-        
+
         return data
     except requests.exceptions.RequestException as e:
         print(f"Detection failed: {e}")
@@ -285,9 +300,9 @@ else:
 function detectLineType($phoneNumber) {
     $url = 'https://api.sendexa.co/v1/lookup/line-type';
     $token = 'sk_live_your_token';
-    
+
     $data = ['phone_number' => $phoneNumber];
-    
+
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
@@ -296,17 +311,17 @@ function detectLineType($phoneNumber) {
         'Authorization: Bearer ' . $token,
         'Content-Type: application/json'
     ]);
-    
+
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
-    
+
     if ($httpCode === 200) {
         $result = json_decode($response, true);
-        
+
         echo "Line Type: " . $result['line_type'] . "\n";
         echo "SMS Capable: " . ($result['sms_capable'] ? 'Yes' : 'No') . "\n";
-        
+
         return $result;
     } else {
         throw new Exception("Detection failed: " . $response);
@@ -337,25 +352,25 @@ Filter out non-mobile numbers before SMS campaigns:
 async function filterMobileNumbers(contacts) {
   const mobile = [];
   const nonMobile = [];
-  
+
   for (const contact of contacts) {
     const detection = await detectLineType(contact.phone);
-    
+
     if (detection.sms_capable) {
       mobile.push({
         ...contact,
         line_type: detection.line_type,
-        carrier: detection.carrier
+        carrier: detection.carrier,
       });
     } else {
       nonMobile.push({
         ...contact,
         line_type: detection.line_type,
-        reason: 'not_sms_capable'
+        reason: 'not_sms_capable',
       });
     }
   }
-  
+
   return { mobile, nonMobile };
 }
 
@@ -379,7 +394,7 @@ Choose communication channel based on line type:
 ```javascript
 async function sendMessage(phoneNumber, message) {
   const detection = await detectLineType(phoneNumber);
-  
+
   const strategies = {
     mobile: async () => {
       // Primary: SMS
@@ -389,12 +404,12 @@ async function sendMessage(phoneNumber, message) {
       // Fallback: Voice
       return await makeVoiceCall(phoneNumber, message);
     },
-    
+
     landline: async () => {
       // Voice call only
       return await makeVoiceCall(phoneNumber, message);
     },
-    
+
     voip: async () => {
       // Try SMS first if supported
       if (detection.sms_capable) {
@@ -405,14 +420,14 @@ async function sendMessage(phoneNumber, message) {
         return await makeVoiceCall(phoneNumber, message);
       }
       throw new Error('No supported communication method');
-    }
+    },
   };
-  
+
   const strategy = strategies[detection.line_type];
   if (strategy) {
     return await strategy();
   }
-  
+
   throw new Error(`Unsupported line type: ${detection.line_type}`);
 }
 ```
@@ -424,15 +439,15 @@ Enrich contact data with line type information:
 ```javascript
 async function enrichContactDatabase() {
   const contacts = await db.contacts.findAll({
-    where: { line_type: null }
+    where: { line_type: null },
   });
-  
+
   console.log(`Enriching ${contacts.length} contacts...`);
-  
+
   for (const contact of contacts) {
     try {
       const detection = await detectLineType(contact.phone);
-      
+
       await db.contacts.update({
         where: { id: contact.id },
         data: {
@@ -440,10 +455,10 @@ async function enrichContactDatabase() {
           sms_capable: detection.sms_capable,
           voice_capable: detection.voice_capable,
           carrier: detection.carrier,
-          enriched_at: new Date()
-        }
+          enriched_at: new Date(),
+        },
       });
-      
+
       console.log(`✓ ${contact.phone}: ${detection.line_type}`);
     } catch (error) {
       console.error(`✗ ${contact.phone}: ${error.message}`);
@@ -459,53 +474,53 @@ Calculate costs based on line type:
 ```javascript
 async function calculateMessageCost(phoneNumber, message) {
   const detection = await detectLineType(phoneNumber);
-  
+
   // Different costs for different line types
   const costs = {
     mobile: {
       sms: 0.035,
-      voice: 0.15
+      voice: 0.15,
     },
     landline: {
-      voice: 0.10
+      voice: 0.1,
     },
     voip: {
       sms: 0.04,
-      voice: 0.12
-    }
+      voice: 0.12,
+    },
   };
-  
+
   const lineTypeCosts = costs[detection.line_type];
-  
+
   if (!lineTypeCosts) {
     return { error: 'Unsupported line type' };
   }
-  
+
   // Choose cheapest available method
   const methods = [];
-  
+
   if (detection.sms_capable && lineTypeCosts.sms) {
     methods.push({
       method: 'sms',
-      cost: lineTypeCosts.sms * Math.ceil(message.length / 160)
+      cost: lineTypeCosts.sms * Math.ceil(message.length / 160),
     });
   }
-  
+
   if (detection.voice_capable && lineTypeCosts.voice) {
     methods.push({
       method: 'voice',
-      cost: lineTypeCosts.voice * 1 // Per minute
+      cost: lineTypeCosts.voice * 1, // Per minute
     });
   }
-  
+
   // Sort by cost
   methods.sort((a, b) => a.cost - b.cost);
-  
+
   return {
     line_type: detection.line_type,
     recommended_method: methods[0]?.method,
     cost: methods[0]?.cost,
-    all_methods: methods
+    all_methods: methods,
   };
 }
 
@@ -521,44 +536,44 @@ Check line type for regulatory compliance:
 ```javascript
 async function checkMarketingCompliance(phoneNumber) {
   const detection = await detectLineType(phoneNumber);
-  
+
   const rules = {
     mobile: {
       can_sms_market: true,
       requires_opt_in: true,
-      quiet_hours: { start: 21, end: 9 }
+      quiet_hours: { start: 21, end: 9 },
     },
     landline: {
       can_sms_market: false,
       can_voice_market: true,
-      requires_opt_in: true
+      requires_opt_in: true,
     },
     voip: {
       can_sms_market: detection.sms_capable,
       requires_opt_in: true,
-      special_consent_needed: true
+      special_consent_needed: true,
     },
     premium: {
       can_sms_market: false,
       can_voice_market: false,
-      blocked: true
-    }
+      blocked: true,
+    },
   };
-  
+
   const compliance = rules[detection.line_type];
-  
+
   return {
     line_type: detection.line_type,
     can_contact: !compliance.blocked,
     methods_allowed: {
       sms: compliance.can_sms_market,
-      voice: compliance.can_voice_market
+      voice: compliance.can_voice_market,
     },
     requirements: {
       opt_in: compliance.requires_opt_in,
-      special_consent: compliance.special_consent_needed
+      special_consent: compliance.special_consent_needed,
     },
-    restrictions: compliance.quiet_hours
+    restrictions: compliance.quiet_hours,
   };
 }
 
@@ -586,41 +601,40 @@ async function analyzeLineTypes(phoneNumbers) {
     voip: 0,
     toll_free: 0,
     premium: 0,
-    unknown: 0
+    unknown: 0,
   };
-  
+
   const capabilities = {
     sms_capable: 0,
     voice_capable: 0,
-    mms_capable: 0
+    mms_capable: 0,
   };
-  
+
   for (const number of phoneNumbers) {
     try {
       const detection = await detectLineType(number);
-      
+
       distribution[detection.line_type]++;
-      
+
       if (detection.sms_capable) capabilities.sms_capable++;
       if (detection.voice_capable) capabilities.voice_capable++;
       if (detection.mms_capable) capabilities.mms_capable++;
-      
     } catch (error) {
       distribution.unknown++;
     }
   }
-  
+
   const total = phoneNumbers.length;
-  
+
   return {
     distribution,
     percentages: {
       mobile: ((distribution.mobile / total) * 100).toFixed(2) + '%',
       landline: ((distribution.landline / total) * 100).toFixed(2) + '%',
-      voip: ((distribution.voip / total) * 100).toFixed(2) + '%'
+      voip: ((distribution.voip / total) * 100).toFixed(2) + '%',
     },
     capabilities,
-    total
+    total,
   };
 }
 
@@ -641,22 +655,22 @@ async function bulkDetectLineType(phoneNumbers) {
   // Split into batches of 100
   const batches = chunkArray(phoneNumbers, 100);
   const results = [];
-  
+
   for (const batch of batches) {
     const response = await axios.post(
       'https://api.sendexa.co/v1/lookup/line-type/bulk',
       { phone_numbers: batch },
       {
         headers: {
-          'Authorization': 'Bearer sk_live_your_token',
-          'Content-Type': 'application/json'
-        }
+          Authorization: 'Bearer sk_live_your_token',
+          'Content-Type': 'application/json',
+        },
       }
     );
-    
+
     results.push(...response.data.results);
   }
-  
+
   return results;
 }
 
@@ -665,8 +679,8 @@ const numbers = await db.contacts.pluck('phone');
 const detections = await bulkDetectLineType(numbers);
 
 // Filter by line type
-const mobile = detections.filter(d => d.line_type === 'mobile');
-const landline = detections.filter(d => d.line_type === 'landline');
+const mobile = detections.filter((d) => d.line_type === 'mobile');
+const landline = detections.filter((d) => d.line_type === 'landline');
 
 console.log(`Mobile: ${mobile.length}`);
 console.log(`Landline: ${landline.length}`);
@@ -684,23 +698,23 @@ const CACHE_TTL = 90 * 24 * 60 * 60 * 1000;
 
 async function detectWithCache(phoneNumber) {
   const cached = await db.lineTypeCache.findOne({
-    where: { phone_number: phoneNumber }
+    where: { phone_number: phoneNumber },
   });
-  
+
   const age = cached ? Date.now() - cached.updated_at.getTime() : Infinity;
-  
+
   if (cached && age < CACHE_TTL) {
     return cached.data;
   }
-  
+
   const detection = await detectLineType(phoneNumber);
-  
+
   await db.lineTypeCache.upsert({
     phone_number: phoneNumber,
     data: detection,
-    updated_at: new Date()
+    updated_at: new Date(),
   });
-  
+
   return detection;
 }
 ```
@@ -743,12 +757,12 @@ if (detection.line_type === 'voip') {
 
 ### Test Numbers
 
-| Number | Line Type | Capabilities |
-|--------|-----------|--------------|
-| `233500000001` | mobile | SMS, Voice, MMS |
-| `233500000002` | landline | Voice only |
-| `233500000003` | voip | SMS, Voice |
-| `233500000004` | toll-free | Voice only |
+| Number         | Line Type | Capabilities    |
+| -------------- | --------- | --------------- |
+| `233500000001` | mobile    | SMS, Voice, MMS |
+| `233500000002` | landline  | Voice only      |
+| `233500000003` | voip      | SMS, Voice      |
+| `233500000004` | toll-free | Voice only      |
 
 ---
 

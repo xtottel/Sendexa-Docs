@@ -13,6 +13,7 @@ Every request you make must include a valid **Bearer Token**.
 ---
 
 ## How Authentication Works
+
 Sendexa issues secure access tokens that uniquely identify your application. These tokens must be included in the `Authorization` header:
 
 ```http
@@ -24,6 +25,7 @@ Tokens allow you to authenticate without exposing your account credentials.
 ---
 
 ## Creating an API Token
+
 To generate a new token:
 
 1. Log in to the **Sendexa Dashboard**.
@@ -32,6 +34,7 @@ To generate a new token:
 4. Copy and store the token securely.
 
 You can create multiple tokens for different environments:
+
 - **Production**
 - **Development**
 - **Staging**
@@ -39,6 +42,7 @@ You can create multiple tokens for different environments:
 ---
 
 ## Using Tokens in API Requests
+
 Here’s an example of adding your token in a standard request:
 
 ```http
@@ -51,7 +55,9 @@ Content-Type: application/json
 ---
 
 ## Token Scopes (Coming Soon)
+
 Future versions of Sendexa will support scoped tokens such as:
+
 - **sms.send**
 - **otp.verify**
 - **email.send**
@@ -61,13 +67,16 @@ This gives you finer control over token permissions.
 ---
 
 ## Securing Your Tokens
+
 To keep your integration safe:
+
 - Never expose tokens in frontend code.
 - Regenerate a token immediately if exposed.
 - Do not share your token with anyone.
 - Use environment variables for storing tokens.
 
 Example `.env` usage:
+
 ```
 SENDEXA_TOKEN=YOUR_TOKEN_HERE
 ```
@@ -75,7 +84,9 @@ SENDEXA_TOKEN=YOUR_TOKEN_HERE
 ---
 
 ## Rotating or Revoking Tokens
+
 If a token becomes compromised:
+
 1. Open **Settings → API Tokens**.
 2. Select the token.
 3. Click **Revoke**.
@@ -84,6 +95,7 @@ If a token becomes compromised:
 ---
 
 ## Testing Authentication
+
 You can test token validity using `/v1/auth/check`:
 
 ```bash
@@ -92,6 +104,7 @@ curl -X GET https://api.sendexa.co/v1/auth/check \
 ```
 
 If successful, you’ll receive:
+
 ```json
 {
   "status": "valid",

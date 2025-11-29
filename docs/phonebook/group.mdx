@@ -47,12 +47,12 @@ const group = await axios.post(
   {
     name: 'Premium Customers',
     description: 'High-value customers',
-    tags: ['premium', 'vip']
+    tags: ['premium', 'vip'],
   },
   {
     headers: {
-      'Authorization': 'Bearer sk_live_your_token'
-    }
+      Authorization: 'Bearer sk_live_your_token',
+    },
   }
 );
 ```
@@ -80,15 +80,12 @@ const group = await axios.post(
 ### GET /v1/phonebook/groups
 
 ```javascript
-const groups = await axios.get(
-  'https://api.sendexa.co/v1/phonebook/groups',
-  {
-    params: { limit: 20 },
-    headers: {
-      'Authorization': 'Bearer sk_live_your_token'
-    }
-  }
-);
+const groups = await axios.get('https://api.sendexa.co/v1/phonebook/groups', {
+  params: { limit: 20 },
+  headers: {
+    Authorization: 'Bearer sk_live_your_token',
+  },
+});
 ```
 
 ---
@@ -101,12 +98,12 @@ const groups = await axios.get(
 await axios.post(
   'https://api.sendexa.co/v1/phonebook/groups/group_xyz789/contacts',
   {
-    contact_id: 'contact_abc123'
+    contact_id: 'contact_abc123',
   },
   {
     headers: {
-      'Authorization': 'Bearer sk_live_your_token'
-    }
+      Authorization: 'Bearer sk_live_your_token',
+    },
   }
 );
 ```
@@ -133,8 +130,8 @@ const contacts = await axios.get(
   'https://api.sendexa.co/v1/phonebook/groups/group_xyz789/contacts',
   {
     headers: {
-      'Authorization': 'Bearer sk_live_your_token'
-    }
+      Authorization: 'Bearer sk_live_your_token',
+    },
   }
 );
 ```
@@ -150,24 +147,24 @@ const contacts = await axios.get(
 const groups = {
   engaged: await createGroup({ name: 'Engaged Users' }),
   inactive: await createGroup({ name: 'Inactive Users' }),
-  vip: await createGroup({ name: 'VIP Customers' })
+  vip: await createGroup({ name: 'VIP Customers' }),
 };
 
 // Segment contacts
 async function segmentContacts() {
   const contacts = await listContacts();
-  
+
   for (const contact of contacts) {
     const daysSinceLastPurchase = getDaysSince(
       contact.custom_fields.last_purchase
     );
-    
+
     if (daysSinceLastPurchase < 30) {
       await addToGroup(groups.engaged.id, contact.id);
     } else if (daysSinceLastPurchase > 90) {
       await addToGroup(groups.inactive.id, contact.id);
     }
-    
+
     if (contact.custom_fields.lifetime_value > 1000) {
       await addToGroup(groups.vip.id, contact.id);
     }
@@ -182,22 +179,23 @@ async function segmentContacts() {
 const eventGroup = await createGroup({
   name: 'Conference 2025',
   description: 'Registered attendees',
-  tags: ['event']
+  tags: ['event'],
 });
 
 // Register attendee
 async function registerAttendee(email, phone, name) {
   const contact = await createContact({
-    email, phone,
+    email,
+    phone,
     first_name: name,
     custom_fields: {
       event: 'Conference 2025',
-      registration_date: new Date().toISOString()
-    }
+      registration_date: new Date().toISOString(),
+    },
   });
-  
+
   await addToGroup(eventGroup.id, contact.id);
-  
+
   // Send confirmation
   await sendSMS(phone, 'Registration confirmed!');
 }

@@ -43,18 +43,21 @@ curl -X POST 'https://api.sendexa.co/v1/lookup/validate' \
 ## What Gets Validated
 
 ### Format Validation
+
 - ✅ Number length
 - ✅ Country code
 - ✅ Area code
 - ✅ Number structure
 
 ### Reachability Check
+
 - ✅ Active status
 - ✅ Network availability
 - ✅ Carrier assignment
 - ✅ Disconnected detection
 
 ### Format Conversion
+
 - ✅ International format
 - ✅ National format
 - ✅ E.164 format
@@ -64,10 +67,10 @@ curl -X POST 'https://api.sendexa.co/v1/lookup/validate' \
 
 ## Request Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `phone_number` | string | Yes | Phone number to validate |
-| `country_hint` | string | No | 2-letter country code |
+| Parameter      | Type   | Required | Description              |
+| -------------- | ------ | -------- | ------------------------ |
+| `phone_number` | string | Yes      | Phone number to validate |
+| `country_hint` | string | No       | 2-letter country code    |
 
 ---
 
@@ -123,7 +126,7 @@ async function validateNumber(phoneNumber) {
     { phone_number: phoneNumber },
     { headers: { Authorization: 'Bearer sk_live_your_token' } }
   );
-  
+
   return response.data;
 }
 
@@ -166,15 +169,15 @@ if result['valid'] and result['reachable']:
 ```javascript
 async function sendSMSWithValidation(phoneNumber, message) {
   const validation = await validateNumber(phoneNumber);
-  
+
   if (!validation.valid) {
     throw new Error(`Invalid number: ${validation.error.message}`);
   }
-  
+
   if (!validation.reachable) {
     throw new Error('Number is not reachable');
   }
-  
+
   return await sendSMS(validation.international_format, message);
 }
 ```
@@ -184,21 +187,21 @@ async function sendSMSWithValidation(phoneNumber, message) {
 ```javascript
 app.post('/register', async (req, res) => {
   const { phone } = req.body;
-  
+
   const validation = await validateNumber(phone);
-  
+
   if (!validation.valid) {
     return res.status(400).json({
       error: 'Invalid phone number',
-      suggestion: validation.error.suggestion
+      suggestion: validation.error.suggestion,
     });
   }
-  
+
   await db.users.create({
     phone: validation.international_format,
-    country: validation.country_code
+    country: validation.country_code,
   });
-  
+
   res.json({ success: true });
 });
 ```
@@ -209,16 +212,16 @@ app.post('/register', async (req, res) => {
 async function cleanPhoneDatabase() {
   const contacts = await db.contacts.findAll();
   const results = { valid: 0, invalid: 0, updated: 0 };
-  
+
   for (const contact of contacts) {
     const validation = await validateNumber(contact.phone);
-    
+
     if (validation.valid) {
       results.valid++;
       if (contact.phone !== validation.international_format) {
         await db.contacts.update({
           where: { id: contact.id },
-          data: { phone: validation.international_format }
+          data: { phone: validation.international_format },
         });
         results.updated++;
       }
@@ -226,11 +229,11 @@ async function cleanPhoneDatabase() {
       results.invalid++;
       await db.contacts.update({
         where: { id: contact.id },
-        data: { valid: false }
+        data: { valid: false },
       });
     }
   }
-  
+
   return results;
 }
 ```
@@ -244,7 +247,7 @@ async function bulkValidate(phoneNumbers) {
     { phone_numbers: phoneNumbers },
     { headers: { Authorization: 'Bearer sk_live_your_token' } }
   );
-  
+
   return response.data.results;
 }
 
@@ -252,8 +255,8 @@ async function bulkValidate(phoneNumbers) {
 const numbers = ['233501234567', '233509876543', 'invalid'];
 const results = await bulkValidate(numbers);
 
-const valid = results.filter(r => r.valid);
-const invalid = results.filter(r => !r.valid);
+const valid = results.filter((r) => r.valid);
+const invalid = results.filter((r) => !r.valid);
 
 console.log(`Valid: ${valid.length}, Invalid: ${invalid.length}`);
 ```
@@ -264,12 +267,12 @@ console.log(`Valid: ${valid.length}, Invalid: ${invalid.length}`);
 
 ### Format Rules
 
-| Country | Format | Example |
-|---------|--------|---------|
-| Ghana | 233 + 9 digits | 233501234567 |
-| Nigeria | 234 + 10 digits | 2348012345678 |
-| Kenya | 254 + 9 digits | 254712345678 |
-| South Africa | 27 + 9 digits | 27812345678 |
+| Country      | Format          | Example       |
+| ------------ | --------------- | ------------- |
+| Ghana        | 233 + 9 digits  | 233501234567  |
+| Nigeria      | 234 + 10 digits | 2348012345678 |
+| Kenya        | 254 + 9 digits  | 254712345678  |
+| South Africa | 27 + 9 digits   | 27812345678   |
 
 ### Common Invalid Patterns
 
@@ -283,13 +286,13 @@ console.log(`Valid: ${valid.length}, Invalid: ${invalid.length}`);
 
 ## Error Codes
 
-| Code | Description | Solution |
-|------|-------------|----------|
-| `INVALID_FORMAT` | Number format invalid | Check number format |
-| `INVALID_LENGTH` | Wrong number length | Verify number length |
-| `INVALID_COUNTRY_CODE` | Country code invalid | Check country code |
-| `NUMBER_NOT_REACHABLE` | Number unreachable | Verify with user |
-| `DISCONNECTED` | Number disconnected | Remove from database |
+| Code                   | Description           | Solution             |
+| ---------------------- | --------------------- | -------------------- |
+| `INVALID_FORMAT`       | Number format invalid | Check number format  |
+| `INVALID_LENGTH`       | Wrong number length   | Verify number length |
+| `INVALID_COUNTRY_CODE` | Country code invalid  | Check country code   |
+| `NUMBER_NOT_REACHABLE` | Number unreachable    | Verify with user     |
+| `DISCONNECTED`         | Number disconnected   | Remove from database |
 
 ---
 
@@ -317,10 +320,10 @@ async function validateWithCache(phoneNumber) {
   if (cache.has(phoneNumber)) {
     return cache.get(phoneNumber);
   }
-  
+
   const result = await validateNumber(phoneNumber);
   cache.set(phoneNumber, result);
-  
+
   return result;
 }
 ```
@@ -332,9 +335,9 @@ async function safeValidate(phoneNumber) {
   try {
     return await validateNumber(phoneNumber);
   } catch (error) {
-    return { 
-      valid: false, 
-      error: { message: 'Validation failed' } 
+    return {
+      valid: false,
+      error: { message: 'Validation failed' },
     };
   }
 }
@@ -346,12 +349,12 @@ async function safeValidate(phoneNumber) {
 
 ### Test Numbers
 
-| Number | Result |
-|--------|--------|
-| `233500000001` | Valid, reachable |
+| Number         | Result               |
+| -------------- | -------------------- |
+| `233500000001` | Valid, reachable     |
 | `233500000002` | Valid, not reachable |
-| `233500000003` | Invalid format |
-| `233500000004` | Disconnected |
+| `233500000003` | Invalid format       |
+| `233500000004` | Disconnected         |
 
 ---
 

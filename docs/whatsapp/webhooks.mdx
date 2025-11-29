@@ -31,6 +31,7 @@ Webhooks are HTTP POST requests sent to your server when WhatsApp events occur. 
 ### Message Events
 
 #### message.sent
+
 Triggered when message is sent to WhatsApp.
 
 ```json
@@ -45,6 +46,7 @@ Triggered when message is sent to WhatsApp.
 ```
 
 #### message.delivered
+
 Triggered when message is delivered to recipient.
 
 ```json
@@ -66,6 +68,7 @@ Triggered when message is delivered to recipient.
 ```
 
 #### message.read
+
 Triggered when recipient reads the message.
 
 ```json
@@ -80,6 +83,7 @@ Triggered when recipient reads the message.
 ```
 
 #### message.failed
+
 Triggered when message delivery fails.
 
 ```json
@@ -100,6 +104,7 @@ Triggered when message delivery fails.
 ### Incoming Message Events
 
 #### message.received
+
 Triggered when you receive a message from a user.
 
 ```json
@@ -144,6 +149,7 @@ Triggered when you receive a message from a user.
 ### Interactive Events
 
 #### interactive.button_reply
+
 User clicks a button.
 
 ```json
@@ -167,6 +173,7 @@ User clicks a button.
 ```
 
 #### interactive.list_reply
+
 User selects from a list.
 
 ```json
@@ -205,12 +212,14 @@ User selects from a list.
 ### Webhook URL Requirements
 
 ✅ **Required:**
+
 - Must use HTTPS (not HTTP)
 - Must be publicly accessible
 - Should respond within 5 seconds
 - Should return 200 OK on success
 
 ❌ **Not Allowed:**
+
 - HTTP URLs
 - Localhost/private IPs
 - URLs requiring authentication
@@ -236,7 +245,7 @@ function verifySignature(payload, signature) {
     .createHmac('sha256', WEBHOOK_SECRET)
     .update(JSON.stringify(payload))
     .digest('hex');
-  
+
   return crypto.timingSafeEqual(
     Buffer.from(signature),
     Buffer.from(expectedSignature)
@@ -246,50 +255,50 @@ function verifySignature(payload, signature) {
 // Webhook endpoint
 app.post('/webhooks/sendexa/whatsapp', async (req, res) => {
   const signature = req.headers['x-sendexa-signature'];
-  
+
   // Verify signature
   if (!verifySignature(req.body, signature)) {
     console.error('Invalid signature');
     return res.status(401).send('Unauthorized');
   }
-  
+
   const event = req.body;
   console.log('Received event:', event.event);
-  
+
   // Handle different event types
   switch (event.event) {
     case 'message.sent':
       await handleMessageSent(event);
       break;
-      
+
     case 'message.delivered':
       await handleMessageDelivered(event);
       break;
-      
+
     case 'message.read':
       await handleMessageRead(event);
       break;
-      
+
     case 'message.failed':
       await handleMessageFailed(event);
       break;
-      
+
     case 'message.received':
       await handleIncomingMessage(event);
       break;
-      
+
     case 'interactive.button_reply':
       await handleButtonReply(event);
       break;
-      
+
     case 'interactive.list_reply':
       await handleListReply(event);
       break;
-      
+
     default:
       console.log('Unknown event:', event.event);
   }
-  
+
   // Respond quickly
   res.status(200).send('OK');
 });
@@ -297,57 +306,57 @@ app.post('/webhooks/sendexa/whatsapp', async (req, res) => {
 // Event handlers
 async function handleMessageSent(event) {
   console.log(`Message sent: ${event.messageId}`);
-  
+
   await db.messages.update({
     where: { id: event.messageId },
-    data: { status: 'sent', sentAt: event.timestamp }
+    data: { status: 'sent', sentAt: event.timestamp },
   });
 }
 
 async function handleMessageDelivered(event) {
   console.log(`Message delivered: ${event.messageId}`);
-  
+
   await db.messages.update({
     where: { id: event.messageId },
     data: {
       status: 'delivered',
       deliveredAt: event.deliveredAt,
-      cost: event.cost
-    }
+      cost: event.cost,
+    },
   });
-  
+
   // Notify user
   await notifyUser(event.messageId, 'delivered');
 }
 
 async function handleMessageRead(event) {
   console.log(`Message read: ${event.messageId}`);
-  
+
   await db.messages.update({
     where: { id: event.messageId },
-    data: { status: 'read', readAt: event.readAt }
+    data: { status: 'read', readAt: event.readAt },
   });
 }
 
 async function handleMessageFailed(event) {
   console.error(`Message failed: ${event.messageId}`, event.error);
-  
+
   await db.messages.update({
     where: { id: event.messageId },
     data: {
       status: 'failed',
       errorCode: event.error.code,
-      errorMessage: event.error.message
-    }
+      errorMessage: event.error.message,
+    },
   });
-  
+
   // Alert admin
   await alertAdmin(`Message ${event.messageId} failed: ${event.error.message}`);
 }
 
 async function handleIncomingMessage(event) {
   console.log(`Incoming message from: ${event.from}`);
-  
+
   // Save message
   await db.incomingMessages.create({
     data: {
@@ -355,18 +364,18 @@ async function handleIncomingMessage(event) {
       from: event.from,
       type: event.type,
       content: event.text?.body || event.image?.url || '',
-      timestamp: event.timestamp
-    }
+      timestamp: event.timestamp,
+    },
   });
-  
+
   // Auto-reply logic
   if (event.text?.body) {
     const message = event.text.body.toLowerCase();
-    
+
     if (message.includes('help')) {
       await sendWhatsApp(event.from, {
         type: 'text',
-        text: { body: 'How can we help you today?' }
+        text: { body: 'How can we help you today?' },
       });
     } else if (message.includes('order')) {
       await sendWhatsApp(event.from, {
@@ -376,11 +385,14 @@ async function handleIncomingMessage(event) {
           body: { text: 'Would you like to check your order status?' },
           action: {
             buttons: [
-              { type: 'reply', reply: { id: 'check_order', title: 'Check Status' } },
-              { type: 'reply', reply: { id: 'new_order', title: 'New Order' } }
-            ]
-          }
-        }
+              {
+                type: 'reply',
+                reply: { id: 'check_order', title: 'Check Status' },
+              },
+              { type: 'reply', reply: { id: 'new_order', title: 'New Order' } },
+            ],
+          },
+        },
       });
     }
   }
@@ -389,7 +401,7 @@ async function handleIncomingMessage(event) {
 async function handleButtonReply(event) {
   const buttonId = event.interactive.button_reply.id;
   console.log(`Button clicked: ${buttonId}`);
-  
+
   // Handle button actions
   switch (buttonId) {
     case 'confirm_yes':
@@ -409,7 +421,7 @@ async function handleButtonReply(event) {
 async function handleListReply(event) {
   const listId = event.interactive.list_reply.id;
   console.log(`List item selected: ${listId}`);
-  
+
   // Handle list selection
   switch (listId) {
     case 'sales_quote':
@@ -447,21 +459,21 @@ def verify_signature(payload, signature):
         json.dumps(payload).encode(),
         hashlib.sha256
     ).hexdigest()
-    
+
     return hmac.compare_digest(signature, expected_signature)
 
 @app.route('/webhooks/sendexa/whatsapp', methods=['POST'])
 def handle_webhook():
     signature = request.headers.get('X-Sendexa-Signature')
     payload = request.get_json()
-    
+
     # Verify signature
     if not verify_signature(payload, signature):
         return jsonify({'error': 'Invalid signature'}), 401
-    
+
     event_type = payload.get('event')
     print(f"Received event: {event_type}")
-    
+
     # Handle different event types
     if event_type == 'message.sent':
         handle_message_sent(payload)
@@ -479,7 +491,7 @@ def handle_webhook():
         handle_list_reply(payload)
     else:
         print(f"Unknown event: {event_type}")
-    
+
     return jsonify({'status': 'success'}), 200
 
 def handle_message_sent(event):
@@ -500,13 +512,13 @@ def handle_message_failed(event):
 
 def handle_incoming_message(event):
     print(f"Incoming message from: {event['from']}")
-    
+
     # Save message to database
     # Implement auto-reply logic
-    
+
     if event['type'] == 'text':
         message = event['text']['body'].lower()
-        
+
         if 'help' in message:
             # Send help message
             send_reply(event['from'], 'How can we help you?')
@@ -517,7 +529,7 @@ def handle_incoming_message(event):
 def handle_button_reply(event):
     button_id = event['interactive']['button_reply']['id']
     print(f"Button clicked: {button_id}")
-    
+
     # Handle button actions
     if button_id == 'confirm_yes':
         process_confirmation(event['from'])
@@ -527,7 +539,7 @@ def handle_button_reply(event):
 def handle_list_reply(event):
     list_id = event['interactive']['list_reply']['id']
     print(f"List item selected: {list_id}")
-    
+
     # Handle list selection
     if list_id == 'sales_quote':
         send_quote_form(event['from'])
@@ -563,31 +575,31 @@ switch ($event['event']) {
     case 'message.sent':
         handleMessageSent($event);
         break;
-        
+
     case 'message.delivered':
         handleMessageDelivered($event);
         break;
-        
+
     case 'message.read':
         handleMessageRead($event);
         break;
-        
+
     case 'message.failed':
         handleMessageFailed($event);
         break;
-        
+
     case 'message.received':
         handleIncomingMessage($event);
         break;
-        
+
     case 'interactive.button_reply':
         handleButtonReply($event);
         break;
-        
+
     case 'interactive.list_reply':
         handleListReply($event);
         break;
-        
+
     default:
         error_log("Unknown event: " . $event['event']);
 }
@@ -618,13 +630,13 @@ function handleMessageFailed($event) {
 
 function handleIncomingMessage($event) {
     error_log("Incoming message from: " . $event['from']);
-    
+
     // Save to database
     // Implement auto-reply
-    
+
     if ($event['type'] === 'text') {
         $message = strtolower($event['text']['body']);
-        
+
         if (strpos($message, 'help') !== false) {
             sendReply($event['from'], 'How can we help you?');
         } elseif (strpos($message, 'order') !== false) {
@@ -636,7 +648,7 @@ function handleIncomingMessage($event) {
 function handleButtonReply($event) {
     $buttonId = $event['interactive']['button_reply']['id'];
     error_log("Button clicked: " . $buttonId);
-    
+
     if ($buttonId === 'confirm_yes') {
         processConfirmation($event['from']);
     }
@@ -645,7 +657,7 @@ function handleButtonReply($event) {
 function handleListReply($event) {
     $listId = $event['interactive']['list_reply']['id'];
     error_log("List item selected: " . $listId);
-    
+
     if ($listId === 'sales_quote') {
         sendQuoteForm($event['from']);
     }
@@ -670,7 +682,7 @@ function verifySignature(payload, signature) {
     .createHmac('sha256', WEBHOOK_SECRET)
     .update(JSON.stringify(payload))
     .digest('hex');
-  
+
   return crypto.timingSafeEqual(
     Buffer.from(signature),
     Buffer.from(expectedSignature)
@@ -694,13 +706,13 @@ function verifySignature(payload, signature) {
 
 If your endpoint doesn't respond with `200 OK`, Sendexa will retry:
 
-| Attempt | Delay | Total Elapsed |
-|---------|-------|---------------|
-| 1 | Immediate | 0s |
-| 2 | 30 seconds | 30s |
-| 3 | 2 minutes | 2.5 min |
-| 4 | 10 minutes | 12.5 min |
-| 5 | 1 hour | 1h 12.5min |
+| Attempt | Delay      | Total Elapsed |
+| ------- | ---------- | ------------- |
+| 1       | Immediate  | 0s            |
+| 2       | 30 seconds | 30s           |
+| 3       | 2 minutes  | 2.5 min       |
+| 4       | 10 minutes | 12.5 min      |
+| 5       | 1 hour     | 1h 12.5min    |
 
 ### Idempotency
 
@@ -709,18 +721,18 @@ const processedEvents = new Set();
 
 app.post('/webhooks/sendexa/whatsapp', (req, res) => {
   const deliveryId = req.headers['x-sendexa-delivery-id'];
-  
+
   // Check if already processed
   if (processedEvents.has(deliveryId)) {
     return res.status(200).send('OK');
   }
-  
+
   // Process event
   handleEvent(req.body);
-  
+
   // Mark as processed
   processedEvents.add(deliveryId);
-  
+
   res.status(200).send('OK');
 });
 ```
@@ -770,10 +782,10 @@ app.post('/webhooks/sendexa/whatsapp', async (req, res) => {
   if (!verifySignature(req.body, req.headers['x-sendexa-signature'])) {
     return res.status(401).send('Unauthorized');
   }
-  
+
   // Queue for processing
   await webhookQueue.add(req.body);
-  
+
   // Respond immediately
   res.status(200).send('OK');
 });
@@ -791,9 +803,9 @@ webhookQueue.process(async (job) => {
 async function handleIncomingMessage(event) {
   // Get conversation context
   const context = await db.conversations.findOne({
-    phone: event.from
+    phone: event.from,
   });
-  
+
   if (context && context.state === 'awaiting_order_id') {
     // User is providing order ID
     await handleOrderIdResponse(event.from, event.text.body);
@@ -812,7 +824,7 @@ const conversationStates = new Map();
 async function handleIncomingMessage(event) {
   const phone = event.from;
   const state = conversationStates.get(phone) || 'idle';
-  
+
   if (state === 'awaiting_name') {
     conversationStates.set(phone, 'awaiting_email');
     await sendWhatsApp(phone, {
@@ -842,6 +854,7 @@ async function handleIncomingMessage(event) {
 **Cause:** Wrong webhook secret or modified payload
 
 **Solution:**
+
 - Verify secret from dashboard
 - Check raw request body
 - Use UTF-8 encoding
@@ -851,6 +864,7 @@ async function handleIncomingMessage(event) {
 **Cause:** Processing takes too long
 
 **Solution:**
+
 - Return 200 OK immediately
 - Process asynchronously
 - Optimize slow operations
@@ -860,6 +874,7 @@ async function handleIncomingMessage(event) {
 **Cause:** Retries due to slow response
 
 **Solution:**
+
 - Implement idempotency using delivery IDs
 - Store processed event IDs
 

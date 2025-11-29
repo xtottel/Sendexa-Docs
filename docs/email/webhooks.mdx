@@ -11,7 +11,9 @@ Receive real-time HTTP callbacks when email events occur including delivery conf
 ## Webhook Events
 
 ### email.sent
+
 Email successfully sent to mail server:
+
 ```json
 {
   "event": "email.sent",
@@ -23,7 +25,9 @@ Email successfully sent to mail server:
 ```
 
 ### email.delivered
+
 Email delivered to recipient:
+
 ```json
 {
   "event": "email.delivered",
@@ -34,7 +38,9 @@ Email delivered to recipient:
 ```
 
 ### email.opened
+
 Recipient opened email:
+
 ```json
 {
   "event": "email.opened",
@@ -47,7 +53,9 @@ Recipient opened email:
 ```
 
 ### email.clicked
+
 Link clicked in email:
+
 ```json
 {
   "event": "email.clicked",
@@ -59,7 +67,9 @@ Link clicked in email:
 ```
 
 ### email.bounced
+
 Email bounced:
+
 ```json
 {
   "event": "email.bounced",
@@ -72,7 +82,9 @@ Email bounced:
 ```
 
 ### email.complained
+
 Marked as spam:
+
 ```json
 {
   "event": "email.complained",
@@ -98,19 +110,24 @@ const crypto = require('crypto');
 
 app.post('/webhooks/email', (req, res) => {
   const signature = req.headers['x-sendexa-signature'];
-  
+
   // Verify signature
   const expectedSignature = crypto
     .createHmac('sha256', WEBHOOK_SECRET)
     .update(JSON.stringify(req.body))
     .digest('hex');
-  
-  if (!crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expectedSignature))) {
+
+  if (
+    !crypto.timingSafeEqual(
+      Buffer.from(signature),
+      Buffer.from(expectedSignature)
+    )
+  ) {
     return res.status(401).send('Invalid signature');
   }
-  
+
   const event = req.body;
-  
+
   switch (event.event) {
     case 'email.delivered':
       console.log('Email delivered:', event.messageId);
@@ -124,7 +141,7 @@ app.post('/webhooks/email', (req, res) => {
       // Unsubscribe user
       break;
   }
-  
+
   res.status(200).send('OK');
 });
 ```

@@ -14,22 +14,22 @@ Receive real-time notifications when contacts or groups are created, updated, or
 
 ### Contact Events
 
-| Event | Trigger |
-|-------|---------|
-| `contact.created` | New contact created |
-| `contact.updated` | Contact updated |
-| `contact.deleted` | Contact deleted |
-| `contact.subscribed` | Contact subscribed |
+| Event                  | Trigger              |
+| ---------------------- | -------------------- |
+| `contact.created`      | New contact created  |
+| `contact.updated`      | Contact updated      |
+| `contact.deleted`      | Contact deleted      |
+| `contact.subscribed`   | Contact subscribed   |
 | `contact.unsubscribed` | Contact unsubscribed |
 
 ### Group Events
 
-| Event | Trigger |
-|-------|---------|
-| `group.created` | New group created |
-| `group.updated` | Group updated |
-| `group.deleted` | Group deleted |
-| `group.contact_added` | Contact added to group |
+| Event                   | Trigger                    |
+| ----------------------- | -------------------------- |
+| `group.created`         | New group created          |
+| `group.updated`         | Group updated              |
+| `group.deleted`         | Group deleted              |
+| `group.contact_added`   | Contact added to group     |
 | `group.contact_removed` | Contact removed from group |
 
 ---
@@ -100,17 +100,17 @@ const app = express();
 
 app.post('/webhooks/phonebook', (req, res) => {
   const event = req.body;
-  
+
   switch (event.event) {
     case 'contact.created':
       handleContactCreated(event.contact);
       break;
-      
+
     case 'contact.unsubscribed':
       handleUnsubscribe(event.contact);
       break;
   }
-  
+
   res.status(200).send('OK');
 });
 

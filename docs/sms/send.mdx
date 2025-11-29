@@ -58,20 +58,21 @@ Send single or bulk SMS messages.
 
 ## Request Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `to` | string or array | Yes | Recipient phone number(s) in international format |
-| `from` | string | Yes | Approved Sender ID (3-11 characters) |
-| `content` | string | Yes | Message text (max 1600 characters) |
-| `reference` | string | No | Your custom reference ID for tracking |
-| `callback_url` | string | No | Webhook URL for delivery reports |
-| `scheduled_at` | string | No | ISO 8601 timestamp for scheduled sending |
+| Parameter      | Type            | Required | Description                                       |
+| -------------- | --------------- | -------- | ------------------------------------------------- |
+| `to`           | string or array | Yes      | Recipient phone number(s) in international format |
+| `from`         | string          | Yes      | Approved Sender ID (3-11 characters)              |
+| `content`      | string          | Yes      | Message text (max 1600 characters)                |
+| `reference`    | string          | No       | Your custom reference ID for tracking             |
+| `callback_url` | string          | No       | Webhook URL for delivery reports                  |
+| `scheduled_at` | string          | No       | ISO 8601 timestamp for scheduled sending          |
 
 ### Parameter Details
 
 #### to (Phone Number)
 
 **Single Recipient:**
+
 ```json
 {
   "to": "233501234567"
@@ -79,6 +80,7 @@ Send single or bulk SMS messages.
 ```
 
 **Multiple Recipients (Bulk):**
+
 ```json
 {
   "to": ["233501234567", "233509876543", "233543219876"]
@@ -86,6 +88,7 @@ Send single or bulk SMS messages.
 ```
 
 **Format Requirements:**
+
 - Must include country code
 - No spaces, dashes, or special characters
 - Start with country code (no + required, but accepted)
@@ -97,12 +100,14 @@ Send single or bulk SMS messages.
 Your registered Sender ID that appears on the recipient's phone.
 
 **Requirements:**
+
 - 3-11 characters
 - Alphanumeric only (letters and numbers)
 - No spaces or special characters
 - Must be pre-registered and approved
 
 **Examples:**
+
 - ✅ `YourBrand`
 - ✅ `MyShop247`
 - ✅ `ALERT`
@@ -115,16 +120,19 @@ Your registered Sender ID that appears on the recipient's phone.
 The SMS message content.
 
 **Character Limits:**
+
 - **160 characters** = 1 SMS part
 - **306 characters** = 2 SMS parts
 - **459 characters** = 3 SMS parts
 - Up to **1600 characters** = 10 SMS parts
 
 **Encoding:**
+
 - GSM-7 encoding (standard): 160 chars per part
 - Unicode (emoji/special chars): 70 chars per part
 
 **Tips:**
+
 - Keep messages concise for cost efficiency
 - Test message length before bulk sending
 - Unicode characters count as more than one character
@@ -140,6 +148,7 @@ Your custom reference ID for tracking:
 ```
 
 **Use Cases:**
+
 - Link SMS to order IDs
 - Track campaign performance
 - Correlate with internal systems
@@ -166,6 +175,7 @@ Schedule SMS for future delivery:
 ```
 
 **Requirements:**
+
 - ISO 8601 format
 - Must be in the future
 - Maximum 30 days ahead
@@ -230,18 +240,18 @@ Schedule SMS for future delivery:
 
 ### Response Fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `success` | boolean | Whether request succeeded |
-| `message` | string | Human-readable status message |
-| `messages` | array | Array of message objects |
-| `messageId` | string | Unique identifier for the message |
-| `to` | string | Recipient phone number |
-| `status` | string | Current status (queued, sent, failed) |
-| `parts` | integer | Number of SMS parts |
-| `cost` | float | Cost for this message |
-| `currency` | string | Currency code (GHS, NGN, etc.) |
-| `summary` | object | Bulk send summary (bulk only) |
+| Field       | Type    | Description                           |
+| ----------- | ------- | ------------------------------------- |
+| `success`   | boolean | Whether request succeeded             |
+| `message`   | string  | Human-readable status message         |
+| `messages`  | array   | Array of message objects              |
+| `messageId` | string  | Unique identifier for the message     |
+| `to`        | string  | Recipient phone number                |
+| `status`    | string  | Current status (queued, sent, failed) |
+| `parts`     | integer | Number of SMS parts                   |
+| `cost`      | float   | Cost for this message                 |
+| `currency`  | string  | Currency code (GHS, NGN, etc.)        |
+| `summary`   | object  | Bulk send summary (bulk only)         |
 
 ---
 
@@ -259,13 +269,13 @@ async function sendSMS(to, content, from = 'YourBrand') {
       {
         to,
         from,
-        content
+        content,
       },
       {
         headers: {
-          'Authorization': 'Bearer sk_live_your_token',
-          'Content-Type': 'application/json'
-        }
+          Authorization: 'Bearer sk_live_your_token',
+          'Content-Type': 'application/json',
+        },
       }
     );
 
@@ -281,10 +291,7 @@ async function sendSMS(to, content, from = 'YourBrand') {
 await sendSMS('233501234567', 'Your OTP is 123456');
 
 // Send bulk SMS
-await sendSMS(
-  ['233501234567', '233509876543'],
-  'Flash Sale! 50% off today'
-);
+await sendSMS(['233501234567', '233509876543'], 'Flash Sale! 50% off today');
 ```
 
 ### Python
@@ -309,7 +316,7 @@ def send_sms(to, content, sender_id='YourBrand'):
         response = requests.post(url, json=payload, headers=headers)
         response.raise_for_status()
         data = response.json()
-        
+
         print(f"Message ID: {data['messages'][0]['messageId']}")
         return data
     except requests.exceptions.RequestException as e:
@@ -334,13 +341,13 @@ send_sms(
 function sendSMS($to, $content, $from = 'YourBrand') {
     $url = 'https://api.sendexa.co/v1/sms/send';
     $token = 'sk_live_your_token';
-    
+
     $data = [
         'to' => $to,
         'from' => $from,
         'content' => $content
     ];
-    
+
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
@@ -349,11 +356,11 @@ function sendSMS($to, $content, $from = 'YourBrand') {
         'Authorization: Bearer ' . $token,
         'Content-Type: application/json'
     ]);
-    
+
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
-    
+
     if ($httpCode === 200) {
         $result = json_decode($response, true);
         echo "Message ID: " . $result['messages'][0]['messageId'] . "\n";
@@ -411,11 +418,12 @@ await axios.post(url, {
   to: '233501234567',
   from: 'YourBrand',
   content: 'Reminder: Your appointment is tomorrow at 2PM',
-  scheduled_at: '2025-03-15T10:00:00Z'
+  scheduled_at: '2025-03-15T10:00:00Z',
 });
 ```
 
 **Use Cases:**
+
 - Appointment reminders
 - Birthday wishes
 - Campaign launches
@@ -428,11 +436,12 @@ await axios.post(url, {
   to: '233501234567',
   from: 'YourBrand',
   content: 'Order #12345 has shipped',
-  reference: 'order-12345-shipment'
+  reference: 'order-12345-shipment',
 });
 ```
 
 **Benefits:**
+
 - Link SMS to orders/users
 - Track delivery by reference
 - Debug specific campaigns
@@ -446,7 +455,8 @@ Create reusable message templates:
 const templates = {
   otp: (code) => `Your verification code is ${code}. Valid for 10 minutes.`,
   welcome: (name) => `Welcome ${name}! Thank you for joining us.`,
-  order: (orderId) => `Order #${orderId} confirmed. Track: https://shop.com/t/${orderId}`
+  order: (orderId) =>
+    `Order #${orderId} confirmed. Track: https://shop.com/t/${orderId}`,
 };
 
 // Use template
@@ -460,12 +470,14 @@ await sendSMS('233501234567', templates.otp('123456'));
 ### 1. Message Content
 
 **Do:**
+
 - Keep messages clear and concise
 - Include brand identification
 - Provide clear call-to-action
 - Use proper grammar
 
 **Don't:**
+
 - Use ALL CAPS (appears as spam)
 - Include excessive punctuation!!!
 - Send irrelevant content
@@ -474,6 +486,7 @@ await sendSMS('233501234567', templates.otp('123456'));
 ### 2. Bulk Sending
 
 **Batch Size:**
+
 - Optimal: 100 recipients per request
 - Maximum: 1000 recipients per request
 - For larger lists, split into batches
@@ -507,10 +520,10 @@ async function sendSMSWithRetry(to, content, maxRetries = 3) {
       return await sendSMS(to, content);
     } catch (error) {
       if (attempt === maxRetries - 1) throw error;
-      
+
       // Exponential backoff
       const delay = Math.pow(2, attempt) * 1000;
-      await new Promise(r => setTimeout(r, delay));
+      await new Promise((r) => setTimeout(r, delay));
     }
   }
 }
@@ -525,11 +538,11 @@ function calculateSMSParts(message) {
   const hasUnicode = /[^\x00-\x7F]/.test(message);
   const maxLength = hasUnicode ? 70 : 160;
   const concatLength = hasUnicode ? 67 : 153;
-  
+
   if (message.length <= maxLength) {
     return 1;
   }
-  
+
   return Math.ceil(message.length / concatLength);
 }
 
@@ -552,17 +565,17 @@ Validate numbers before sending:
 function isValidPhoneNumber(phone) {
   // Remove spaces, dashes, plus
   const cleaned = phone.replace(/[\s\-+]/g, '');
-  
+
   // Check length (typically 10-15 digits)
   if (cleaned.length < 10 || cleaned.length > 15) {
     return false;
   }
-  
+
   // Check if numeric
   if (!/^\d+$/.test(cleaned)) {
     return false;
   }
-  
+
   return true;
 }
 
@@ -614,8 +627,8 @@ const validNumbers = numbers.filter(isValidPhoneNumber);
   "error": "INSUFFICIENT_BALANCE",
   "message": "Not enough credits",
   "details": {
-    "required": 3.50,
-    "available": 1.00,
+    "required": 3.5,
+    "available": 1.0,
     "currency": "GHS"
   }
 }
@@ -644,12 +657,12 @@ const validNumbers = numbers.filter(isValidPhoneNumber);
 
 Use these in sandbox for testing:
 
-| Number | Behavior |
-|--------|----------|
-| `233500000001` | Always succeeds |
+| Number         | Behavior               |
+| -------------- | ---------------------- |
+| `233500000001` | Always succeeds        |
 | `233500000002` | Always fails (invalid) |
-| `233500000003` | Delivers after 30s |
-| `233500000004` | Fails after retry |
+| `233500000003` | Delivers after 30s     |
+| `233500000004` | Fails after retry      |
 
 ### Example Test
 
@@ -658,7 +671,7 @@ Use these in sandbox for testing:
 const testNumbers = [
   '233500000001', // Success
   '233500000002', // Fail
-  '233500000003'  // Delayed
+  '233500000003', // Delayed
 ];
 
 for (const number of testNumbers) {

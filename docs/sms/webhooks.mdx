@@ -100,17 +100,20 @@ Triggered when SMS delivery fails.
 ### Webhook URL Requirements
 
 ✅ **Required:**
+
 - Must use HTTPS (not HTTP)
 - Must be publicly accessible
 - Should respond within 5 seconds
 - Should return 200 OK on success
 
 ❌ **Not Allowed:**
+
 - HTTP URLs (security requirement)
 - Localhost/private IPs (not accessible)
 - URLs requiring authentication
 
 **Examples:**
+
 ```
 ✅ https://api.yourdomain.com/webhooks/sendexa
 ✅ https://yourdomain.com/api/sms/callback
@@ -139,7 +142,7 @@ function verifySignature(payload, signature) {
     .createHmac('sha256', WEBHOOK_SECRET)
     .update(JSON.stringify(payload))
     .digest('hex');
-  
+
   return crypto.timingSafeEqual(
     Buffer.from(signature),
     Buffer.from(expectedSignature)
@@ -149,34 +152,34 @@ function verifySignature(payload, signature) {
 // Webhook endpoint
 app.post('/webhooks/sendexa/sms', (req, res) => {
   const signature = req.headers['x-sendexa-signature'];
-  
+
   // Verify signature
   if (!verifySignature(req.body, signature)) {
     console.error('Invalid signature');
     return res.status(401).send('Unauthorized');
   }
-  
+
   const event = req.body;
   console.log('Received event:', event.event);
-  
+
   // Handle different event types
   switch (event.event) {
     case 'sms.sent':
       handleSmsSent(event);
       break;
-      
+
     case 'sms.delivered':
       handleSmsDelivered(event);
       break;
-      
+
     case 'sms.failed':
       handleSmsFailed(event);
       break;
-      
+
     default:
       console.log('Unknown event:', event.event);
   }
-  
+
   // Respond quickly (within 5 seconds)
   res.status(200).send('OK');
 });
@@ -186,7 +189,7 @@ async function handleSmsSent(event) {
   // Update database
   await db.messages.update({
     where: { id: event.messageId },
-    data: { status: 'sent', sentAt: event.timestamp }
+    data: { status: 'sent', sentAt: event.timestamp },
   });
 }
 
@@ -195,13 +198,13 @@ async function handleSmsDelivered(event) {
   // Update database
   await db.messages.update({
     where: { id: event.messageId },
-    data: { 
+    data: {
       status: 'delivered',
       deliveredAt: event.deliveredAt,
-      cost: event.cost
-    }
+      cost: event.cost,
+    },
   });
-  
+
   // Send notification to user
   await notifyUser(event.messageId, 'delivered');
 }
@@ -214,10 +217,10 @@ async function handleSmsFailed(event) {
     data: {
       status: 'failed',
       errorCode: event.error.code,
-      errorMessage: event.error.message
-    }
+      errorMessage: event.error.message,
+    },
   });
-  
+
   // Notify admin
   await alertAdmin(`SMS ${event.messageId} failed: ${event.error.message}`);
 }
@@ -246,21 +249,21 @@ def verify_signature(payload, signature):
         json.dumps(payload).encode(),
         hashlib.sha256
     ).hexdigest()
-    
+
     return hmac.compare_digest(signature, expected_signature)
 
 @app.route('/webhooks/sendexa/sms', methods=['POST'])
 def handle_webhook():
     signature = request.headers.get('X-Sendexa-Signature')
     payload = request.get_json()
-    
+
     # Verify signature
     if not verify_signature(payload, signature):
         return jsonify({'error': 'Invalid signature'}), 401
-    
+
     event_type = payload.get('event')
     print(f"Received event: {event_type}")
-    
+
     # Handle different event types
     if event_type == 'sms.sent':
         handle_sms_sent(payload)
@@ -270,7 +273,7 @@ def handle_webhook():
         handle_sms_failed(payload)
     else:
         print(f"Unknown event: {event_type}")
-    
+
     return jsonify({'status': 'success'}), 200
 
 def handle_sms_sent(event):
@@ -323,15 +326,15 @@ switch ($event['event']) {
     case 'sms.sent':
         handleSmsSent($event);
         break;
-        
+
     case 'sms.delivered':
         handleSmsDelivered($event);
         break;
-        
+
     case 'sms.failed':
         handleSmsFailed($event);
         break;
-        
+
     default:
         error_log("Unknown event: " . $event['event']);
 }
@@ -369,6 +372,7 @@ function handleSmsFailed($event) {
 Every webhook includes a signature in the `X-Sendexa-Signature` header. **Always verify** this signature to ensure requests are from Sendexa.
 
 **How Signature is Generated:**
+
 ```
 HMAC-SHA256(webhook_secret, request_body)
 ```
@@ -403,13 +407,13 @@ if (crypto.timingSafeEqual(
 
 If your endpoint doesn't respond with `200 OK`, Sendexa will retry:
 
-| Attempt | Delay | Total Elapsed |
-|---------|-------|---------------|
-| 1 | Immediate | 0s |
-| 2 | 30 seconds | 30s |
-| 3 | 2 minutes | 2.5 min |
-| 4 | 10 minutes | 12.5 min |
-| 5 | 1 hour | 1h 12.5min |
+| Attempt | Delay      | Total Elapsed |
+| ------- | ---------- | ------------- |
+| 1       | Immediate  | 0s            |
+| 2       | 30 seconds | 30s           |
+| 3       | 2 minutes  | 2.5 min       |
+| 4       | 10 minutes | 12.5 min      |
+| 5       | 1 hour     | 1h 12.5min    |
 
 After 5 failed attempts, the webhook is marked as failed.
 
@@ -431,19 +435,19 @@ const processedEvents = new Set();
 
 app.post('/webhooks/sendexa/sms', (req, res) => {
   const deliveryId = req.headers['x-sendexa-delivery-id'];
-  
+
   // Check if already processed
   if (processedEvents.has(deliveryId)) {
     console.log('Event already processed:', deliveryId);
     return res.status(200).send('OK');
   }
-  
+
   // Process event
   handleEvent(req.body);
-  
+
   // Mark as processed
   processedEvents.add(deliveryId);
-  
+
   res.status(200).send('OK');
 });
 ```
@@ -453,23 +457,23 @@ app.post('/webhooks/sendexa/sms', (req, res) => {
 ```javascript
 app.post('/webhooks/sendexa/sms', async (req, res) => {
   const deliveryId = req.headers['x-sendexa-delivery-id'];
-  
+
   // Check database
   const exists = await db.webhookEvents.findOne({ deliveryId });
-  
+
   if (exists) {
     return res.status(200).send('OK');
   }
-  
+
   // Store and process
   await db.webhookEvents.create({
     deliveryId,
     event: req.body,
-    processedAt: new Date()
+    processedAt: new Date(),
   });
-  
+
   await handleEvent(req.body);
-  
+
   res.status(200).send('OK');
 });
 ```
@@ -497,6 +501,7 @@ ngrok http 3000
 ### Webhook Testing Services
 
 Use these services during development:
+
 - **[Webhook.site](https://webhook.site)** - Inspect webhook payloads
 - **[RequestBin](https://requestbin.com)** - Debug webhooks
 - **[Hookdeck](https://hookdeck.com)** - Webhook infrastructure
@@ -541,6 +546,7 @@ View webhook delivery logs in your dashboard:
 3. View **Delivery Logs** tab
 
 **Log Information:**
+
 - Timestamp
 - Event type
 - HTTP status code
@@ -559,6 +565,7 @@ Monitor and retry failed webhooks:
 ### Webhook Analytics
 
 Track webhook performance:
+
 - Success rate (target: >99%)
 - - Average response time (target: &lt;1s)
 - Failed delivery reasons
@@ -582,10 +589,10 @@ app.post('/webhooks/sendexa/sms', (req, res) => {
   if (!verifySignature(req.body, req.headers['x-sendexa-signature'])) {
     return res.status(401).send('Unauthorized');
   }
-  
+
   // Add to queue immediately
   webhookQueue.add(req.body);
-  
+
   // Respond quickly
   res.status(200).send('OK');
 });
@@ -605,22 +612,22 @@ Handle different events with different endpoints:
 // Delivery notifications
 app.post('/webhooks/sms/delivery', async (req, res) => {
   const event = req.body;
-  
+
   if (event.event === 'sms.delivered' || event.event === 'sms.failed') {
     await handleDeliveryEvent(event);
   }
-  
+
   res.status(200).send('OK');
 });
 
 // Status updates
 app.post('/webhooks/sms/status', async (req, res) => {
   const event = req.body;
-  
+
   if (event.event === 'sms.sent') {
     await handleStatusUpdate(event);
   }
-  
+
   res.status(200).send('OK');
 });
 ```
@@ -634,14 +641,14 @@ const interestedEvents = ['sms.delivered', 'sms.failed'];
 
 app.post('/webhooks/sendexa/sms', (req, res) => {
   const event = req.body;
-  
+
   if (!interestedEvents.includes(event.event)) {
     return res.status(200).send('OK');
   }
-  
+
   // Process only interested events
   handleEvent(event);
-  
+
   res.status(200).send('OK');
 });
 ```
@@ -653,12 +660,14 @@ app.post('/webhooks/sendexa/sms', (req, res) => {
 ### Issue: Webhooks Not Received
 
 **Possible Causes:**
+
 - Firewall blocking Sendexa IPs
 - Endpoint not publicly accessible
 - HTTPS certificate issues
 - Endpoint taking >5 seconds
 
 **Solutions:**
+
 1. Whitelist Sendexa IPs (see below)
 2. Use ngrok for local testing
 3. Fix SSL certificate
@@ -673,11 +682,13 @@ app.post('/webhooks/sendexa/sms', (req, res) => {
 ### Issue: Signature Verification Fails
 
 **Possible Causes:**
+
 - Wrong webhook secret
 - Request body modified
 - Character encoding issues
 
 **Solutions:**
+
 1. Verify secret from dashboard
 2. Verify raw request body
 3. Use UTF-8 encoding

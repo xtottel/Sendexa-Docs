@@ -17,6 +17,7 @@ https://api.sendexa.co
 ```
 
 **Environments:**
+
 - **Production:** `https://api.sendexa.co`
 - **Sandbox:** `https://sandbox.api.sendexa.co`
 
@@ -36,17 +37,17 @@ Authorization: Bearer YOUR_API_TOKEN
 
 ## Endpoints Overview
 
-| Endpoint | Method | Purpose | Rate Limit |
-|----------|--------|---------|------------|
-| `/v1/voice/call` | POST | Make outbound call | 60/min |
-| `/v1/voice/broadcast` | POST | Broadcast voice message | 30/min |
-| `/v1/voice/tts` | POST | Generate speech from text | 100/min |
-| `/v1/voice/calls/:id` | GET | Get call details | 100/min |
-| `/v1/voice/calls` | GET | List calls | 60/min |
-| `/v1/voice/calls/:id/recording` | GET | Get call recording | 100/min |
-| `/v1/voice/broadcasts/:id` | GET | Get broadcast details | 60/min |
-| `/v1/voice/numbers` | GET | List phone numbers | 60/min |
-| `/v1/voice/numbers` | POST | Purchase phone number | 30/min |
+| Endpoint                        | Method | Purpose                   | Rate Limit |
+| ------------------------------- | ------ | ------------------------- | ---------- |
+| `/v1/voice/call`                | POST   | Make outbound call        | 60/min     |
+| `/v1/voice/broadcast`           | POST   | Broadcast voice message   | 30/min     |
+| `/v1/voice/tts`                 | POST   | Generate speech from text | 100/min    |
+| `/v1/voice/calls/:id`           | GET    | Get call details          | 100/min    |
+| `/v1/voice/calls`               | GET    | List calls                | 60/min     |
+| `/v1/voice/calls/:id/recording` | GET    | Get call recording        | 100/min    |
+| `/v1/voice/broadcasts/:id`      | GET    | Get broadcast details     | 60/min     |
+| `/v1/voice/numbers`             | GET    | List phone numbers        | 60/min     |
+| `/v1/voice/numbers`             | POST   | Purchase phone number     | 30/min     |
 
 ---
 
@@ -58,22 +59,22 @@ Make an outbound voice call.
 
 #### Request Body
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `to` | string | Yes | Recipient phone number |
-| `from` | string | Yes | Your Sendexa phone number |
-| `url` | string | Yes* | VoiceXML endpoint URL |
-| `tts` | object | Yes* | Text-to-speech object |
-| `method` | string | No | HTTP method (GET/POST, default: POST) |
-| `status_callback` | string | No | Webhook URL for call events |
-| `status_callback_method` | string | No | Callback HTTP method |
-| `timeout` | integer | No | Answer timeout in seconds (default: 60) |
-| `record` | boolean | No | Record the call (default: false) |
-| `recording_status_callback` | string | No | Webhook for recording events |
-| `fallback_url` | string | No | Fallback URL if primary fails |
-| `machine_detection` | string | No | Detect answering machines |
+| Parameter                   | Type    | Required | Description                             |
+| --------------------------- | ------- | -------- | --------------------------------------- |
+| `to`                        | string  | Yes      | Recipient phone number                  |
+| `from`                      | string  | Yes      | Your Sendexa phone number               |
+| `url`                       | string  | Yes\*    | VoiceXML endpoint URL                   |
+| `tts`                       | object  | Yes\*    | Text-to-speech object                   |
+| `method`                    | string  | No       | HTTP method (GET/POST, default: POST)   |
+| `status_callback`           | string  | No       | Webhook URL for call events             |
+| `status_callback_method`    | string  | No       | Callback HTTP method                    |
+| `timeout`                   | integer | No       | Answer timeout in seconds (default: 60) |
+| `record`                    | boolean | No       | Record the call (default: false)        |
+| `recording_status_callback` | string  | No       | Webhook for recording events            |
+| `fallback_url`              | string  | No       | Fallback URL if primary fails           |
+| `machine_detection`         | string  | No       | Detect answering machines               |
 
-*Either `url` or `tts` required
+\*Either `url` or `tts` required
 
 #### Example Request
 
@@ -118,21 +119,21 @@ Send voice message to multiple recipients.
 
 #### Request Body
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `to` | array | Yes | Array of phone numbers (max 10,000) |
-| `from` | string | Yes | Your Sendexa phone number |
-| `message` | string | Yes* | TTS text message |
-| `audio_url` | string | Yes* | Audio file URL |
-| `voice` | string | No | TTS voice (male/female) |
-| `language` | string | No | TTS language code |
-| `status_callback` | string | No | Webhook URL |
-| `priority` | string | No | high/normal (default: normal) |
-| `retry_failed` | boolean | No | Retry failed calls (default: true) |
-| `max_retries` | integer | No | Max retry attempts (default: 2) |
-| `schedule_at` | string | No | ISO 8601 timestamp |
+| Parameter         | Type    | Required | Description                         |
+| ----------------- | ------- | -------- | ----------------------------------- |
+| `to`              | array   | Yes      | Array of phone numbers (max 10,000) |
+| `from`            | string  | Yes      | Your Sendexa phone number           |
+| `message`         | string  | Yes\*    | TTS text message                    |
+| `audio_url`       | string  | Yes\*    | Audio file URL                      |
+| `voice`           | string  | No       | TTS voice (male/female)             |
+| `language`        | string  | No       | TTS language code                   |
+| `status_callback` | string  | No       | Webhook URL                         |
+| `priority`        | string  | No       | high/normal (default: normal)       |
+| `retry_failed`    | boolean | No       | Retry failed calls (default: true)  |
+| `max_retries`     | integer | No       | Max retry attempts (default: 2)     |
+| `schedule_at`     | string  | No       | ISO 8601 timestamp                  |
 
-*Either `message` or `audio_url` required
+\*Either `message` or `audio_url` required
 
 #### Example Request
 
@@ -176,15 +177,15 @@ Generate speech audio from text.
 
 #### Request Body
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `text` | string | Yes | Text to convert (max 3000 chars) |
-| `language` | string | No | Language code (default: en-US) |
-| `voice` | string | No | Voice type (male/female, default: female) |
-| `speed` | float | No | Speech speed (0.5-2.0, default: 1.0) |
-| `pitch` | integer | No | Voice pitch (-20 to 20, default: 0) |
-| `format` | string | No | Audio format (mp3/wav/ogg, default: mp3) |
-| `save` | boolean | No | Save audio file (default: false) |
+| Parameter  | Type    | Required | Description                               |
+| ---------- | ------- | -------- | ----------------------------------------- |
+| `text`     | string  | Yes      | Text to convert (max 3000 chars)          |
+| `language` | string  | No       | Language code (default: en-US)            |
+| `voice`    | string  | No       | Voice type (male/female, default: female) |
+| `speed`    | float   | No       | Speech speed (0.5-2.0, default: 1.0)      |
+| `pitch`    | integer | No       | Voice pitch (-20 to 20, default: 0)       |
+| `format`   | string  | No       | Audio format (mp3/wav/ogg, default: mp3)  |
+| `save`     | boolean | No       | Save audio file (default: false)          |
 
 #### Example Request
 
@@ -230,9 +231,9 @@ Retrieve information about a specific call.
 
 #### Path Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `callId` | string | Yes | Call ID |
+| Parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| `callId`  | string | Yes      | Call ID     |
 
 #### Example Request
 
@@ -273,15 +274,15 @@ List all calls with optional filters.
 
 #### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `from` | string | Filter by caller number |
-| `to` | string | Filter by recipient number |
-| `status` | string | Filter by status |
-| `date_from` | string | Start date (ISO 8601) |
-| `date_to` | string | End date (ISO 8601) |
-| `limit` | integer | Results per page (max 100, default 50) |
-| `offset` | integer | Pagination offset |
+| Parameter   | Type    | Description                            |
+| ----------- | ------- | -------------------------------------- |
+| `from`      | string  | Filter by caller number                |
+| `to`        | string  | Filter by recipient number             |
+| `status`    | string  | Filter by status                       |
+| `date_from` | string  | Start date (ISO 8601)                  |
+| `date_to`   | string  | End date (ISO 8601)                    |
+| `limit`     | integer | Results per page (max 100, default 50) |
+| `offset`    | integer | Pagination offset                      |
 
 #### Example Request
 
@@ -325,9 +326,9 @@ Get recording URL for a specific call.
 
 #### Path Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `callId` | string | Yes | Call ID |
+| Parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| `callId`  | string | Yes      | Call ID     |
 
 #### Example Request
 
@@ -364,9 +365,9 @@ Retrieve broadcast information and statistics.
 
 #### Path Parameters
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `broadcastId` | string | Yes | Broadcast ID |
+| Parameter     | Type   | Required | Description  |
+| ------------- | ------ | -------- | ------------ |
+| `broadcastId` | string | Yes      | Broadcast ID |
 
 #### Example Request
 
@@ -428,7 +429,7 @@ curl -X GET 'https://api.sendexa.co/v1/voice/numbers' \
       "capabilities": ["voice", "sms"],
       "voice_url": "https://yourapp.com/voice.xml",
       "status": "active",
-      "monthly_cost": 5.00,
+      "monthly_cost": 5.0,
       "currency": "USD",
       "purchased_at": "2025-03-01T10:00:00Z"
     }
@@ -446,12 +447,12 @@ Purchase a new phone number.
 
 #### Request Body
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `country` | string | Yes | Country code (e.g., GH, NG, KE) |
-| `type` | string | No | local/toll-free (default: local) |
-| `area_code` | string | No | Preferred area code |
-| `voice_url` | string | No | Default voice URL |
+| Parameter   | Type   | Required | Description                      |
+| ----------- | ------ | -------- | -------------------------------- |
+| `country`   | string | Yes      | Country code (e.g., GH, NG, KE)  |
+| `type`      | string | No       | local/toll-free (default: local) |
+| `area_code` | string | No       | Preferred area code              |
+| `voice_url` | string | No       | Default voice URL                |
 
 #### Example Request
 
@@ -477,7 +478,7 @@ curl -X POST 'https://api.sendexa.co/v1/voice/numbers' \
     "phone_number": "233302123456",
     "country": "GH",
     "type": "local",
-    "monthly_cost": 5.00,
+    "monthly_cost": 5.0,
     "currency": "USD",
     "purchased_at": "2025-03-12T14:20:00Z"
   }
@@ -504,6 +505,7 @@ curl -X POST 'https://api.sendexa.co/v1/voice/numbers' \
 Speak text using text-to-speech.
 
 **Attributes:**
+
 - `voice` - male/female (default: female)
 - `language` - Language code (default: en-US)
 - `loop` - Number of times to repeat (default: 1)
@@ -519,6 +521,7 @@ Speak text using text-to-speech.
 Play an audio file.
 
 **Attributes:**
+
 - `loop` - Number of times to play (default: 1)
 
 ```xml
@@ -532,6 +535,7 @@ Play an audio file.
 Collect DTMF (keypad) input from caller.
 
 **Attributes:**
+
 - `numDigits` - Number of digits to collect
 - `timeout` - Seconds to wait (default: 5)
 - `action` - URL to send input to
@@ -549,6 +553,7 @@ Collect DTMF (keypad) input from caller.
 Record caller's voice.
 
 **Attributes:**
+
 - `maxLength` - Max recording seconds (default: 60)
 - `timeout` - Silence timeout (default: 5)
 - `playBeep` - Play beep before recording (default: true)
@@ -556,8 +561,8 @@ Record caller's voice.
 - `transcribe` - Transcribe recording (default: false)
 
 ```xml
-<Record 
-  maxLength="120" 
+<Record
+  maxLength="120"
   playBeep="true"
   action="/handle-recording"
   transcribe="true"
@@ -569,6 +574,7 @@ Record caller's voice.
 Connect caller to another number.
 
 **Attributes:**
+
 - `timeout` - Ring timeout in seconds (default: 30)
 - `callerId` - Caller ID to display
 - `action` - URL after dial completes
@@ -593,6 +599,7 @@ End the call immediately.
 Redirect to new VoiceXML URL.
 
 **Attributes:**
+
 - `method` - HTTP method (default: POST)
 
 ```xml
@@ -606,6 +613,7 @@ Redirect to new VoiceXML URL.
 Add pause/silence.
 
 **Attributes:**
+
 - `length` - Seconds of silence (default: 1)
 
 ```xml
@@ -618,46 +626,46 @@ Add pause/silence.
 
 ### HTTP Status Codes
 
-| Code | Meaning | Description |
-|------|---------|-------------|
-| 200 | OK | Request successful |
-| 400 | Bad Request | Invalid parameters |
-| 401 | Unauthorized | Invalid or missing API token |
-| 402 | Payment Required | Insufficient balance |
-| 403 | Forbidden | Access denied |
-| 404 | Not Found | Resource not found |
-| 422 | Unprocessable Entity | Validation errors |
-| 429 | Too Many Requests | Rate limit exceeded |
-| 500 | Internal Server Error | Server error |
-| 503 | Service Unavailable | Temporary unavailability |
+| Code | Meaning               | Description                  |
+| ---- | --------------------- | ---------------------------- |
+| 200  | OK                    | Request successful           |
+| 400  | Bad Request           | Invalid parameters           |
+| 401  | Unauthorized          | Invalid or missing API token |
+| 402  | Payment Required      | Insufficient balance         |
+| 403  | Forbidden             | Access denied                |
+| 404  | Not Found             | Resource not found           |
+| 422  | Unprocessable Entity  | Validation errors            |
+| 429  | Too Many Requests     | Rate limit exceeded          |
+| 500  | Internal Server Error | Server error                 |
+| 503  | Service Unavailable   | Temporary unavailability     |
 
 ### Application Error Codes
 
-| Code | HTTP | Description |
-|------|------|-------------|
-| `INVALID_TOKEN` | 401 | API token invalid or expired |
-| `INVALID_PHONE_NUMBER` | 400 | Phone number format invalid |
-| `INVALID_CALLER_ID` | 400 | Caller ID not registered |
-| `URL_NOT_ACCESSIBLE` | 400 | VoiceXML URL not accessible |
-| `TEXT_TOO_LONG` | 400 | TTS text exceeds limit |
-| `UNSUPPORTED_LANGUAGE` | 400 | Language not supported |
-| `INSUFFICIENT_BALANCE` | 402 | Not enough credits |
-| `RATE_LIMIT_EXCEEDED` | 429 | Too many requests |
-| `CALL_NOT_FOUND` | 404 | Call ID not found |
-| `NUMBER_NOT_AVAILABLE` | 404 | Phone number unavailable |
-| `SERVER_ERROR` | 500 | Internal error |
+| Code                   | HTTP | Description                  |
+| ---------------------- | ---- | ---------------------------- |
+| `INVALID_TOKEN`        | 401  | API token invalid or expired |
+| `INVALID_PHONE_NUMBER` | 400  | Phone number format invalid  |
+| `INVALID_CALLER_ID`    | 400  | Caller ID not registered     |
+| `URL_NOT_ACCESSIBLE`   | 400  | VoiceXML URL not accessible  |
+| `TEXT_TOO_LONG`        | 400  | TTS text exceeds limit       |
+| `UNSUPPORTED_LANGUAGE` | 400  | Language not supported       |
+| `INSUFFICIENT_BALANCE` | 402  | Not enough credits           |
+| `RATE_LIMIT_EXCEEDED`  | 429  | Too many requests            |
+| `CALL_NOT_FOUND`       | 404  | Call ID not found            |
+| `NUMBER_NOT_AVAILABLE` | 404  | Phone number unavailable     |
+| `SERVER_ERROR`         | 500  | Internal error               |
 
 ---
 
 ## Rate Limits
 
-| Endpoint | Rate Limit | Window |
-|----------|------------|--------|
-| `/v1/voice/call` | 60 requests | 1 minute |
-| `/v1/voice/broadcast` | 30 requests | 1 minute |
-| `/v1/voice/tts` | 100 requests | 1 minute |
-| `/v1/voice/calls` | 60 requests | 1 minute |
-| `/v1/voice/numbers` | 60 requests | 1 minute |
+| Endpoint              | Rate Limit   | Window   |
+| --------------------- | ------------ | -------- |
+| `/v1/voice/call`      | 60 requests  | 1 minute |
+| `/v1/voice/broadcast` | 30 requests  | 1 minute |
+| `/v1/voice/tts`       | 100 requests | 1 minute |
+| `/v1/voice/calls`     | 60 requests  | 1 minute |
+| `/v1/voice/numbers`   | 60 requests  | 1 minute |
 
 ### Rate Limit Headers
 
@@ -673,15 +681,15 @@ X-RateLimit-Reset: 1678627800
 
 ### Event Types
 
-| Event | Description |
-|-------|-------------|
-| `call.initiated` | Call started |
-| `call.ringing` | Phone ringing |
-| `call.answered` | Call answered |
-| `call.completed` | Call ended |
-| `call.failed` | Call failed |
-| `call.busy` | Number busy |
-| `call.no-answer` | No answer |
+| Event                 | Description     |
+| --------------------- | --------------- |
+| `call.initiated`      | Call started    |
+| `call.ringing`        | Phone ringing   |
+| `call.answered`       | Call answered   |
+| `call.completed`      | Call ended      |
+| `call.failed`         | Call failed     |
+| `call.busy`           | Number busy     |
+| `call.no-answer`      | No answer       |
 | `recording.completed` | Recording ready |
 
 ### Webhook Payload Example
@@ -708,21 +716,25 @@ X-RateLimit-Reset: 1678627800
 ### Official SDKs
 
 **Node.js**
+
 ```bash
 npm install @sendexa/node-sdk
 ```
 
 **Python**
+
 ```bash
 pip install sendexa
 ```
 
 **PHP**
+
 ```bash
 composer require sendexa/php-sdk
 ```
 
 **Go**
+
 ```bash
 go get github.com/sendexa/go-sdk
 ```
@@ -737,11 +749,11 @@ go get github.com/sendexa/go-sdk
 
 **Test Numbers:**
 
-| Number | Behavior |
-|--------|----------|
-| `233500000001` | Always answers |
-| `233500000002` | Always busy |
-| `233500000003` | No answer |
+| Number         | Behavior          |
+| -------------- | ----------------- |
+| `233500000001` | Always answers    |
+| `233500000002` | Always busy       |
+| `233500000003` | No answer         |
 | `233500000004` | Answers after 10s |
 
 ---
@@ -772,6 +784,7 @@ go get github.com/sendexa/go-sdk
 ## Changelog
 
 ### v1.0.0 (Current)
+
 - Initial release
 - Outbound calling
 - Voice broadcasting

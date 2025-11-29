@@ -807,6 +807,231 @@ export const TocData: TocData = {
     },
   ],
 
+  'phonebook/overview': [
+    {
+      title: 'Phonebook API Overview',
+      href: '/docs/phonebook/overview',
+      pages: [
+        {
+          title: 'Why Choose Sendexa Phonebook?',
+          href: '/docs/phonebook/overview#why-choose-sendexa-phonebook',
+        },
+        {
+          title: 'Key Features',
+          href: '/docs/phonebook/overview#key-features',
+        },
+        {
+          title: 'Getting Started',
+          href: '/docs/phonebook/overview#getting-started',
+        },
+        {
+          title: 'Base URL',
+          href: '/docs/phonebook/overview#base-url',
+        },
+        {
+          title: 'Authentication',
+          href: '/docs/phonebook/overview#authentication',
+        },
+        {
+          title: 'API Endpoints Summary',
+          href: '/docs/phonebook/overview#api-endpoints-summary',
+        },
+        {
+          title: 'Contact Structure',
+          href: '/docs/phonebook/overview#contact-structure',
+        },
+        {
+          title: 'Group Structure',
+          href: '/docs/phonebook/overview#group-structure',
+        },
+        {
+          title: 'Common Use Cases',
+          href: '/docs/phonebook/overview#common-use-cases',
+        },
+        {
+          title: 'Custom Fields',
+          href: '/docs/phonebook/overview#custom-fields',
+        },
+        {
+          title: 'Tags System',
+          href: '/docs/phonebook/overview#tags-system',
+        },
+        {
+          title: 'Opt-In/Opt-Out Management',
+          href: '/docs/phonebook/overview#opt-inopt-out-management',
+        },
+        {
+          title: 'Best Practices',
+          href: '/docs/phonebook/overview#best-practices',
+        },
+        {
+          title: 'Data Privacy & GDPR',
+          href: '/docs/phonebook/overview#data-privacy--gdpr',
+        },
+        {
+          title: 'Rate Limits',
+          href: '/docs/phonebook/overview#rate-limits',
+        },
+        {
+          title: 'Support',
+          href: '/docs/phonebook/overview#support',
+        },
+      ],
+    },
+  ],
+
+  'phonebook/contact': [
+    {
+      title: 'Contact Management',
+      href: '/docs/phonebook/contact',
+      pages: [
+        {
+          title: 'Quick Start',
+          href: '/docs/phonebook/contact#quick-start',
+        },
+        {
+          title: 'Create Contact',
+          href: '/docs/phonebook/contact#create-contact',
+        },
+        {
+          title: 'List Contacts',
+          href: '/docs/phonebook/contact#list-contacts',
+        },
+        {
+          title: 'Get Contact',
+          href: '/docs/phonebook/contact#get-contact',
+        },
+        {
+          title: 'Update Contact',
+          href: '/docs/phonebook/contact#update-contact',
+        },
+        {
+          title: 'Delete Contact',
+          href: '/docs/phonebook/contact#delete-contact',
+        },
+        {
+          title: 'Bulk Import',
+          href: '/docs/phonebook/contact#bulk-import',
+        },
+        {
+          title: 'Search Contacts',
+          href: '/docs/phonebook/contact#search-contacts',
+        },
+        {
+          title: 'Common Use Cases',
+          href: '/docs/phonebook/contact#common-use-cases',
+        },
+      ],
+    },
+  ],
+
+  'phonebook/group': [
+    {
+      title: 'Group Management',
+      href: '/docs/phonebook/group',
+      pages: [
+        {
+          title: 'Quick Start',
+          href: '/docs/phonebook/group#quick-start',
+        },
+        {
+          title: 'Create Group',
+          href: '/docs/phonebook/group#create-group',
+        },
+        {
+          title: 'List Groups',
+          href: '/docs/phonebook/group#list-groups',
+        },
+        {
+          title: 'Add Contact to Group',
+          href: '/docs/phonebook/group#add-contact-to-group',
+        },
+        {
+          title: 'Remove Contact from Group',
+          href: '/docs/phonebook/group#remove-contact-from-group',
+        },
+        {
+          title: 'List Group Contacts',
+          href: '/docs/phonebook/group#list-group-contacts',
+        },
+        {
+          title: 'Common Use Cases',
+          href: '/docs/phonebook/group#common-use-cases',
+        },
+      ],
+    },
+  ],
+
+  'phonebook/webhooks': [
+    {
+      title: 'Phonebook Webhooks',
+      href: '/docs/phonebook/webhooks',
+      pages: [
+        {
+          title: 'Webhook Events',
+          href: '/docs/phonebook/webhooks#webhook-events',
+        },
+        {
+          title: 'Webhook Payload',
+          href: '/docs/phonebook/webhooks#webhook-payload',
+        },
+        {
+          title: 'Setup Webhooks',
+          href: '/docs/phonebook/webhooks#setup-webhooks',
+        },
+        {
+          title: 'Implementing Webhook Handler',
+          href: '/docs/phonebook/webhooks#implementing-webhook-handler',
+        },
+      ],
+    },
+  ],
+
+  'phonebook/v1': [
+    {
+      title: 'Phonebook API v1 Reference',
+      href: '/docs/phonebook/v1',
+      pages: [
+        {
+          title: 'Base URL',
+          href: '/docs/phonebook/v1#base-url',
+        },
+        {
+          title: 'Authentication',
+          href: '/docs/phonebook/v1#authentication',
+        },
+        {
+          title: 'Endpoints Overview',
+          href: '/docs/phonebook/v1#endpoints-overview',
+        },
+        {
+          title: 'Contact Endpoints',
+          href: '/docs/phonebook/v1#contact-endpoints',
+        },
+        {
+          title: 'Group Endpoints',
+          href: '/docs/phonebook/v1#group-endpoints',
+        },
+        {
+          title: 'Error Codes',
+          href: '/docs/phonebook/v1#error-codes',
+        },
+        {
+          title: 'Rate Limits',
+          href: '/docs/phonebook/v1#rate-limits',
+        },
+        {
+          title: 'SDKs',
+          href: '/docs/phonebook/v1#sdks',
+        },
+        {
+          title: 'Support',
+          href: '/docs/phonebook/v1#support',
+        },
+      ],
+    },
+  ],
+
   'sms/overview': [
     {
       title: 'SMS API Overview',
